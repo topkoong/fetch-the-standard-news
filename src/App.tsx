@@ -9,7 +9,7 @@ export function App() {
   const [wealthPosts, setWealthPosts] = useState([]);
   const [popPosts, setPopPosts] = useState([]);
   const [newsPosts, setNewsPosts] = useState([]);
-  const [categories, setCategories] = useState([]);
+  const [categories, setCategories] = useState<any[]>([]);
   const THE_STANDARD_POSTS_ENDPOINT = 'https://thestandard.co/wp-json/wp/v2/posts';
   const THE_STANDARD_CATEGORIES_ENDPOINT =
     'https://thestandard.co/wp-json/wp/v2/categories';
@@ -22,47 +22,47 @@ export function App() {
       ]);
       const regEx = /^[A-Za-z0-9]*$/;
       const tempUnique: any = [];
-      const nonThaiCategories = fetchedCategories
+      const nonThaiCategories: any = {};
+      fetchedCategories
         .filter((section: any) => regEx.test(section.name))
-        .map((section: any) => ({
-          [section.id]: section.name,
-        }))
-        .filter((nonThaiCategory: any) => {
-          const isDuplicate = tempUnique.includes(Object.values(nonThaiCategory)[0]);
-          if (!isDuplicate) {
-            tempUnique.push(Object.values(nonThaiCategory)[0]);
-            return true;
-          }
-          return false;
+        .forEach((section: any) => {
+          nonThaiCategories[section.id] = section.name;
         });
-      // const postCategories = data.map((d: any) => d.categories); // [[123, 1234]]
+      // .filter((nonThaiCategory: any) => {
+      //   const isDuplicate = tempUnique.includes(Object.values(nonThaiCategory)[0]);
+      //   if (!isDuplicate) {
+      //     tempUnique.push(Object.values(nonThaiCategory)[0]);
+      //     return true;
+      //   }
+      //   return false;
+      // });
+      const nonThaiCategoryNames: string[] = Object.values(nonThaiCategories);
       const postsWithCategoryNames = fetchedPosts
         .map((fetchedPost: any) => ({
           ...fetchedPost,
           categories: fetchedPost.categories
-            .map((category: any) => nonThaiCategories[category])
+            .map((category: any) =>
+              Object.keys(nonThaiCategories).includes(category + '')
+                ? nonThaiCategories[category + '']
+                : null,
+            )
             .filter(Boolean),
         }))
         .filter((fetchedPost: any) => fetchedPost?.categories?.length);
-      const groupPostByCategories = nonThaiCategories.map(
-        (nonThaiCategory: { number: string }) => ({
-          [Object.values(nonThaiCategory)[0]]: postsWithCategoryNames
-            .filter((postsWithCategoryName: any) =>
-              Object.values(postsWithCategoryName.categories).map((category: any) =>
-                Object.values(category),
-              ),
-            )
-            .flat(),
-        }),
-      );
 
+      const groupPostByCategories: any[] = nonThaiCategoryNames
+        .map((nonThaiCategoryName: any) => ({
+          [nonThaiCategoryName]: postsWithCategoryNames
+            .filter(({ categories }: any) => categories.includes(nonThaiCategoryName))
+            .flat(),
+        }))
+        .filter((elem) => Object.values(elem)[0].length);
       setCategories(
         groupPostByCategories.map(
-          (groupPostByCategory: any) => Object.keys(groupPostByCategory)[0],
+          (groupPostByCategory) => Object.keys(groupPostByCategory)[0],
         ),
       );
       setPosts(groupPostByCategories);
-      console.log(groupPostByCategories);
     } catch (err) {
       console.error(err);
     }
