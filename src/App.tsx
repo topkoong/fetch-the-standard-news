@@ -2,6 +2,10 @@ import './app.css';
 
 import { useEffect, useState } from 'preact/hooks';
 
+import CategoryHeader from './components/CategoryHeader';
+import PageBreak from './components/PageBreak';
+import PageHeader from './components/PageHeader';
+import Post from './components/Post';
 import axios from 'axios';
 
 export function App() {
@@ -76,61 +80,20 @@ export function App() {
 
   return (
     <article className="bg-bright-blue w-full">
-      <h1 className="text-center font-extrabold leading-tight text-5xl py-8 text-white uppercase">
-        Fetch The Standard News
-      </h1>
+      <PageHeader title="Fetch The Standard News" />
       {categories && (
         <ul className="px-6">
           {categories.map((category, idx) => (
             <li className="w-100 my-8">
-              <div className="flex justify-between">
-                <div className="font-semibold text-4xl text-white uppercase">
-                  {category}
-                </div>
-                <div className="font-semibold text-xl text-white uppercase underline underline-offset-4">
-                  View all - Category ID:
-                  {/* TODO:
-                  Create another component and pass the category ID to the component
-                  Use React Query to fetch posts and implement pagination / infinite scroll 
-                   */}
-                  {Object.keys(nonThaiCategoriesMapping).find(
-                    (nonThaiCategoryKey: string) =>
-                      nonThaiCategoriesMapping[nonThaiCategoryKey] === category,
-                  )}
-                </div>
-              </div>
-              <div className="relative flex py-5 items-center">
-                <div className="flex-grow border-2 border-white"></div>
-                <div className="flex-grow border-2 border-white"></div>
-              </div>
+              <CategoryHeader
+                category={category}
+                nonThaiCategoriesMapping={nonThaiCategoriesMapping}
+              />
+              <PageBreak />
               {posts && (
                 <ul className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 md:gap-8 px-6">
                   {posts[idx][category].slice(0, 5).map((post: any) => (
-                    <li
-                      className="relative bg-black border border-4 border-black p-8 grid grid-rows-2 after:absolute after:content-[''] after:-translate-x-3 after:-translate-y-3 after:left-0 after:top-0 after:bg-white after:p-8 after:w-full after:h-full after:-z-2"
-                      key={
-                        post?.id ||
-                        Date.now().toString(16) +
-                          Math.random().toString(16) +
-                          '0'.repeat(16)
-                      }
-                    >
-                      <header className="z-10">
-                        <h2 className="font-bold text-xl text-bright-blue">
-                          {post?.title?.rendered || ''}
-                        </h2>
-                      </header>
-                      <div className="text-center my-2 z-10">
-                        <button
-                          className="relative bg-black -z-10 w-40 md:w-48 lg:w-52 p-8 after:absolute after:content-[''] after:-translate-x-2 after:-translate-y-2 after:font-bold after:left-0 after:top-0 after:border after:border-4 after:border-black after:bg-white after:w-40 after:md:w-48 after:lg:w-52 after:h-full after:z-10"
-                          onClick={() => window.open(post.link)}
-                        >
-                          <span className="relative z-20 text-black font-bold w-full h-full -translate-x-2 -translate-y-2 uppercase text-2xl">
-                            Check it out!
-                          </span>
-                        </button>
-                      </div>
-                    </li>
+                    <Post post={post} />
                   ))}
                 </ul>
               )}
@@ -138,30 +101,6 @@ export function App() {
           ))}
         </ul>
       )}
-      {/* <ul className="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 md:gap-8 px-6">
-        {posts.map((post: any) => (
-          <li
-            className="relative bg-black border border-4 border-black p-8 grid grid-rows-2 after:absolute after:content-[''] after:-translate-x-3 after:-translate-y-3 after:left-0 after:top-0 after:bg-white after:p-8 after:w-full after:h-full after:-z-2"
-            key={post.id}
-          >
-            <header className="z-10">
-              <h2 className="font-bold text-xl text-bright-blue">
-                {post.title.rendered}
-              </h2>
-            </header>
-            <div className="text-center my-2 z-10">
-              <button
-                className="relative bg-black -z-10 lg:w-40 p-8 after:absolute after:content-[''] after:-translate-x-2 after:-translate-y-2 after:font-bold after:text-xl after:left-0 after:top-0 after:border after:border-4 after:border-black after:bg-white after:w-40 after:h-full after:z-10"
-                onClick={() => window.open(post.link)}
-              >
-                <span className="relative z-20 text-black font-bold w-full h-full -translate-x-2 -translate-y-2 uppercase">
-                  Check it out!
-                </span>
-              </button>
-            </div>
-          </li>
-        ))}
-      </ul> */}
     </article>
   );
 }
