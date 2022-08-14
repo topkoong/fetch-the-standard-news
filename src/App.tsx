@@ -10,6 +10,9 @@ export function App() {
   const [popPosts, setPopPosts] = useState([]);
   const [newsPosts, setNewsPosts] = useState([]);
   const [categories, setCategories] = useState<any[]>([]);
+  const [nonThaiCategoriesMapping, setNonThaiCategoriesMapping] = useState<{
+    [key: string]: string;
+  }>({});
   const THE_STANDARD_POSTS_ENDPOINT = 'https://thestandard.co/wp-json/wp/v2/posts';
   const THE_STANDARD_CATEGORIES_ENDPOINT =
     'https://thestandard.co/wp-json/wp/v2/categories';
@@ -21,21 +24,12 @@ export function App() {
         axios.get(`${THE_STANDARD_CATEGORIES_ENDPOINT}?per_page=100`),
       ]);
       const regEx = /^[A-Za-z0-9]*$/;
-      const tempUnique: any = [];
       const nonThaiCategories: any = {};
       fetchedCategories
         .filter((section: any) => regEx.test(section.name))
         .forEach((section: any) => {
           nonThaiCategories[section.id] = section.name;
         });
-      // .filter((nonThaiCategory: any) => {
-      //   const isDuplicate = tempUnique.includes(Object.values(nonThaiCategory)[0]);
-      //   if (!isDuplicate) {
-      //     tempUnique.push(Object.values(nonThaiCategory)[0]);
-      //     return true;
-      //   }
-      //   return false;
-      // });
       const nonThaiCategoryNames: string[] = Object.values(nonThaiCategories);
       const postsWithCategoryNames = fetchedPosts
         .map((fetchedPost: any) => ({
@@ -49,7 +43,8 @@ export function App() {
             .filter(Boolean),
         }))
         .filter((fetchedPost: any) => fetchedPost?.categories?.length);
-
+      setNonThaiCategoriesMapping({ ...nonThaiCategories });
+      console.log('postsWithCategoryNames: ', postsWithCategoryNames);
       const groupPostByCategories: any[] = nonThaiCategoryNames
         .map((nonThaiCategoryName: any) => ({
           [nonThaiCategoryName]: postsWithCategoryNames
@@ -57,12 +52,16 @@ export function App() {
             .flat(),
         }))
         .filter((elem) => Object.values(elem)[0].length);
+      console.log('groupPostByCategories: ', groupPostByCategories);
       setCategories(
         groupPostByCategories.map(
           (groupPostByCategory) => Object.keys(groupPostByCategory)[0],
         ),
       );
+
       setPosts(groupPostByCategories);
+
+      console.log('nonThaiCategoriesMapping: ', nonThaiCategoriesMapping);
     } catch (err) {
       console.error(err);
     }
@@ -70,9 +69,9 @@ export function App() {
 
   useEffect(() => {
     getPosts();
-    const interval = setInterval(getPosts, 1000000);
-    // should clear the interval when the component unmounts
-    return () => clearInterval(interval);
+    // const interval = setInterval(getPosts, 1000000);
+    // // should clear the interval when the component unmounts
+    // return () => clearInterval(interval);
   }, []);
 
   return (
@@ -83,14 +82,29 @@ export function App() {
       {categories && (
         <ul className="px-6">
           {categories.map((category, idx) => (
-            <li className="w-100 font-semibold text-3xl py-8 text-white uppercase">
-              {category}
+            <li className="w-100 my-8">
+              <div className="flex justify-between">
+                <div className="font-semibold text-4xl text-white uppercase">
+                  {category}
+                </div>
+                <div className="font-semibold text-xl text-white uppercase underline underline-offset-4">
+                  View all - Category ID:
+                  {/* TODO:
+                  Create another component and pass the category ID to the component
+                  Use React Query to fetch posts and implement pagination / infinite scroll 
+                   */}
+                  {Object.keys(nonThaiCategoriesMapping).find(
+                    (nonThaiCategoryKey: string) =>
+                      nonThaiCategoriesMapping[nonThaiCategoryKey] === category,
+                  )}
+                </div>
+              </div>
               <div className="relative flex py-5 items-center">
                 <div className="flex-grow border-2 border-white"></div>
                 <div className="flex-grow border-2 border-white"></div>
               </div>
               {posts && (
-                <ul className="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 md:gap-8 px-6">
+                <ul className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 md:gap-8 px-6">
                   {posts[idx][category].slice(0, 5).map((post: any) => (
                     <li
                       className="relative bg-black border border-4 border-black p-8 grid grid-rows-2 after:absolute after:content-[''] after:-translate-x-3 after:-translate-y-3 after:left-0 after:top-0 after:bg-white after:p-8 after:w-full after:h-full after:-z-2"
@@ -108,10 +122,10 @@ export function App() {
                       </header>
                       <div className="text-center my-2 z-10">
                         <button
-                          className="relative bg-black -z-10 lg:w-40 p-8 after:absolute after:content-[''] after:-translate-x-2 after:-translate-y-2 after:font-bold after:text-xl after:left-0 after:top-0 after:border after:border-4 after:border-black after:bg-white after:w-40 after:h-full after:z-10"
+                          className="relative bg-black -z-10 w-40 md:w-48 lg:w-52 p-8 after:absolute after:content-[''] after:-translate-x-2 after:-translate-y-2 after:font-bold after:left-0 after:top-0 after:border after:border-4 after:border-black after:bg-white after:w-40 after:md:w-48 after:lg:w-52 after:h-full after:z-10"
                           onClick={() => window.open(post.link)}
                         >
-                          <span className="relative z-20 text-black font-bold w-full h-full -translate-x-2 -translate-y-2 uppercase">
+                          <span className="relative z-20 text-black font-bold w-full h-full -translate-x-2 -translate-y-2 uppercase text-2xl">
                             Check it out!
                           </span>
                         </button>
