@@ -1,28 +1,29 @@
 import { PAGE_SIZE, THE_STANDARD_POSTS_ENDPOINT } from '../constants';
 import { useLocation, useParams } from 'react-router-dom';
 
-import PageBreak from './PageBreak';
-import PageHeader from './PageHeader';
-import Post from './Post';
-import Spinner from './Spinner';
+import PageBreak from '../components/PageBreak';
+import PageHeader from '../components/PageHeader';
+import Post from '../components/Post';
+import Spinner from '../components/Spinner';
 import axios from 'axios';
 import { useInfiniteQuery } from 'react-query';
 import { useState } from 'preact/hooks';
 
-export function Posts() {
+interface LinkState {
+  category: string;
+}
+
+function Posts() {
   const [currentOffset, setCurrentOffset] = useState<number>(0);
   const { id } = useParams();
   const location = useLocation();
-  const { category } = location.state;
+  const { category }: LinkState = location.state as LinkState;
   const fetchPosts = async ({
     pageParam = `${THE_STANDARD_POSTS_ENDPOINT}?categories=${id}&per_page=${PAGE_SIZE}&offset=${currentOffset}`,
   }) => {
     try {
       setCurrentOffset((prevOffSet) => prevOffSet + PAGE_SIZE);
-      const { data } = await axios.get(
-        // `${THE_STANDARD_POSTS_ENDPOINT}?offset=0&categories=${id}&per_page=6`,
-        pageParam,
-      );
+      const { data } = await axios.get(pageParam);
       return { posts: data, nextCursor: currentOffset };
     } catch (err) {
       console.error(err);
@@ -84,3 +85,5 @@ export function Posts() {
     </article>
   );
 }
+
+export default Posts;

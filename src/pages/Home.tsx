@@ -1,28 +1,29 @@
-import './app.css';
+import '../app.css';
 
+import {
+  THE_STANDARD_CATEGORIES_ENDPOINT,
+  THE_STANDARD_POSTS_ENDPOINT,
+} from '../constants';
 import { useEffect, useState } from 'preact/hooks';
 
-import CategoryHeader from './components/CategoryHeader';
-import PageBreak from './components/PageBreak';
-import PageHeader from './components/PageHeader';
-import Post from './components/Post';
+import CategoryHeader from '../components/CategoryHeader';
+import PageBreak from '../components/PageBreak';
+import PageHeader from '../components/PageHeader';
+import Post from '../components/Post';
 import axios from 'axios';
 
-export function Home() {
+function Home() {
   const [posts, setPosts] = useState<any[]>([]);
   const [categories, setCategories] = useState<any[]>([]);
   const [nonThaiCategoriesMapping, setNonThaiCategoriesMapping] = useState<{
     [key: string]: string;
   }>({});
-  const THE_STANDARD_POSTS_ENDPOINT = 'https://thestandard.co/wp-json/wp/v2/posts';
-  const THE_STANDARD_CATEGORIES_ENDPOINT =
-    'https://thestandard.co/wp-json/wp/v2/categories';
 
   const getPosts = async () => {
     try {
       const [{ data: fetchedPosts }, { data: fetchedCategories }] = await Promise.all([
-        axios.get(`${THE_STANDARD_POSTS_ENDPOINT}?per_page=100`),
-        axios.get(`${THE_STANDARD_CATEGORIES_ENDPOINT}?per_page=100`),
+        axios.get(`${THE_STANDARD_POSTS_ENDPOINT}?per_page=30`),
+        axios.get(`${THE_STANDARD_CATEGORIES_ENDPOINT}?per_page=60`),
       ]);
       const regEx = /^[A-Za-z0-9]*$/;
       const nonThaiCategories: any = {};
@@ -79,14 +80,14 @@ export function Home() {
       {categories && (
         <ul className="px-6">
           {categories.map((category, idx) => (
-            <li className="w-100 my-8">
+            <li className="w-full my-8">
               <CategoryHeader
                 category={category}
                 nonThaiCategoriesMapping={nonThaiCategoriesMapping}
               />
               <PageBreak />
               {posts && (
-                <ul className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 md:gap-8 px-6">
+                <ul className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 md:gap-8 px-6 my-8 ">
                   {posts[idx][category].slice(0, 5).map((post: any) => (
                     <Post post={post} />
                   ))}
@@ -99,3 +100,5 @@ export function Home() {
     </article>
   );
 }
+
+export default Home;

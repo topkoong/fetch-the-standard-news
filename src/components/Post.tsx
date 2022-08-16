@@ -1,9 +1,3 @@
-import axios from 'axios';
-
-// interface PostsProps {
-//   id: number;
-// }
-
 function Post({ post }: any) {
   return (
     <li
@@ -13,16 +7,16 @@ function Post({ post }: any) {
       }
     >
       <header className="z-10">
-        <h2 className="font-bold text-xl text-bright-blue">
+        <h2 className="font-bold text-base md:text-lg lg:text-xl text-bright-blue">
           {post?.title?.rendered || ''}
         </h2>
       </header>
-      <div className="text-center my-2 z-10">
+      <div className="text-center my-8 z-10">
         <button
           className="relative bg-black -z-10 w-40 md:w-48 lg:w-52 p-8 after:absolute after:content-[''] after:-translate-x-2 after:-translate-y-2 after:font-bold after:left-0 after:top-0 after:border after:border-4 after:border-black after:bg-white after:w-40 after:md:w-48 after:lg:w-52 after:h-full after:z-10"
           onClick={() => window.open(post.link)}
         >
-          <span className="relative z-20 text-black font-bold w-full h-full -translate-x-2 -translate-y-2 uppercase text-2xl">
+          <span className="relative z-20 text-black font-bold w-full h-full -translate-x-2 -translate-y-2 uppercase text-base md:text-lg lg:text-xl">
             Check this out!
           </span>
         </button>

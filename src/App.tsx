@@ -1,8 +1,8 @@
-import { QueryClient, QueryClientProvider, useInfiniteQuery } from 'react-query';
+import { QueryClient, QueryClientProvider } from 'react-query';
 import { Route, Routes } from 'react-router-dom';
 
-import { Home } from './Home';
-import { Posts } from './components/Posts';
+import Home from './pages/Home';
+import Posts from './pages/Posts';
 
 function App() {
   // Create a client
