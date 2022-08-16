@@ -1,17 +1,86 @@
+import { PAGE_SIZE, THE_STANDARD_POSTS_ENDPOINT } from '../constants';
+import { useLocation, useParams } from 'react-router-dom';
+
+import PageBreak from './PageBreak';
 import PageHeader from './PageHeader';
+import Post from './Post';
+import Spinner from './Spinner';
 import axios from 'axios';
+import { useInfiniteQuery } from 'react-query';
+import { useState } from 'preact/hooks';
 
-interface PostsProps {
-  id: number;
-}
+export function Posts() {
+  const [currentOffset, setCurrentOffset] = useState<number>(0);
+  const { id } = useParams();
+  const location = useLocation();
+  const { category } = location.state;
+  const fetchPosts = async ({
+    pageParam = `${THE_STANDARD_POSTS_ENDPOINT}?categories=${id}&per_page=${PAGE_SIZE}&offset=${currentOffset}`,
+  }) => {
+    try {
+      setCurrentOffset((prevOffSet) => prevOffSet + PAGE_SIZE);
+      const { data } = await axios.get(
+        // `${THE_STANDARD_POSTS_ENDPOINT}?offset=0&categories=${id}&per_page=6`,
+        pageParam,
+      );
+      return { posts: data, nextCursor: currentOffset };
+    } catch (err) {
+      console.error(err);
+    }
+  };
+  const { data, isLoading, status, fetchNextPage, hasNextPage, isFetchingNextPage } =
+    useInfiniteQuery(
+      `posts-of-category-${id}`,
+      ({
+        pageParam = `${THE_STANDARD_POSTS_ENDPOINT}?categories=${id}&per_page=${PAGE_SIZE}&offset=${currentOffset}`,
+      }) => fetchPosts(pageParam),
+      {
+        getNextPageParam: (lastPage) => lastPage?.nextCursor,
+      },
+    );
 
-export function Posts({ id }: PostsProps) {
   return (
-    <article className="bg-bright-blue w-full">
-      <h1 className="text-center font-extrabold leading-tight text-5xl py-8 text-white uppercase">
-        Fetch The Standard News - Catrgory ID: {{ id }}
-      </h1>
-      <PageHeader title={`Fetch The Standard News - Catrgory ID: ${id}`} />
+    <article className="bg-bright-blue w-full h-full py-8">
+      <PageHeader title={category} />
+      <PageBreak />
+      {isLoading ? (
+        <div className="flex items-center justify-center h-screen">
+          <Spinner />
+        </div>
+      ) : (
+        <>
+          <ul className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 md:gap-8 px-6 h-full">
+            {data?.pages?.map((page: any) =>
+              page?.posts.map((post: any) => <Post post={post} />),
+            )}
+          </ul>
+          <div className="text-center mt-8 z-10">
+            {isFetchingNextPage ? (
+              <div className="flex items-center justify-center h-full">
+                <Spinner />
+              </div>
+            ) : hasNextPage ? (
+              <button
+                className="relative bg-black w-40 md:w-48 lg:w-52 p-8 after:absolute after:content-[''] after:-translate-x-2 after:-translate-y-2 after:font-bold after:left-0 after:top-0 after:border after:border-4 after:border-black after:bg-white after:w-40 after:md:w-48 after:lg:w-52 after:h-full after:z-10"
+                onClick={() =>
+                  fetchNextPage({
+                    pageParam: `${THE_STANDARD_POSTS_ENDPOINT}?categories=${id}&per_page=${PAGE_SIZE}&offset=${currentOffset}`,
+                  })
+                }
+                disabled={!hasNextPage || isFetchingNextPage}
+              >
+                <span className="relative z-20 text-black font-bold w-full h-full -translate-x-2 -translate-y-2 uppercase text-2xl">
+                  Load more
+                </span>
+              </button>
+            ) : (
+              <h1 className="text-center font-extrabold leading-tight text-5xl py-8 text-white uppercase">
+                Nothing more to load
+              </h1>
+            )}
+          </div>
+        </>
+      )}
     </article>
   );
 }

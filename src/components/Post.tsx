@@ -23,7 +23,7 @@ function Post({ post }: any) {
           onClick={() => window.open(post.link)}
         >
           <span className="relative z-20 text-black font-bold w-full h-full -translate-x-2 -translate-y-2 uppercase text-2xl">
-            Check it out!
+            Check this out!
           </span>
         </button>
       </div>
