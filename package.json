@@ -4,6 +4,14 @@
   "private": true,
   "version": "0.0.0",
   "type": "module",
+  "homepage": "https://github.com/topkoong/fetch-the-standard-news",
+  "keywords": [
+    "react",
+    "vite",
+    "typescript",
+    "ghactions",
+    "vitest"
+  ],
   "scripts": {
     "dev": "vite",
     "build": "tsc && vite build",
