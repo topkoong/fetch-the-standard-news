@@ -4,7 +4,7 @@
   "private": true,
   "version": "0.0.0",
   "type": "module",
-  "homepage": "https://github.com/topkoong/fetch-the-standard-news",
+  "homepage": "https://topkoong.github.io/fetch-the-standard-news",
   "keywords": [
     "react",
     "vite",
