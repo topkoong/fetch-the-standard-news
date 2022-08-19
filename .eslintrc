@@ -3,7 +3,17 @@
     "browser": true,
     "es2021": true
   },
-  "extends": ["eslint:recommended", "preact", "prettier", "prettier/@typescript-eslint"],
+  "settings": {
+    "jest": {
+      "version": 28
+    }
+  },
+  "extends": [
+    "eslint:recommended",
+    "preact",
+    "plugin:@typescript-eslint/recommended",
+    "prettier"
+  ],
   "parser": "@typescript-eslint/parser",
   "parserOptions": {
     "ecmaFeatures": {

@@ -52,7 +52,7 @@ function Posts() {
         <>
           <ul className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 md:gap-8 px-6 h-full">
             {data?.pages?.map((page: any) =>
-              page?.posts.map((post: any) => <Post post={post} />),
+              page?.posts.map((post: any) => <Post key={post.id} post={post} />),
             )}
           </ul>
           <div className="text-center mt-8 z-10">

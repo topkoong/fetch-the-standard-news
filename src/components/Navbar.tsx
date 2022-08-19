@@ -41,6 +41,7 @@ function NavBar() {
         <div className="text-md font-bold text-blue-700 lg:flex-grow">
           {Object.keys(categories).map((key: string) => (
             <Link
+              key={`${categories[key]}`}
               to={`/posts/categories/${key}`}
               state={{ category: categories[key] }}
               className="uppercase block mt-4 lg:inline-block lg:mt-0 hover:text-white px-2 py-2 rounded hover:bg-blue-700 mr-2"

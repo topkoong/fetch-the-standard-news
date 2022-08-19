@@ -80,7 +80,7 @@ function Home() {
       {categories && (
         <ul className="px-6">
           {categories.map((category, idx) => (
-            <li className="w-full my-8">
+            <li className="w-full my-8" key={category}>
               <CategoryHeader
                 category={category}
                 nonThaiCategoriesMapping={nonThaiCategoriesMapping}
@@ -89,7 +89,7 @@ function Home() {
               {posts && (
                 <ul className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 md:gap-8 px-6 my-8 ">
                   {posts[idx][category].slice(0, 5).map((post: any) => (
-                    <Post post={post} />
+                    <Post key={post.id} post={post} />
                   ))}
                 </ul>
               )}
