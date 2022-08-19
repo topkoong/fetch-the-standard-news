@@ -13,7 +13,7 @@ function Post({ post }: any) {
       </header>
       <div className="text-center my-8 z-10">
         <button
-          className="relative bg-black -z-10 w-40 md:w-48 lg:w-52 p-8 after:absolute after:content-[''] after:-translate-x-2 after:-translate-y-2 after:font-bold after:left-0 after:top-0 after:border after:border-4 after:border-black after:bg-white after:w-40 after:md:w-48 after:lg:w-52 after:h-full after:z-10"
+          className="cursor-pointer relative bg-black -z-10 w-40 md:w-48 lg:w-52 p-8 after:absolute after:content-[''] after:-translate-x-2 after:-translate-y-2 after:font-bold after:left-0 after:top-0 after:border after:border-4 after:border-black after:bg-white after:w-40 after:md:w-48 after:lg:w-52 after:h-full after:z-10 after:cursor-pointer"
           onClick={() => window.open(post.link)}
         >
           <span className="relative z-20 text-black font-bold w-full h-full -translate-x-2 -translate-y-2 uppercase text-base md:text-lg lg:text-xl">

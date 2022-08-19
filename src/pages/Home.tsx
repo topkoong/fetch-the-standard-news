@@ -69,9 +69,9 @@ function Home() {
 
   useEffect(() => {
     getPosts();
-    // const interval = setInterval(getPosts, 1000000);
-    // // should clear the interval when the component unmounts
-    // return () => clearInterval(interval);
+    const interval = setInterval(getPosts, 1000 * 60 * 5);
+    // should clear the interval when the component unmounts
+    return () => clearInterval(interval);
   }, []);
 
   return (
