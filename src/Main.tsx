@@ -5,7 +5,7 @@ import { BrowserRouter } from 'react-router-dom';
 import { render } from 'preact';
 
 render(
-  <BrowserRouter>
+  <BrowserRouter basename="/fetch-the-standard-news">
     <App />
   </BrowserRouter>,
   document.getElementById('app') as HTMLElement,
