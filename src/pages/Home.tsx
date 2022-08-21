@@ -1,6 +1,7 @@
 import '../app.css';
 
 import {
+  REFETCH_INTERVAL,
   THE_STANDARD_CATEGORIES_ENDPOINT,
   THE_STANDARD_POSTS_ENDPOINT,
 } from '../constants';
@@ -20,7 +21,6 @@ function Home() {
   const [nonThaiCategoriesMapping, setNonThaiCategoriesMapping] = useState<{
     [key: string]: string;
   }>({});
-  const [intervalMs] = useState<number>(1000 * 60 * 5);
 
   const getPosts = async () => {
     try {
@@ -72,7 +72,7 @@ function Home() {
 
   const { status, isFetching } = useQuery(['allposts'], async () => getPosts(), {
     // Refetch the data every 5 minutes
-    refetchInterval: intervalMs,
+    refetchInterval: REFETCH_INTERVAL,
   });
 
   return (
