@@ -7,16 +7,11 @@ function Post({ post }: any) {
       }
     >
       <header className="z-10">
-        <h2 className="font-bold text-base md:text-lg lg:text-xl text-bright-blue">
-          {post?.title?.rendered || ''}
-        </h2>
+        <h2 className="post-title">{post?.title?.rendered || ''}</h2>
       </header>
       <div className="text-center my-8 z-10">
-        <button
-          className="cursor-pointer relative bg-black -z-10 w-40 md:w-48 lg:w-52 p-8 after:absolute after:content-[''] after:-translate-x-2 after:-translate-y-2 after:font-bold after:left-0 after:top-0 after:border after:border-4 after:border-black after:bg-white after:w-40 after:md:w-48 after:lg:w-52 after:h-full after:z-10 after:cursor-pointer"
-          onClick={() => window.open(post.link)}
-        >
-          <span className="relative z-20 text-black font-bold w-full h-full -translate-x-2 -translate-y-2 uppercase text-base md:text-lg lg:text-xl">
+        <button className="btn-primary" onClick={() => window.open(post.link)}>
+          <span className="relative z-20 text-black font-bold w-full h-full -translate-x-2 -translate-y-2 uppercase text-lg lg:text-xl">
             Check this out!
           </span>
         </button>

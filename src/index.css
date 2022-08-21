@@ -1,3 +1,27 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+@layer components {
+  .page-title {
+    @apply text-center font-extrabold leading-tight text-3xl md:text-5xl py-8 text-white uppercase;
+  }
+  .category-title {
+    @apply font-semibold text-3xl md:text-4xl text-white uppercase;
+  }
+  .post-title {
+    @apply font-bold text-xl text-bright-blue;
+  }
+  .btn-primary {
+    @apply cursor-pointer relative bg-black w-56 p-8 after:absolute after:content-[''] after:-translate-x-2 after:-translate-y-2 after:font-bold after:left-0 after:top-0 after:border after:border-4 after:border-black after:bg-white after:w-56 after:h-full after:z-10;
+  }
+  .btn-secondary {
+    @apply relative z-20 text-black font-bold w-full h-full -translate-x-2 -translate-y-2 uppercase text-2xl;
+  }
+  .btn-terinary {
+    @apply text-center font-extrabold leading-tight text-5xl py-8 text-white uppercase;
+  }
+  .spinner-container {
+    @apply flex items-center justify-center h-full;
+  }
+}

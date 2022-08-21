@@ -79,7 +79,7 @@ function Home() {
     <article className="bg-bright-blue w-full">
       <PageHeader title="Fetch The Standard News" />
       {isFetching || status === 'loading' ? (
-        <div className="flex items-center justify-center h-screen">
+        <div className="spinner-container">
           <Spinner />
         </div>
       ) : (
@@ -92,7 +92,7 @@ function Home() {
               />
               <PageBreak />
               {posts && (
-                <ul className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 md:gap-8 px-6 my-8 ">
+                <ul className="grid grid-cols-1 gap-y-8 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 md:gap-8 px-6 my-8 ">
                   {posts[idx][category].slice(0, 5).map((post: any) => (
                     <Post key={post.id} post={post} />
                   ))}
