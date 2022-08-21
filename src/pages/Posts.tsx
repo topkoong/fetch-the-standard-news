@@ -45,7 +45,7 @@ function Posts() {
       <PageHeader title={category} />
       <PageBreak />
       {isLoading ? (
-        <div className="flex items-center justify-center h-screen">
+        <div className="spinner-container">
           <Spinner />
         </div>
       ) : (

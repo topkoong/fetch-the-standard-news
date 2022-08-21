@@ -1,7 +1,7 @@
 function Post({ post }: any) {
   return (
     <li
-      className="relative bg-black border border-4 border-black p-8 grid grid-rows-2 after:absolute after:content-[''] after:-translate-x-3 after:-translate-y-3 after:left-0 after:top-0 after:bg-white after:p-8 after:w-full after:h-full after:-z-2"
+      className="relative bg-white p-8 grid grid-rows-2 drop-shadow-md"
       key={
         post?.id || Date.now().toString(16) + Math.random().toString(16) + '0'.repeat(16)
       }
