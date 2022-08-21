@@ -29,9 +29,9 @@ function Posts() {
       console.error(err);
     }
   };
-  const { data, isLoading, status, fetchNextPage, hasNextPage, isFetchingNextPage } =
+  const { data, isLoading, fetchNextPage, hasNextPage, isFetchingNextPage } =
     useInfiniteQuery(
-      `posts-of-category-${id}`,
+      `posts-from-category-${id}`,
       ({
         pageParam = `${THE_STANDARD_POSTS_ENDPOINT}?categories=${id}&per_page=${PAGE_SIZE}&offset=${currentOffset}`,
       }) => fetchPosts(pageParam),

@@ -4,13 +4,15 @@ import {
   THE_STANDARD_CATEGORIES_ENDPOINT,
   THE_STANDARD_POSTS_ENDPOINT,
 } from '../constants';
-import { useEffect, useState } from 'preact/hooks';
 
 import CategoryHeader from '../components/CategoryHeader';
 import PageBreak from '../components/PageBreak';
 import PageHeader from '../components/PageHeader';
 import Post from '../components/Post';
+import Spinner from '../components/Spinner';
 import axios from 'axios';
+import { useQuery } from 'react-query';
+import { useState } from 'preact/hooks';
 
 function Home() {
   const [posts, setPosts] = useState<any[]>([]);
@@ -18,6 +20,7 @@ function Home() {
   const [nonThaiCategoriesMapping, setNonThaiCategoriesMapping] = useState<{
     [key: string]: string;
   }>({});
+  const [intervalMs] = useState<number>(1000 * 60 * 5);
 
   const getPosts = async () => {
     try {
@@ -38,8 +41,8 @@ function Home() {
           ...fetchedPost,
           categories: fetchedPost.categories
             .map((category: any) =>
-              Object.keys(nonThaiCategories).includes(category + '')
-                ? nonThaiCategories[category + '']
+              Object.keys(nonThaiCategories).includes(`${category}`)
+                ? nonThaiCategories[`${category}`]
                 : null,
             )
             .filter(Boolean),
@@ -67,17 +70,19 @@ function Home() {
     }
   };
 
-  useEffect(() => {
-    getPosts();
-    const interval = setInterval(getPosts, 1000 * 60 * 5);
-    // should clear the interval when the component unmounts
-    return () => clearInterval(interval);
-  }, []);
+  const { status, isFetching } = useQuery(['allposts'], async () => getPosts(), {
+    // Refetch the data every 5 minutes
+    refetchInterval: intervalMs,
+  });
 
   return (
     <article className="bg-bright-blue w-full">
       <PageHeader title="Fetch The Standard News" />
-      {categories && (
+      {isFetching || status === 'loading' ? (
+        <div className="flex items-center justify-center h-screen">
+          <Spinner />
+        </div>
+      ) : (
         <ul className="px-6">
           {categories.map((category, idx) => (
             <li className="w-full my-8" key={category}>
