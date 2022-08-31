@@ -50,7 +50,7 @@ function Posts() {
         </div>
       ) : (
         <>
-          <ul className='grid grid-cols-1 gap-y-2 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 md:gap-8 px-6 h-full'>
+          <ul className='grid grid-cols-1 gap-12 lg:gap-8 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 px-6 h-full'>
             {data?.pages?.map((page: any) =>
               page?.posts.map((post: any) => <Post key={post.id} post={post} />),
             )}
