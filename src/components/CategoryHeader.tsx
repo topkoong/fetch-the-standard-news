@@ -6,9 +6,9 @@ function CategoryHeader({ category, nonThaiCategoriesMapping }: any) {
       nonThaiCategoriesMapping[nonThaiCategoryKey] === category,
   );
   return (
-    <div className="flex justify-between">
-      <div className="category-title">{category}</div>
-      <div className="font-semibold text-lg md:text-xl text-white uppercase underline underline-offset-4">
+    <div className='flex justify-between'>
+      <div className='category-title'>{category}</div>
+      <div className='font-semibold text-lg md:text-xl text-white uppercase underline underline-offset-4'>
         <Link to={`/posts/categories/${categoryId}`} state={{ category }}>
           View all
         </Link>

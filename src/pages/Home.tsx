@@ -4,13 +4,13 @@ import {
   REFETCH_INTERVAL,
   THE_STANDARD_CATEGORIES_ENDPOINT,
   THE_STANDARD_POSTS_ENDPOINT,
-} from '../constants';
+} from '@constants/index';
 
-import CategoryHeader from '../components/CategoryHeader';
-import PageBreak from '../components/PageBreak';
-import PageHeader from '../components/PageHeader';
-import Post from '../components/Post';
-import Spinner from '../components/Spinner';
+import CategoryHeader from '@components/CategoryHeader';
+import PageBreak from '@components/PageBreak';
+import PageHeader from '@components/PageHeader';
+import Post from '@components/Post';
+import Spinner from '@components/Spinner';
 import axios from 'axios';
 import { useQuery } from 'react-query';
 import { useState } from 'preact/hooks';
@@ -76,23 +76,23 @@ function Home() {
   });
 
   return (
-    <article className="bg-bright-blue w-full">
-      <PageHeader title="Fetch The Standard News" />
+    <article className='bg-bright-blue w-full'>
+      <PageHeader title='Fetch The Standard News' />
       {isFetching || status === 'loading' ? (
-        <div className="spinner-container">
+        <div className='spinner-container'>
           <Spinner />
         </div>
       ) : (
-        <ul className="px-6">
+        <ul className='px-6'>
           {categories.map((category, idx) => (
-            <li className="w-full my-8" key={category}>
+            <li className='w-full my-8' key={category}>
               <CategoryHeader
                 category={category}
                 nonThaiCategoriesMapping={nonThaiCategoriesMapping}
               />
               <PageBreak />
               {posts && (
-                <ul className="grid grid-cols-1 gap-y-8 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 md:gap-8 px-6 my-8 ">
+                <ul className='grid grid-cols-1 gap-y-8 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 md:gap-8 px-6 my-8 '>
                   {posts[idx][category].slice(0, 5).map((post: any) => (
                     <Post key={post.id} post={post} />
                   ))}

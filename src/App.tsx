@@ -1,8 +1,8 @@
 import { QueryClient, QueryClientProvider } from 'react-query';
 import { Route, Routes } from 'react-router-dom';
 
-import Home from './pages/Home';
 import Navbar from './components/Navbar';
+import Home from './pages/Home';
 import Posts from './pages/Posts';
 
 function App() {
@@ -12,8 +12,8 @@ function App() {
     <QueryClientProvider client={queryClient}>
       <Navbar />
       <Routes>
-        <Route path="/" element={<Home />} />
-        <Route path="posts/categories/:id" element={<Posts />} />
+        <Route path='/' element={<Home />} />
+        <Route path='posts/categories/:id' element={<Posts />} />
       </Routes>
     </QueryClientProvider>
   );

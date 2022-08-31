@@ -3,7 +3,7 @@ interface PageHeaderProps {
 }
 
 function PageHeader({ title }: PageHeaderProps) {
-  return <h1 className="page-title">{title}</h1>;
+  return <h1 className='page-title'>{title}</h1>;
 }
 
 export default PageHeader;
