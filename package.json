@@ -10,7 +10,12 @@
     "vite",
     "typescript",
     "ghactions",
-    "vitest"
+    "vitest",
+    "ghactions",
+    "eslint",
+    "prettier",
+    "husky",
+    "tailwindcss"
   ],
   "scripts": {
     "prepare": "husky install",
