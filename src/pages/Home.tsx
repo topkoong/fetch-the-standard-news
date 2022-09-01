@@ -1,19 +1,18 @@
 import '../app.css';
 
-import axios from 'axios';
-import { useState } from 'preact/hooks';
-import { useQuery } from 'react-query';
-
-import CategoryHeader from '../components/CategoryHeader';
-import PageBreak from '../components/PageBreak';
-import PageHeader from '../components/PageHeader';
-import Post from '../components/Post';
-import Spinner from '../components/Spinner';
+import CategoryHeader from '@components/CategoryHeader';
+import PageBreak from '@components/PageBreak';
+import PageHeader from '@components/PageHeader';
+import Post from '@components/Post';
+import Spinner from '@components/Spinner';
 import {
   REFETCH_INTERVAL,
   THE_STANDARD_CATEGORIES_ENDPOINT,
   THE_STANDARD_POSTS_ENDPOINT,
-} from '../constants';
+} from '@constants/index';
+import axios from 'axios';
+import { useState } from 'preact/hooks';
+import { useQuery } from 'react-query';
 
 function Home() {
   const [posts, setPosts] = useState<any[]>([]);

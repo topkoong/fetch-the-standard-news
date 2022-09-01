@@ -1,12 +1,12 @@
+import PageBreak from '@components/PageBreak';
+import PageHeader from '@components/PageHeader';
+import Post from '@components/Post';
+import Spinner from '@components/Spinner';
 import axios from 'axios';
 import { useState } from 'preact/hooks';
 import { useInfiniteQuery } from 'react-query';
 import { useLocation, useParams } from 'react-router-dom';
 
-import PageBreak from '../components/PageBreak';
-import PageHeader from '../components/PageHeader';
-import Post from '../components/Post';
-import Spinner from '../components/Spinner';
 import { PAGE_SIZE, THE_STANDARD_POSTS_ENDPOINT } from '../constants';
 
 interface LinkState {
