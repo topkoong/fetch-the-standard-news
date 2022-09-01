@@ -1,5 +1,5 @@
-import { Link } from 'react-router-dom';
 import { useState } from 'preact/hooks';
+import { Link } from 'react-router-dom';
 
 function NavBar() {
   const categories: { [key: string]: string } = {
