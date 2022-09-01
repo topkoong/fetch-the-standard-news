@@ -1,3 +1,4 @@
+import { useState } from 'preact/hooks';
 import { Link } from 'react-router-dom';
 
 function NavBar() {
@@ -12,6 +13,7 @@ function NavBar() {
     '33': 'Travel',
     '58822': 'Economic',
   };
+  const [isNavbarOpen, setIsNavbarOpen] = useState(false);
   return (
     <nav className='flex items-center justify-between flex-wrap bg-white py-4 lg:px-12 shadow border-solid border-t-2 border-blue-700'>
       <div className='flex justify-between lg:w-auto w-full lg:border-b-0 pl-6 pr-2 border-solid border-b-2 border-gray-300 pb-5 lg:pb-0'>
@@ -23,33 +25,59 @@ function NavBar() {
         <div className='block lg:hidden'>
           <button
             id='nav'
+            type='button'
             className='flex items-center px-3 py-2 border-2 rounded text-blue-700 border-blue-700 hover:text-blue-700 hover:border-blue-700'
+            onClick={() => setIsNavbarOpen(!isNavbarOpen)}
           >
-            <svg
-              className='fill-current h-3 w-3'
-              viewBox='0 0 20 20'
-              xmlns='http://www.w3.org/2000/svg'
-            >
-              <title>Menu</title>
-              <path d='M0 3h20v2H0V3zm0 6h20v2H0V9zm0 6h20v2H0v-2z' />
-            </svg>
+            {isNavbarOpen ? (
+              <svg
+                className='fill-current h-3 w-3'
+                viewBox='0 0 20 20'
+                xmlns='http://www.w3.org/2000/svg'
+              >
+                <title>Menu</title>
+                <path d='M0 3h20v2H0V3zm0 6h20v2H0V9zm0 6h20v2H0v-2z' />
+              </svg>
+            ) : (
+              <svg
+                className='block h-3 w-3 lg:hidden'
+                xmlns='http://www.w3.org/2000/svg'
+                fill='none'
+                viewBox='0 0 24 24'
+                stroke='currentColor'
+                aria-hidden='true'
+              >
+                <path
+                  strokeLinecap='round'
+                  strokeLinejoin='round'
+                  strokeWidth='2'
+                  d='M6 18L18 6M6 6l12 12'
+                />
+              </svg>
+            )}
           </button>
         </div>
       </div>
-
-      <div className='menu w-full lg:block flex-grow lg:flex lg:items-center lg:w-auto lg:px-3 px-8'>
-        <div className='text-md font-bold text-blue-700 lg:flex-grow'>
+      <div
+        className={`lg:flex flex-grow items-center${isNavbarOpen ? ' flex' : ' hidden'}`}
+        id='example-navbar-danger'
+      >
+        <ul className='flex flex-col lg:flex-row list-none lg:ml-auto lg:px-3 px-8'>
           {Object.keys(categories).map((key: string) => (
-            <Link
+            <li
               key={`${categories[key]}`}
-              to={`/posts/categories/${key}`}
-              state={{ category: categories[key] }}
-              className='uppercase block mt-4 lg:inline-block lg:mt-0 hover:text-white px-2 py-2 rounded hover:bg-blue-700 mr-2'
+              className='nav-item text-md font-bold text-blue-700'
             >
-              {categories[key]}
-            </Link>
+              <Link
+                to={`/posts/categories/${key}`}
+                state={{ category: categories[key] }}
+                className='uppercase block mt-4 lg:inline-block lg:mt-0 hover:text-white px-2 py-2 rounded hover:bg-blue-700 mr-2'
+              >
+                {categories[key]}
+              </Link>
+            </li>
           ))}
-        </div>
+        </ul>
       </div>
     </nav>
   );
