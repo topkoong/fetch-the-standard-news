@@ -1,7 +1,7 @@
 function Post({ post }: any) {
   return (
     <li
-      className='relative bg-white p-8 grid grid-rows-2 drop-shadow-md'
+      className='relative bg-white p-8 grid grid-rows-2 shadow-md'
       key={
         post?.id || Date.now().toString(16) + Math.random().toString(16) + '0'.repeat(16)
       }

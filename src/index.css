@@ -13,7 +13,7 @@
     @apply font-bold text-xl text-bright-blue;
   }
   .btn-primary {
-    @apply cursor-pointer relative border border-black border-4 bg-white w-56 p-8 drop-shadow-sm;
+    @apply cursor-pointer relative border border-black border-4 bg-white w-56 p-8 shadow-sm;
   }
   .btn-secondary {
     @apply relative z-20 text-black font-bold w-full h-full uppercase text-2xl;
