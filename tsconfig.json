@@ -16,16 +16,16 @@
     "noEmit": true,
     "jsx": "preserve",
     "jsxFactory": "h",
-    "jsxFragmentFactory": "Fragment",
-    "baseUrl": ".",
-    "paths": {
-      "@components/*": ["src/components/*"],
-      "@pages/*": ["src/pages/*"],
-      "types/*": ["src/types/*"],
-      "@constants/*": ["src/constants/*"],
-      "@services/*": ["src/services/*"],
-      "@assets/*": ["src/assets/*"]
-    }
+    "jsxFragmentFactory": "Fragment"
+    // "baseUrl": ".",
+    // "paths": {
+    //   "@components/*": ["src/components/*"],
+    //   "@pages/*": ["src/pages/*"],
+    //   "types/*": ["src/types/*"],
+    //   "@constants/*": ["src/constants/*"],
+    //   "@services/*": ["src/services/*"],
+    //   "@assets/*": ["src/assets/*"]
+    // }
   },
   "include": ["src"],
   "references": [{ "path": "./tsconfig.node.json" }],
