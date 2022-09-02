@@ -23,8 +23,17 @@ function Posts() {
   }) => {
     try {
       setCurrentOffset((prevOffSet) => prevOffSet + PAGE_SIZE);
-      const { data } = await axios.get(pageParam);
-      return { posts: data, nextCursor: currentOffset };
+      const { data: posts } = await axios.get(pageParam);
+      const urls = posts.map(
+        (post: any) => post?.['_links']?.['wp:featuredmedia'][0]?.['href'],
+      );
+      const responses = await Promise.all(urls.map((url: string) => axios.get(url)));
+      const imageUrls = responses?.map(({ data }) => data?.guid?.rendered);
+      const postsWithImage = posts.map((post: any, idx: number) => ({
+        ...post,
+        imageUrl: imageUrls[idx],
+      }));
+      return { posts: postsWithImage, nextCursor: currentOffset };
     } catch (err) {
       console.error(err);
     }

@@ -24,8 +24,8 @@ function Home() {
   const getPosts = async () => {
     try {
       const [{ data: fetchedPosts }, { data: fetchedCategories }] = await Promise.all([
-        axios.get(`${THE_STANDARD_POSTS_ENDPOINT}?per_page=30`),
-        axios.get(`${THE_STANDARD_CATEGORIES_ENDPOINT}?per_page=60`),
+        axios.get(`${THE_STANDARD_POSTS_ENDPOINT}?per_page=70`),
+        axios.get(`${THE_STANDARD_CATEGORIES_ENDPOINT}?per_page=70`),
       ]);
       const regEx = /^[A-Za-z0-9]*$/;
       const nonThaiCategories: any = {};
@@ -60,10 +60,26 @@ function Home() {
           (groupPostByCategory) => Object.keys(groupPostByCategory)[0],
         ),
       );
-
-      setPosts(groupPostByCategories);
-
-      console.log('nonThaiCategoriesMapping: ', nonThaiCategoriesMapping);
+      const urls = groupPostByCategories
+        .map((category) =>
+          Object.values(category).map((posts: any) =>
+            posts.map((post: any) => post?.['_links']?.['wp:featuredmedia'][0]?.['href']),
+          ),
+        )
+        .flat(2);
+      const responses = await Promise.all(urls.map((url: string) => axios.get(url)));
+      const imageUrls = responses?.map(({ data }) => data?.guid?.rendered);
+      const postsWithImages = groupPostByCategories.map((category) => ({
+        [Object.keys(category)[0]]: Object.values(category)
+          .map((posts: any) =>
+            posts.map((post: any, idx: number) => ({
+              ...post,
+              imageUrl: imageUrls[idx],
+            })),
+          )
+          .flat(2),
+      }));
+      setPosts(postsWithImages);
     } catch (err) {
       console.error(err);
     }
@@ -84,7 +100,15 @@ function Home() {
       ) : (
         <ul className='px-6'>
           {categories.map((category, idx) => (
-            <li className='w-full my-8' key={category}>
+            <li
+              className='w-full my-8'
+              key={
+                category +
+                Date.now().toString(16) +
+                Math.random().toString(16) +
+                '0'.repeat(16)
+              }
+            >
               <CategoryHeader
                 category={category}
                 nonThaiCategoriesMapping={nonThaiCategoriesMapping}

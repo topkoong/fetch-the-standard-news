@@ -10,6 +10,9 @@ module.exports = {
       colors: {
         'bright-blue': '#0b01f9',
       },
+      fontFamily: {
+        eqTH: ['EQ TH'],
+      },
     },
   },
   plugins: [],
