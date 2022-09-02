@@ -11,7 +11,6 @@
     "typescript",
     "ghactions",
     "vitest",
-    "ghactions",
     "eslint",
     "prettier",
     "husky",
