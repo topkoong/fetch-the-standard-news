@@ -1,5 +1,7 @@
 import '../app.css';
 
+import fetchCategories from '@apis/categories';
+import fetchPosts from '@apis/posts';
 import CategoryHeader from '@components/CategoryHeader';
 import PageBreak from '@components/PageBreak';
 import PageHeader from '@components/PageHeader';
@@ -11,65 +13,108 @@ import {
   THE_STANDARD_POSTS_ENDPOINT,
 } from '@constants/index';
 import axios from 'axios';
-import { useState } from 'preact/hooks';
+import { useEffect, useMemo, useState } from 'preact/hooks';
 import { useQuery } from 'react-query';
 
-function Home() {
-  const [posts, setPosts] = useState<any[]>([]);
-  const [categories, setCategories] = useState<any[]>([]);
-  const [nonThaiCategoriesMapping, setNonThaiCategoriesMapping] = useState<{
-    [key: string]: string;
-  }>({});
+interface Keyable {
+  [key: string]: string;
+}
 
-  const getPosts = async () => {
-    try {
-      const [{ data: fetchedPosts }, { data: fetchedCategories }] = await Promise.all([
-        axios.get(`${THE_STANDARD_POSTS_ENDPOINT}?per_page=70`),
-        axios.get(`${THE_STANDARD_CATEGORIES_ENDPOINT}?per_page=70`),
-      ]);
-      const regEx = /^[A-Za-z0-9]*$/;
-      const nonThaiCategories: any = {};
-      fetchedCategories
-        .filter((section: any) => regEx.test(section.name))
-        .forEach((section: any) => {
-          nonThaiCategories[section.id] = section.name;
-        });
-      const nonThaiCategoryNames: string[] = Object.values(nonThaiCategories);
-      const postsWithCategoryNames = fetchedPosts
-        .map((fetchedPost: any) => ({
+function Home() {
+  const [imageUrls, setImageUrls] = useState<any[]>([]);
+  const {
+    data: postData,
+    error: postError,
+    status: postStatus,
+  } = useQuery('allposts', fetchPosts, {
+    refetchInterval: REFETCH_INTERVAL,
+  });
+  const {
+    data: categoryData,
+    error: categoryError,
+    status: categoryStatus,
+  } = useQuery('allcategories', fetchCategories, {
+    refetchInterval: REFETCH_INTERVAL,
+  });
+
+  const nonThaiCategories = useMemo(() => {
+    const regEx = /^[A-Za-z0-9]*$/;
+    const nonThaiCategoriesObj: any = {};
+    categoryData
+      ?.filter((section: any) => regEx.test(section.name))
+      ?.forEach((section: any) => {
+        nonThaiCategoriesObj[section.id] = section.name;
+      });
+    return nonThaiCategoriesObj;
+  }, [categoryData]);
+
+  const nonThaiCategoryNames = useMemo(() => {
+    const nonThaiCategoryNamesArr: string[] = Object.values(nonThaiCategories);
+    return nonThaiCategoryNamesArr;
+  }, [nonThaiCategories]);
+
+  const postsWithCategoryNames = useMemo(
+    () =>
+      postData
+        ?.map((fetchedPost: any) => ({
           ...fetchedPost,
-          categories: fetchedPost.categories
-            .map((category: any) =>
+          categories: fetchedPost?.categories
+            ?.map((category: any) =>
               Object.keys(nonThaiCategories).includes(`${category}`)
                 ? nonThaiCategories[`${category}`]
                 : null,
             )
-            .filter(Boolean),
+            ?.filter(Boolean),
         }))
-        .filter((fetchedPost: any) => fetchedPost?.categories?.length);
-      setNonThaiCategoriesMapping(nonThaiCategories);
-      const groupPostByCategories: any[] = nonThaiCategoryNames
-        .map((nonThaiCategoryName: any) => ({
+        ?.filter((fetchedPost: any) => fetchedPost?.categories?.length),
+    [nonThaiCategories, postData],
+  );
+
+  const groupPostByCategories = useMemo(
+    () =>
+      nonThaiCategoryNames
+        ?.map((nonThaiCategoryName: any) => ({
           [nonThaiCategoryName]: postsWithCategoryNames
-            .filter(({ categories }: any) => categories.includes(nonThaiCategoryName))
-            .flat(),
+            ?.filter(({ categories }: any) => categories.includes(nonThaiCategoryName))
+            ?.flat(),
         }))
-        .filter((elem) => Object.values(elem)[0].length);
-      setCategories(
-        groupPostByCategories.map(
-          (groupPostByCategory) => Object.keys(groupPostByCategory)[0],
-        ),
-      );
-      const urls = groupPostByCategories
-        .map((category) =>
-          Object.values(category).map((posts: any) =>
+        ?.filter((elem) => elem && Object.values(elem)[0]?.length),
+    [nonThaiCategoryNames, postsWithCategoryNames],
+  );
+
+  const categories = useMemo(
+    () =>
+      groupPostByCategories?.map(
+        (groupPostByCategory) => Object.keys(groupPostByCategory)[0],
+      ),
+    [groupPostByCategories],
+  ) as any[];
+
+  const rawImageUrls = useMemo(
+    () =>
+      groupPostByCategories
+        ?.map((category) =>
+          Object.values(category)?.map((posts: any) =>
             posts.map((post: any) => post?.['_links']?.['wp:featuredmedia'][0]?.['href']),
           ),
         )
-        .flat(2);
-      const responses = await Promise.all(urls.map((url: string) => axios.get(url)));
-      const imageUrls = responses?.map(({ data }) => data?.guid?.rendered);
-      const postsWithImages = groupPostByCategories.map((category) => ({
+        ?.flat(2),
+    [groupPostByCategories],
+  );
+
+  useEffect(() => {
+    const getImages = async () => {
+      const responses = await Promise.all(
+        rawImageUrls?.map((url: string) => axios.get(url)),
+      );
+      setImageUrls(responses);
+    };
+    getImages();
+  }, [rawImageUrls]);
+
+  const postsWithImages = useMemo(
+    () =>
+      groupPostByCategories.map((category) => ({
         [Object.keys(category)[0]]: Object.values(category)
           .map((posts: any) =>
             posts.map((post: any, idx: number) => ({
@@ -78,30 +123,27 @@ function Home() {
             })),
           )
           .flat(2),
-      }));
-      setPosts(postsWithImages);
-    } catch (err) {
-      console.error(err);
-    }
-  };
-
-  const { status, isFetching } = useQuery(['allposts'], async () => getPosts(), {
-    // Refetch the data every 5 minutes
-    refetchInterval: REFETCH_INTERVAL,
-  });
+      })),
+    [groupPostByCategories, imageUrls],
+  );
 
   return (
-    <article className='bg-bright-blue w-full'>
+    <article className='bg-bright-blue w-full h-full pb-4'>
       <PageHeader title='Fetch The Standard News' />
-      {isFetching || status === 'loading' ? (
-        <div className='spinner-container'>
+      {(postStatus || categoryStatus) === 'loading' ? (
+        <div className='spinner-container h-full'>
           <Spinner />
         </div>
+      ) : (postError || categoryError) instanceof Error ? (
+        <span>
+          Error:
+          {(postError as Keyable)?.message || (categoryError as Keyable)?.message}
+        </span>
       ) : (
-        <ul className='px-6'>
+        <ul className='px-6 h-full'>
           {categories.map((category, idx) => (
             <li
-              className='w-full my-8'
+              className='w-full my-16 h-full'
               key={
                 category +
                 Date.now().toString(16) +
@@ -111,12 +153,12 @@ function Home() {
             >
               <CategoryHeader
                 category={category}
-                nonThaiCategoriesMapping={nonThaiCategoriesMapping}
+                nonThaiCategoriesMapping={nonThaiCategories}
               />
               <PageBreak />
-              {posts && (
+              {groupPostByCategories && (
                 <ul className='grid grid-cols-1 gap-12 lg:gap-8 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 px-6 my-8'>
-                  {posts[idx][category].slice(0, 5).map((post: any) => (
+                  {groupPostByCategories[idx][category].slice(0, 5).map((post: any) => (
                     <Post key={post.id} post={post} />
                   ))}
                 </ul>
