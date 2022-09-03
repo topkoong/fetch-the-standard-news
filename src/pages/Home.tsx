@@ -7,11 +7,7 @@ import PageBreak from '@components/PageBreak';
 import PageHeader from '@components/PageHeader';
 import Post from '@components/Post';
 import Spinner from '@components/Spinner';
-import {
-  REFETCH_INTERVAL,
-  THE_STANDARD_CATEGORIES_ENDPOINT,
-  THE_STANDARD_POSTS_ENDPOINT,
-} from '@constants/index';
+import { REFETCH_INTERVAL } from '@constants/index';
 import axios from 'axios';
 import { useEffect, useMemo, useState } from 'preact/hooks';
 import { useQuery } from 'react-query';
@@ -20,8 +16,13 @@ interface Keyable {
   [key: string]: string;
 }
 
+interface ImageUrl {
+  url: string;
+  id: number;
+}
+
 function Home() {
-  const [imageUrls, setImageUrls] = useState<any[]>([]);
+  const [imageUrls, setImageUrls] = useState<ImageUrl[]>([]);
   const {
     data: postData,
     error: postError,
@@ -107,19 +108,27 @@ function Home() {
       const responses = await Promise.all(
         rawImageUrls?.map((url: string) => axios.get(url)),
       );
-      setImageUrls(responses);
+      const imgUrls: ImageUrl[] = responses?.map(({ data }) => ({
+        id: data?.id,
+        url: data?.guid?.rendered,
+      }));
+      setImageUrls(imgUrls);
     };
     getImages();
   }, [rawImageUrls]);
+
+  console.log('groupPostByCategories: ', groupPostByCategories);
 
   const postsWithImages = useMemo(
     () =>
       groupPostByCategories.map((category) => ({
         [Object.keys(category)[0]]: Object.values(category)
           .map((posts: any) =>
-            posts.map((post: any, idx: number) => ({
+            posts.map((post: any) => ({
               ...post,
-              imageUrl: imageUrls[idx],
+              imageUrl: imageUrls?.find(
+                (imageUrl: ImageUrl) => imageUrl?.id === post?.featured_media,
+              )?.url,
             })),
           )
           .flat(2),
@@ -156,9 +165,9 @@ function Home() {
                 nonThaiCategoriesMapping={nonThaiCategories}
               />
               <PageBreak />
-              {groupPostByCategories && (
+              {postsWithImages && (
                 <ul className='grid grid-cols-1 gap-12 lg:gap-8 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 px-6 my-8'>
-                  {groupPostByCategories[idx][category].slice(0, 5).map((post: any) => (
+                  {postsWithImages[idx][category].slice(0, 5).map((post: any) => (
                     <Post key={post.id} post={post} />
                   ))}
                 </ul>

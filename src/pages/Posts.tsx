@@ -2,15 +2,19 @@ import PageBreak from '@components/PageBreak';
 import PageHeader from '@components/PageHeader';
 import Post from '@components/Post';
 import Spinner from '@components/Spinner';
+import { PAGE_SIZE, THE_STANDARD_POSTS_ENDPOINT } from '@constants/index';
 import axios from 'axios';
 import { useState } from 'preact/hooks';
 import { useInfiniteQuery } from 'react-query';
 import { useLocation, useParams } from 'react-router-dom';
 
-import { PAGE_SIZE, THE_STANDARD_POSTS_ENDPOINT } from '../constants';
-
 interface LinkState {
   category: string;
+}
+
+interface ImageUrl {
+  url: string;
+  id: number;
 }
 
 function Posts() {
@@ -28,10 +32,15 @@ function Posts() {
         (post: any) => post?.['_links']?.['wp:featuredmedia'][0]?.['href'],
       );
       const responses = await Promise.all(urls.map((url: string) => axios.get(url)));
-      const imageUrls = responses?.map(({ data }) => data?.guid?.rendered);
-      const postsWithImage = posts.map((post: any, idx: number) => ({
+      const imageUrls: ImageUrl[] = responses?.map(({ data }) => ({
+        id: data?.id,
+        url: data?.guid?.rendered,
+      }));
+      const postsWithImage = posts.map((post: any) => ({
         ...post,
-        imageUrl: imageUrls[idx],
+        imageUrl: imageUrls?.find(
+          (imageUrl: ImageUrl) => imageUrl?.id === post?.featured_media,
+        )?.url,
       }));
       return { posts: postsWithImage, nextCursor: currentOffset };
     } catch (err) {
