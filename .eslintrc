@@ -42,7 +42,8 @@
         "unnamedComponents": "arrow-function"
       }
     ],
-    "no-shadow": "off"
+    "no-shadow": "off",
+    "no-undef": "error"
   },
   "settings": {
     "jest": {
@@ -59,5 +60,6 @@
         "extensions": [".js", ".jsx", ".ts", ".tsx"]
       }
     }
-  }
+  },
+  "ignorePatterns": "**/*.d.ts"
 }
