@@ -36,10 +36,10 @@ jobs:
     - name: Checking out the latest code
       uses: actions/checkout@v3
 
-    - name: Running fetch-the-standard-categories script file
+    - name: Running fetch-the-standard-posts script file
       run: |
-          chmod +x ./cachescripts/fetch-the-standard-categories.sh
-          ./cachescripts/fetch-the-standard-categories.sh
+          chmod +x ./cachescripts/fetch-the-standard-posts.sh
+          ./cachescripts/fetch-the-standard-posts.sh
       shell: bash
 
     - name: Committing to fetch-the-standard-news repository
