@@ -1,4 +1,4 @@
-#!/bin/sh
+#!/bin/bash
 #
 # Scrape posts from the standard and store JSON data on disk
 workdir="cachescripts"

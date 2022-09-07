@@ -15,10 +15,11 @@ jobs:
         uses: actions/checkout@v3
 
       - name: Running fetch-the-standard-categories script file
+        shell: bash
         run: |
             chmod +x ./cachescripts/fetch-the-standard-categories.sh
             ./cachescripts/fetch-the-standard-categories.sh
-        shell: bash
+        
 
       - name: Committing to fetch-the-standard-news repository
         uses: stefanzweifel/git-auto-commit-action@v4
@@ -37,10 +38,11 @@ jobs:
       uses: actions/checkout@v3
 
     - name: Running fetch-the-standard-posts script file
+      shell: bash
       run: |
           chmod +x ./cachescripts/fetch-the-standard-posts.sh
           ./cachescripts/fetch-the-standard-posts.sh
-      shell: bash
+      
 
     - name: Committing to fetch-the-standard-news repository
       uses: stefanzweifel/git-auto-commit-action@v4

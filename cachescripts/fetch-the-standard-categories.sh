@@ -1,4 +1,4 @@
-#!/bin/sh
+#!/bin/bash
 #
 # Scrape post categories from the standard and store JSON data on disk
 workdir="cachescripts"
