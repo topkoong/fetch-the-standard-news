@@ -1,11 +1,11 @@
 name: Schedule the standard posts and categories cache update
 
 on:
-  schedule:
+  # schedule:
     # Runs every hour
     # - cron: '0 * * * *'
     # Test run every 30 mins
-    - cron: '*/30 * * * *'
+    # - cron: '*/30 * * * *'
   workflow_dispatch:
 
 jobs:
