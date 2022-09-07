@@ -12,7 +12,7 @@ cachedDir="src/assets/cached"
 
 getTotalCategoryPages() {
     echo "Fetching the standard categories"
-    headers=$(curl -I "https://thestandard.co/wp-json/wp/v2/categories?page=1&per_page=${queryPerPage}")
+    headers=$(curl -I "${categoriesBaseUrl}?page=1&per_page=${queryPerPage}")
     rawTotalPosts=$(echo "$headers" | grep -Fi X-WP-Total:)
     rawTotalPages=$(echo "$headers" | grep -Fi X-WP-TotalPages:)
     totalPosts=${rawTotalPosts//[!0-9]/}
@@ -20,6 +20,7 @@ getTotalCategoryPages() {
     echo "totalPages: $totalPages"
     echo "totalPosts: $totalPosts"
     echo "queryPerPage: $queryPerPage"
+
     for ((count = 1; count <= $totalPages; count++)); do
         if [ $count -eq $totalPages ]; then
             quriedPages=$((count - 1))

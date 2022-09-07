@@ -14,13 +14,16 @@ jobs:
       - name: Checking out the latest code
         uses: actions/checkout@v3
 
+      - name: Installing jq, a lightweight and flexible command-line JSON processor.
+        shell: sh
+        run: sudo apt-get install jq
+
       - name: Running fetch-the-standard-categories script file
         shell: sh
         run: |
-            chmod +x ./cachescripts/fetch-the-standard-categories.sh
+            sudo chmod +x ./cachescripts/fetch-the-standard-categories.sh
             ./cachescripts/fetch-the-standard-categories.sh
         
-
       - name: Committing to fetch-the-standard-news repository
         uses: stefanzweifel/git-auto-commit-action@v4
         with:
@@ -37,10 +40,14 @@ jobs:
     - name: Checking out the latest code
       uses: actions/checkout@v3
 
+    - name: Installing jq, a lightweight and flexible command-line JSON processor.
+      shell: sh
+      run: sudo apt-get install jq
+
     - name: Running fetch-the-standard-posts script file
       shell: sh
       run: |
-          chmod +x ./cachescripts/fetch-the-standard-posts.sh
+          sudo chmod +x ./cachescripts/fetch-the-standard-posts.sh
           ./cachescripts/fetch-the-standard-posts.sh
       
 
