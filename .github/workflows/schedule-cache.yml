@@ -1,0 +1,52 @@
+name: Schedule the standard posts and categories cache update
+
+on:
+  schedule:
+    # Runs every hour
+    # - cron: '0 * * * *'
+    # Test run every 30 mins
+    - cron: '*/30 * * * *'
+jobs:
+  update_categories_cache:
+    name: Update the standard categories cache
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checking out the latest code
+        uses: actions/checkout@v3
+
+      - name: Running fetch-the-standard-categories script file
+        run: |
+            chmod +x ./cachescripts/fetch-the-standard-categories.sh
+            ./cachescripts/fetch-the-standard-categories.sh
+        shell: bash
+
+      - name: Committing to fetch-the-standard-news repository
+        uses: stefanzweifel/git-auto-commit-action@v4
+        with:
+          commit_message: Updated the standard categories cache
+          branch: main
+          commit_options: '--no-verify --signoff'
+          file_pattern: src/assets/cached/categories.json
+          repository: .
+
+  update_posts_cache:
+    name: Update the standard posts cache
+    runs-on: ubuntu-latest
+    steps:
+    - name: Checking out the latest code
+      uses: actions/checkout@v3
+
+    - name: Running fetch-the-standard-categories script file
+      run: |
+          chmod +x ./cachescripts/fetch-the-standard-categories.sh
+          ./cachescripts/fetch-the-standard-categories.sh
+      shell: bash
+
+    - name: Committing to fetch-the-standard-news repository
+      uses: stefanzweifel/git-auto-commit-action@v4
+      with:
+        commit_message: Updated the standard posts cache
+        branch: main
+        commit_options: '--no-verify --signoff'
+        file_pattern: src/assets/cached/posts.json
+        repository: .
