@@ -15,12 +15,13 @@ getTotalCategoryPages() {
     headers=$(curl -I "${categoriesBaseUrl}?page=1&per_page=${queryPerPage}")
     rawTotalPosts=$(echo "$headers" | grep -Fi X-WP-Total:)
     rawTotalPages=$(echo "$headers" | grep -Fi X-WP-TotalPages:)
+    echo "rawTotalPosts: $rawTotalPosts"
+    echo "rawTotalPages: $rawTotalPages"
     totalPosts=${rawTotalPosts//[!0-9]/}
     totalPages=${rawTotalPages//[!0-9]/}
     echo "totalPages: $totalPages"
     echo "totalPosts: $totalPosts"
     echo "queryPerPage: $queryPerPage"
-
     for ((count = 1; count <= $totalPages; count++)); do
         if [ $count -eq $totalPages ]; then
             quriedPages=$((count - 1))
