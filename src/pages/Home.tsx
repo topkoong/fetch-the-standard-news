@@ -8,11 +8,13 @@ import PageHeader from '@components/PageHeader';
 import Post from '@components/Post';
 import Spinner from '@components/Spinner';
 import { REFETCH_INTERVAL } from '@constants/index';
-import axios from 'axios';
-import { useEffect, useMemo, useState } from 'preact/hooks';
+// import axios from 'axios';
+// import { useEffect, useMemo, useState } from 'preact/hooks';
+import { useMemo, useState } from 'preact/hooks';
 import { useQuery } from 'react-query';
 
 import cachedCategoryData from '../assets/cached/categories.json';
+import cachedImagesData from '../assets/cached/images.json';
 import cachedPostsData from '../assets/cached/posts.json';
 
 interface Keyable {
@@ -100,33 +102,33 @@ function Home() {
     [groupPostByCategories],
   ) as any[];
 
-  const rawImageUrls = useMemo(
-    () =>
-      groupPostByCategories
-        ?.map((category) =>
-          Object.values(category)?.map((posts: any) =>
-            posts.map((post: any) => post?.['_links']?.['wp:featuredmedia'][0]?.['href']),
-          ),
-        )
-        ?.flat(2),
-    [groupPostByCategories],
-  );
+  // Use cache image instead
 
-  useEffect(() => {
-    const getImages = async () => {
-      const responses = await Promise.all(
-        rawImageUrls?.map((url: string) => axios.get(url)),
-      );
-      const imgUrls: ImageUrl[] = responses?.map(({ data }) => ({
-        id: data?.id,
-        url: data?.guid?.rendered,
-      }));
-      setImageUrls(imgUrls);
-    };
-    getImages();
-  }, [rawImageUrls]);
+  // const rawImageUrls = useMemo(
+  //   () =>
+  //     groupPostByCategories
+  //       ?.map((category) =>
+  //         Object.values(category)?.map((posts: any) =>
+  //           posts.map((post: any) => post?.['_links']?.['wp:featuredmedia'][0]?.['href']),
+  //         ),
+  //       )
+  //       ?.flat(2),
+  //   [groupPostByCategories],
+  // );
 
-  console.log('groupPostByCategories: ', groupPostByCategories);
+  // useEffect(() => {
+  //   const getImages = async () => {
+  //     const responses = await Promise.all(
+  //       rawImageUrls?.map((url: string) => axios.get(url)),
+  //     );
+  //     const imgUrls: ImageUrl[] = responses?.map(({ data }) => ({
+  //       id: data?.id,
+  //       url: data?.guid?.rendered,
+  //     }));
+  //     setImageUrls(imgUrls);
+  //   };
+  //   getImages();
+  // }, [rawImageUrls]);
 
   const postsWithImages = useMemo(
     () =>
@@ -135,14 +137,14 @@ function Home() {
           .map((posts: any) =>
             posts.map((post: any) => ({
               ...post,
-              imageUrl: imageUrls?.find(
+              imageUrl: cachedImagesData?.find(
                 (imageUrl: ImageUrl) => imageUrl?.id === post?.featured_media,
               )?.url,
             })),
           )
           .flat(2),
       })),
-    [groupPostByCategories, imageUrls],
+    [groupPostByCategories],
   );
 
   return (

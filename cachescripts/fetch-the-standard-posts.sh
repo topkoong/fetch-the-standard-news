@@ -20,15 +20,15 @@ getSinglePostPage() {
     echo "totalPages: $totalPages"
     echo "totalPosts: $totalPosts"
     echo "queryPerPage: $queryPerPage"
-    # for ((count = 1; count <= 1; count++)); do
-    #     if [ $count -le 2 ]; then
-    #         echo "Fetching the standard posts page: $count"
-    #         curl -s "${postsBaseUrl}?page=${count}&per_page=${queryPerPage}" \
-    #             -H 'Accept: application/json' \
-    #             -H 'Content-Type: application/json' |
-    #             jq '.' >./${postsDir}/${postFilename}-${count}.json
-    #     fi
-    # done
+    for ((count = 1; count <= 10; count++)); do
+        if [ $count -le 10 ]; then
+            echo "Fetching the standard posts page: $count"
+            curl -s "${postsBaseUrl}?page=${count}&per_page=${queryPerPage}" \
+                -H 'Accept: application/json' \
+                -H 'Content-Type: application/json' |
+                jq '.' >./${postsDir}/${postFilename}-${count}.json
+        fi
+    done
 }
 mergeJsonFiles() {
     jq -s 'flatten' ./${postsDir}/${postFilename}*.json >./${outputDir}/${outputFilename}
@@ -39,4 +39,4 @@ mergeJsonFiles() {
 }
 
 getSinglePostPage
-# mergeJsonFiles
+mergeJsonFiles
