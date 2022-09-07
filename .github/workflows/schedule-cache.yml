@@ -17,7 +17,7 @@ jobs:
         uses: actions/checkout@v3
 
       - name: Installing jq, a lightweight and flexible command-line JSON processor.
-        run: sh sudo apt-get install jq
+        run: sh apt-get install jq
 
       - name: Running fetch-the-standard-categories script file
         run: sh ./cachescripts/fetch-the-standard-categories.sh
@@ -39,7 +39,7 @@ jobs:
       uses: actions/checkout@v3
 
     - name: Installing jq, a lightweight and flexible command-line JSON processor.
-      run: sh sudo apt-get install jq
+      run: sh apt-get install jq
 
     - name: Running fetch-the-standard-posts script file
       run: sh ./cachescripts/fetch-the-standard-posts.sh
