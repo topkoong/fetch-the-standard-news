@@ -42,7 +42,10 @@ getTotalCategoryPages() {
 }
 mergeJsonFiles() {
     jq -s 'flatten' ./${categoriesDir}/${categoriesGroupFilename}-*.json >./${outputDir}/${outputFilename}
+    echo "Copying cache file to static folder"
     mv ./${outputDir}/${outputFilename} ${cachedDir}/${outputFilename}
+    echo "Cleaning up cache folder"
+    rm ./${categoriesDir}/${categoriesGroupFilename}-*.json
 }
 
 getTotalCategoryPages

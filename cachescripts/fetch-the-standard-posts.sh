@@ -10,7 +10,7 @@ outputDir="${postsDir}/merged"
 outputFilename="posts.json"
 cachedDir="src/assets/cached"
 
-getTenPostPages() {
+getSinglePostPage() {
     echo "Fetching the standard posts"
     headers=$(curl -I "${postsBaseUrl}?page=1&per_page=${queryPerPage}")
     rawTotalPosts=$(echo "$headers" | grep -Fi X-WP-Total:)
@@ -20,8 +20,8 @@ getTenPostPages() {
     echo "totalPages: $totalPages"
     echo "totalPosts: $totalPosts"
     echo "queryPerPage: $queryPerPage"
-    for ((count = 1; count <= 10; count++)); do
-        if [ $count -le 10 ]; then
+    for ((count = 1; count <= 1; count++)); do
+        if [ $count -le 2 ]; then
             echo "Fetching the standard posts page: $count"
             curl -s "${postsBaseUrl}?page=${count}&per_page=${queryPerPage}" \
                 -H 'Accept: application/json' \
@@ -32,8 +32,11 @@ getTenPostPages() {
 }
 mergeJsonFiles() {
     jq -s 'flatten' ./${postsDir}/${postFilename}*.json >./${outputDir}/${outputFilename}
+    echo "Copying cache file to static folder"
     mv ./${outputDir}/${outputFilename} ${cachedDir}/${outputFilename}
+    echo "Cleaning up cache folder"
+    rm ./${postsDir}/${postFilename}-*.json
 }
 
-getTenPostPages
+getSinglePostPage
 mergeJsonFiles

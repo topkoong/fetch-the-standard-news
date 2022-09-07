@@ -1,6 +1,6 @@
 import '../app.css';
 
-// import fetchCategories from '@apis/categories';
+import fetchCategories from '@apis/categories';
 import fetchPosts from '@apis/posts';
 import CategoryHeader from '@components/CategoryHeader';
 import PageBreak from '@components/PageBreak';
@@ -12,11 +12,12 @@ import axios from 'axios';
 import { useEffect, useMemo, useState } from 'preact/hooks';
 import { useQuery } from 'react-query';
 
-import categoryData from '../assets/cached/categories.json';
+import cachedCategoryData from '../assets/cached/categories.json';
+import cachedPostsData from '../assets/cached/posts.json';
 
-// interface Keyable {
-//   [key: string]: string;
-// }
+interface Keyable {
+  [key: string]: string;
+}
 
 interface ImageUrl {
   url: string;
@@ -30,26 +31,21 @@ function Home() {
     error: postError,
     status: postStatus,
   } = useQuery('allposts', fetchPosts, {
-    refetchInterval: REFETCH_INTERVAL,
+    refetchInterval: REFETCH_INTERVAL * 3,
+    initialData: cachedPostsData,
+    placeholderData: cachedPostsData,
+    staleTime: 1000,
   });
-  // const {
-  //   data: categoryData,
-  //   error: categoryError,
-  //   status: categoryStatus,
-  // } = useQuery('allcategories', fetchCategories, {
-  //   refetchInterval: REFETCH_INTERVAL,
-  // });
-
-  // const nonThaiCategories = useMemo(() => {
-  //   const regEx = /^[A-Za-z0-9]*$/;
-  //   const nonThaiCategoriesObj: any = {};
-  //   categoryData
-  //     ?.filter((section: any) => regEx.test(section.name))
-  //     ?.forEach((section: any) => {
-  //       nonThaiCategoriesObj[section.id] = section.name;
-  //     });
-  //   return nonThaiCategoriesObj;
-  // }, [categoryData]);
+  const {
+    data: categoryData,
+    error: categoryError,
+    status: categoryStatus,
+  } = useQuery('allcategories', fetchCategories, {
+    refetchInterval: REFETCH_INTERVAL * 3,
+    initialData: cachedCategoryData,
+    placeholderData: cachedCategoryData,
+    staleTime: 1000,
+  });
 
   const nonThaiCategories = useMemo(() => {
     const regEx = /^[A-Za-z0-9]*$/;
@@ -60,7 +56,7 @@ function Home() {
         nonThaiCategoriesObj[section.id] = section.name;
       });
     return nonThaiCategoriesObj;
-  }, []);
+  }, [categoryData]);
 
   const nonThaiCategoryNames = useMemo(() => {
     const nonThaiCategoryNamesArr: string[] = Object.values(nonThaiCategories);
@@ -152,7 +148,7 @@ function Home() {
   return (
     <article className='bg-bright-blue w-full h-full pb-4'>
       <PageHeader title='Fetch The Standard News' />
-      {/* {(postStatus || categoryStatus) === 'loading' ? (
+      {(postStatus || categoryStatus) === 'loading' ? (
         <div className='spinner-container h-full'>
           <Spinner />
         </div>
@@ -160,16 +156,6 @@ function Home() {
         <span>
           Error:
           {(postError as Keyable)?.message || (categoryError as Keyable)?.message}
-        </span>
-      ) : ( */}
-      {postStatus === 'loading' ? (
-        <div className='spinner-container h-full'>
-          <Spinner />
-        </div>
-      ) : postError instanceof Error ? (
-        <span>
-          Error:
-          {postError?.message}
         </span>
       ) : (
         <ul className='px-6 h-full'>
