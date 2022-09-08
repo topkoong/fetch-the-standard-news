@@ -10,7 +10,7 @@ outputDir="${postsDir}/merged"
 outputFilename="posts.json"
 cachedDir="src/assets/cached"
 
-getSinglePostPage() {
+getTenPostPages() {
     echo "Fetching the standard posts"
     headers=$(curl -I "${postsBaseUrl}?page=1&per_page=${queryPerPage}")
     rawTotalPosts=$(echo "$headers" | grep -Fi X-WP-Total:)
@@ -38,5 +38,5 @@ mergeJsonFiles() {
     rm ./${postsDir}/${postFilename}-*.json
 }
 
-getSinglePostPage
+getTenPostPages
 mergeJsonFiles

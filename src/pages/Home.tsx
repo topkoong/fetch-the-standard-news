@@ -15,7 +15,7 @@ import { useMemo } from 'preact/hooks';
 import { useQuery } from 'react-query';
 
 // import axios from 'axios';
-import cachedCategoryData from '../assets/cached/categories.json';
+import cachedCategoriesData from '../assets/cached/categories.json';
 import cachedImagesData from '../assets/cached/images.json';
 import cachedPostsData from '../assets/cached/posts.json';
 
@@ -41,26 +41,26 @@ function Home() {
     staleTime: 1000,
   });
   const {
-    data: categoryData,
+    data: categoriesData,
     error: categoryError,
     status: categoryStatus,
   } = useQuery('allcategories', fetchCategories, {
     refetchInterval: REFETCH_INTERVAL * 3,
-    initialData: cachedCategoryData,
-    placeholderData: cachedCategoryData,
+    initialData: cachedCategoriesData,
+    placeholderData: cachedCategoriesData,
     staleTime: 1000,
   });
 
   const nonThaiCategories = useMemo(() => {
     const regEx = /^[A-Za-z0-9]*$/;
     const nonThaiCategoriesObj: any = {};
-    categoryData
+    categoriesData
       ?.filter((section: any) => regEx.test(section.name))
       ?.forEach((section: any) => {
         nonThaiCategoriesObj[section.id] = section.name;
       });
     return nonThaiCategoriesObj;
-  }, [categoryData]);
+  }, [categoriesData]);
 
   const nonThaiCategoryNames = useMemo(() => {
     const nonThaiCategoryNamesArr: string[] = Object.values(nonThaiCategories);
