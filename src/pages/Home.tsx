@@ -3,21 +3,21 @@ import '../app.css';
 import fetchCategories from '@apis/categories';
 // import fetchImage from '@apis/images';
 import fetchPosts from '@apis/posts';
+// import axios from 'axios';
+import cachedCategoriesData from '@assets/cached/categories.json';
+import cachedImagesData from '@assets/cached/images.json';
+import cachedPostsData from '@assets/cached/posts.json';
 import CategoryHeader from '@components/CategoryHeader';
 import PageBreak from '@components/PageBreak';
 import PageHeader from '@components/PageHeader';
 import Post from '@components/Post';
 import Spinner from '@components/Spinner';
 import { REFETCH_INTERVAL } from '@constants/index';
+import useBreakpoints from '@hooks/useBreakpoints';
 // import { useEffect, useMemo, useState } from 'preact/hooks';
 // import { useQueries, useQuery } from 'react-query';
 import { useMemo } from 'preact/hooks';
 import { useQuery } from 'react-query';
-
-// import axios from 'axios';
-import cachedCategoriesData from '../assets/cached/categories.json';
-import cachedImagesData from '../assets/cached/images.json';
-import cachedPostsData from '../assets/cached/posts.json';
 
 interface Keyable {
   [key: string]: string;
@@ -30,6 +30,7 @@ interface ImageUrl {
 
 function Home() {
   // const [imageUrls, setImageUrls] = useState<ImageUrl[]>([]);
+  const { isXs, isSm, isMd, isLg, isXl } = useBreakpoints();
   const {
     data: postData,
     error: postError,
@@ -103,6 +104,15 @@ function Home() {
       ),
     [groupPostByCategories],
   ) as any[];
+
+  const numberOfElementsToBeRendered = useMemo(() => {
+    if (isXs) return 1;
+    if (isSm) return 1;
+    if (isMd) return 2;
+    if (isLg) return 3;
+    if (isXl) return 4;
+    return 8;
+  }, [isLg, isMd, isSm, isXl, isXs]);
 
   // Use cache image instead
 
@@ -184,9 +194,11 @@ function Home() {
               <PageBreak />
               {postsWithImages && (
                 <ul className='grid grid-cols-1 gap-12 lg:gap-8 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 px-6 my-8'>
-                  {postsWithImages[idx][category].slice(0, 5).map((post: any) => (
-                    <Post key={post.id} post={post} />
-                  ))}
+                  {postsWithImages[idx][category]
+                    .slice(0, numberOfElementsToBeRendered)
+                    .map((post: any) => (
+                      <Post key={post.id} post={post} />
+                    ))}
                 </ul>
               )}
             </li>

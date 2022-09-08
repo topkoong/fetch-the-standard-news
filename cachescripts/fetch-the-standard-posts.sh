@@ -20,7 +20,7 @@ getTenPostPages() {
     echo "totalPages: $totalPages"
     echo "totalPosts: $totalPosts"
     echo "queryPerPage: $queryPerPage"
-    for ((count = 1; count <= 10; count++)); do
+    for ((count = 1; count <= 3; count++)); do
         if [ $count -le 10 ]; then
             echo "Fetching the standard posts page: $count"
             curl -s "${postsBaseUrl}?page=${count}&per_page=${queryPerPage}" \

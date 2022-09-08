@@ -25,6 +25,7 @@
       "@constants/*": ["src/constants/*"],
       "@services/*": ["src/services/*"],
       "@assets/*": ["src/assets/*"],
+      "@hooks/*": ["src/hooks/*"],
       "@apis/*": ["src/apis/*"]
     }
   },
