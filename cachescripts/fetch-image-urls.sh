@@ -5,9 +5,34 @@ workdir="cachescripts"
 imagesDir="${workdir}/images-json"
 cachedDir="src/assets/cached"
 rawInputFilename="posts.json"
-inputFilename="input-${inputFilename}"
+inputFilename="input-${rawInputFilename}"
 outputFilename="images.json"
 outputDir="${imagesDir}/merged"
+mockNum=936
+
+# optional adding
+# mockNum=936
+#  if [ $iter -gt ${mockNum} ]; then
+#     url=$(sed -e 's/^"//' -e 's/"$//' <<<"$url")
+#     echo $url
+#     curl ${url} \
+#         -H 'Accept: application/json' \
+#         -H 'Content-Type: application/json' |
+#         jq '{id: .id, url: .guid.rendered}' >./${imagesDir}/${outputFilename}-${iter}.json
+# fi
+# ((iter += 1))
+
+# adding a specific image
+# mockNum=936
+#  if [ $iter -gt ${mockNum} ]; then
+#     url=$(sed -e 's/^"//' -e 's/"$//' <<<"$url")
+#     echo $url
+#     curl ${url} \
+#         -H 'Accept: application/json' \
+#         -H 'Content-Type: application/json' |
+#         jq '{id: .id, url: .guid.rendered}' >./${imagesDir}/${outputFilename}-${iter}.json
+# fi
+# ((iter += 1))
 
 getImageResponses() {
     cp ./${cachedDir}/${rawInputFilename} ./${imagesDir}/${inputFilename}
@@ -33,5 +58,5 @@ mergeJsonFiles() {
     rm ./${imagesDir}/${outputFilename}-*.json
 }
 
-getImageResponses
+# getImageResponses
 mergeJsonFiles
