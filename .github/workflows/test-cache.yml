@@ -10,7 +10,7 @@ on:
 
 jobs:
   update_categories_cache:
-    name: Update the standard categories cache
+    name: Test cache
     runs-on: ubuntu-latest
     steps:
       - name: Checking out the latest code
