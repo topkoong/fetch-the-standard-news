@@ -7,7 +7,13 @@ import Posts from './pages/Posts';
 
 function App() {
   // Create a client
-  const queryClient = new QueryClient();
+  const queryClient = new QueryClient({
+    defaultOptions: {
+      queries: {
+        refetchOnWindowFocus: false,
+      },
+    },
+  });
   return (
     <QueryClientProvider client={queryClient}>
       <Navbar />

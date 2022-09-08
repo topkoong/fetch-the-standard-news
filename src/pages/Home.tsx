@@ -1,6 +1,7 @@
 import '../app.css';
 
 import fetchCategories from '@apis/categories';
+// import fetchImage from '@apis/images';
 import fetchPosts from '@apis/posts';
 import CategoryHeader from '@components/CategoryHeader';
 import PageBreak from '@components/PageBreak';
@@ -8,11 +9,12 @@ import PageHeader from '@components/PageHeader';
 import Post from '@components/Post';
 import Spinner from '@components/Spinner';
 import { REFETCH_INTERVAL } from '@constants/index';
-// import axios from 'axios';
 // import { useEffect, useMemo, useState } from 'preact/hooks';
-import { useMemo, useState } from 'preact/hooks';
+// import { useQueries, useQuery } from 'react-query';
+import { useMemo } from 'preact/hooks';
 import { useQuery } from 'react-query';
 
+// import axios from 'axios';
 import cachedCategoryData from '../assets/cached/categories.json';
 import cachedImagesData from '../assets/cached/images.json';
 import cachedPostsData from '../assets/cached/posts.json';
@@ -27,7 +29,7 @@ interface ImageUrl {
 }
 
 function Home() {
-  const [imageUrls, setImageUrls] = useState<ImageUrl[]>([]);
+  // const [imageUrls, setImageUrls] = useState<ImageUrl[]>([]);
   const {
     data: postData,
     error: postError,
@@ -104,7 +106,7 @@ function Home() {
 
   // Use cache image instead
 
-  // const rawImageUrls = useMemo(
+  // const rawImageUrls: string[] = useMemo(
   //   () =>
   //     groupPostByCategories
   //       ?.map((category) =>
@@ -116,19 +118,23 @@ function Home() {
   //   [groupPostByCategories],
   // );
 
+  // const imageResults = useQueries({
+  //   queries: rawImageUrls?.map((url: string) => ({
+  //     queryKey: ['imageUrl', url],
+  //     queryFn: () => fetchImage(url),
+  //   })),
+  //   initialData: cachedPostsData,
+  //   placeholderData: cachedPostsData,
+  //   staleTime: 1000,
+  // });
+
   // useEffect(() => {
-  //   const getImages = async () => {
-  //     const responses = await Promise.all(
-  //       rawImageUrls?.map((url: string) => axios.get(url)),
-  //     );
-  //     const imgUrls: ImageUrl[] = responses?.map(({ data }) => ({
-  //       id: data?.id,
-  //       url: data?.guid?.rendered,
-  //     }));
-  //     setImageUrls(imgUrls);
-  //   };
-  //   getImages();
-  // }, [rawImageUrls]);
+  //   const imgUrls: ImageUrl[] = imageResults?.map(({ data }) => ({
+  //     id: data?.id,
+  //     url: data?.guid?.rendered,
+  //   }));
+  //   setImageUrls(imgUrls);
+  // }, [imageResults]);
 
   const postsWithImages = useMemo(
     () =>
