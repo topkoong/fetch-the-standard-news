@@ -1,0 +1,25 @@
+name: Test cache
+
+on:
+  # schedule:
+    # Runs every hour
+    # - cron: '0 * * * *'
+    # Test run every 30 mins
+    # - cron: '*/30 * * * *'
+  workflow_dispatch:
+
+jobs:
+  update_categories_cache:
+    name: Update the standard categories cache
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checking out the latest code
+        uses: actions/checkout@v3
+
+      - name: Installing jq, a lightweight and flexible command-line JSON processor.
+        shell: sh
+        run: sudo apt-get install jq
+
+      - name: Running test-fetch script file
+        run: sh ./cachescripts/test-fetch.sh
+        
