@@ -58,5 +58,5 @@ mergeJsonFiles() {
     rm ./${imagesDir}/${outputFilename}-*.json
 }
 
-# getImageResponses
+getImageResponses
 mergeJsonFiles
