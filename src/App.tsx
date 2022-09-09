@@ -1,7 +1,10 @@
+import '../app.css';
+
 import Spinner from '@components/Spinner';
 import { lazy, Suspense } from 'preact/compat';
 import { QueryClient, QueryClientProvider } from 'react-query';
 import { Route, Routes } from 'react-router-dom';
+
 const Navbar = lazy(() => import('@components/Navbar'));
 const Home = lazy(() => import('@pages/Home'));
 const Posts = lazy(() => import('@pages/Posts'));
@@ -24,7 +27,13 @@ function App() {
         <Route
           path='/'
           element={
-            <Suspense fallback={<Spinner />}>
+            <Suspense
+              fallback={
+                <div className='spinner-container h-full'>
+                  <Spinner />
+                </div>
+              }
+            >
               <Home />
             </Suspense>
           }
@@ -32,7 +41,13 @@ function App() {
         <Route
           path='posts/categories/:id'
           element={
-            <Suspense fallback={<Spinner />}>
+            <Suspense
+              fallback={
+                <div className='spinner-container h-full'>
+                  <Spinner />
+                </div>
+              }
+            >
               <Posts />
             </Suspense>
           }
