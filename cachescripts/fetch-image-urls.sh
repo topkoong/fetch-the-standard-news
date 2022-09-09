@@ -46,7 +46,7 @@ getImageResponses() {
         curl ${url} \
             -H 'Accept: application/json' \
             -H 'Content-Type: application/json' |
-            jq '{id: .id, url: .guid.rendered}' >./${imagesDir}/${outputFilename}-${iter}.json
+            jq '{id: .id, url: ."media_details" .sizes .medium ."source_url" }' >./${imagesDir}/${outputFilename}-${iter}.json
         ((iter += 1))
     done
 }
