@@ -197,7 +197,7 @@ function Home() {
                   {postsWithImages[idx][category]
                     .slice(0, numberOfElementsToBeRendered)
                     .map((post: any) => (
-                      <Post key={post.id} post={post} />
+                      <Post key={post.id} post={post} group={idx} />
                     ))}
                 </ul>
               )}

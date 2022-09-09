@@ -2,7 +2,7 @@ import placeholderImage from '@assets/images/placeholder.png';
 import useIntersectionObserver from '@hooks/useIntersectionObserver';
 import { useRef } from 'preact/hooks';
 
-function Post({ post }: any) {
+function Post({ post, group }: any) {
   const ref = useRef<HTMLImageElement | null>(null);
   const entry = useIntersectionObserver(ref, {});
   const isVisible = !!entry?.isIntersecting;
@@ -20,11 +20,13 @@ function Post({ post }: any) {
         <div className='flex flex-wrap justify-center'>
           <img
             ref={ref}
-            class={`object-contain w-full duration-700 ease-in-out ${
-              !isVisible ? 'grayscale blur-md scale-110' : 'grayscale-0 blur-0 scale-100'
+            className={`object-contain w-full duration-700 ease-in-out ${
+              group !== 0 && !isVisible
+                ? 'grayscale blur-md scale-110'
+                : 'grayscale-0 blur-0 scale-100'
             }
           `}
-            src={!isVisible ? placeholderImage : post?.imageUrl}
+            src={!isVisible && group !== 0 ? placeholderImage : post?.imageUrl}
             loading='lazy'
           />
         </div>
