@@ -1,9 +1,10 @@
-import '../app.css';
+import './app.css';
 
 import Spinner from '@components/Spinner';
 import { lazy, Suspense } from 'preact/compat';
 import { QueryClient, QueryClientProvider } from 'react-query';
 import { Route, Routes } from 'react-router-dom';
+
 const Navbar = lazy(() => import('@components/Navbar'));
 const Home = lazy(() => import('@pages/Home'));
 const Posts = lazy(() => import('@pages/Posts'));
