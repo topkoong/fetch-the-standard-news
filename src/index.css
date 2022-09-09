@@ -24,4 +24,7 @@
   .spinner-container {
     @apply flex items-center justify-center h-full;
   }
+  .spinner-wrapper {
+    @apply flex flex-col items-center justify-center h-full;
+  }
 }
