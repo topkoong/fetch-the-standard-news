@@ -7,17 +7,19 @@ import fetchPosts from '@apis/posts';
 import cachedCategoriesData from '@assets/cached/categories.json';
 import cachedImagesData from '@assets/cached/images.json';
 import cachedPostsData from '@assets/cached/posts.json';
-import CategoryHeader from '@components/CategoryHeader';
-import PageBreak from '@components/PageBreak';
-import PageHeader from '@components/PageHeader';
-import Post from '@components/Post';
-import Spinner from '@components/Spinner';
 import { REFETCH_INTERVAL } from '@constants/index';
 import useBreakpoints from '@hooks/useBreakpoints';
+import { lazy } from 'preact/compat';
 // import { useEffect, useMemo, useState } from 'preact/hooks';
 // import { useQueries, useQuery } from 'react-query';
 import { useMemo } from 'preact/hooks';
 import { useQuery } from 'react-query';
+
+const PageBreak = lazy(() => import('@components/PageBreak'));
+const PageHeader = lazy(() => import('@components/PageHeader'));
+const Post = lazy(() => import('@components/Post'));
+const Spinner = lazy(() => import('@components/Spinner'));
+const CategoryHeader = lazy(() => import('@components/CategoryHeader'));
 
 interface Keyable {
   [key: string]: string;
