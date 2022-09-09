@@ -1,5 +1,3 @@
-import '../app.css';
-
 import fetchCategories from '@apis/categories';
 // import fetchImage from '@apis/images';
 import fetchPosts from '@apis/posts';
@@ -169,7 +167,7 @@ function Home() {
     <article className='bg-bright-blue w-full h-full pb-4'>
       <PageHeader title='Toppy X The Standard News' />
       {(postStatus || categoryStatus) === 'loading' ? (
-        <div className='spinner-container h-full'>
+        <div className='spinner-container'>
           <Spinner />
         </div>
       ) : (postError || categoryError) instanceof Error ? (
