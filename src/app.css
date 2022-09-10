@@ -3,6 +3,7 @@ body {
   height: 100%;
   width: 100%;
   font-family: 'EQ TH', sans-serif !important;
+  @apply bg-bright-blue min-h-full;
 }
 
 .loader div {

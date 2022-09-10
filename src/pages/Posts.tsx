@@ -60,7 +60,7 @@ function Posts() {
     );
 
   return (
-    <article className='bg-bright-blue w-full h-full py-8'>
+    <article className='w-full h-full py-8'>
       <PageHeader title={category} />
       <PageBreak />
       {isLoading ? (

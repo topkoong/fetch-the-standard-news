@@ -166,7 +166,7 @@ function Home() {
   );
 
   return (
-    <article className='bg-bright-blue w-full h-full pb-4'>
+    <article className='w-full h-full pb-4'>
       <PageHeader title='Toppy X The Standard News' />
       {(postStatus || categoryStatus) === 'loading' ? (
         <div className='spinner-container'>
