@@ -8,6 +8,7 @@ postsBaseUrl="https://thestandard.co/wp-json/wp/v2/posts"
 postFilename="post"
 outputDir="${postsDir}/merged"
 outputFilename="posts.json"
+mobileOutputFilename="mobile-posts.json"
 cachedDir="src/assets/cached"
 
 getTenPostPages() {
@@ -32,7 +33,9 @@ getTenPostPages() {
 }
 mergeJsonFiles() {
     jq -s 'flatten' ./${postsDir}/${postFilename}*.json >./${outputDir}/${outputFilename}
+    jq -s 'flatten' ./${postsDir}/${postFilename}-1.json >./${outputDir}/${mobileOutputFilename}
     echo "Copying cache file to static folder"
+    mv ./${outputDir}/${mobileOutputFilename} ${cachedDir}/${mobileOutputFilename}
     mv ./${outputDir}/${outputFilename} ${cachedDir}/${outputFilename}
     echo "Cleaning up cache folder"
     rm ./${postsDir}/${postFilename}-*.json
