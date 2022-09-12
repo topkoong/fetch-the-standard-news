@@ -155,9 +155,10 @@ function Home() {
           .map((posts: any) =>
             posts.map((post: any) => ({
               ...post,
-              imageUrl: (isXs || isSm ? cachedMobileImagesData : cachedImagesData)?.find(
-                (imageUrl: ImageUrl) => imageUrl?.id === post?.featured_media,
-              )?.url,
+              imageUrl: (isXs || isSm
+                ? (cachedMobileImagesData as ImageUrl[])
+                : (cachedImagesData as ImageUrl[])
+              )?.find((imageUrl: ImageUrl) => imageUrl?.id === post?.featured_media)?.url,
             })),
           )
           .flat(2),
