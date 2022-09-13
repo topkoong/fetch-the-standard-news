@@ -58,7 +58,7 @@ function NavBar() {
         </div>
       </div>
       <div
-        className={`lg:flex flex-grow items-center${isNavbarOpen ? ' flex' : ' hidden'}`}
+        className={`lg:flex flex-grow items-center ${isNavbarOpen ? 'flex' : 'hidden'}`}
         id='example-navbar-danger'
       >
         <ul className='flex flex-col lg:flex-row list-none lg:ml-auto lg:px-3 px-8'>
