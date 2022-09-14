@@ -12,9 +12,7 @@ updates:
       interval: "weekly"
       time: "10:00"
     open-pull-requests-limit: 25
-    labels:
-      - "npm"
-      - "dependencies"
+    
   - package-ecosystem: 'github-actions' # See documentation for possible values
     directory: '/' # Location of package manifests
     open-pull-requests-limit: 25
