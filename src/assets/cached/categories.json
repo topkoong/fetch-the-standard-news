@@ -1,5 +1,146 @@
 [
   {
+    "id": 77062,
+    "count": 37,
+    "description": "",
+    "link": "https://thestandard.co/category/video/key-messages/",
+    "name": "Key Messages",
+    "slug": "key-messages",
+    "taxonomy": "category",
+    "parent": 6,
+    "meta": [],
+    "acf": [],
+    "_links": {
+      "self": [
+        {
+          "href": "https://thestandard.co/wp-json/wp/v2/categories/77062"
+        }
+      ],
+      "collection": [
+        {
+          "href": "https://thestandard.co/wp-json/wp/v2/categories"
+        }
+      ],
+      "about": [
+        {
+          "href": "https://thestandard.co/wp-json/wp/v2/taxonomies/category"
+        }
+      ],
+      "up": [
+        {
+          "embeddable": true,
+          "href": "https://thestandard.co/wp-json/wp/v2/categories/6"
+        }
+      ],
+      "wp:post_type": [
+        {
+          "href": "https://thestandard.co/wp-json/wp/v2/posts?categories=77062"
+        }
+      ],
+      "curies": [
+        {
+          "name": "wp",
+          "href": "https://api.w.org/{rel}",
+          "templated": true
+        }
+      ]
+    }
+  },
+  {
+    "id": 77429,
+    "count": 49,
+    "description": "",
+    "link": "https://thestandard.co/category/video/real-money-real-life/",
+    "name": "เงินทองของจริง",
+    "slug": "real-money-real-life",
+    "taxonomy": "category",
+    "parent": 6,
+    "meta": [],
+    "acf": [],
+    "_links": {
+      "self": [
+        {
+          "href": "https://thestandard.co/wp-json/wp/v2/categories/77429"
+        }
+      ],
+      "collection": [
+        {
+          "href": "https://thestandard.co/wp-json/wp/v2/categories"
+        }
+      ],
+      "about": [
+        {
+          "href": "https://thestandard.co/wp-json/wp/v2/taxonomies/category"
+        }
+      ],
+      "up": [
+        {
+          "embeddable": true,
+          "href": "https://thestandard.co/wp-json/wp/v2/categories/6"
+        }
+      ],
+      "wp:post_type": [
+        {
+          "href": "https://thestandard.co/wp-json/wp/v2/posts?categories=77429"
+        }
+      ],
+      "curies": [
+        {
+          "name": "wp",
+          "href": "https://api.w.org/{rel}",
+          "templated": true
+        }
+      ]
+    }
+  },
+  {
+    "id": 77646,
+    "count": 1,
+    "description": "<img class=\"alignnone size-full wp-image-657636\" src=\"https://thestandard.co/wp-content/uploads/2022/07/บีม-ชานน-จรัสสุทธิกุล.jpg\" alt=\"\" width=\"1006\" height=\"1006\" />",
+    "link": "https://thestandard.co/category/wealth/wealth-opinion/wealth-%e0%b8%8a%e0%b8%b2%e0%b8%99%e0%b8%99-%e0%b8%88%e0%b8%a3%e0%b8%b1%e0%b8%aa%e0%b8%aa%e0%b8%b8%e0%b8%97%e0%b8%98%e0%b8%b4%e0%b8%81%e0%b8%b8%e0%b8%a5/",
+    "name": "ชานน จรัสสุทธิกุล",
+    "slug": "wealth-%e0%b8%8a%e0%b8%b2%e0%b8%99%e0%b8%99-%e0%b8%88%e0%b8%a3%e0%b8%b1%e0%b8%aa%e0%b8%aa%e0%b8%b8%e0%b8%97%e0%b8%98%e0%b8%b4%e0%b8%81%e0%b8%b8%e0%b8%a5",
+    "taxonomy": "category",
+    "parent": 58821,
+    "meta": [],
+    "acf": [],
+    "_links": {
+      "self": [
+        {
+          "href": "https://thestandard.co/wp-json/wp/v2/categories/77646"
+        }
+      ],
+      "collection": [
+        {
+          "href": "https://thestandard.co/wp-json/wp/v2/categories"
+        }
+      ],
+      "about": [
+        {
+          "href": "https://thestandard.co/wp-json/wp/v2/taxonomies/category"
+        }
+      ],
+      "up": [
+        {
+          "embeddable": true,
+          "href": "https://thestandard.co/wp-json/wp/v2/categories/58821"
+        }
+      ],
+      "wp:post_type": [
+        {
+          "href": "https://thestandard.co/wp-json/wp/v2/posts?categories=77646"
+        }
+      ],
+      "curies": [
+        {
+          "name": "wp",
+          "href": "https://api.w.org/{rel}",
+          "templated": true
+        }
+      ]
+    }
+  },
+  {
     "id": 77986,
     "count": 1,
     "description": "<img class=\"alignnone size-full wp-image-662064\" src=\"https://thestandard.co/wp-content/uploads/2022/08/ศรพล-ตุลยะเสถียร.jpg\" alt=\"\" width=\"600\" height=\"600\" />",
@@ -705,20 +846,20 @@
     }
   },
   {
-    "id": 77062,
-    "count": 37,
-    "description": "",
-    "link": "https://thestandard.co/category/video/key-messages/",
-    "name": "Key Messages",
-    "slug": "key-messages",
+    "id": 62096,
+    "count": 2,
+    "description": "<img class=\"alignnone size-full wp-image-465266\" src=\"https://thestandard.co/wp-content/uploads/2021/03/ชานันท์-ยอดหงษ์.jpg\" alt=\"\" width=\"450\" height=\"450\" />",
+    "link": "https://thestandard.co/category/opinion/%e0%b8%8a%e0%b8%b2%e0%b8%99%e0%b8%b1%e0%b8%99%e0%b8%97%e0%b9%8c-%e0%b8%a2%e0%b8%ad%e0%b8%94%e0%b8%ab%e0%b8%87%e0%b8%a9%e0%b9%8c/",
+    "name": "ชานันท์ ยอดหงษ์",
+    "slug": "%e0%b8%8a%e0%b8%b2%e0%b8%99%e0%b8%b1%e0%b8%99%e0%b8%97%e0%b9%8c-%e0%b8%a2%e0%b8%ad%e0%b8%94%e0%b8%ab%e0%b8%87%e0%b8%a9%e0%b9%8c",
     "taxonomy": "category",
-    "parent": 6,
+    "parent": 1744,
     "meta": [],
     "acf": [],
     "_links": {
       "self": [
         {
-          "href": "https://thestandard.co/wp-json/wp/v2/categories/77062"
+          "href": "https://thestandard.co/wp-json/wp/v2/categories/62096"
         }
       ],
       "collection": [
@@ -734,12 +875,12 @@
       "up": [
         {
           "embeddable": true,
-          "href": "https://thestandard.co/wp-json/wp/v2/categories/6"
+          "href": "https://thestandard.co/wp-json/wp/v2/categories/1744"
         }
       ],
       "wp:post_type": [
         {
-          "href": "https://thestandard.co/wp-json/wp/v2/posts?categories=77062"
+          "href": "https://thestandard.co/wp-json/wp/v2/posts?categories=62096"
         }
       ],
       "curies": [
@@ -752,20 +893,20 @@
     }
   },
   {
-    "id": 77429,
-    "count": 49,
+    "id": 71998,
+    "count": 16,
     "description": "",
-    "link": "https://thestandard.co/category/video/real-money-real-life/",
-    "name": "เงินทองของจริง",
-    "slug": "real-money-real-life",
+    "link": "https://thestandard.co/category/now-next-2022/now-next-2022-news/",
+    "name": "News Now and Next 2022",
+    "slug": "now-next-2022-news",
     "taxonomy": "category",
-    "parent": 6,
+    "parent": 71997,
     "meta": [],
     "acf": [],
     "_links": {
       "self": [
         {
-          "href": "https://thestandard.co/wp-json/wp/v2/categories/77429"
+          "href": "https://thestandard.co/wp-json/wp/v2/categories/71998"
         }
       ],
       "collection": [
@@ -781,59 +922,12 @@
       "up": [
         {
           "embeddable": true,
-          "href": "https://thestandard.co/wp-json/wp/v2/categories/6"
+          "href": "https://thestandard.co/wp-json/wp/v2/categories/71997"
         }
       ],
       "wp:post_type": [
         {
-          "href": "https://thestandard.co/wp-json/wp/v2/posts?categories=77429"
-        }
-      ],
-      "curies": [
-        {
-          "name": "wp",
-          "href": "https://api.w.org/{rel}",
-          "templated": true
-        }
-      ]
-    }
-  },
-  {
-    "id": 77646,
-    "count": 1,
-    "description": "<img class=\"alignnone size-full wp-image-657636\" src=\"https://thestandard.co/wp-content/uploads/2022/07/บีม-ชานน-จรัสสุทธิกุล.jpg\" alt=\"\" width=\"1006\" height=\"1006\" />",
-    "link": "https://thestandard.co/category/wealth/wealth-opinion/wealth-%e0%b8%8a%e0%b8%b2%e0%b8%99%e0%b8%99-%e0%b8%88%e0%b8%a3%e0%b8%b1%e0%b8%aa%e0%b8%aa%e0%b8%b8%e0%b8%97%e0%b8%98%e0%b8%b4%e0%b8%81%e0%b8%b8%e0%b8%a5/",
-    "name": "ชานน จรัสสุทธิกุล",
-    "slug": "wealth-%e0%b8%8a%e0%b8%b2%e0%b8%99%e0%b8%99-%e0%b8%88%e0%b8%a3%e0%b8%b1%e0%b8%aa%e0%b8%aa%e0%b8%b8%e0%b8%97%e0%b8%98%e0%b8%b4%e0%b8%81%e0%b8%b8%e0%b8%a5",
-    "taxonomy": "category",
-    "parent": 58821,
-    "meta": [],
-    "acf": [],
-    "_links": {
-      "self": [
-        {
-          "href": "https://thestandard.co/wp-json/wp/v2/categories/77646"
-        }
-      ],
-      "collection": [
-        {
-          "href": "https://thestandard.co/wp-json/wp/v2/categories"
-        }
-      ],
-      "about": [
-        {
-          "href": "https://thestandard.co/wp-json/wp/v2/taxonomies/category"
-        }
-      ],
-      "up": [
-        {
-          "embeddable": true,
-          "href": "https://thestandard.co/wp-json/wp/v2/categories/58821"
-        }
-      ],
-      "wp:post_type": [
-        {
-          "href": "https://thestandard.co/wp-json/wp/v2/posts?categories=77646"
+          "href": "https://thestandard.co/wp-json/wp/v2/posts?categories=71998"
         }
       ],
       "curies": [
@@ -847,7 +941,7 @@
   },
   {
     "id": 32,
-    "count": 3032,
+    "count": 3033,
     "description": "",
     "link": "https://thestandard.co/category/lifestyle/eat-drink/",
     "name": "Eat &amp; Drink",
@@ -894,7 +988,7 @@
   },
   {
     "id": 11,
-    "count": 11123,
+    "count": 11131,
     "description": "",
     "link": "https://thestandard.co/category/news/world/",
     "name": "World",
@@ -988,7 +1082,7 @@
   },
   {
     "id": 63458,
-    "count": 331,
+    "count": 332,
     "description": "",
     "link": "https://thestandard.co/category/the-standard-now/now-full/",
     "name": "Full Show",
@@ -1129,7 +1223,7 @@
   },
   {
     "id": 66230,
-    "count": 956,
+    "count": 958,
     "description": "",
     "link": "https://thestandard.co/category/wealth/wealth-cryptocurrency/",
     "name": "Cryptocurrency",
@@ -1176,7 +1270,7 @@
   },
   {
     "id": 26,
-    "count": 2914,
+    "count": 2917,
     "description": "",
     "link": "https://thestandard.co/category/culture/film/",
     "name": "Film",
@@ -1223,7 +1317,7 @@
   },
   {
     "id": 1,
-    "count": 73,
+    "count": 77,
     "description": "",
     "link": "https://thestandard.co/category/%e0%b9%84%e0%b8%a1%e0%b9%88%e0%b8%a1%e0%b8%b5%e0%b8%ab%e0%b8%a1%e0%b8%a7%e0%b8%94%e0%b8%ab%e0%b8%a1%e0%b8%b9%e0%b9%88/",
     "name": "ไม่มีหมวดหมู่",
@@ -1263,20 +1357,20 @@
     }
   },
   {
-    "id": 62096,
-    "count": 2,
-    "description": "<img class=\"alignnone size-full wp-image-465266\" src=\"https://thestandard.co/wp-content/uploads/2021/03/ชานันท์-ยอดหงษ์.jpg\" alt=\"\" width=\"450\" height=\"450\" />",
-    "link": "https://thestandard.co/category/opinion/%e0%b8%8a%e0%b8%b2%e0%b8%99%e0%b8%b1%e0%b8%99%e0%b8%97%e0%b9%8c-%e0%b8%a2%e0%b8%ad%e0%b8%94%e0%b8%ab%e0%b8%87%e0%b8%a9%e0%b9%8c/",
-    "name": "ชานันท์ ยอดหงษ์",
-    "slug": "%e0%b8%8a%e0%b8%b2%e0%b8%99%e0%b8%b1%e0%b8%99%e0%b8%97%e0%b9%8c-%e0%b8%a2%e0%b8%ad%e0%b8%94%e0%b8%ab%e0%b8%87%e0%b8%a9%e0%b9%8c",
+    "id": 59842,
+    "count": 71,
+    "description": "",
+    "link": "https://thestandard.co/category/now-next-2021/",
+    "name": "Now &amp; Next 2021",
+    "slug": "now-next-2021",
     "taxonomy": "category",
-    "parent": 1744,
+    "parent": 0,
     "meta": [],
     "acf": [],
     "_links": {
       "self": [
         {
-          "href": "https://thestandard.co/wp-json/wp/v2/categories/62096"
+          "href": "https://thestandard.co/wp-json/wp/v2/categories/59842"
         }
       ],
       "collection": [
@@ -1289,15 +1383,9 @@
           "href": "https://thestandard.co/wp-json/wp/v2/taxonomies/category"
         }
       ],
-      "up": [
-        {
-          "embeddable": true,
-          "href": "https://thestandard.co/wp-json/wp/v2/categories/1744"
-        }
-      ],
       "wp:post_type": [
         {
-          "href": "https://thestandard.co/wp-json/wp/v2/posts?categories=62096"
+          "href": "https://thestandard.co/wp-json/wp/v2/posts?categories=59842"
         }
       ],
       "curies": [
@@ -1310,12 +1398,12 @@
     }
   },
   {
-    "id": 71998,
-    "count": 16,
+    "id": 71999,
+    "count": 54,
     "description": "",
-    "link": "https://thestandard.co/category/now-next-2022/now-next-2022-news/",
-    "name": "News Now and Next 2022",
-    "slug": "now-next-2022-news",
+    "link": "https://thestandard.co/category/now-next-2022/now-next-2022-pop/",
+    "name": "POP Now and Next 2022",
+    "slug": "now-next-2022-pop",
     "taxonomy": "category",
     "parent": 71997,
     "meta": [],
@@ -1323,7 +1411,7 @@
     "_links": {
       "self": [
         {
-          "href": "https://thestandard.co/wp-json/wp/v2/categories/71998"
+          "href": "https://thestandard.co/wp-json/wp/v2/categories/71999"
         }
       ],
       "collection": [
@@ -1344,7 +1432,7 @@
       ],
       "wp:post_type": [
         {
-          "href": "https://thestandard.co/wp-json/wp/v2/posts?categories=71998"
+          "href": "https://thestandard.co/wp-json/wp/v2/posts?categories=71999"
         }
       ],
       "curies": [
@@ -1358,7 +1446,7 @@
   },
   {
     "id": 33,
-    "count": 1484,
+    "count": 1485,
     "description": "",
     "link": "https://thestandard.co/category/lifestyle/travel/",
     "name": "Travel",
@@ -1405,7 +1493,7 @@
   },
   {
     "id": 12,
-    "count": 16848,
+    "count": 16862,
     "description": "",
     "link": "https://thestandard.co/category/news/thailand/",
     "name": "Thailand",
@@ -1593,7 +1681,7 @@
   },
   {
     "id": 39,
-    "count": 3670,
+    "count": 3676,
     "description": "",
     "link": "https://thestandard.co/category/video/news-video/",
     "name": "News",
@@ -1734,7 +1822,7 @@
   },
   {
     "id": 27,
-    "count": 3227,
+    "count": 3230,
     "description": "",
     "link": "https://thestandard.co/category/culture/music/",
     "name": "Music",
@@ -1780,61 +1868,20 @@
     }
   },
   {
-    "id": 59842,
-    "count": 71,
+    "id": 28,
+    "count": 252,
     "description": "",
-    "link": "https://thestandard.co/category/now-next-2021/",
-    "name": "Now &amp; Next 2021",
-    "slug": "now-next-2021",
+    "link": "https://thestandard.co/category/culture/book/",
+    "name": "Book",
+    "slug": "book",
     "taxonomy": "category",
-    "parent": 0,
+    "parent": 3,
     "meta": [],
     "acf": [],
     "_links": {
       "self": [
         {
-          "href": "https://thestandard.co/wp-json/wp/v2/categories/59842"
-        }
-      ],
-      "collection": [
-        {
-          "href": "https://thestandard.co/wp-json/wp/v2/categories"
-        }
-      ],
-      "about": [
-        {
-          "href": "https://thestandard.co/wp-json/wp/v2/taxonomies/category"
-        }
-      ],
-      "wp:post_type": [
-        {
-          "href": "https://thestandard.co/wp-json/wp/v2/posts?categories=59842"
-        }
-      ],
-      "curies": [
-        {
-          "name": "wp",
-          "href": "https://api.w.org/{rel}",
-          "templated": true
-        }
-      ]
-    }
-  },
-  {
-    "id": 71999,
-    "count": 54,
-    "description": "",
-    "link": "https://thestandard.co/category/now-next-2022/now-next-2022-pop/",
-    "name": "POP Now and Next 2022",
-    "slug": "now-next-2022-pop",
-    "taxonomy": "category",
-    "parent": 71997,
-    "meta": [],
-    "acf": [],
-    "_links": {
-      "self": [
-        {
-          "href": "https://thestandard.co/wp-json/wp/v2/categories/71999"
+          "href": "https://thestandard.co/wp-json/wp/v2/categories/28"
         }
       ],
       "collection": [
@@ -1850,12 +1897,59 @@
       "up": [
         {
           "embeddable": true,
-          "href": "https://thestandard.co/wp-json/wp/v2/categories/71997"
+          "href": "https://thestandard.co/wp-json/wp/v2/categories/3"
         }
       ],
       "wp:post_type": [
         {
-          "href": "https://thestandard.co/wp-json/wp/v2/posts?categories=71999"
+          "href": "https://thestandard.co/wp-json/wp/v2/posts?categories=28"
+        }
+      ],
+      "curies": [
+        {
+          "name": "wp",
+          "href": "https://api.w.org/{rel}",
+          "templated": true
+        }
+      ]
+    }
+  },
+  {
+    "id": 63768,
+    "count": 155,
+    "description": "<img class=\"alignnone size-full wp-image-468923\" src=\"https://thestandard.co/wp-content/uploads/2021/03/ชนาธิป-ไชยเหล็ก.jpg\" alt=\"\" width=\"450\" height=\"450\" />",
+    "link": "https://thestandard.co/category/opinion/%e0%b8%8a%e0%b8%99%e0%b8%b2%e0%b8%98%e0%b8%b4%e0%b8%9b-%e0%b9%84%e0%b8%8a%e0%b8%a2%e0%b9%80%e0%b8%ab%e0%b8%a5%e0%b9%87%e0%b8%81/",
+    "name": "ชนาธิป ไชยเหล็ก",
+    "slug": "%e0%b8%8a%e0%b8%99%e0%b8%b2%e0%b8%98%e0%b8%b4%e0%b8%9b-%e0%b9%84%e0%b8%8a%e0%b8%a2%e0%b9%80%e0%b8%ab%e0%b8%a5%e0%b9%87%e0%b8%81",
+    "taxonomy": "category",
+    "parent": 1744,
+    "meta": [],
+    "acf": [],
+    "_links": {
+      "self": [
+        {
+          "href": "https://thestandard.co/wp-json/wp/v2/categories/63768"
+        }
+      ],
+      "collection": [
+        {
+          "href": "https://thestandard.co/wp-json/wp/v2/categories"
+        }
+      ],
+      "about": [
+        {
+          "href": "https://thestandard.co/wp-json/wp/v2/taxonomies/category"
+        }
+      ],
+      "up": [
+        {
+          "embeddable": true,
+          "href": "https://thestandard.co/wp-json/wp/v2/categories/1744"
+        }
+      ],
+      "wp:post_type": [
+        {
+          "href": "https://thestandard.co/wp-json/wp/v2/posts?categories=63768"
         }
       ],
       "curies": [
@@ -1916,7 +2010,7 @@
   },
   {
     "id": 58822,
-    "count": 2691,
+    "count": 2697,
     "description": "",
     "link": "https://thestandard.co/category/wealth/wealth-economic/",
     "name": "Economic",
@@ -1963,7 +2057,7 @@
   },
   {
     "id": 34,
-    "count": 1098,
+    "count": 1099,
     "description": "",
     "link": "https://thestandard.co/category/lifestyle/wellness/",
     "name": "Wellness",
@@ -2010,7 +2104,7 @@
   },
   {
     "id": 13,
-    "count": 17500,
+    "count": 17524,
     "description": "",
     "link": "https://thestandard.co/category/news/business/",
     "name": "Business",
@@ -2057,7 +2151,7 @@
   },
   {
     "id": 63457,
-    "count": 617,
+    "count": 618,
     "description": "",
     "link": "https://thestandard.co/category/the-standard-now/",
     "name": "THE STANDARD NOW",
@@ -2191,12 +2285,53 @@
     }
   },
   {
-    "id": 28,
-    "count": 252,
+    "id": 66983,
+    "count": 65,
     "description": "",
-    "link": "https://thestandard.co/category/culture/book/",
-    "name": "Book",
-    "slug": "book",
+    "link": "https://thestandard.co/category/exclusive-content/",
+    "name": "Exclusive Content",
+    "slug": "exclusive-content",
+    "taxonomy": "category",
+    "parent": 0,
+    "meta": [],
+    "acf": [],
+    "_links": {
+      "self": [
+        {
+          "href": "https://thestandard.co/wp-json/wp/v2/categories/66983"
+        }
+      ],
+      "collection": [
+        {
+          "href": "https://thestandard.co/wp-json/wp/v2/categories"
+        }
+      ],
+      "about": [
+        {
+          "href": "https://thestandard.co/wp-json/wp/v2/taxonomies/category"
+        }
+      ],
+      "wp:post_type": [
+        {
+          "href": "https://thestandard.co/wp-json/wp/v2/posts?categories=66983"
+        }
+      ],
+      "curies": [
+        {
+          "name": "wp",
+          "href": "https://api.w.org/{rel}",
+          "templated": true
+        }
+      ]
+    }
+  },
+  {
+    "id": 29,
+    "count": 638,
+    "description": "",
+    "link": "https://thestandard.co/category/culture/art-design/",
+    "name": "Art &amp; Design",
+    "slug": "art-design",
     "taxonomy": "category",
     "parent": 3,
     "meta": [],
@@ -2204,7 +2339,7 @@
     "_links": {
       "self": [
         {
-          "href": "https://thestandard.co/wp-json/wp/v2/categories/28"
+          "href": "https://thestandard.co/wp-json/wp/v2/categories/29"
         }
       ],
       "collection": [
@@ -2225,54 +2360,7 @@
       ],
       "wp:post_type": [
         {
-          "href": "https://thestandard.co/wp-json/wp/v2/posts?categories=28"
-        }
-      ],
-      "curies": [
-        {
-          "name": "wp",
-          "href": "https://api.w.org/{rel}",
-          "templated": true
-        }
-      ]
-    }
-  },
-  {
-    "id": 63768,
-    "count": 155,
-    "description": "<img class=\"alignnone size-full wp-image-468923\" src=\"https://thestandard.co/wp-content/uploads/2021/03/ชนาธิป-ไชยเหล็ก.jpg\" alt=\"\" width=\"450\" height=\"450\" />",
-    "link": "https://thestandard.co/category/opinion/%e0%b8%8a%e0%b8%99%e0%b8%b2%e0%b8%98%e0%b8%b4%e0%b8%9b-%e0%b9%84%e0%b8%8a%e0%b8%a2%e0%b9%80%e0%b8%ab%e0%b8%a5%e0%b9%87%e0%b8%81/",
-    "name": "ชนาธิป ไชยเหล็ก",
-    "slug": "%e0%b8%8a%e0%b8%99%e0%b8%b2%e0%b8%98%e0%b8%b4%e0%b8%9b-%e0%b9%84%e0%b8%8a%e0%b8%a2%e0%b9%80%e0%b8%ab%e0%b8%a5%e0%b9%87%e0%b8%81",
-    "taxonomy": "category",
-    "parent": 1744,
-    "meta": [],
-    "acf": [],
-    "_links": {
-      "self": [
-        {
-          "href": "https://thestandard.co/wp-json/wp/v2/categories/63768"
-        }
-      ],
-      "collection": [
-        {
-          "href": "https://thestandard.co/wp-json/wp/v2/categories"
-        }
-      ],
-      "about": [
-        {
-          "href": "https://thestandard.co/wp-json/wp/v2/taxonomies/category"
-        }
-      ],
-      "up": [
-        {
-          "embeddable": true,
-          "href": "https://thestandard.co/wp-json/wp/v2/categories/1744"
-        }
-      ],
-      "wp:post_type": [
-        {
-          "href": "https://thestandard.co/wp-json/wp/v2/posts?categories=63768"
+          "href": "https://thestandard.co/wp-json/wp/v2/posts?categories=29"
         }
       ],
       "curies": [
@@ -2333,7 +2421,7 @@
   },
   {
     "id": 58823,
-    "count": 3624,
+    "count": 3628,
     "description": "",
     "link": "https://thestandard.co/category/wealth/wealth-market/",
     "name": "Market",
@@ -2380,7 +2468,7 @@
   },
   {
     "id": 35,
-    "count": 1849,
+    "count": 1851,
     "description": "",
     "link": "https://thestandard.co/category/lifestyle/beauty-grooming/",
     "name": "Beauty &amp; Grooming",
@@ -2427,7 +2515,7 @@
   },
   {
     "id": 14,
-    "count": 6344,
+    "count": 6349,
     "description": "",
     "link": "https://thestandard.co/category/news/sport/",
     "name": "Sport",
@@ -2567,12 +2655,12 @@
     }
   },
   {
-    "id": 66983,
-    "count": 65,
+    "id": 71997,
+    "count": 7,
     "description": "",
-    "link": "https://thestandard.co/category/exclusive-content/",
-    "name": "Exclusive Content",
-    "slug": "exclusive-content",
+    "link": "https://thestandard.co/category/now-next-2022/",
+    "name": "Now &amp; Next 2022",
+    "slug": "now-next-2022",
     "taxonomy": "category",
     "parent": 0,
     "meta": [],
@@ -2580,7 +2668,7 @@
     "_links": {
       "self": [
         {
-          "href": "https://thestandard.co/wp-json/wp/v2/categories/66983"
+          "href": "https://thestandard.co/wp-json/wp/v2/categories/71997"
         }
       ],
       "collection": [
@@ -2595,7 +2683,7 @@
       ],
       "wp:post_type": [
         {
-          "href": "https://thestandard.co/wp-json/wp/v2/posts?categories=66983"
+          "href": "https://thestandard.co/wp-json/wp/v2/posts?categories=71997"
         }
       ],
       "curies": [
@@ -2608,12 +2696,12 @@
     }
   },
   {
-    "id": 29,
-    "count": 638,
+    "id": 30,
+    "count": 2072,
     "description": "",
-    "link": "https://thestandard.co/category/culture/art-design/",
-    "name": "Art &amp; Design",
-    "slug": "art-design",
+    "link": "https://thestandard.co/category/culture/fashion/",
+    "name": "Fashion",
+    "slug": "fashion",
     "taxonomy": "category",
     "parent": 3,
     "meta": [],
@@ -2621,7 +2709,7 @@
     "_links": {
       "self": [
         {
-          "href": "https://thestandard.co/wp-json/wp/v2/categories/29"
+          "href": "https://thestandard.co/wp-json/wp/v2/categories/30"
         }
       ],
       "collection": [
@@ -2642,7 +2730,7 @@
       ],
       "wp:post_type": [
         {
-          "href": "https://thestandard.co/wp-json/wp/v2/posts?categories=29"
+          "href": "https://thestandard.co/wp-json/wp/v2/posts?categories=30"
         }
       ],
       "curies": [
@@ -2656,7 +2744,7 @@
   },
   {
     "id": 58824,
-    "count": 4208,
+    "count": 4217,
     "description": "",
     "link": "https://thestandard.co/category/wealth/wealth-business/",
     "name": "Business",
@@ -2797,7 +2885,7 @@
   },
   {
     "id": 15,
-    "count": 12580,
+    "count": 12589,
     "description": "",
     "link": "https://thestandard.co/category/news/politics/",
     "name": "Politics",
@@ -2937,96 +3025,8 @@
     }
   },
   {
-    "id": 71997,
-    "count": 7,
-    "description": "",
-    "link": "https://thestandard.co/category/now-next-2022/",
-    "name": "Now &amp; Next 2022",
-    "slug": "now-next-2022",
-    "taxonomy": "category",
-    "parent": 0,
-    "meta": [],
-    "acf": [],
-    "_links": {
-      "self": [
-        {
-          "href": "https://thestandard.co/wp-json/wp/v2/categories/71997"
-        }
-      ],
-      "collection": [
-        {
-          "href": "https://thestandard.co/wp-json/wp/v2/categories"
-        }
-      ],
-      "about": [
-        {
-          "href": "https://thestandard.co/wp-json/wp/v2/taxonomies/category"
-        }
-      ],
-      "wp:post_type": [
-        {
-          "href": "https://thestandard.co/wp-json/wp/v2/posts?categories=71997"
-        }
-      ],
-      "curies": [
-        {
-          "name": "wp",
-          "href": "https://api.w.org/{rel}",
-          "templated": true
-        }
-      ]
-    }
-  },
-  {
-    "id": 30,
-    "count": 2069,
-    "description": "",
-    "link": "https://thestandard.co/category/culture/fashion/",
-    "name": "Fashion",
-    "slug": "fashion",
-    "taxonomy": "category",
-    "parent": 3,
-    "meta": [],
-    "acf": [],
-    "_links": {
-      "self": [
-        {
-          "href": "https://thestandard.co/wp-json/wp/v2/categories/30"
-        }
-      ],
-      "collection": [
-        {
-          "href": "https://thestandard.co/wp-json/wp/v2/categories"
-        }
-      ],
-      "about": [
-        {
-          "href": "https://thestandard.co/wp-json/wp/v2/taxonomies/category"
-        }
-      ],
-      "up": [
-        {
-          "embeddable": true,
-          "href": "https://thestandard.co/wp-json/wp/v2/categories/3"
-        }
-      ],
-      "wp:post_type": [
-        {
-          "href": "https://thestandard.co/wp-json/wp/v2/posts?categories=30"
-        }
-      ],
-      "curies": [
-        {
-          "name": "wp",
-          "href": "https://api.w.org/{rel}",
-          "templated": true
-        }
-      ]
-    }
-  },
-  {
     "id": 31,
-    "count": 4319,
+    "count": 4321,
     "description": "",
     "link": "https://thestandard.co/category/culture/tv-entertainment/",
     "name": "TV &amp; Entertainment",
@@ -3073,7 +3073,7 @@
   },
   {
     "id": 58820,
-    "count": 2282,
+    "count": 2285,
     "description": "",
     "link": "https://thestandard.co/category/wealth/",
     "name": "Wealth",
@@ -3114,7 +3114,7 @@
   },
   {
     "id": 58825,
-    "count": 200,
+    "count": 201,
     "description": "",
     "link": "https://thestandard.co/category/wealth/wealth-management/",
     "name": "Wealth Management",
@@ -3395,6 +3395,141 @@
     }
   },
   {
+    "id": 2,
+    "count": 1468,
+    "description": "",
+    "link": "https://thestandard.co/category/news/",
+    "name": "News",
+    "slug": "news",
+    "taxonomy": "category",
+    "parent": 0,
+    "meta": [],
+    "acf": [],
+    "_links": {
+      "self": [
+        {
+          "href": "https://thestandard.co/wp-json/wp/v2/categories/2"
+        }
+      ],
+      "collection": [
+        {
+          "href": "https://thestandard.co/wp-json/wp/v2/categories"
+        }
+      ],
+      "about": [
+        {
+          "href": "https://thestandard.co/wp-json/wp/v2/taxonomies/category"
+        }
+      ],
+      "wp:post_type": [
+        {
+          "href": "https://thestandard.co/wp-json/wp/v2/posts?categories=2"
+        }
+      ],
+      "curies": [
+        {
+          "name": "wp",
+          "href": "https://api.w.org/{rel}",
+          "templated": true
+        }
+      ]
+    }
+  },
+  {
+    "id": 44,
+    "count": 30,
+    "description": "",
+    "link": "https://thestandard.co/category/video/wild/",
+    "name": "Wild",
+    "slug": "wild",
+    "taxonomy": "category",
+    "parent": 6,
+    "meta": [],
+    "acf": [],
+    "_links": {
+      "self": [
+        {
+          "href": "https://thestandard.co/wp-json/wp/v2/categories/44"
+        }
+      ],
+      "collection": [
+        {
+          "href": "https://thestandard.co/wp-json/wp/v2/categories"
+        }
+      ],
+      "about": [
+        {
+          "href": "https://thestandard.co/wp-json/wp/v2/taxonomies/category"
+        }
+      ],
+      "up": [
+        {
+          "embeddable": true,
+          "href": "https://thestandard.co/wp-json/wp/v2/categories/6"
+        }
+      ],
+      "wp:post_type": [
+        {
+          "href": "https://thestandard.co/wp-json/wp/v2/posts?categories=44"
+        }
+      ],
+      "curies": [
+        {
+          "name": "wp",
+          "href": "https://api.w.org/{rel}",
+          "templated": true
+        }
+      ]
+    }
+  },
+  {
+    "id": 56944,
+    "count": 11,
+    "description": "<img class=\"alignnone size-full wp-image-388319\" src=\"https://thestandard.co/wp-content/uploads/2020/08/Maybank.jpg\" alt=\"\" width=\"300\" height=\"300\" />",
+    "link": "https://thestandard.co/category/opinion/invest-in-style-by-maybank-kim-eng/",
+    "name": "Invest in Style by Maybank Kim Eng",
+    "slug": "invest-in-style-by-maybank-kim-eng",
+    "taxonomy": "category",
+    "parent": 1744,
+    "meta": [],
+    "acf": [],
+    "_links": {
+      "self": [
+        {
+          "href": "https://thestandard.co/wp-json/wp/v2/categories/56944"
+        }
+      ],
+      "collection": [
+        {
+          "href": "https://thestandard.co/wp-json/wp/v2/categories"
+        }
+      ],
+      "about": [
+        {
+          "href": "https://thestandard.co/wp-json/wp/v2/taxonomies/category"
+        }
+      ],
+      "up": [
+        {
+          "embeddable": true,
+          "href": "https://thestandard.co/wp-json/wp/v2/categories/1744"
+        }
+      ],
+      "wp:post_type": [
+        {
+          "href": "https://thestandard.co/wp-json/wp/v2/posts?categories=56944"
+        }
+      ],
+      "curies": [
+        {
+          "name": "wp",
+          "href": "https://api.w.org/{rel}",
+          "templated": true
+        }
+      ]
+    }
+  },
+  {
     "id": 58826,
     "count": 95,
     "description": "",
@@ -3537,7 +3672,7 @@
   },
   {
     "id": 18,
-    "count": 812,
+    "count": 813,
     "description": "",
     "link": "https://thestandard.co/category/news/environment/",
     "name": "Environment",
@@ -3618,323 +3753,6 @@
       "wp:post_type": [
         {
           "href": "https://thestandard.co/wp-json/wp/v2/posts?categories=59783"
-        }
-      ],
-      "curies": [
-        {
-          "name": "wp",
-          "href": "https://api.w.org/{rel}",
-          "templated": true
-        }
-      ]
-    }
-  },
-  {
-    "id": 2,
-    "count": 1465,
-    "description": "",
-    "link": "https://thestandard.co/category/news/",
-    "name": "News",
-    "slug": "news",
-    "taxonomy": "category",
-    "parent": 0,
-    "meta": [],
-    "acf": [],
-    "_links": {
-      "self": [
-        {
-          "href": "https://thestandard.co/wp-json/wp/v2/categories/2"
-        }
-      ],
-      "collection": [
-        {
-          "href": "https://thestandard.co/wp-json/wp/v2/categories"
-        }
-      ],
-      "about": [
-        {
-          "href": "https://thestandard.co/wp-json/wp/v2/taxonomies/category"
-        }
-      ],
-      "wp:post_type": [
-        {
-          "href": "https://thestandard.co/wp-json/wp/v2/posts?categories=2"
-        }
-      ],
-      "curies": [
-        {
-          "name": "wp",
-          "href": "https://api.w.org/{rel}",
-          "templated": true
-        }
-      ]
-    }
-  },
-  {
-    "id": 44,
-    "count": 30,
-    "description": "",
-    "link": "https://thestandard.co/category/video/wild/",
-    "name": "Wild",
-    "slug": "wild",
-    "taxonomy": "category",
-    "parent": 6,
-    "meta": [],
-    "acf": [],
-    "_links": {
-      "self": [
-        {
-          "href": "https://thestandard.co/wp-json/wp/v2/categories/44"
-        }
-      ],
-      "collection": [
-        {
-          "href": "https://thestandard.co/wp-json/wp/v2/categories"
-        }
-      ],
-      "about": [
-        {
-          "href": "https://thestandard.co/wp-json/wp/v2/taxonomies/category"
-        }
-      ],
-      "up": [
-        {
-          "embeddable": true,
-          "href": "https://thestandard.co/wp-json/wp/v2/categories/6"
-        }
-      ],
-      "wp:post_type": [
-        {
-          "href": "https://thestandard.co/wp-json/wp/v2/posts?categories=44"
-        }
-      ],
-      "curies": [
-        {
-          "name": "wp",
-          "href": "https://api.w.org/{rel}",
-          "templated": true
-        }
-      ]
-    }
-  },
-  {
-    "id": 56944,
-    "count": 11,
-    "description": "<img class=\"alignnone size-full wp-image-388319\" src=\"https://thestandard.co/wp-content/uploads/2020/08/Maybank.jpg\" alt=\"\" width=\"300\" height=\"300\" />",
-    "link": "https://thestandard.co/category/opinion/invest-in-style-by-maybank-kim-eng/",
-    "name": "Invest in Style by Maybank Kim Eng",
-    "slug": "invest-in-style-by-maybank-kim-eng",
-    "taxonomy": "category",
-    "parent": 1744,
-    "meta": [],
-    "acf": [],
-    "_links": {
-      "self": [
-        {
-          "href": "https://thestandard.co/wp-json/wp/v2/categories/56944"
-        }
-      ],
-      "collection": [
-        {
-          "href": "https://thestandard.co/wp-json/wp/v2/categories"
-        }
-      ],
-      "about": [
-        {
-          "href": "https://thestandard.co/wp-json/wp/v2/taxonomies/category"
-        }
-      ],
-      "up": [
-        {
-          "embeddable": true,
-          "href": "https://thestandard.co/wp-json/wp/v2/categories/1744"
-        }
-      ],
-      "wp:post_type": [
-        {
-          "href": "https://thestandard.co/wp-json/wp/v2/posts?categories=56944"
-        }
-      ],
-      "curies": [
-        {
-          "name": "wp",
-          "href": "https://api.w.org/{rel}",
-          "templated": true
-        }
-      ]
-    }
-  },
-  {
-    "id": 28373,
-    "count": 18476,
-    "description": "",
-    "link": "https://thestandard.co/category/pop/",
-    "name": "POP",
-    "slug": "pop",
-    "taxonomy": "category",
-    "parent": 0,
-    "meta": [],
-    "acf": [],
-    "_links": {
-      "self": [
-        {
-          "href": "https://thestandard.co/wp-json/wp/v2/categories/28373"
-        }
-      ],
-      "collection": [
-        {
-          "href": "https://thestandard.co/wp-json/wp/v2/categories"
-        }
-      ],
-      "about": [
-        {
-          "href": "https://thestandard.co/wp-json/wp/v2/taxonomies/category"
-        }
-      ],
-      "wp:post_type": [
-        {
-          "href": "https://thestandard.co/wp-json/wp/v2/posts?categories=28373"
-        }
-      ],
-      "curies": [
-        {
-          "name": "wp",
-          "href": "https://api.w.org/{rel}",
-          "templated": true
-        }
-      ]
-    }
-  },
-  {
-    "id": 2694,
-    "count": 156,
-    "description": "",
-    "link": "https://thestandard.co/category/news/science/",
-    "name": "Science",
-    "slug": "science",
-    "taxonomy": "category",
-    "parent": 2,
-    "meta": [],
-    "acf": [],
-    "_links": {
-      "self": [
-        {
-          "href": "https://thestandard.co/wp-json/wp/v2/categories/2694"
-        }
-      ],
-      "collection": [
-        {
-          "href": "https://thestandard.co/wp-json/wp/v2/categories"
-        }
-      ],
-      "about": [
-        {
-          "href": "https://thestandard.co/wp-json/wp/v2/taxonomies/category"
-        }
-      ],
-      "up": [
-        {
-          "embeddable": true,
-          "href": "https://thestandard.co/wp-json/wp/v2/categories/2"
-        }
-      ],
-      "wp:post_type": [
-        {
-          "href": "https://thestandard.co/wp-json/wp/v2/posts?categories=2694"
-        }
-      ],
-      "curies": [
-        {
-          "name": "wp",
-          "href": "https://api.w.org/{rel}",
-          "templated": true
-        }
-      ]
-    }
-  },
-  {
-    "id": 3144,
-    "count": 356,
-    "description": "",
-    "link": "https://thestandard.co/category/video/special-story/",
-    "name": "Special Story",
-    "slug": "special-story",
-    "taxonomy": "category",
-    "parent": 6,
-    "meta": [],
-    "acf": [],
-    "_links": {
-      "self": [
-        {
-          "href": "https://thestandard.co/wp-json/wp/v2/categories/3144"
-        }
-      ],
-      "collection": [
-        {
-          "href": "https://thestandard.co/wp-json/wp/v2/categories"
-        }
-      ],
-      "about": [
-        {
-          "href": "https://thestandard.co/wp-json/wp/v2/taxonomies/category"
-        }
-      ],
-      "up": [
-        {
-          "embeddable": true,
-          "href": "https://thestandard.co/wp-json/wp/v2/categories/6"
-        }
-      ],
-      "wp:post_type": [
-        {
-          "href": "https://thestandard.co/wp-json/wp/v2/posts?categories=3144"
-        }
-      ],
-      "curies": [
-        {
-          "name": "wp",
-          "href": "https://api.w.org/{rel}",
-          "templated": true
-        }
-      ]
-    }
-  },
-  {
-    "id": 58827,
-    "count": 106,
-    "description": "",
-    "link": "https://thestandard.co/category/wealth/wealth-lifestyle-passion-investment/",
-    "name": "Lifestyle &amp; Passion",
-    "slug": "wealth-lifestyle-passion-investment",
-    "taxonomy": "category",
-    "parent": 58820,
-    "meta": [],
-    "acf": [],
-    "_links": {
-      "self": [
-        {
-          "href": "https://thestandard.co/wp-json/wp/v2/categories/58827"
-        }
-      ],
-      "collection": [
-        {
-          "href": "https://thestandard.co/wp-json/wp/v2/categories"
-        }
-      ],
-      "about": [
-        {
-          "href": "https://thestandard.co/wp-json/wp/v2/taxonomies/category"
-        }
-      ],
-      "up": [
-        {
-          "embeddable": true,
-          "href": "https://thestandard.co/wp-json/wp/v2/categories/58820"
-        }
-      ],
-      "wp:post_type": [
-        {
-          "href": "https://thestandard.co/wp-json/wp/v2/posts?categories=58827"
         }
       ],
       "curies": [
@@ -4029,6 +3847,323 @@
       "wp:post_type": [
         {
           "href": "https://thestandard.co/wp-json/wp/v2/posts?categories=1748"
+        }
+      ],
+      "curies": [
+        {
+          "name": "wp",
+          "href": "https://api.w.org/{rel}",
+          "templated": true
+        }
+      ]
+    }
+  },
+  {
+    "id": 28373,
+    "count": 18492,
+    "description": "",
+    "link": "https://thestandard.co/category/pop/",
+    "name": "POP",
+    "slug": "pop",
+    "taxonomy": "category",
+    "parent": 0,
+    "meta": [],
+    "acf": [],
+    "_links": {
+      "self": [
+        {
+          "href": "https://thestandard.co/wp-json/wp/v2/categories/28373"
+        }
+      ],
+      "collection": [
+        {
+          "href": "https://thestandard.co/wp-json/wp/v2/categories"
+        }
+      ],
+      "about": [
+        {
+          "href": "https://thestandard.co/wp-json/wp/v2/taxonomies/category"
+        }
+      ],
+      "wp:post_type": [
+        {
+          "href": "https://thestandard.co/wp-json/wp/v2/posts?categories=28373"
+        }
+      ],
+      "curies": [
+        {
+          "name": "wp",
+          "href": "https://api.w.org/{rel}",
+          "templated": true
+        }
+      ]
+    }
+  },
+  {
+    "id": 2694,
+    "count": 157,
+    "description": "",
+    "link": "https://thestandard.co/category/news/science/",
+    "name": "Science",
+    "slug": "science",
+    "taxonomy": "category",
+    "parent": 2,
+    "meta": [],
+    "acf": [],
+    "_links": {
+      "self": [
+        {
+          "href": "https://thestandard.co/wp-json/wp/v2/categories/2694"
+        }
+      ],
+      "collection": [
+        {
+          "href": "https://thestandard.co/wp-json/wp/v2/categories"
+        }
+      ],
+      "about": [
+        {
+          "href": "https://thestandard.co/wp-json/wp/v2/taxonomies/category"
+        }
+      ],
+      "up": [
+        {
+          "embeddable": true,
+          "href": "https://thestandard.co/wp-json/wp/v2/categories/2"
+        }
+      ],
+      "wp:post_type": [
+        {
+          "href": "https://thestandard.co/wp-json/wp/v2/posts?categories=2694"
+        }
+      ],
+      "curies": [
+        {
+          "name": "wp",
+          "href": "https://api.w.org/{rel}",
+          "templated": true
+        }
+      ]
+    }
+  },
+  {
+    "id": 3144,
+    "count": 357,
+    "description": "",
+    "link": "https://thestandard.co/category/video/special-story/",
+    "name": "Special Story",
+    "slug": "special-story",
+    "taxonomy": "category",
+    "parent": 6,
+    "meta": [],
+    "acf": [],
+    "_links": {
+      "self": [
+        {
+          "href": "https://thestandard.co/wp-json/wp/v2/categories/3144"
+        }
+      ],
+      "collection": [
+        {
+          "href": "https://thestandard.co/wp-json/wp/v2/categories"
+        }
+      ],
+      "about": [
+        {
+          "href": "https://thestandard.co/wp-json/wp/v2/taxonomies/category"
+        }
+      ],
+      "up": [
+        {
+          "embeddable": true,
+          "href": "https://thestandard.co/wp-json/wp/v2/categories/6"
+        }
+      ],
+      "wp:post_type": [
+        {
+          "href": "https://thestandard.co/wp-json/wp/v2/posts?categories=3144"
+        }
+      ],
+      "curies": [
+        {
+          "name": "wp",
+          "href": "https://api.w.org/{rel}",
+          "templated": true
+        }
+      ]
+    }
+  },
+  {
+    "id": 58827,
+    "count": 106,
+    "description": "",
+    "link": "https://thestandard.co/category/wealth/wealth-lifestyle-passion-investment/",
+    "name": "Lifestyle &amp; Passion",
+    "slug": "wealth-lifestyle-passion-investment",
+    "taxonomy": "category",
+    "parent": 58820,
+    "meta": [],
+    "acf": [],
+    "_links": {
+      "self": [
+        {
+          "href": "https://thestandard.co/wp-json/wp/v2/categories/58827"
+        }
+      ],
+      "collection": [
+        {
+          "href": "https://thestandard.co/wp-json/wp/v2/categories"
+        }
+      ],
+      "about": [
+        {
+          "href": "https://thestandard.co/wp-json/wp/v2/taxonomies/category"
+        }
+      ],
+      "up": [
+        {
+          "embeddable": true,
+          "href": "https://thestandard.co/wp-json/wp/v2/categories/58820"
+        }
+      ],
+      "wp:post_type": [
+        {
+          "href": "https://thestandard.co/wp-json/wp/v2/posts?categories=58827"
+        }
+      ],
+      "curies": [
+        {
+          "name": "wp",
+          "href": "https://api.w.org/{rel}",
+          "templated": true
+        }
+      ]
+    }
+  },
+  {
+    "id": 3,
+    "count": 83,
+    "description": "",
+    "link": "https://thestandard.co/category/culture/",
+    "name": "Culture",
+    "slug": "culture",
+    "taxonomy": "category",
+    "parent": 0,
+    "meta": [],
+    "acf": [],
+    "_links": {
+      "self": [
+        {
+          "href": "https://thestandard.co/wp-json/wp/v2/categories/3"
+        }
+      ],
+      "collection": [
+        {
+          "href": "https://thestandard.co/wp-json/wp/v2/categories"
+        }
+      ],
+      "about": [
+        {
+          "href": "https://thestandard.co/wp-json/wp/v2/taxonomies/category"
+        }
+      ],
+      "wp:post_type": [
+        {
+          "href": "https://thestandard.co/wp-json/wp/v2/posts?categories=3"
+        }
+      ],
+      "curies": [
+        {
+          "name": "wp",
+          "href": "https://api.w.org/{rel}",
+          "templated": true
+        }
+      ]
+    }
+  },
+  {
+    "id": 3901,
+    "count": 884,
+    "description": "",
+    "link": "https://thestandard.co/category/video/pop-video/",
+    "name": "POP Video",
+    "slug": "pop-video",
+    "taxonomy": "category",
+    "parent": 6,
+    "meta": [],
+    "acf": [],
+    "_links": {
+      "self": [
+        {
+          "href": "https://thestandard.co/wp-json/wp/v2/categories/3901"
+        }
+      ],
+      "collection": [
+        {
+          "href": "https://thestandard.co/wp-json/wp/v2/categories"
+        }
+      ],
+      "about": [
+        {
+          "href": "https://thestandard.co/wp-json/wp/v2/taxonomies/category"
+        }
+      ],
+      "up": [
+        {
+          "embeddable": true,
+          "href": "https://thestandard.co/wp-json/wp/v2/categories/6"
+        }
+      ],
+      "wp:post_type": [
+        {
+          "href": "https://thestandard.co/wp-json/wp/v2/posts?categories=3901"
+        }
+      ],
+      "curies": [
+        {
+          "name": "wp",
+          "href": "https://api.w.org/{rel}",
+          "templated": true
+        }
+      ]
+    }
+  },
+  {
+    "id": 59947,
+    "count": 5,
+    "description": "<img class=\"alignnone size-full wp-image-425544\" src=\"https://thestandard.co/wp-content/uploads/2020/11/นงชนก-สถานานนท์-1.jpg\" alt=\"\" width=\"600\" height=\"600\" />",
+    "link": "https://thestandard.co/category/wealth/wealth-opinion/wealth-%e0%b8%99%e0%b8%87%e0%b8%8a%e0%b8%99%e0%b8%81-%e0%b8%aa%e0%b8%96%e0%b8%b2%e0%b8%99%e0%b8%b2%e0%b8%99%e0%b8%99%e0%b8%97%e0%b9%8c/",
+    "name": "นงชนก สถานานนท์",
+    "slug": "wealth-%e0%b8%99%e0%b8%87%e0%b8%8a%e0%b8%99%e0%b8%81-%e0%b8%aa%e0%b8%96%e0%b8%b2%e0%b8%99%e0%b8%b2%e0%b8%99%e0%b8%99%e0%b8%97%e0%b9%8c",
+    "taxonomy": "category",
+    "parent": 58821,
+    "meta": [],
+    "acf": [],
+    "_links": {
+      "self": [
+        {
+          "href": "https://thestandard.co/wp-json/wp/v2/categories/59947"
+        }
+      ],
+      "collection": [
+        {
+          "href": "https://thestandard.co/wp-json/wp/v2/categories"
+        }
+      ],
+      "about": [
+        {
+          "href": "https://thestandard.co/wp-json/wp/v2/taxonomies/category"
+        }
+      ],
+      "up": [
+        {
+          "embeddable": true,
+          "href": "https://thestandard.co/wp-json/wp/v2/categories/58821"
+        }
+      ],
+      "wp:post_type": [
+        {
+          "href": "https://thestandard.co/wp-json/wp/v2/posts?categories=59947"
         }
       ],
       "curies": [
@@ -4182,12 +4317,12 @@
     }
   },
   {
-    "id": 3,
-    "count": 83,
+    "id": 4,
+    "count": 102,
     "description": "",
-    "link": "https://thestandard.co/category/culture/",
-    "name": "Culture",
-    "slug": "culture",
+    "link": "https://thestandard.co/category/lifestyle/",
+    "name": "Lifestyle",
+    "slug": "lifestyle",
     "taxonomy": "category",
     "parent": 0,
     "meta": [],
@@ -4195,7 +4330,7 @@
     "_links": {
       "self": [
         {
-          "href": "https://thestandard.co/wp-json/wp/v2/categories/3"
+          "href": "https://thestandard.co/wp-json/wp/v2/categories/4"
         }
       ],
       "collection": [
@@ -4210,7 +4345,7 @@
       ],
       "wp:post_type": [
         {
-          "href": "https://thestandard.co/wp-json/wp/v2/posts?categories=3"
+          "href": "https://thestandard.co/wp-json/wp/v2/posts?categories=4"
         }
       ],
       "curies": [
@@ -4223,12 +4358,12 @@
     }
   },
   {
-    "id": 3901,
-    "count": 883,
+    "id": 3902,
+    "count": 24,
     "description": "",
-    "link": "https://thestandard.co/category/video/pop-video/",
-    "name": "POP Video",
-    "slug": "pop-video",
+    "link": "https://thestandard.co/category/video/startup-the-series/",
+    "name": "Startup The Series",
+    "slug": "startup-the-series",
     "taxonomy": "category",
     "parent": 6,
     "meta": [],
@@ -4236,7 +4371,7 @@
     "_links": {
       "self": [
         {
-          "href": "https://thestandard.co/wp-json/wp/v2/categories/3901"
+          "href": "https://thestandard.co/wp-json/wp/v2/categories/3902"
         }
       ],
       "collection": [
@@ -4257,54 +4392,7 @@
       ],
       "wp:post_type": [
         {
-          "href": "https://thestandard.co/wp-json/wp/v2/posts?categories=3901"
-        }
-      ],
-      "curies": [
-        {
-          "name": "wp",
-          "href": "https://api.w.org/{rel}",
-          "templated": true
-        }
-      ]
-    }
-  },
-  {
-    "id": 59947,
-    "count": 5,
-    "description": "<img class=\"alignnone size-full wp-image-425544\" src=\"https://thestandard.co/wp-content/uploads/2020/11/นงชนก-สถานานนท์-1.jpg\" alt=\"\" width=\"600\" height=\"600\" />",
-    "link": "https://thestandard.co/category/wealth/wealth-opinion/wealth-%e0%b8%99%e0%b8%87%e0%b8%8a%e0%b8%99%e0%b8%81-%e0%b8%aa%e0%b8%96%e0%b8%b2%e0%b8%99%e0%b8%b2%e0%b8%99%e0%b8%99%e0%b8%97%e0%b9%8c/",
-    "name": "นงชนก สถานานนท์",
-    "slug": "wealth-%e0%b8%99%e0%b8%87%e0%b8%8a%e0%b8%99%e0%b8%81-%e0%b8%aa%e0%b8%96%e0%b8%b2%e0%b8%99%e0%b8%b2%e0%b8%99%e0%b8%99%e0%b8%97%e0%b9%8c",
-    "taxonomy": "category",
-    "parent": 58821,
-    "meta": [],
-    "acf": [],
-    "_links": {
-      "self": [
-        {
-          "href": "https://thestandard.co/wp-json/wp/v2/categories/59947"
-        }
-      ],
-      "collection": [
-        {
-          "href": "https://thestandard.co/wp-json/wp/v2/categories"
-        }
-      ],
-      "about": [
-        {
-          "href": "https://thestandard.co/wp-json/wp/v2/taxonomies/category"
-        }
-      ],
-      "up": [
-        {
-          "embeddable": true,
-          "href": "https://thestandard.co/wp-json/wp/v2/categories/58821"
-        }
-      ],
-      "wp:post_type": [
-        {
-          "href": "https://thestandard.co/wp-json/wp/v2/posts?categories=59947"
+          "href": "https://thestandard.co/wp-json/wp/v2/posts?categories=3902"
         }
       ],
       "curies": [
@@ -4412,7 +4500,7 @@
   },
   {
     "id": 38935,
-    "count": 329,
+    "count": 330,
     "description": "",
     "link": "https://thestandard.co/category/news/lgbtqia/",
     "name": "LGBTQIA+",
@@ -4459,7 +4547,7 @@
   },
   {
     "id": 58829,
-    "count": 1899,
+    "count": 1902,
     "description": "",
     "link": "https://thestandard.co/category/wealth/wealth-video/",
     "name": "Video",
@@ -4493,94 +4581,6 @@
       "wp:post_type": [
         {
           "href": "https://thestandard.co/wp-json/wp/v2/posts?categories=58829"
-        }
-      ],
-      "curies": [
-        {
-          "name": "wp",
-          "href": "https://api.w.org/{rel}",
-          "templated": true
-        }
-      ]
-    }
-  },
-  {
-    "id": 4,
-    "count": 102,
-    "description": "",
-    "link": "https://thestandard.co/category/lifestyle/",
-    "name": "Lifestyle",
-    "slug": "lifestyle",
-    "taxonomy": "category",
-    "parent": 0,
-    "meta": [],
-    "acf": [],
-    "_links": {
-      "self": [
-        {
-          "href": "https://thestandard.co/wp-json/wp/v2/categories/4"
-        }
-      ],
-      "collection": [
-        {
-          "href": "https://thestandard.co/wp-json/wp/v2/categories"
-        }
-      ],
-      "about": [
-        {
-          "href": "https://thestandard.co/wp-json/wp/v2/taxonomies/category"
-        }
-      ],
-      "wp:post_type": [
-        {
-          "href": "https://thestandard.co/wp-json/wp/v2/posts?categories=4"
-        }
-      ],
-      "curies": [
-        {
-          "name": "wp",
-          "href": "https://api.w.org/{rel}",
-          "templated": true
-        }
-      ]
-    }
-  },
-  {
-    "id": 3902,
-    "count": 24,
-    "description": "",
-    "link": "https://thestandard.co/category/video/startup-the-series/",
-    "name": "Startup The Series",
-    "slug": "startup-the-series",
-    "taxonomy": "category",
-    "parent": 6,
-    "meta": [],
-    "acf": [],
-    "_links": {
-      "self": [
-        {
-          "href": "https://thestandard.co/wp-json/wp/v2/categories/3902"
-        }
-      ],
-      "collection": [
-        {
-          "href": "https://thestandard.co/wp-json/wp/v2/categories"
-        }
-      ],
-      "about": [
-        {
-          "href": "https://thestandard.co/wp-json/wp/v2/taxonomies/category"
-        }
-      ],
-      "up": [
-        {
-          "embeddable": true,
-          "href": "https://thestandard.co/wp-json/wp/v2/categories/6"
-        }
-      ],
-      "wp:post_type": [
-        {
-          "href": "https://thestandard.co/wp-json/wp/v2/posts?categories=3902"
         }
       ],
       "curies": [
@@ -4823,7 +4823,7 @@
   },
   {
     "id": 58830,
-    "count": 722,
+    "count": 723,
     "description": "",
     "link": "https://thestandard.co/category/wealth/wealth-podcast/",
     "name": "Podcast",
@@ -5462,6 +5462,47 @@
     }
   },
   {
+    "id": 1744,
+    "count": 503,
+    "description": "",
+    "link": "https://thestandard.co/category/opinion/",
+    "name": "Opinion",
+    "slug": "opinion",
+    "taxonomy": "category",
+    "parent": 0,
+    "meta": [],
+    "acf": [],
+    "_links": {
+      "self": [
+        {
+          "href": "https://thestandard.co/wp-json/wp/v2/categories/1744"
+        }
+      ],
+      "collection": [
+        {
+          "href": "https://thestandard.co/wp-json/wp/v2/categories"
+        }
+      ],
+      "about": [
+        {
+          "href": "https://thestandard.co/wp-json/wp/v2/taxonomies/category"
+        }
+      ],
+      "wp:post_type": [
+        {
+          "href": "https://thestandard.co/wp-json/wp/v2/posts?categories=1744"
+        }
+      ],
+      "curies": [
+        {
+          "name": "wp",
+          "href": "https://api.w.org/{rel}",
+          "templated": true
+        }
+      ]
+    }
+  },
+  {
     "id": 60559,
     "count": 1,
     "description": "<img class=\"alignnone size-full wp-image-431759\" src=\"https://thestandard.co/wp-content/uploads/2020/12/สุกิจ-วงศ์ถาวราวัฒน์.jpg\" alt=\"\" width=\"600\" height=\"600\" />",
@@ -5603,20 +5644,20 @@
     }
   },
   {
-    "id": 1744,
-    "count": 502,
+    "id": 45914,
+    "count": 17,
     "description": "",
-    "link": "https://thestandard.co/category/opinion/",
-    "name": "Opinion",
-    "slug": "opinion",
+    "link": "https://thestandard.co/category/video/%e0%b8%a5%e0%b8%87%e0%b8%97%e0%b8%b8%e0%b8%99%e0%b9%81%e0%b8%9a%e0%b8%a3%e0%b8%99%e0%b8%94%e0%b9%8c/",
+    "name": "ลงทุนแบรนด์",
+    "slug": "%e0%b8%a5%e0%b8%87%e0%b8%97%e0%b8%b8%e0%b8%99%e0%b9%81%e0%b8%9a%e0%b8%a3%e0%b8%99%e0%b8%94%e0%b9%8c",
     "taxonomy": "category",
-    "parent": 0,
+    "parent": 6,
     "meta": [],
     "acf": [],
     "_links": {
       "self": [
         {
-          "href": "https://thestandard.co/wp-json/wp/v2/categories/1744"
+          "href": "https://thestandard.co/wp-json/wp/v2/categories/45914"
         }
       ],
       "collection": [
@@ -5629,9 +5670,15 @@
           "href": "https://thestandard.co/wp-json/wp/v2/taxonomies/category"
         }
       ],
+      "up": [
+        {
+          "embeddable": true,
+          "href": "https://thestandard.co/wp-json/wp/v2/categories/6"
+        }
+      ],
       "wp:post_type": [
         {
-          "href": "https://thestandard.co/wp-json/wp/v2/posts?categories=1744"
+          "href": "https://thestandard.co/wp-json/wp/v2/posts?categories=45914"
         }
       ],
       "curies": [
@@ -5767,53 +5814,6 @@
       "wp:post_type": [
         {
           "href": "https://thestandard.co/wp-json/wp/v2/posts?categories=3613"
-        }
-      ],
-      "curies": [
-        {
-          "name": "wp",
-          "href": "https://api.w.org/{rel}",
-          "templated": true
-        }
-      ]
-    }
-  },
-  {
-    "id": 45914,
-    "count": 17,
-    "description": "",
-    "link": "https://thestandard.co/category/video/%e0%b8%a5%e0%b8%87%e0%b8%97%e0%b8%b8%e0%b8%99%e0%b9%81%e0%b8%9a%e0%b8%a3%e0%b8%99%e0%b8%94%e0%b9%8c/",
-    "name": "ลงทุนแบรนด์",
-    "slug": "%e0%b8%a5%e0%b8%87%e0%b8%97%e0%b8%b8%e0%b8%99%e0%b9%81%e0%b8%9a%e0%b8%a3%e0%b8%99%e0%b8%94%e0%b9%8c",
-    "taxonomy": "category",
-    "parent": 6,
-    "meta": [],
-    "acf": [],
-    "_links": {
-      "self": [
-        {
-          "href": "https://thestandard.co/wp-json/wp/v2/categories/45914"
-        }
-      ],
-      "collection": [
-        {
-          "href": "https://thestandard.co/wp-json/wp/v2/categories"
-        }
-      ],
-      "about": [
-        {
-          "href": "https://thestandard.co/wp-json/wp/v2/taxonomies/category"
-        }
-      ],
-      "up": [
-        {
-          "embeddable": true,
-          "href": "https://thestandard.co/wp-json/wp/v2/categories/6"
-        }
-      ],
-      "wp:post_type": [
-        {
-          "href": "https://thestandard.co/wp-json/wp/v2/posts?categories=45914"
         }
       ],
       "curies": [
@@ -6460,8 +6460,49 @@
     }
   },
   {
+    "id": 3618,
+    "count": 6,
+    "description": "",
+    "link": "https://thestandard.co/category/travel-magazine/",
+    "name": "Travel and Lifestyle",
+    "slug": "travel-magazine",
+    "taxonomy": "category",
+    "parent": 0,
+    "meta": [],
+    "acf": [],
+    "_links": {
+      "self": [
+        {
+          "href": "https://thestandard.co/wp-json/wp/v2/categories/3618"
+        }
+      ],
+      "collection": [
+        {
+          "href": "https://thestandard.co/wp-json/wp/v2/categories"
+        }
+      ],
+      "about": [
+        {
+          "href": "https://thestandard.co/wp-json/wp/v2/taxonomies/category"
+        }
+      ],
+      "wp:post_type": [
+        {
+          "href": "https://thestandard.co/wp-json/wp/v2/posts?categories=3618"
+        }
+      ],
+      "curies": [
+        {
+          "name": "wp",
+          "href": "https://api.w.org/{rel}",
+          "templated": true
+        }
+      ]
+    }
+  },
+  {
     "id": 61669,
-    "count": 21,
+    "count": 22,
     "description": "<img class=\"alignnone size-full wp-image-442800\" src=\"https://thestandard.co/wp-content/uploads/2021/01/นริศ-สถาผลเดชา-1.jpg\" alt=\"\" width=\"300\" height=\"300\" />",
     "link": "https://thestandard.co/category/wealth/wealth-opinion/wealth-%e0%b8%99%e0%b8%a3%e0%b8%b4%e0%b8%a8-%e0%b8%aa%e0%b8%96%e0%b8%b2%e0%b8%9c%e0%b8%a5%e0%b9%80%e0%b8%94%e0%b8%8a%e0%b8%b2/",
     "name": "นริศ สถาผลเดชา",
@@ -6554,20 +6595,20 @@
     }
   },
   {
-    "id": 3618,
-    "count": 6,
-    "description": "",
-    "link": "https://thestandard.co/category/travel-magazine/",
-    "name": "Travel and Lifestyle",
-    "slug": "travel-magazine",
+    "id": 1769,
+    "count": 281,
+    "description": "<img class=\"alignnone size-full wp-image-302390\" src=\"https://thestandard.co/wp-content/uploads/2019/11/เมธา-พันธุ์วราทร.png\" alt=\"\" width=\"300\" height=\"300\" />",
+    "link": "https://thestandard.co/category/opinion/%e0%b9%80%e0%b8%a1%e0%b8%98%e0%b8%b2-%e0%b8%9e%e0%b8%b1%e0%b8%99%e0%b8%98%e0%b8%b8%e0%b9%8c%e0%b8%a7%e0%b8%a3%e0%b8%b2%e0%b8%97%e0%b8%a3/",
+    "name": "เมธา พันธุ์วราทร",
+    "slug": "%e0%b9%80%e0%b8%a1%e0%b8%98%e0%b8%b2-%e0%b8%9e%e0%b8%b1%e0%b8%99%e0%b8%98%e0%b8%b8%e0%b9%8c%e0%b8%a7%e0%b8%a3%e0%b8%b2%e0%b8%97%e0%b8%a3",
     "taxonomy": "category",
-    "parent": 0,
+    "parent": 1744,
     "meta": [],
     "acf": [],
     "_links": {
       "self": [
         {
-          "href": "https://thestandard.co/wp-json/wp/v2/categories/3618"
+          "href": "https://thestandard.co/wp-json/wp/v2/categories/1769"
         }
       ],
       "collection": [
@@ -6580,9 +6621,15 @@
           "href": "https://thestandard.co/wp-json/wp/v2/taxonomies/category"
         }
       ],
+      "up": [
+        {
+          "embeddable": true,
+          "href": "https://thestandard.co/wp-json/wp/v2/categories/1744"
+        }
+      ],
       "wp:post_type": [
         {
-          "href": "https://thestandard.co/wp-json/wp/v2/posts?categories=3618"
+          "href": "https://thestandard.co/wp-json/wp/v2/posts?categories=1769"
         }
       ],
       "curies": [
@@ -6671,94 +6718,6 @@
       "wp:post_type": [
         {
           "href": "https://thestandard.co/wp-json/wp/v2/posts?categories=61691"
-        }
-      ],
-      "curies": [
-        {
-          "name": "wp",
-          "href": "https://api.w.org/{rel}",
-          "templated": true
-        }
-      ]
-    }
-  },
-  {
-    "id": 1769,
-    "count": 281,
-    "description": "<img class=\"alignnone size-full wp-image-302390\" src=\"https://thestandard.co/wp-content/uploads/2019/11/เมธา-พันธุ์วราทร.png\" alt=\"\" width=\"300\" height=\"300\" />",
-    "link": "https://thestandard.co/category/opinion/%e0%b9%80%e0%b8%a1%e0%b8%98%e0%b8%b2-%e0%b8%9e%e0%b8%b1%e0%b8%99%e0%b8%98%e0%b8%b8%e0%b9%8c%e0%b8%a7%e0%b8%a3%e0%b8%b2%e0%b8%97%e0%b8%a3/",
-    "name": "เมธา พันธุ์วราทร",
-    "slug": "%e0%b9%80%e0%b8%a1%e0%b8%98%e0%b8%b2-%e0%b8%9e%e0%b8%b1%e0%b8%99%e0%b8%98%e0%b8%b8%e0%b9%8c%e0%b8%a7%e0%b8%a3%e0%b8%b2%e0%b8%97%e0%b8%a3",
-    "taxonomy": "category",
-    "parent": 1744,
-    "meta": [],
-    "acf": [],
-    "_links": {
-      "self": [
-        {
-          "href": "https://thestandard.co/wp-json/wp/v2/categories/1769"
-        }
-      ],
-      "collection": [
-        {
-          "href": "https://thestandard.co/wp-json/wp/v2/categories"
-        }
-      ],
-      "about": [
-        {
-          "href": "https://thestandard.co/wp-json/wp/v2/taxonomies/category"
-        }
-      ],
-      "up": [
-        {
-          "embeddable": true,
-          "href": "https://thestandard.co/wp-json/wp/v2/categories/1744"
-        }
-      ],
-      "wp:post_type": [
-        {
-          "href": "https://thestandard.co/wp-json/wp/v2/posts?categories=1769"
-        }
-      ],
-      "curies": [
-        {
-          "name": "wp",
-          "href": "https://api.w.org/{rel}",
-          "templated": true
-        }
-      ]
-    }
-  },
-  {
-    "id": 8413,
-    "count": 275,
-    "description": "",
-    "link": "https://thestandard.co/category/kingrama9/",
-    "name": "King Rama 9",
-    "slug": "kingrama9",
-    "taxonomy": "category",
-    "parent": 0,
-    "meta": [],
-    "acf": [],
-    "_links": {
-      "self": [
-        {
-          "href": "https://thestandard.co/wp-json/wp/v2/categories/8413"
-        }
-      ],
-      "collection": [
-        {
-          "href": "https://thestandard.co/wp-json/wp/v2/categories"
-        }
-      ],
-      "about": [
-        {
-          "href": "https://thestandard.co/wp-json/wp/v2/taxonomies/category"
-        }
-      ],
-      "wp:post_type": [
-        {
-          "href": "https://thestandard.co/wp-json/wp/v2/posts?categories=8413"
         }
       ],
       "curies": [
@@ -6865,12 +6824,12 @@
     }
   },
   {
-    "id": 13461,
-    "count": 65,
+    "id": 8413,
+    "count": 275,
     "description": "",
-    "link": "https://thestandard.co/category/now-next-2018/",
-    "name": "Now &amp; Next 2018",
-    "slug": "now-next-2018",
+    "link": "https://thestandard.co/category/kingrama9/",
+    "name": "King Rama 9",
+    "slug": "kingrama9",
     "taxonomy": "category",
     "parent": 0,
     "meta": [],
@@ -6878,7 +6837,7 @@
     "_links": {
       "self": [
         {
-          "href": "https://thestandard.co/wp-json/wp/v2/categories/13461"
+          "href": "https://thestandard.co/wp-json/wp/v2/categories/8413"
         }
       ],
       "collection": [
@@ -6893,7 +6852,7 @@
       ],
       "wp:post_type": [
         {
-          "href": "https://thestandard.co/wp-json/wp/v2/posts?categories=13461"
+          "href": "https://thestandard.co/wp-json/wp/v2/posts?categories=8413"
         }
       ],
       "curies": [
@@ -6988,6 +6947,47 @@
       "wp:post_type": [
         {
           "href": "https://thestandard.co/wp-json/wp/v2/posts?categories=62215"
+        }
+      ],
+      "curies": [
+        {
+          "name": "wp",
+          "href": "https://api.w.org/{rel}",
+          "templated": true
+        }
+      ]
+    }
+  },
+  {
+    "id": 13461,
+    "count": 65,
+    "description": "",
+    "link": "https://thestandard.co/category/now-next-2018/",
+    "name": "Now &amp; Next 2018",
+    "slug": "now-next-2018",
+    "taxonomy": "category",
+    "parent": 0,
+    "meta": [],
+    "acf": [],
+    "_links": {
+      "self": [
+        {
+          "href": "https://thestandard.co/wp-json/wp/v2/categories/13461"
+        }
+      ],
+      "collection": [
+        {
+          "href": "https://thestandard.co/wp-json/wp/v2/categories"
+        }
+      ],
+      "about": [
+        {
+          "href": "https://thestandard.co/wp-json/wp/v2/taxonomies/category"
+        }
+      ],
+      "wp:post_type": [
+        {
+          "href": "https://thestandard.co/wp-json/wp/v2/posts?categories=13461"
         }
       ],
       "curies": [
@@ -7405,6 +7405,47 @@
     }
   },
   {
+    "id": 23563,
+    "count": 37,
+    "description": "",
+    "link": "https://thestandard.co/category/harryandmeghan/",
+    "name": "Harry And Meghan",
+    "slug": "harryandmeghan",
+    "taxonomy": "category",
+    "parent": 0,
+    "meta": [],
+    "acf": [],
+    "_links": {
+      "self": [
+        {
+          "href": "https://thestandard.co/wp-json/wp/v2/categories/23563"
+        }
+      ],
+      "collection": [
+        {
+          "href": "https://thestandard.co/wp-json/wp/v2/categories"
+        }
+      ],
+      "about": [
+        {
+          "href": "https://thestandard.co/wp-json/wp/v2/taxonomies/category"
+        }
+      ],
+      "wp:post_type": [
+        {
+          "href": "https://thestandard.co/wp-json/wp/v2/posts?categories=23563"
+        }
+      ],
+      "curies": [
+        {
+          "name": "wp",
+          "href": "https://api.w.org/{rel}",
+          "templated": true
+        }
+      ]
+    }
+  },
+  {
     "id": 1795,
     "count": 13,
     "description": "<img class=\"alignnone size-full wp-image-302396\" src=\"https://thestandard.co/wp-content/uploads/2019/11/กาญจนา-หงษ์ทอง.jpg\" alt=\"\" width=\"300\" height=\"300\" />",
@@ -7499,12 +7540,12 @@
     }
   },
   {
-    "id": 23563,
-    "count": 37,
+    "id": 24287,
+    "count": 200,
     "description": "",
-    "link": "https://thestandard.co/category/harryandmeghan/",
-    "name": "Harry And Meghan",
-    "slug": "harryandmeghan",
+    "link": "https://thestandard.co/category/worldcup2018/",
+    "name": "WORLD CUP 2018",
+    "slug": "worldcup2018",
     "taxonomy": "category",
     "parent": 0,
     "meta": [],
@@ -7512,7 +7553,7 @@
     "_links": {
       "self": [
         {
-          "href": "https://thestandard.co/wp-json/wp/v2/categories/23563"
+          "href": "https://thestandard.co/wp-json/wp/v2/categories/24287"
         }
       ],
       "collection": [
@@ -7527,7 +7568,7 @@
       ],
       "wp:post_type": [
         {
-          "href": "https://thestandard.co/wp-json/wp/v2/posts?categories=23563"
+          "href": "https://thestandard.co/wp-json/wp/v2/posts?categories=24287"
         }
       ],
       "curies": [
@@ -7634,12 +7675,12 @@
     }
   },
   {
-    "id": 24287,
-    "count": 200,
+    "id": 24786,
+    "count": 2,
     "description": "",
-    "link": "https://thestandard.co/category/worldcup2018/",
-    "name": "WORLD CUP 2018",
-    "slug": "worldcup2018",
+    "link": "https://thestandard.co/category/worldcup2018-fixtures/",
+    "name": "World Cup 2018 Fixtures",
+    "slug": "worldcup2018-fixtures",
     "taxonomy": "category",
     "parent": 0,
     "meta": [],
@@ -7647,7 +7688,7 @@
     "_links": {
       "self": [
         {
-          "href": "https://thestandard.co/wp-json/wp/v2/categories/24287"
+          "href": "https://thestandard.co/wp-json/wp/v2/categories/24786"
         }
       ],
       "collection": [
@@ -7662,7 +7703,7 @@
       ],
       "wp:post_type": [
         {
-          "href": "https://thestandard.co/wp-json/wp/v2/posts?categories=24287"
+          "href": "https://thestandard.co/wp-json/wp/v2/posts?categories=24786"
         }
       ],
       "curies": [
@@ -7757,47 +7798,6 @@
       "wp:post_type": [
         {
           "href": "https://thestandard.co/wp-json/wp/v2/posts?categories=63333"
-        }
-      ],
-      "curies": [
-        {
-          "name": "wp",
-          "href": "https://api.w.org/{rel}",
-          "templated": true
-        }
-      ]
-    }
-  },
-  {
-    "id": 24786,
-    "count": 2,
-    "description": "",
-    "link": "https://thestandard.co/category/worldcup2018-fixtures/",
-    "name": "World Cup 2018 Fixtures",
-    "slug": "worldcup2018-fixtures",
-    "taxonomy": "category",
-    "parent": 0,
-    "meta": [],
-    "acf": [],
-    "_links": {
-      "self": [
-        {
-          "href": "https://thestandard.co/wp-json/wp/v2/categories/24786"
-        }
-      ],
-      "collection": [
-        {
-          "href": "https://thestandard.co/wp-json/wp/v2/categories"
-        }
-      ],
-      "about": [
-        {
-          "href": "https://thestandard.co/wp-json/wp/v2/taxonomies/category"
-        }
-      ],
-      "wp:post_type": [
-        {
-          "href": "https://thestandard.co/wp-json/wp/v2/posts?categories=24786"
         }
       ],
       "curies": [
@@ -8215,6 +8215,53 @@
     }
   },
   {
+    "id": 64295,
+    "count": 6,
+    "description": "<img class=\"alignnone size-full wp-image-475457\" src=\"https://thestandard.co/wp-content/uploads/2021/04/บุรินทร์-อดุลวัฒนะ.jpg\" alt=\"\" width=\"450\" height=\"450\" />",
+    "link": "https://thestandard.co/category/wealth/wealth-opinion/wealth-%e0%b8%9a%e0%b8%b8%e0%b8%a3%e0%b8%b4%e0%b8%99%e0%b8%97%e0%b8%a3%e0%b9%8c-%e0%b8%ad%e0%b8%94%e0%b8%b8%e0%b8%a5%e0%b8%a7%e0%b8%b1%e0%b8%92%e0%b8%99%e0%b8%b0/",
+    "name": "บุรินทร์ อดุลวัฒนะ",
+    "slug": "wealth-%e0%b8%9a%e0%b8%b8%e0%b8%a3%e0%b8%b4%e0%b8%99%e0%b8%97%e0%b8%a3%e0%b9%8c-%e0%b8%ad%e0%b8%94%e0%b8%b8%e0%b8%a5%e0%b8%a7%e0%b8%b1%e0%b8%92%e0%b8%99%e0%b8%b0",
+    "taxonomy": "category",
+    "parent": 58821,
+    "meta": [],
+    "acf": [],
+    "_links": {
+      "self": [
+        {
+          "href": "https://thestandard.co/wp-json/wp/v2/categories/64295"
+        }
+      ],
+      "collection": [
+        {
+          "href": "https://thestandard.co/wp-json/wp/v2/categories"
+        }
+      ],
+      "about": [
+        {
+          "href": "https://thestandard.co/wp-json/wp/v2/taxonomies/category"
+        }
+      ],
+      "up": [
+        {
+          "embeddable": true,
+          "href": "https://thestandard.co/wp-json/wp/v2/categories/58821"
+        }
+      ],
+      "wp:post_type": [
+        {
+          "href": "https://thestandard.co/wp-json/wp/v2/posts?categories=64295"
+        }
+      ],
+      "curies": [
+        {
+          "name": "wp",
+          "href": "https://api.w.org/{rel}",
+          "templated": true
+        }
+      ]
+    }
+  },
+  {
     "id": 30595,
     "count": 13,
     "description": "",
@@ -8303,12 +8350,12 @@
     }
   },
   {
-    "id": 64295,
-    "count": 6,
-    "description": "<img class=\"alignnone size-full wp-image-475457\" src=\"https://thestandard.co/wp-content/uploads/2021/04/บุรินทร์-อดุลวัฒนะ.jpg\" alt=\"\" width=\"450\" height=\"450\" />",
-    "link": "https://thestandard.co/category/wealth/wealth-opinion/wealth-%e0%b8%9a%e0%b8%b8%e0%b8%a3%e0%b8%b4%e0%b8%99%e0%b8%97%e0%b8%a3%e0%b9%8c-%e0%b8%ad%e0%b8%94%e0%b8%b8%e0%b8%a5%e0%b8%a7%e0%b8%b1%e0%b8%92%e0%b8%99%e0%b8%b0/",
-    "name": "บุรินทร์ อดุลวัฒนะ",
-    "slug": "wealth-%e0%b8%9a%e0%b8%b8%e0%b8%a3%e0%b8%b4%e0%b8%99%e0%b8%97%e0%b8%a3%e0%b9%8c-%e0%b8%ad%e0%b8%94%e0%b8%b8%e0%b8%a5%e0%b8%a7%e0%b8%b1%e0%b8%92%e0%b8%99%e0%b8%b0",
+    "id": 64354,
+    "count": 2,
+    "description": "<img class=\"alignnone size-full wp-image-476242\" src=\"https://thestandard.co/wp-content/uploads/2021/04/พิพัฒน์-เหลืองนฤมิตชัย-1.jpg\" alt=\"\" width=\"450\" height=\"450\" />",
+    "link": "https://thestandard.co/category/wealth/wealth-opinion/wealth-%e0%b8%9e%e0%b8%b4%e0%b8%9e%e0%b8%b1%e0%b8%92%e0%b8%99%e0%b9%8c-%e0%b9%80%e0%b8%ab%e0%b8%a5%e0%b8%b7%e0%b8%ad%e0%b8%87%e0%b8%99%e0%b8%a4%e0%b8%a1%e0%b8%b4%e0%b8%95%e0%b8%8a%e0%b8%b1%e0%b8%a2/",
+    "name": "พิพัฒน์ เหลืองนฤมิตชัย",
+    "slug": "wealth-%e0%b8%9e%e0%b8%b4%e0%b8%9e%e0%b8%b1%e0%b8%92%e0%b8%99%e0%b9%8c-%e0%b9%80%e0%b8%ab%e0%b8%a5%e0%b8%b7%e0%b8%ad%e0%b8%87%e0%b8%99%e0%b8%a4%e0%b8%a1%e0%b8%b4%e0%b8%95%e0%b8%8a%e0%b8%b1%e0%b8%a2",
     "taxonomy": "category",
     "parent": 58821,
     "meta": [],
@@ -8316,7 +8363,7 @@
     "_links": {
       "self": [
         {
-          "href": "https://thestandard.co/wp-json/wp/v2/categories/64295"
+          "href": "https://thestandard.co/wp-json/wp/v2/categories/64354"
         }
       ],
       "collection": [
@@ -8337,7 +8384,7 @@
       ],
       "wp:post_type": [
         {
-          "href": "https://thestandard.co/wp-json/wp/v2/posts?categories=64295"
+          "href": "https://thestandard.co/wp-json/wp/v2/posts?categories=64354"
         }
       ],
       "curies": [
@@ -8438,20 +8485,20 @@
     }
   },
   {
-    "id": 64354,
-    "count": 2,
-    "description": "<img class=\"alignnone size-full wp-image-476242\" src=\"https://thestandard.co/wp-content/uploads/2021/04/พิพัฒน์-เหลืองนฤมิตชัย-1.jpg\" alt=\"\" width=\"450\" height=\"450\" />",
-    "link": "https://thestandard.co/category/wealth/wealth-opinion/wealth-%e0%b8%9e%e0%b8%b4%e0%b8%9e%e0%b8%b1%e0%b8%92%e0%b8%99%e0%b9%8c-%e0%b9%80%e0%b8%ab%e0%b8%a5%e0%b8%b7%e0%b8%ad%e0%b8%87%e0%b8%99%e0%b8%a4%e0%b8%a1%e0%b8%b4%e0%b8%95%e0%b8%8a%e0%b8%b1%e0%b8%a2/",
-    "name": "พิพัฒน์ เหลืองนฤมิตชัย",
-    "slug": "wealth-%e0%b8%9e%e0%b8%b4%e0%b8%9e%e0%b8%b1%e0%b8%92%e0%b8%99%e0%b9%8c-%e0%b9%80%e0%b8%ab%e0%b8%a5%e0%b8%b7%e0%b8%ad%e0%b8%87%e0%b8%99%e0%b8%a4%e0%b8%a1%e0%b8%b4%e0%b8%95%e0%b8%8a%e0%b8%b1%e0%b8%a2",
+    "id": 44376,
+    "count": 57,
+    "description": "",
+    "link": "https://thestandard.co/category/oscars2019/",
+    "name": "Oscars 2019",
+    "slug": "oscars2019",
     "taxonomy": "category",
-    "parent": 58821,
+    "parent": 0,
     "meta": [],
     "acf": [],
     "_links": {
       "self": [
         {
-          "href": "https://thestandard.co/wp-json/wp/v2/categories/64354"
+          "href": "https://thestandard.co/wp-json/wp/v2/categories/44376"
         }
       ],
       "collection": [
@@ -8464,15 +8511,9 @@
           "href": "https://thestandard.co/wp-json/wp/v2/taxonomies/category"
         }
       ],
-      "up": [
-        {
-          "embeddable": true,
-          "href": "https://thestandard.co/wp-json/wp/v2/categories/58821"
-        }
-      ],
       "wp:post_type": [
         {
-          "href": "https://thestandard.co/wp-json/wp/v2/posts?categories=64354"
+          "href": "https://thestandard.co/wp-json/wp/v2/posts?categories=44376"
         }
       ],
       "curies": [
@@ -8579,20 +8620,20 @@
     }
   },
   {
-    "id": 44376,
-    "count": 57,
-    "description": "",
-    "link": "https://thestandard.co/category/oscars2019/",
-    "name": "Oscars 2019",
-    "slug": "oscars2019",
+    "id": 43045,
+    "count": 5,
+    "description": "<img class=\"alignnone size-full wp-image-302988\" src=\"https://thestandard.co/wp-content/uploads/2019/11/ธนาพร-ตั้งเจริญมั่นคง-1.png\" alt=\"\" width=\"300\" height=\"300\" />",
+    "link": "https://thestandard.co/category/opinion/%e0%b8%98%e0%b8%99%e0%b8%b2%e0%b8%9e%e0%b8%a3-%e0%b8%95%e0%b8%b1%e0%b9%89%e0%b8%87%e0%b9%80%e0%b8%88%e0%b8%a3%e0%b8%b4%e0%b8%8d%e0%b8%a1%e0%b8%b1%e0%b9%88%e0%b8%99%e0%b8%84%e0%b8%87/",
+    "name": "ธนาพร ตั้งเจริญมั่นคง",
+    "slug": "%e0%b8%98%e0%b8%99%e0%b8%b2%e0%b8%9e%e0%b8%a3-%e0%b8%95%e0%b8%b1%e0%b9%89%e0%b8%87%e0%b9%80%e0%b8%88%e0%b8%a3%e0%b8%b4%e0%b8%8d%e0%b8%a1%e0%b8%b1%e0%b9%88%e0%b8%99%e0%b8%84%e0%b8%87",
     "taxonomy": "category",
-    "parent": 0,
+    "parent": 1744,
     "meta": [],
     "acf": [],
     "_links": {
       "self": [
         {
-          "href": "https://thestandard.co/wp-json/wp/v2/categories/44376"
+          "href": "https://thestandard.co/wp-json/wp/v2/categories/43045"
         }
       ],
       "collection": [
@@ -8605,9 +8646,15 @@
           "href": "https://thestandard.co/wp-json/wp/v2/taxonomies/category"
         }
       ],
+      "up": [
+        {
+          "embeddable": true,
+          "href": "https://thestandard.co/wp-json/wp/v2/categories/1744"
+        }
+      ],
       "wp:post_type": [
         {
-          "href": "https://thestandard.co/wp-json/wp/v2/posts?categories=44376"
+          "href": "https://thestandard.co/wp-json/wp/v2/posts?categories=43045"
         }
       ],
       "curies": [
@@ -8696,53 +8743,6 @@
       "wp:post_type": [
         {
           "href": "https://thestandard.co/wp-json/wp/v2/posts?categories=64796"
-        }
-      ],
-      "curies": [
-        {
-          "name": "wp",
-          "href": "https://api.w.org/{rel}",
-          "templated": true
-        }
-      ]
-    }
-  },
-  {
-    "id": 43045,
-    "count": 5,
-    "description": "<img class=\"alignnone size-full wp-image-302988\" src=\"https://thestandard.co/wp-content/uploads/2019/11/ธนาพร-ตั้งเจริญมั่นคง-1.png\" alt=\"\" width=\"300\" height=\"300\" />",
-    "link": "https://thestandard.co/category/opinion/%e0%b8%98%e0%b8%99%e0%b8%b2%e0%b8%9e%e0%b8%a3-%e0%b8%95%e0%b8%b1%e0%b9%89%e0%b8%87%e0%b9%80%e0%b8%88%e0%b8%a3%e0%b8%b4%e0%b8%8d%e0%b8%a1%e0%b8%b1%e0%b9%88%e0%b8%99%e0%b8%84%e0%b8%87/",
-    "name": "ธนาพร ตั้งเจริญมั่นคง",
-    "slug": "%e0%b8%98%e0%b8%99%e0%b8%b2%e0%b8%9e%e0%b8%a3-%e0%b8%95%e0%b8%b1%e0%b9%89%e0%b8%87%e0%b9%80%e0%b8%88%e0%b8%a3%e0%b8%b4%e0%b8%8d%e0%b8%a1%e0%b8%b1%e0%b9%88%e0%b8%99%e0%b8%84%e0%b8%87",
-    "taxonomy": "category",
-    "parent": 1744,
-    "meta": [],
-    "acf": [],
-    "_links": {
-      "self": [
-        {
-          "href": "https://thestandard.co/wp-json/wp/v2/categories/43045"
-        }
-      ],
-      "collection": [
-        {
-          "href": "https://thestandard.co/wp-json/wp/v2/categories"
-        }
-      ],
-      "about": [
-        {
-          "href": "https://thestandard.co/wp-json/wp/v2/taxonomies/category"
-        }
-      ],
-      "up": [
-        {
-          "embeddable": true,
-          "href": "https://thestandard.co/wp-json/wp/v2/categories/1744"
-        }
-      ],
-      "wp:post_type": [
-        {
-          "href": "https://thestandard.co/wp-json/wp/v2/posts?categories=43045"
         }
       ],
       "curies": [
@@ -9160,94 +9160,6 @@
     }
   },
   {
-    "id": 58829,
-    "count": 1899,
-    "description": "",
-    "link": "https://thestandard.co/category/wealth/wealth-video/",
-    "name": "Video",
-    "slug": "wealth-video",
-    "taxonomy": "category",
-    "parent": 58820,
-    "meta": [],
-    "acf": [],
-    "_links": {
-      "self": [
-        {
-          "href": "https://thestandard.co/wp-json/wp/v2/categories/58829"
-        }
-      ],
-      "collection": [
-        {
-          "href": "https://thestandard.co/wp-json/wp/v2/categories"
-        }
-      ],
-      "about": [
-        {
-          "href": "https://thestandard.co/wp-json/wp/v2/taxonomies/category"
-        }
-      ],
-      "up": [
-        {
-          "embeddable": true,
-          "href": "https://thestandard.co/wp-json/wp/v2/categories/58820"
-        }
-      ],
-      "wp:post_type": [
-        {
-          "href": "https://thestandard.co/wp-json/wp/v2/posts?categories=58829"
-        }
-      ],
-      "curies": [
-        {
-          "name": "wp",
-          "href": "https://api.w.org/{rel}",
-          "templated": true
-        }
-      ]
-    }
-  },
-  {
-    "id": 4,
-    "count": 102,
-    "description": "",
-    "link": "https://thestandard.co/category/lifestyle/",
-    "name": "Lifestyle",
-    "slug": "lifestyle",
-    "taxonomy": "category",
-    "parent": 0,
-    "meta": [],
-    "acf": [],
-    "_links": {
-      "self": [
-        {
-          "href": "https://thestandard.co/wp-json/wp/v2/categories/4"
-        }
-      ],
-      "collection": [
-        {
-          "href": "https://thestandard.co/wp-json/wp/v2/categories"
-        }
-      ],
-      "about": [
-        {
-          "href": "https://thestandard.co/wp-json/wp/v2/taxonomies/category"
-        }
-      ],
-      "wp:post_type": [
-        {
-          "href": "https://thestandard.co/wp-json/wp/v2/posts?categories=4"
-        }
-      ],
-      "curies": [
-        {
-          "name": "wp",
-          "href": "https://api.w.org/{rel}",
-          "templated": true
-        }
-      ]
-    }
-  },
-  {
     "id": 3902,
     "count": 24,
     "description": "",
@@ -9389,12 +9301,12 @@
     }
   },
   {
-    "id": 40670,
-    "count": 1379,
+    "id": 38935,
+    "count": 330,
     "description": "",
-    "link": "https://thestandard.co/category/news/on-this-day/",
-    "name": "On this day",
-    "slug": "on-this-day",
+    "link": "https://thestandard.co/category/news/lgbtqia/",
+    "name": "LGBTQIA+",
+    "slug": "lgbtqia",
     "taxonomy": "category",
     "parent": 2,
     "meta": [],
@@ -9402,7 +9314,7 @@
     "_links": {
       "self": [
         {
-          "href": "https://thestandard.co/wp-json/wp/v2/categories/40670"
+          "href": "https://thestandard.co/wp-json/wp/v2/categories/38935"
         }
       ],
       "collection": [
@@ -9423,7 +9335,7 @@
       ],
       "wp:post_type": [
         {
-          "href": "https://thestandard.co/wp-json/wp/v2/posts?categories=40670"
+          "href": "https://thestandard.co/wp-json/wp/v2/posts?categories=38935"
         }
       ],
       "curies": [
@@ -9436,12 +9348,12 @@
     }
   },
   {
-    "id": 58830,
-    "count": 722,
+    "id": 58829,
+    "count": 1902,
     "description": "",
-    "link": "https://thestandard.co/category/wealth/wealth-podcast/",
-    "name": "Podcast",
-    "slug": "wealth-podcast",
+    "link": "https://thestandard.co/category/wealth/wealth-video/",
+    "name": "Video",
+    "slug": "wealth-video",
     "taxonomy": "category",
     "parent": 58820,
     "meta": [],
@@ -9449,7 +9361,7 @@
     "_links": {
       "self": [
         {
-          "href": "https://thestandard.co/wp-json/wp/v2/categories/58830"
+          "href": "https://thestandard.co/wp-json/wp/v2/categories/58829"
         }
       ],
       "collection": [
@@ -9470,7 +9382,7 @@
       ],
       "wp:post_type": [
         {
-          "href": "https://thestandard.co/wp-json/wp/v2/posts?categories=58830"
+          "href": "https://thestandard.co/wp-json/wp/v2/posts?categories=58829"
         }
       ],
       "curies": [
@@ -9653,6 +9565,100 @@
       "wp:post_type": [
         {
           "href": "https://thestandard.co/wp-json/wp/v2/posts?categories=1751"
+        }
+      ],
+      "curies": [
+        {
+          "name": "wp",
+          "href": "https://api.w.org/{rel}",
+          "templated": true
+        }
+      ]
+    }
+  },
+  {
+    "id": 40670,
+    "count": 1379,
+    "description": "",
+    "link": "https://thestandard.co/category/news/on-this-day/",
+    "name": "On this day",
+    "slug": "on-this-day",
+    "taxonomy": "category",
+    "parent": 2,
+    "meta": [],
+    "acf": [],
+    "_links": {
+      "self": [
+        {
+          "href": "https://thestandard.co/wp-json/wp/v2/categories/40670"
+        }
+      ],
+      "collection": [
+        {
+          "href": "https://thestandard.co/wp-json/wp/v2/categories"
+        }
+      ],
+      "about": [
+        {
+          "href": "https://thestandard.co/wp-json/wp/v2/taxonomies/category"
+        }
+      ],
+      "up": [
+        {
+          "embeddable": true,
+          "href": "https://thestandard.co/wp-json/wp/v2/categories/2"
+        }
+      ],
+      "wp:post_type": [
+        {
+          "href": "https://thestandard.co/wp-json/wp/v2/posts?categories=40670"
+        }
+      ],
+      "curies": [
+        {
+          "name": "wp",
+          "href": "https://api.w.org/{rel}",
+          "templated": true
+        }
+      ]
+    }
+  },
+  {
+    "id": 58830,
+    "count": 723,
+    "description": "",
+    "link": "https://thestandard.co/category/wealth/wealth-podcast/",
+    "name": "Podcast",
+    "slug": "wealth-podcast",
+    "taxonomy": "category",
+    "parent": 58820,
+    "meta": [],
+    "acf": [],
+    "_links": {
+      "self": [
+        {
+          "href": "https://thestandard.co/wp-json/wp/v2/categories/58830"
+        }
+      ],
+      "collection": [
+        {
+          "href": "https://thestandard.co/wp-json/wp/v2/categories"
+        }
+      ],
+      "about": [
+        {
+          "href": "https://thestandard.co/wp-json/wp/v2/taxonomies/category"
+        }
+      ],
+      "up": [
+        {
+          "embeddable": true,
+          "href": "https://thestandard.co/wp-json/wp/v2/categories/58820"
+        }
+      ],
+      "wp:post_type": [
+        {
+          "href": "https://thestandard.co/wp-json/wp/v2/posts?categories=58830"
         }
       ],
       "curies": [
@@ -9894,53 +9900,6 @@
     }
   },
   {
-    "id": 28502,
-    "count": 35,
-    "description": "",
-    "link": "https://thestandard.co/category/video/bizklass/",
-    "name": "BizKlass",
-    "slug": "bizklass",
-    "taxonomy": "category",
-    "parent": 6,
-    "meta": [],
-    "acf": [],
-    "_links": {
-      "self": [
-        {
-          "href": "https://thestandard.co/wp-json/wp/v2/categories/28502"
-        }
-      ],
-      "collection": [
-        {
-          "href": "https://thestandard.co/wp-json/wp/v2/categories"
-        }
-      ],
-      "about": [
-        {
-          "href": "https://thestandard.co/wp-json/wp/v2/taxonomies/category"
-        }
-      ],
-      "up": [
-        {
-          "embeddable": true,
-          "href": "https://thestandard.co/wp-json/wp/v2/categories/6"
-        }
-      ],
-      "wp:post_type": [
-        {
-          "href": "https://thestandard.co/wp-json/wp/v2/posts?categories=28502"
-        }
-      ],
-      "curies": [
-        {
-          "name": "wp",
-          "href": "https://api.w.org/{rel}",
-          "templated": true
-        }
-      ]
-    }
-  },
-  {
     "id": 8,
     "count": 0,
     "description": "",
@@ -10076,6 +10035,141 @@
     }
   },
   {
+    "id": 28502,
+    "count": 35,
+    "description": "",
+    "link": "https://thestandard.co/category/video/bizklass/",
+    "name": "BizKlass",
+    "slug": "bizklass",
+    "taxonomy": "category",
+    "parent": 6,
+    "meta": [],
+    "acf": [],
+    "_links": {
+      "self": [
+        {
+          "href": "https://thestandard.co/wp-json/wp/v2/categories/28502"
+        }
+      ],
+      "collection": [
+        {
+          "href": "https://thestandard.co/wp-json/wp/v2/categories"
+        }
+      ],
+      "about": [
+        {
+          "href": "https://thestandard.co/wp-json/wp/v2/taxonomies/category"
+        }
+      ],
+      "up": [
+        {
+          "embeddable": true,
+          "href": "https://thestandard.co/wp-json/wp/v2/categories/6"
+        }
+      ],
+      "wp:post_type": [
+        {
+          "href": "https://thestandard.co/wp-json/wp/v2/posts?categories=28502"
+        }
+      ],
+      "curies": [
+        {
+          "name": "wp",
+          "href": "https://api.w.org/{rel}",
+          "templated": true
+        }
+      ]
+    }
+  },
+  {
+    "id": 9,
+    "count": 0,
+    "description": "",
+    "link": "https://thestandard.co/category/contact/",
+    "name": "Contact",
+    "slug": "contact",
+    "taxonomy": "category",
+    "parent": 0,
+    "meta": [],
+    "acf": [],
+    "_links": {
+      "self": [
+        {
+          "href": "https://thestandard.co/wp-json/wp/v2/categories/9"
+        }
+      ],
+      "collection": [
+        {
+          "href": "https://thestandard.co/wp-json/wp/v2/categories"
+        }
+      ],
+      "about": [
+        {
+          "href": "https://thestandard.co/wp-json/wp/v2/taxonomies/category"
+        }
+      ],
+      "wp:post_type": [
+        {
+          "href": "https://thestandard.co/wp-json/wp/v2/posts?categories=9"
+        }
+      ],
+      "curies": [
+        {
+          "name": "wp",
+          "href": "https://api.w.org/{rel}",
+          "templated": true
+        }
+      ]
+    }
+  },
+  {
+    "id": 60459,
+    "count": 19,
+    "description": "<img class=\"alignnone size-full wp-image-430666\" src=\"https://thestandard.co/wp-content/uploads/2020/12/ชาญชัย-ชัยประสิทธิ์.jpg\" alt=\"\" width=\"600\" height=\"600\" />",
+    "link": "https://thestandard.co/category/wealth/wealth-opinion/wealth-%e0%b8%8a%e0%b8%b2%e0%b8%8d%e0%b8%8a%e0%b8%b1%e0%b8%a2-%e0%b8%8a%e0%b8%b1%e0%b8%a2%e0%b8%9b%e0%b8%a3%e0%b8%b0%e0%b8%aa%e0%b8%b4%e0%b8%97%e0%b8%98%e0%b8%b4%e0%b9%8c/",
+    "name": "ชาญชัย ชัยประสิทธิ์",
+    "slug": "wealth-%e0%b8%8a%e0%b8%b2%e0%b8%8d%e0%b8%8a%e0%b8%b1%e0%b8%a2-%e0%b8%8a%e0%b8%b1%e0%b8%a2%e0%b8%9b%e0%b8%a3%e0%b8%b0%e0%b8%aa%e0%b8%b4%e0%b8%97%e0%b8%98%e0%b8%b4%e0%b9%8c",
+    "taxonomy": "category",
+    "parent": 58821,
+    "meta": [],
+    "acf": [],
+    "_links": {
+      "self": [
+        {
+          "href": "https://thestandard.co/wp-json/wp/v2/categories/60459"
+        }
+      ],
+      "collection": [
+        {
+          "href": "https://thestandard.co/wp-json/wp/v2/categories"
+        }
+      ],
+      "about": [
+        {
+          "href": "https://thestandard.co/wp-json/wp/v2/taxonomies/category"
+        }
+      ],
+      "up": [
+        {
+          "embeddable": true,
+          "href": "https://thestandard.co/wp-json/wp/v2/categories/58821"
+        }
+      ],
+      "wp:post_type": [
+        {
+          "href": "https://thestandard.co/wp-json/wp/v2/posts?categories=60459"
+        }
+      ],
+      "curies": [
+        {
+          "name": "wp",
+          "href": "https://api.w.org/{rel}",
+          "templated": true
+        }
+      ]
+    }
+  },
+  {
     "id": 1756,
     "count": 2,
     "description": "<img class=\"alignnone size-full wp-image-302382\" src=\"https://thestandard.co/wp-content/uploads/2019/11/จักรพงษ์-เมษพันธุ์.png\" alt=\"\" width=\"300\" height=\"300\" />",
@@ -10170,12 +10264,12 @@
     }
   },
   {
-    "id": 9,
-    "count": 0,
+    "id": 1744,
+    "count": 503,
     "description": "",
-    "link": "https://thestandard.co/category/contact/",
-    "name": "Contact",
-    "slug": "contact",
+    "link": "https://thestandard.co/category/opinion/",
+    "name": "Opinion",
+    "slug": "opinion",
     "taxonomy": "category",
     "parent": 0,
     "meta": [],
@@ -10183,7 +10277,7 @@
     "_links": {
       "self": [
         {
-          "href": "https://thestandard.co/wp-json/wp/v2/categories/9"
+          "href": "https://thestandard.co/wp-json/wp/v2/categories/1744"
         }
       ],
       "collection": [
@@ -10198,54 +10292,7 @@
       ],
       "wp:post_type": [
         {
-          "href": "https://thestandard.co/wp-json/wp/v2/posts?categories=9"
-        }
-      ],
-      "curies": [
-        {
-          "name": "wp",
-          "href": "https://api.w.org/{rel}",
-          "templated": true
-        }
-      ]
-    }
-  },
-  {
-    "id": 60459,
-    "count": 19,
-    "description": "<img class=\"alignnone size-full wp-image-430666\" src=\"https://thestandard.co/wp-content/uploads/2020/12/ชาญชัย-ชัยประสิทธิ์.jpg\" alt=\"\" width=\"600\" height=\"600\" />",
-    "link": "https://thestandard.co/category/wealth/wealth-opinion/wealth-%e0%b8%8a%e0%b8%b2%e0%b8%8d%e0%b8%8a%e0%b8%b1%e0%b8%a2-%e0%b8%8a%e0%b8%b1%e0%b8%a2%e0%b8%9b%e0%b8%a3%e0%b8%b0%e0%b8%aa%e0%b8%b4%e0%b8%97%e0%b8%98%e0%b8%b4%e0%b9%8c/",
-    "name": "ชาญชัย ชัยประสิทธิ์",
-    "slug": "wealth-%e0%b8%8a%e0%b8%b2%e0%b8%8d%e0%b8%8a%e0%b8%b1%e0%b8%a2-%e0%b8%8a%e0%b8%b1%e0%b8%a2%e0%b8%9b%e0%b8%a3%e0%b8%b0%e0%b8%aa%e0%b8%b4%e0%b8%97%e0%b8%98%e0%b8%b4%e0%b9%8c",
-    "taxonomy": "category",
-    "parent": 58821,
-    "meta": [],
-    "acf": [],
-    "_links": {
-      "self": [
-        {
-          "href": "https://thestandard.co/wp-json/wp/v2/categories/60459"
-        }
-      ],
-      "collection": [
-        {
-          "href": "https://thestandard.co/wp-json/wp/v2/categories"
-        }
-      ],
-      "about": [
-        {
-          "href": "https://thestandard.co/wp-json/wp/v2/taxonomies/category"
-        }
-      ],
-      "up": [
-        {
-          "embeddable": true,
-          "href": "https://thestandard.co/wp-json/wp/v2/categories/58821"
-        }
-      ],
-      "wp:post_type": [
-        {
-          "href": "https://thestandard.co/wp-json/wp/v2/posts?categories=60459"
+          "href": "https://thestandard.co/wp-json/wp/v2/posts?categories=1744"
         }
       ],
       "curies": [
@@ -10399,20 +10446,20 @@
     }
   },
   {
-    "id": 1744,
-    "count": 502,
+    "id": 45914,
+    "count": 17,
     "description": "",
-    "link": "https://thestandard.co/category/opinion/",
-    "name": "Opinion",
-    "slug": "opinion",
+    "link": "https://thestandard.co/category/video/%e0%b8%a5%e0%b8%87%e0%b8%97%e0%b8%b8%e0%b8%99%e0%b9%81%e0%b8%9a%e0%b8%a3%e0%b8%99%e0%b8%94%e0%b9%8c/",
+    "name": "ลงทุนแบรนด์",
+    "slug": "%e0%b8%a5%e0%b8%87%e0%b8%97%e0%b8%b8%e0%b8%99%e0%b9%81%e0%b8%9a%e0%b8%a3%e0%b8%99%e0%b8%94%e0%b9%8c",
     "taxonomy": "category",
-    "parent": 0,
+    "parent": 6,
     "meta": [],
     "acf": [],
     "_links": {
       "self": [
         {
-          "href": "https://thestandard.co/wp-json/wp/v2/categories/1744"
+          "href": "https://thestandard.co/wp-json/wp/v2/categories/45914"
         }
       ],
       "collection": [
@@ -10425,9 +10472,15 @@
           "href": "https://thestandard.co/wp-json/wp/v2/taxonomies/category"
         }
       ],
+      "up": [
+        {
+          "embeddable": true,
+          "href": "https://thestandard.co/wp-json/wp/v2/categories/6"
+        }
+      ],
       "wp:post_type": [
         {
-          "href": "https://thestandard.co/wp-json/wp/v2/posts?categories=1744"
+          "href": "https://thestandard.co/wp-json/wp/v2/posts?categories=45914"
         }
       ],
       "curies": [
@@ -10575,12 +10628,12 @@
     }
   },
   {
-    "id": 45914,
-    "count": 17,
+    "id": 48363,
+    "count": 7,
     "description": "",
-    "link": "https://thestandard.co/category/video/%e0%b8%a5%e0%b8%87%e0%b8%97%e0%b8%b8%e0%b8%99%e0%b9%81%e0%b8%9a%e0%b8%a3%e0%b8%99%e0%b8%94%e0%b9%8c/",
-    "name": "ลงทุนแบรนด์",
-    "slug": "%e0%b8%a5%e0%b8%87%e0%b8%97%e0%b8%b8%e0%b8%99%e0%b9%81%e0%b8%9a%e0%b8%a3%e0%b8%99%e0%b8%94%e0%b9%8c",
+    "link": "https://thestandard.co/category/video/wealth-focus/",
+    "name": "Wealth Focus",
+    "slug": "wealth-focus",
     "taxonomy": "category",
     "parent": 6,
     "meta": [],
@@ -10588,7 +10641,7 @@
     "_links": {
       "self": [
         {
-          "href": "https://thestandard.co/wp-json/wp/v2/categories/45914"
+          "href": "https://thestandard.co/wp-json/wp/v2/categories/48363"
         }
       ],
       "collection": [
@@ -10609,7 +10662,7 @@
       ],
       "wp:post_type": [
         {
-          "href": "https://thestandard.co/wp-json/wp/v2/posts?categories=45914"
+          "href": "https://thestandard.co/wp-json/wp/v2/posts?categories=48363"
         }
       ],
       "curies": [
@@ -10745,53 +10798,6 @@
       "wp:post_type": [
         {
           "href": "https://thestandard.co/wp-json/wp/v2/posts?categories=3614"
-        }
-      ],
-      "curies": [
-        {
-          "name": "wp",
-          "href": "https://api.w.org/{rel}",
-          "templated": true
-        }
-      ]
-    }
-  },
-  {
-    "id": 48363,
-    "count": 7,
-    "description": "",
-    "link": "https://thestandard.co/category/video/wealth-focus/",
-    "name": "Wealth Focus",
-    "slug": "wealth-focus",
-    "taxonomy": "category",
-    "parent": 6,
-    "meta": [],
-    "acf": [],
-    "_links": {
-      "self": [
-        {
-          "href": "https://thestandard.co/wp-json/wp/v2/categories/48363"
-        }
-      ],
-      "collection": [
-        {
-          "href": "https://thestandard.co/wp-json/wp/v2/categories"
-        }
-      ],
-      "about": [
-        {
-          "href": "https://thestandard.co/wp-json/wp/v2/taxonomies/category"
-        }
-      ],
-      "up": [
-        {
-          "embeddable": true,
-          "href": "https://thestandard.co/wp-json/wp/v2/categories/6"
-        }
-      ],
-      "wp:post_type": [
-        {
-          "href": "https://thestandard.co/wp-json/wp/v2/posts?categories=48363"
         }
       ],
       "curies": [
@@ -11256,20 +11262,20 @@
     }
   },
   {
-    "id": 61669,
-    "count": 21,
-    "description": "<img class=\"alignnone size-full wp-image-442800\" src=\"https://thestandard.co/wp-content/uploads/2021/01/นริศ-สถาผลเดชา-1.jpg\" alt=\"\" width=\"300\" height=\"300\" />",
-    "link": "https://thestandard.co/category/wealth/wealth-opinion/wealth-%e0%b8%99%e0%b8%a3%e0%b8%b4%e0%b8%a8-%e0%b8%aa%e0%b8%96%e0%b8%b2%e0%b8%9c%e0%b8%a5%e0%b9%80%e0%b8%94%e0%b8%8a%e0%b8%b2/",
-    "name": "นริศ สถาผลเดชา",
-    "slug": "wealth-%e0%b8%99%e0%b8%a3%e0%b8%b4%e0%b8%a8-%e0%b8%aa%e0%b8%96%e0%b8%b2%e0%b8%9c%e0%b8%a5%e0%b9%80%e0%b8%94%e0%b8%8a%e0%b8%b2",
+    "id": 3618,
+    "count": 6,
+    "description": "",
+    "link": "https://thestandard.co/category/travel-magazine/",
+    "name": "Travel and Lifestyle",
+    "slug": "travel-magazine",
     "taxonomy": "category",
-    "parent": 58821,
+    "parent": 0,
     "meta": [],
     "acf": [],
     "_links": {
       "self": [
         {
-          "href": "https://thestandard.co/wp-json/wp/v2/categories/61669"
+          "href": "https://thestandard.co/wp-json/wp/v2/categories/3618"
         }
       ],
       "collection": [
@@ -11282,15 +11288,9 @@
           "href": "https://thestandard.co/wp-json/wp/v2/taxonomies/category"
         }
       ],
-      "up": [
-        {
-          "embeddable": true,
-          "href": "https://thestandard.co/wp-json/wp/v2/categories/58821"
-        }
-      ],
       "wp:post_type": [
         {
-          "href": "https://thestandard.co/wp-json/wp/v2/posts?categories=61669"
+          "href": "https://thestandard.co/wp-json/wp/v2/posts?categories=3618"
         }
       ],
       "curies": [
