@@ -50,7 +50,7 @@
     "eslint-config-prettier": "latest",
     "eslint-import-resolver-typescript": "latest",
     "eslint-plugin-import": "^2.26.0",
-    "eslint-plugin-jsx-a11y": "^6.6.1",
+    "eslint-plugin-jsx-a11y": "^6.7.1",
     "eslint-plugin-prettier": "latest",
     "eslint-plugin-promise": "^6.0.1",
     "eslint-plugin-simple-import-sort": "^8.0.0",
