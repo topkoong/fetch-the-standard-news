@@ -71,6 +71,6 @@
     "*.{js,jsx,ts,tsx,css,md,json}": [
       "prettier --loglevel warn --write"
     ],
-    "*.{ts,tsx}": "eslint --fix --quiet --fix --ignore-path ./.gitignore"
+    "*.{ts,tsx}": "eslint --fix --quiet"
   }
 }

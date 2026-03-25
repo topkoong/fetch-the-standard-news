@@ -1,5 +1,6 @@
 import { PAGE_SIZE, THE_STANDARD_POSTS_ENDPOINT } from '@constants/index';
 import axios from 'axios';
+import { Fragment } from 'preact';
 import { lazy } from 'preact/compat';
 import { useState } from 'preact/hooks';
 import { useInfiniteQuery } from 'react-query';
