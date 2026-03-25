@@ -1,12 +1,10 @@
 import fetchCategories from '@apis/categories';
 import fetchPosts from '@apis/posts';
-import cachedCategoriesData from '@assets/cached/categories.json';
-import cachedImagesData from '@assets/cached/images.json';
-import cachedMobileImagesData from '@assets/cached/mobile-images.json';
-import cachedMobilePostsData from '@assets/cached/mobile-posts.json';
-import cachedPostsData from '@assets/cached/posts.json';
+import HomeSkeleton from '@components/home-skeleton';
+import Spinner from '@components/spinner';
 import { REFETCH_INTERVAL } from '@constants/index';
 import useBreakpoints from '@hooks/use-breakpoints';
+import { useCachedFeedBootstrap } from '@hooks/use-cached-feed-bootstrap';
 import { lazy } from 'preact/compat';
 import { useMemo } from 'preact/hooks';
 import { useQuery } from 'react-query';
@@ -14,7 +12,6 @@ import { useQuery } from 'react-query';
 const PageBreak = lazy(() => import('@components/page-break'));
 const PageHeader = lazy(() => import('@components/page-header'));
 const Post = lazy(() => import('@components/post'));
-const Spinner = lazy(() => import('@components/spinner'));
 const CategoryHeader = lazy(() => import('@components/category-header'));
 
 interface WpCategory {
@@ -30,17 +27,8 @@ interface WpPost {
   link?: string;
 }
 
-interface CachedImageRow {
-  id: number;
-  url: string;
-}
-
 interface PostWithCategoryLabels extends Omit<WpPost, 'categories'> {
   categories: string[];
-}
-
-interface PostCardModel extends PostWithCategoryLabels {
-  imageUrl?: string;
 }
 
 interface CategorySection {
@@ -61,14 +49,15 @@ const ASCII_NAME = /^[A-Za-z0-9]*$/;
 
 function Home() {
   const { isXs, isSm, isMd, isLg, isXl } = useBreakpoints();
+  const isMobile = isXs || isSm;
+  const { cacheReady, imageUrlById } = useCachedFeedBootstrap(isMobile);
+
   const {
     data: postData,
     error: postError,
     status: postStatus,
   } = useQuery('allposts', fetchPosts, {
     refetchInterval: REFETCH_INTERVAL * 3,
-    initialData: isXs || isSm ? cachedMobilePostsData : cachedPostsData,
-    placeholderData: isXs || isSm ? cachedMobilePostsData : cachedPostsData,
     staleTime: REFETCH_INTERVAL * 3,
   });
   const {
@@ -77,8 +66,6 @@ function Home() {
     status: categoryStatus,
   } = useQuery('allcategories', fetchCategories, {
     refetchInterval: REFETCH_INTERVAL * 3,
-    initialData: cachedCategoriesData,
-    placeholderData: cachedCategoriesData,
     staleTime: REFETCH_INTERVAL * 3,
   });
 
@@ -117,7 +104,7 @@ function Home() {
   }, [nonThaiCategoryIdToName, postData]);
 
   const categorySections = useMemo((): CategorySection[] => {
-    const postsByCategory = new Map<string, PostCardModel[]>();
+    const postsByCategory = new Map<string, PostWithCategoryLabels[]>();
     for (const name of asciiCategoryNames) {
       postsByCategory.set(name, []);
     }
@@ -146,33 +133,32 @@ function Home() {
     return 8;
   }, [isLg, isMd, isSm, isXl, isXs]);
 
-  const cachedImageUrlById = useMemo(() => {
-    const rows = (
-      isXs || isSm ? cachedMobileImagesData : cachedImagesData
-    ) as CachedImageRow[];
-    return new Map(rows.map((row) => [row.id, row.url]));
-  }, [isSm, isXs]);
-
   const sectionsWithImages = useMemo(
     () =>
       categorySections.map((section) => ({
         ...section,
         posts: section.posts.map((post) => ({
           ...post,
-          imageUrl: cachedImageUrlById.get(post.featured_media ?? 0),
+          imageUrl: imageUrlById.get(post.featured_media ?? 0),
         })),
       })),
-    [cachedImageUrlById, categorySections],
+    [categorySections, imageUrlById],
   );
+
+  const showInitialShell = !cacheReady;
+  const showQuerySpinner =
+    cacheReady && (postStatus === 'loading' || categoryStatus === 'loading');
 
   return (
     <article className='w-full min-h-[60vh] pb-10'>
       <PageHeader title='Toppy × The Standard News' />
-      {(postStatus || categoryStatus) === 'loading' ? (
+      {showInitialShell ? (
+        <HomeSkeleton />
+      ) : showQuerySpinner ? (
         <div
           className='spinner-container py-24'
           aria-busy='true'
-          aria-label='Loading news'
+          aria-label='Refreshing news'
         >
           <Spinner />
         </div>
