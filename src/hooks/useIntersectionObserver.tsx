@@ -1,7 +1,6 @@
 import { RefObject } from 'preact';
 import { useEffect, useState } from 'preact/hooks';
 
-// eslint-disable-next-line no-undef
 interface Args extends IntersectionObserverInit {
   freezeOnceVisible?: boolean;
 }
@@ -30,8 +29,6 @@ function useIntersectionObserver(
     observer.observe(node);
 
     return () => observer.disconnect();
-
-    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [elementRef, JSON.stringify(threshold), root, rootMargin, frozen]);
 
   return entry;
