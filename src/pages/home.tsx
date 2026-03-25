@@ -1,25 +1,21 @@
 import fetchCategories from '@apis/categories';
-// import fetchImage from '@apis/images';
 import fetchPosts from '@apis/posts';
-// import axios from 'axios';
 import cachedCategoriesData from '@assets/cached/categories.json';
 import cachedImagesData from '@assets/cached/images.json';
 import cachedMobileImagesData from '@assets/cached/mobile-images.json';
 import cachedMobilePostsData from '@assets/cached/mobile-posts.json';
 import cachedPostsData from '@assets/cached/posts.json';
 import { REFETCH_INTERVAL } from '@constants/index';
-import useBreakpoints from '@hooks/useBreakpoints';
+import useBreakpoints from '@hooks/use-breakpoints';
 import { lazy } from 'preact/compat';
-// import { useEffect, useMemo, useState } from 'preact/hooks';
-// import { useQueries, useQuery } from 'react-query';
 import { useMemo } from 'preact/hooks';
 import { useQuery } from 'react-query';
 
-const PageBreak = lazy(() => import('@components/PageBreak'));
-const PageHeader = lazy(() => import('@components/PageHeader'));
-const Post = lazy(() => import('@components/Post'));
-const Spinner = lazy(() => import('@components/Spinner'));
-const CategoryHeader = lazy(() => import('@components/CategoryHeader'));
+const PageBreak = lazy(() => import('@components/page-break'));
+const PageHeader = lazy(() => import('@components/page-header'));
+const Post = lazy(() => import('@components/post'));
+const Spinner = lazy(() => import('@components/spinner'));
+const CategoryHeader = lazy(() => import('@components/category-header'));
 
 interface Keyable {
   [key: string]: string;
@@ -31,7 +27,6 @@ interface ImageUrl {
 }
 
 function Home() {
-  // const [imageUrls, setImageUrls] = useState<ImageUrl[]>([]);
   const { isXs, isSm, isMd, isLg, isXl } = useBreakpoints();
   const {
     data: postData,
@@ -41,7 +36,7 @@ function Home() {
     refetchInterval: REFETCH_INTERVAL * 3,
     initialData: isXs || isSm ? cachedMobilePostsData : cachedPostsData,
     placeholderData: isXs || isSm ? cachedMobilePostsData : cachedPostsData,
-    staleTime: 1000,
+    staleTime: REFETCH_INTERVAL * 3,
   });
   const {
     data: categoriesData,
@@ -51,7 +46,7 @@ function Home() {
     refetchInterval: REFETCH_INTERVAL * 3,
     initialData: cachedCategoriesData,
     placeholderData: cachedCategoriesData,
-    staleTime: 1000,
+    staleTime: REFETCH_INTERVAL * 3,
   });
 
   const nonThaiCategories = useMemo(() => {
@@ -116,37 +111,10 @@ function Home() {
     return 8;
   }, [isLg, isMd, isSm, isXl, isXs]);
 
-  // Use cache image instead
-
-  // const rawImageUrls: string[] = useMemo(
-  //   () =>
-  //     groupPostByCategories
-  //       ?.map((category) =>
-  //         Object.values(category)?.map((posts: any) =>
-  //           posts.map((post: any) => post?.['_links']?.['wp:featuredmedia'][0]?.['href']),
-  //         ),
-  //       )
-  //       ?.flat(2),
-  //   [groupPostByCategories],
-  // );
-
-  // const imageResults = useQueries({
-  //   queries: rawImageUrls?.map((url: string) => ({
-  //     queryKey: ['imageUrl', url],
-  //     queryFn: () => fetchImage(url),
-  //   })),
-  //   initialData: cachedPostsData,
-  //   placeholderData: cachedPostsData,
-  //   staleTime: 1000,
-  // });
-
-  // useEffect(() => {
-  //   const imgUrls: ImageUrl[] = imageResults?.map(({ data }) => ({
-  //     id: data?.id,
-  //     url: data?.guid?.rendered,
-  //   }));
-  //   setImageUrls(imgUrls);
-  // }, [imageResults]);
+  const cachedImageUrlById = useMemo(() => {
+    const rows = (isXs || isSm ? cachedMobileImagesData : cachedImagesData) as ImageUrl[];
+    return new Map(rows.map((row) => [row.id, row.url]));
+  }, [isSm, isXs]);
 
   const postsWithImages = useMemo(
     () =>
@@ -155,48 +123,48 @@ function Home() {
           .map((posts: any) =>
             posts.map((post: any) => ({
               ...post,
-              imageUrl: (isXs || isSm
-                ? (cachedMobileImagesData as ImageUrl[])
-                : (cachedImagesData as ImageUrl[])
-              )?.find((imageUrl: ImageUrl) => imageUrl?.id === post?.featured_media)?.url,
+              imageUrl: cachedImageUrlById.get(post?.featured_media),
             })),
           )
           .flat(2),
       })),
-    [groupPostByCategories, isSm, isXs],
+    [cachedImageUrlById, groupPostByCategories],
   );
 
   return (
-    <article className='w-full h-full pb-4'>
-      <PageHeader title='Toppy X The Standard News' />
+    <article className='w-full min-h-[60vh] pb-10'>
+      <PageHeader title='Toppy × The Standard News' />
       {(postStatus || categoryStatus) === 'loading' ? (
-        <div className='spinner-container'>
+        <div
+          className='spinner-container py-24'
+          aria-busy='true'
+          aria-label='Loading news'
+        >
           <Spinner />
         </div>
       ) : (postError || categoryError) instanceof Error ? (
-        <span>
-          Error:
-          {(postError as Keyable)?.message || (categoryError as Keyable)?.message}
-        </span>
+        <div
+          className='mx-6 my-8 rounded-xl border-2 border-white/30 bg-white/10 px-6 py-5 text-white shadow-md'
+          role='alert'
+        >
+          <p className='font-semibold uppercase tracking-wide text-sm opacity-90'>
+            Something went wrong
+          </p>
+          <p className='mt-2 text-lg'>
+            {(postError as Keyable)?.message || (categoryError as Keyable)?.message}
+          </p>
+        </div>
       ) : (
-        <ul className='px-6 h-full'>
+        <ul className='px-4 sm:px-6 h-full max-w-[1600px] mx-auto'>
           {categories.map((category, idx) => (
-            <li
-              className='w-full my-16 h-full'
-              key={
-                category +
-                Date.now().toString(16) +
-                Math.random().toString(16) +
-                '0'.repeat(16)
-              }
-            >
+            <li className='w-full my-16 h-full' key={`${idx}-${category}`}>
               <CategoryHeader
                 category={category}
                 nonThaiCategoriesMapping={nonThaiCategories}
               />
               <PageBreak />
               {postsWithImages && (
-                <ul className='grid grid-cols-1 gap-12 lg:gap-8 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 px-6 my-8'>
+                <ul className='grid grid-cols-1 gap-8 md:gap-10 lg:gap-8 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 my-8'>
                   {postsWithImages[idx][category]
                     .slice(0, numberOfElementsToBeRendered)
                     .map((post: any) => (

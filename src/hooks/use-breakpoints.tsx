@@ -1,10 +1,6 @@
-import useMediaQuery from '@hooks/useMediaQuery';
-/**
- * Get a set of boolean representing which breakpoint is active
- * and which breakpoints are inactive.
- * It can be used like this:
- * const {isXs, isSm, isMd, isLg, active} = useBreakpoints();
- */
+import useMediaQuery from '@hooks/use-media-query';
+
+/** Active breakpoint flags for responsive layout (see `use-media-query`). */
 export default function useBreakpoints() {
   const breakpoints = {
     isXs: useMediaQuery('(max-width: 640px)'),

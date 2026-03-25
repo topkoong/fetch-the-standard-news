@@ -1,20 +1,21 @@
 import './app.css';
 
-import Spinner from '@components/Spinner';
+import Spinner from '@components/spinner';
+import { REFETCH_INTERVAL } from '@constants/index';
 import { lazy, Suspense } from 'preact/compat';
 import { QueryClient, QueryClientProvider } from 'react-query';
 import { Route, Routes } from 'react-router-dom';
 
-const Navbar = lazy(() => import('@components/Navbar'));
-const Home = lazy(() => import('@pages/Home'));
-const Posts = lazy(() => import('@pages/Posts'));
+const Navbar = lazy(() => import('@components/navbar'));
+const Home = lazy(() => import('@pages/home'));
+const Posts = lazy(() => import('@pages/posts'));
 
 function App() {
-  // Create a client
   const queryClient = new QueryClient({
     defaultOptions: {
       queries: {
         refetchOnWindowFocus: false,
+        staleTime: REFETCH_INTERVAL * 3,
       },
     },
   });

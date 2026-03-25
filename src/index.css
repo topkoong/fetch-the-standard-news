@@ -4,22 +4,35 @@
 
 @layer components {
   .page-title {
-    @apply text-center font-extrabold leading-tight text-3xl md:text-5xl py-8 text-white uppercase;
+    @apply text-center font-extrabold leading-tight text-3xl md:text-5xl py-6 md:py-10 text-white uppercase tracking-tight;
   }
   .category-title {
-    @apply font-semibold text-3xl md:text-4xl text-white uppercase;
+    @apply font-semibold text-2xl md:text-4xl text-white uppercase tracking-tight;
   }
   .post-title {
     @apply font-bold text-xl text-bright-blue;
+    display: -webkit-box;
+    -webkit-box-orient: vertical;
+    -webkit-line-clamp: 3;
+    overflow: hidden;
+  }
+  .card-article {
+    @apply bg-white rounded-xl p-6 shadow-md border border-black/10 h-full
+      transition-[transform,box-shadow] duration-200 ease-out
+      hover:-translate-y-1 hover:shadow-lg;
   }
   .btn-primary {
-    @apply cursor-pointer relative border border-black border-4 bg-white w-56 p-8 shadow-sm;
+    @apply cursor-pointer relative border-4 border-black bg-white p-6 shadow-sm
+      transition-[transform,box-shadow] duration-200 ease-out
+      hover:-translate-y-0.5 hover:shadow-md
+      focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-white
+      focus-visible:ring-offset-2 focus-visible:ring-offset-bright-blue;
   }
   .btn-secondary {
-    @apply relative z-20 text-black font-bold w-full h-full uppercase text-2xl;
+    @apply relative z-20 text-black font-bold w-full h-full uppercase text-xl;
   }
-  .btn-terinary {
-    @apply text-center font-extrabold leading-tight text-5xl py-8 text-white uppercase;
+  .btn-tertiary {
+    @apply text-center font-extrabold leading-tight text-2xl md:text-4xl py-6 text-white/95 uppercase tracking-tight;
   }
   .spinner-container {
     @apply flex items-center justify-center h-full;
