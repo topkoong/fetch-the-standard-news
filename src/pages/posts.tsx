@@ -76,7 +76,7 @@ function Posts() {
 
   return (
     <article className='w-full min-h-[50vh] py-8 max-w-[1600px] mx-auto'>
-      <PageHeader title={category} />
+      <PageHeader title={category ?? 'Category'} />
       <PageBreak />
       {showSkeleton ? (
         <PostsPageSkeleton />

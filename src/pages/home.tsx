@@ -8,24 +8,12 @@ import { useCachedFeedBootstrap } from '@hooks/use-cached-feed-bootstrap';
 import { lazy } from 'preact/compat';
 import { useMemo } from 'preact/hooks';
 import { useQuery } from 'react-query';
+import type { WpPost } from 'types/wp-api';
 
 const PageBreak = lazy(() => import('@components/page-break'));
 const PageHeader = lazy(() => import('@components/page-header'));
 const Post = lazy(() => import('@components/post'));
 const CategoryHeader = lazy(() => import('@components/category-header'));
-
-interface WpCategory {
-  id: number;
-  name: string;
-}
-
-interface WpPost {
-  id: number;
-  categories?: number[];
-  featured_media?: number;
-  title?: { rendered?: string };
-  link?: string;
-}
 
 interface PostWithCategoryLabels extends Omit<WpPost, 'categories'> {
   categories: string[];
@@ -71,7 +59,7 @@ function Home() {
 
   const nonThaiCategoryIdToName = useMemo(() => {
     const map: Record<string, string> = {};
-    (categoriesData as WpCategory[] | undefined)
+    categoriesData
       ?.filter((section) => ASCII_NAME.test(section.name))
       ?.forEach((section) => {
         map[String(section.id)] = section.name;
@@ -87,7 +75,7 @@ function Home() {
   const postsWithCategoryLabels = useMemo((): PostWithCategoryLabels[] => {
     const idKeys = new Set(Object.keys(nonThaiCategoryIdToName));
     return (
-      (postData as WpPost[] | undefined)
+      postData
         ?.map((fetchedPost) => ({
           ...fetchedPost,
           categories:

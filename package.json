@@ -21,7 +21,7 @@
     "tailwindcss"
   ],
   "scripts": {
-    "prepare": "husky install",
+    "prepare": "husky",
     "dev": "vite",
     "build": "tsc && vite build",
     "preview": "vite preview",
@@ -64,8 +64,7 @@
     "prettier": "2.8.8",
     "tailwindcss": "3.4.19",
     "typescript": "6.0.2",
-    "vite": "8.0.2",
-    "vite-tsconfig-paths": "6.1.1"
+    "vite": "8.0.2"
   },
   "lint-staged": {
     "*.{js,jsx,ts,tsx,css,md,json}": [
