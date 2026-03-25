@@ -1,5 +1,7 @@
 import './app.css';
 
+import HomeSkeleton from '@components/home-skeleton';
+import PostsPageSkeleton from '@components/posts-page-skeleton';
 import Spinner from '@components/spinner';
 import { REFETCH_INTERVAL } from '@constants/index';
 import { lazy, Suspense } from 'preact/compat';
@@ -30,8 +32,8 @@ function App() {
           element={
             <Suspense
               fallback={
-                <div className='spinner-wrapper'>
-                  <Spinner />
+                <div className='min-h-[50vh] bg-bright-blue'>
+                  <HomeSkeleton />
                 </div>
               }
             >
@@ -44,8 +46,8 @@ function App() {
           element={
             <Suspense
               fallback={
-                <div className='spinner-wrapper'>
-                  <Spinner />
+                <div className='min-h-[40vh] bg-bright-blue py-8'>
+                  <PostsPageSkeleton />
                 </div>
               }
             >

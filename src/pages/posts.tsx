@@ -1,21 +1,16 @@
-import cachedImagesData from '@assets/cached/images.json';
-import cachedMobileImagesData from '@assets/cached/mobile-images.json';
+import PostsPageSkeleton from '@components/posts-page-skeleton';
 import { PAGE_SIZE, THE_STANDARD_POSTS_ENDPOINT } from '@constants/index';
 import useBreakpoints from '@hooks/use-breakpoints';
+import { useCachedImageBundle } from '@hooks/use-cached-image-bundle';
 import axios from 'axios';
 import { Fragment } from 'preact';
 import { lazy } from 'preact/compat';
-import { useCallback, useMemo } from 'preact/hooks';
+import { useCallback } from 'preact/hooks';
 import { useInfiniteQuery } from 'react-query';
 import { useLocation, useParams } from 'react-router-dom';
 
 interface LinkState {
   category: string;
-}
-
-interface CachedImageRow {
-  id: number;
-  url: string;
 }
 
 const PageBreak = lazy(() => import('@components/page-break'));
@@ -28,13 +23,8 @@ function Posts() {
   const location = useLocation();
   const { category }: LinkState = location.state as LinkState;
   const { isXs, isSm } = useBreakpoints();
-
-  const imageUrlById = useMemo(() => {
-    const rows = (
-      isXs || isSm ? cachedMobileImagesData : cachedImagesData
-    ) as CachedImageRow[];
-    return new Map(rows.map((row) => [row.id, row.url]));
-  }, [isSm, isXs]);
+  const isMobile = isXs || isSm;
+  const { imagesReady, imageUrlById } = useCachedImageBundle(isMobile);
 
   const fetchCategoryPostsPage = useCallback(
     async ({ pageParam, signal }: { pageParam?: number; signal?: AbortSignal }) => {
@@ -68,8 +58,11 @@ function Posts() {
     [id, imageUrlById],
   );
 
+  const queryEnabled = Boolean(id) && imagesReady;
+
   const { data, isLoading, fetchNextPage, hasNextPage, isFetchingNextPage } =
     useInfiniteQuery(`posts-from-category-${id}`, fetchCategoryPostsPage, {
+      enabled: queryEnabled,
       getNextPageParam: (lastPage) => {
         if (!lastPage?.posts?.length || lastPage.posts.length < PAGE_SIZE) {
           return undefined;
@@ -78,18 +71,15 @@ function Posts() {
       },
     });
 
+  const pages = data && 'pages' in data ? (data as { pages: unknown[] }).pages : [];
+  const showSkeleton = !imagesReady || (isLoading && pages.length === 0);
+
   return (
     <article className='w-full min-h-[50vh] py-8 max-w-[1600px] mx-auto'>
       <PageHeader title={category} />
       <PageBreak />
-      {isLoading ? (
-        <div
-          className='spinner-container py-20'
-          aria-busy='true'
-          aria-label='Loading posts'
-        >
-          <Spinner />
-        </div>
+      {showSkeleton ? (
+        <PostsPageSkeleton />
       ) : (
         <Fragment>
           <ul className='grid grid-cols-1 gap-8 md:gap-10 lg:gap-8 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 px-4 sm:px-6 h-full'>
