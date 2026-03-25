@@ -4,6 +4,10 @@
   "private": true,
   "version": "0.0.0",
   "type": "module",
+  "engines": {
+    "node": ">=25.8.2 <26"
+  },
+  "packageManager": "pnpm@9.15.0",
   "homepage": "https://topkoong.github.io/fetch-the-standard-news",
   "keywords": [
     "preact",
@@ -21,9 +25,9 @@
     "dev": "vite",
     "build": "tsc && vite build",
     "preview": "vite preview",
-    "lint:fix": "eslint ./src --ext .jsx,.js,.ts,.tsx --fix --ignore-path ./.gitignore",
+    "lint:fix": "eslint ./src --ext .jsx,.js,.ts,.tsx --fix --ignore-pattern \"**/*.d.ts\"",
     "lint:format": "prettier --loglevel warn --write \"./**/*.{js,jsx,ts,tsx,css,md,json}\" ",
-    "lint": "yarn lint:format && yarn lint:fix ",
+    "lint": "pnpm run lint:format && pnpm run lint:fix",
     "type-check": "tsc"
   },
   "repository": {
@@ -53,7 +57,7 @@
     "eslint-plugin-jsx-a11y": "^6.6.1",
     "eslint-plugin-prettier": "latest",
     "eslint-plugin-promise": "^6.0.1",
-    "eslint-plugin-simple-import-sort": "^8.0.0",
+    "eslint-plugin-simple-import-sort": "^12.1.1",
     "husky": "latest",
     "lint-staged": "latest",
     "postcss": "^8.4.20",

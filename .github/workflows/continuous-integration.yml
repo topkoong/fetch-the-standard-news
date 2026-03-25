@@ -16,28 +16,30 @@ jobs:
 
     strategy:
       matrix:
-        node-version: [16.x]
+        node-version: ['25.8.2']
 
     steps:
       - name: Checking out the latest code
-        uses: actions/checkout@v3
+        uses: actions/checkout@v4
 
       - name: Setting up nodejs for building codebase and Use Node.js ${{ matrix.node-version }}
-        uses: actions/setup-node@v3
+        uses: actions/setup-node@v4
         with:
           node-version: ${{ matrix.node-version }}
+          cache: 'pnpm'
+          cache-dependency-path: pnpm-lock.yaml
 
-      - name: Installing yarn   
-        run: npm install -g yarn
+      - name: Enable corepack and pnpm
+        run: corepack enable && corepack prepare pnpm@9.15.0 --activate && pnpm -v
 
       - name: Installing Dependencies
-        run: yarn install
+        run: pnpm install --frozen-lockfile
 
       - name: Lint
-        run: yarn lint
+        run: pnpm lint
 
       - name: Build
-        run: yarn build
+        run: pnpm build
 
   dependabot:
       name: 'Dependabot'
