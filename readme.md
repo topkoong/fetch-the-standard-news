@@ -12,6 +12,11 @@ This project pins **Node** in [`.nvmrc`](.nvmrc) (`25.8.2`) and **pnpm** in [`pa
 4. Install dependencies: `pnpm install` (CI uses `pnpm install --frozen-lockfile`)
 5. Run: `pnpm dev` / `pnpm build` / `pnpm lint`
 
+## Stack notes
+
+- **Tailwind CSS v4** uses the Vite plugin (`@tailwindcss/vite`) and theme tokens in [`src/index.css`](src/index.css) (`@import "tailwindcss"` + `@theme`). There is no `tailwind.config.cjs`; PostCSS is not required for Tailwind here.
+- **`react-router-dom` stays on v6** while the app uses **Preact** via `preact/compat`. React Router v7 expects React 19 hooks (`use`, `useOptimistic`) that Preact does not provide, so upgrading the router would need a React stack or a future Preact release.
+
 ## Refreshing cached JSON (optional)
 
 Shell scripts in [`cachescripts/`](cachescripts/) refetch WordPress data into `src/assets/cached/`. Run from the **repository root** with **bash**, **curl**, and **jq** installed.

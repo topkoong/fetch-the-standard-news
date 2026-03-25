@@ -2,7 +2,6 @@
 
 @theme {
   --color-bright-blue: #0b01f9;
-  --font-eq-th: 'EQ TH', ui-sans-serif, sans-serif;
   --shadow-sm: 8px 8px 0px rgba(0, 0, 0, 1);
   --shadow-md: 15px 15px 0px rgba(0, 0, 0, 1);
 }
