@@ -1,9 +1,14 @@
 import { Link } from 'react-router-dom';
 
-function CategoryHeader({ category, nonThaiCategoriesMapping }: any) {
-  const categoryId = Object.keys(nonThaiCategoriesMapping).find(
-    (nonThaiCategoryKey: string) =>
-      nonThaiCategoriesMapping[nonThaiCategoryKey] === category,
+interface CategoryHeaderProps {
+  category: string;
+  /** WordPress category id (string key) → display name for ASCII-only categories. */
+  categoryIdToName: Record<string, string>;
+}
+
+function CategoryHeader({ category, categoryIdToName }: CategoryHeaderProps) {
+  const categoryId = Object.keys(categoryIdToName).find(
+    (id) => categoryIdToName[id] === category,
   );
   return (
     <div className='flex justify-between'>

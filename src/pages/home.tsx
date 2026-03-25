@@ -17,14 +17,47 @@ const Post = lazy(() => import('@components/post'));
 const Spinner = lazy(() => import('@components/spinner'));
 const CategoryHeader = lazy(() => import('@components/category-header'));
 
-interface Keyable {
-  [key: string]: string;
+interface WpCategory {
+  id: number;
+  name: string;
 }
 
-interface ImageUrl {
-  url: string;
+interface WpPost {
   id: number;
+  categories?: number[];
+  featured_media?: number;
+  title?: { rendered?: string };
+  link?: string;
 }
+
+interface CachedImageRow {
+  id: number;
+  url: string;
+}
+
+interface PostWithCategoryLabels extends Omit<WpPost, 'categories'> {
+  categories: string[];
+}
+
+interface PostCardModel extends PostWithCategoryLabels {
+  imageUrl?: string;
+}
+
+interface CategorySection {
+  categoryName: string;
+  posts: PostWithCategoryLabels[];
+}
+
+function errorMessage(err: unknown): string {
+  if (err instanceof Error) return err.message;
+  if (typeof err === 'object' && err !== null && 'message' in err) {
+    const m = (err as { message?: unknown }).message;
+    return typeof m === 'string' ? m : 'Unknown error';
+  }
+  return 'Unknown error';
+}
+
+const ASCII_NAME = /^[A-Za-z0-9]*$/;
 
 function Home() {
   const { isXs, isSm, isMd, isLg, isXl } = useBreakpoints();
@@ -49,58 +82,60 @@ function Home() {
     staleTime: REFETCH_INTERVAL * 3,
   });
 
-  const nonThaiCategories = useMemo(() => {
-    const regEx = /^[A-Za-z0-9]*$/;
-    const nonThaiCategoriesObj: any = {};
-    categoriesData
-      ?.filter((section: any) => regEx.test(section.name))
-      ?.forEach((section: any) => {
-        nonThaiCategoriesObj[section.id] = section.name;
+  const nonThaiCategoryIdToName = useMemo(() => {
+    const map: Record<string, string> = {};
+    (categoriesData as WpCategory[] | undefined)
+      ?.filter((section) => ASCII_NAME.test(section.name))
+      ?.forEach((section) => {
+        map[String(section.id)] = section.name;
       });
-    return nonThaiCategoriesObj;
+    return map;
   }, [categoriesData]);
 
-  const nonThaiCategoryNames = useMemo(() => {
-    const nonThaiCategoryNamesArr: string[] = Object.values(nonThaiCategories);
-    return nonThaiCategoryNamesArr;
-  }, [nonThaiCategories]);
+  const asciiCategoryNames = useMemo(
+    () => Object.values(nonThaiCategoryIdToName),
+    [nonThaiCategoryIdToName],
+  );
 
-  const postsWithCategoryNames = useMemo(
-    () =>
-      postData
-        ?.map((fetchedPost: any) => ({
+  const postsWithCategoryLabels = useMemo((): PostWithCategoryLabels[] => {
+    const idKeys = new Set(Object.keys(nonThaiCategoryIdToName));
+    return (
+      (postData as WpPost[] | undefined)
+        ?.map((fetchedPost) => ({
           ...fetchedPost,
-          categories: fetchedPost?.categories
-            ?.map((category: any) =>
-              Object.keys(nonThaiCategories).includes(`${category}`)
-                ? nonThaiCategories[`${category}`]
-                : null,
-            )
-            ?.filter(Boolean),
+          categories:
+            fetchedPost.categories
+              ?.map((categoryId) =>
+                idKeys.has(String(categoryId))
+                  ? nonThaiCategoryIdToName[String(categoryId)]
+                  : null,
+              )
+              ?.filter((label): label is string => Boolean(label)) ?? [],
         }))
-        ?.filter((fetchedPost: any) => fetchedPost?.categories?.length),
-    [nonThaiCategories, postData],
-  );
+        ?.filter((p) => p.categories.length > 0) ?? []
+    );
+  }, [nonThaiCategoryIdToName, postData]);
 
-  const groupPostByCategories = useMemo(
-    () =>
-      nonThaiCategoryNames
-        ?.map((nonThaiCategoryName: any) => ({
-          [nonThaiCategoryName]: postsWithCategoryNames
-            ?.filter(({ categories }: any) => categories.includes(nonThaiCategoryName))
-            ?.flat(),
-        }))
-        ?.filter((elem) => elem && Object.values(elem)[0]?.length),
-    [nonThaiCategoryNames, postsWithCategoryNames],
-  );
-
-  const categories = useMemo(
-    () =>
-      groupPostByCategories?.map(
-        (groupPostByCategory) => Object.keys(groupPostByCategory)[0],
-      ),
-    [groupPostByCategories],
-  ) as any[];
+  const categorySections = useMemo((): CategorySection[] => {
+    const postsByCategory = new Map<string, PostCardModel[]>();
+    for (const name of asciiCategoryNames) {
+      postsByCategory.set(name, []);
+    }
+    for (const post of postsWithCategoryLabels) {
+      for (const catName of post.categories) {
+        const bucket = postsByCategory.get(catName);
+        if (bucket) {
+          bucket.push(post);
+        }
+      }
+    }
+    return asciiCategoryNames
+      .map((categoryName) => ({
+        categoryName,
+        posts: postsByCategory.get(categoryName) ?? [],
+      }))
+      .filter((section) => section.posts.length > 0);
+  }, [asciiCategoryNames, postsWithCategoryLabels]);
 
   const numberOfElementsToBeRendered = useMemo(() => {
     if (isXs) return 1;
@@ -112,23 +147,22 @@ function Home() {
   }, [isLg, isMd, isSm, isXl, isXs]);
 
   const cachedImageUrlById = useMemo(() => {
-    const rows = (isXs || isSm ? cachedMobileImagesData : cachedImagesData) as ImageUrl[];
+    const rows = (
+      isXs || isSm ? cachedMobileImagesData : cachedImagesData
+    ) as CachedImageRow[];
     return new Map(rows.map((row) => [row.id, row.url]));
   }, [isSm, isXs]);
 
-  const postsWithImages = useMemo(
+  const sectionsWithImages = useMemo(
     () =>
-      groupPostByCategories.map((category) => ({
-        [Object.keys(category)[0]]: Object.values(category)
-          .map((posts: any) =>
-            posts.map((post: any) => ({
-              ...post,
-              imageUrl: cachedImageUrlById.get(post?.featured_media),
-            })),
-          )
-          .flat(2),
+      categorySections.map((section) => ({
+        ...section,
+        posts: section.posts.map((post) => ({
+          ...post,
+          imageUrl: cachedImageUrlById.get(post.featured_media ?? 0),
+        })),
       })),
-    [cachedImageUrlById, groupPostByCategories],
+    [cachedImageUrlById, categorySections],
   );
 
   return (
@@ -142,7 +176,7 @@ function Home() {
         >
           <Spinner />
         </div>
-      ) : (postError || categoryError) instanceof Error ? (
+      ) : postError || categoryError ? (
         <div
           className='mx-6 my-8 rounded-xl border-2 border-white/30 bg-white/10 px-6 py-5 text-white shadow-md'
           role='alert'
@@ -151,27 +185,26 @@ function Home() {
             Something went wrong
           </p>
           <p className='mt-2 text-lg'>
-            {(postError as Keyable)?.message || (categoryError as Keyable)?.message}
+            {[postError, categoryError]
+              .filter(Boolean)
+              .map((e) => errorMessage(e))
+              .join(' · ')}
           </p>
         </div>
       ) : (
         <ul className='px-4 sm:px-6 h-full max-w-[1600px] mx-auto'>
-          {categories.map((category, idx) => (
-            <li className='w-full my-16 h-full' key={`${idx}-${category}`}>
+          {sectionsWithImages.map(({ categoryName, posts }, idx) => (
+            <li className='w-full my-16 h-full' key={`${idx}-${categoryName}`}>
               <CategoryHeader
-                category={category}
-                nonThaiCategoriesMapping={nonThaiCategories}
+                category={categoryName}
+                categoryIdToName={nonThaiCategoryIdToName}
               />
               <PageBreak />
-              {postsWithImages && (
-                <ul className='grid grid-cols-1 gap-8 md:gap-10 lg:gap-8 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 my-8'>
-                  {postsWithImages[idx][category]
-                    .slice(0, numberOfElementsToBeRendered)
-                    .map((post: any) => (
-                      <Post key={post.id} post={post} group={idx} />
-                    ))}
-                </ul>
-              )}
+              <ul className='grid grid-cols-1 gap-8 md:gap-10 lg:gap-8 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 my-8'>
+                {posts.slice(0, numberOfElementsToBeRendered).map((post) => (
+                  <Post key={post.id} post={post} group={idx} />
+                ))}
+              </ul>
             </li>
           ))}
         </ul>

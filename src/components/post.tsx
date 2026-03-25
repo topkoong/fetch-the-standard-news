@@ -51,16 +51,24 @@ function Post({ post, group }: PostProps) {
           />
         </div>
         <div className='text-center mt-auto pt-2'>
-          <button
-            type='button'
-            className='btn-primary w-full max-w-xs mx-auto'
-            onClick={() =>
-              post.link && window.open(post.link, '_blank', 'noopener,noreferrer')
-            }
-            aria-label={`Open article: ${titlePlain}`}
-          >
-            <span className='btn-secondary text-lg lg:text-xl'>Read article</span>
-          </button>
+          {post.link ? (
+            <a
+              href={post.link}
+              target='_blank'
+              rel='noopener noreferrer'
+              className='btn-primary w-full max-w-xs mx-auto no-underline inline-flex items-center justify-center'
+              aria-label={`Open article: ${titlePlain}`}
+            >
+              <span className='btn-secondary text-lg lg:text-xl'>Read article</span>
+            </a>
+          ) : (
+            <span
+              className='inline-block rounded border-2 border-neutral-300 bg-neutral-100 px-6 py-4 text-neutral-500 text-sm uppercase font-bold'
+              aria-disabled='true'
+            >
+              Link unavailable
+            </span>
+          )}
         </div>
       </article>
     </li>
