@@ -22,6 +22,8 @@ Shell scripts in [`cachescripts/`](cachescripts/) refetch WordPress data into `s
 | [`cachescripts/fetch-the-standard-categories.sh`](cachescripts/fetch-the-standard-categories.sh) | `categories.json`                                         |
 | [`cachescripts/fetch-image-urls.sh`](cachescripts/fetch-image-urls.sh)                           | `images.json`, `mobile-images.json` (run **after** posts) |
 
-Posts fetch uses `orderby=date&order=desc`. By default **10 pages** (1000 posts) are downloaded. Override with `POST_FETCH_PAGES=25 bash cachescripts/fetch-the-standard-posts.sh` or `POST_FETCH_PAGES=all` for every page (slow, very large).
+Posts fetch uses `orderby=date&order=desc`. By default it fetches **all pages**. You can cap this with `POST_FETCH_PAGES=25 bash cachescripts/fetch-the-standard-posts.sh` for faster partial refreshes.
+
+The posts script also writes `src/assets/cached/posts-meta.json` with `totalPosts`, `totalPages`, `fetchedPages`, and `fetchedAt` so cache completeness can be audited.
 
 Smoke test API: `bash cachescripts/test-fetch.sh`

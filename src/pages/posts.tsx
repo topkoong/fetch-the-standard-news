@@ -5,12 +5,29 @@ import { useCachedImageBundle } from '@hooks/use-cached-image-bundle';
 import axios from 'axios';
 import { Fragment } from 'preact';
 import { lazy } from 'preact/compat';
-import { useCallback } from 'preact/hooks';
+import { useCallback, useMemo } from 'preact/hooks';
 import { useInfiniteQuery } from 'react-query';
 import { useLocation, useParams } from 'react-router-dom';
+import type { WpPost } from 'types/wp-api';
 
 interface LinkState {
-  category: string;
+  category?: string;
+}
+
+interface CategoryPostsPage {
+  posts: WpPost[];
+  nextOffset: number;
+  totalAvailable: number;
+}
+
+interface WpMediaResponse {
+  guid?: {
+    rendered?: string;
+  };
+}
+
+function hasCategoryState(state: unknown): state is LinkState {
+  return Boolean(state) && typeof state === 'object';
 }
 
 const PageBreak = lazy(() => import('@components/page-break'));
@@ -21,38 +38,55 @@ const Spinner = lazy(() => import('@components/spinner'));
 function Posts() {
   const { id } = useParams();
   const location = useLocation();
-  const { category }: LinkState = location.state as LinkState;
+  const category = hasCategoryState(location.state) ? location.state.category : undefined;
   const { isXs, isSm } = useBreakpoints();
   const isMobile = isXs || isSm;
   const { imagesReady, imageUrlById } = useCachedImageBundle(isMobile);
 
   const fetchCategoryPostsPage = useCallback(
-    async ({ pageParam, signal }: { pageParam?: number; signal?: AbortSignal }) => {
+    async ({
+      pageParam,
+      signal,
+    }: {
+      pageParam?: number;
+      signal?: AbortSignal;
+    }): Promise<CategoryPostsPage> => {
       const offset = pageParam ?? 0;
       const url = `${THE_STANDARD_POSTS_ENDPOINT}?categories=${id}&per_page=${PAGE_SIZE}&offset=${offset}&orderby=date&order=desc`;
-      const { data: posts } = await axios.get(url, { signal });
+      const response = await axios.get<WpPost[]>(url, { signal });
+      const posts = response.data;
+      const totalHeader = response.headers['x-wp-total'];
+      const totalAvailable =
+        typeof totalHeader === 'string' ? Number.parseInt(totalHeader, 10) : 0;
 
-      const postsWithImage = await Promise.all(
-        posts.map(async (post: any) => {
-          const mediaId = post?.featured_media;
-          if (mediaId && imageUrlById.has(mediaId)) {
-            return { ...post, imageUrl: imageUrlById.get(mediaId) };
-          }
-          const href = post?.['_links']?.['wp:featuredmedia']?.[0]?.['href'];
-          if (!href) {
-            return { ...post, imageUrl: undefined };
-          }
-          const { data } = await axios.get(href, { signal });
-          return {
-            ...post,
-            imageUrl: data?.guid?.rendered,
-          };
+      const fallbackMediaHrefs = new Map<number, string>();
+      for (const post of posts) {
+        const mediaId = post.featured_media;
+        if (!mediaId || imageUrlById.has(mediaId)) continue;
+        const href = post._links?.['wp:featuredmedia']?.[0]?.href;
+        if (href) fallbackMediaHrefs.set(mediaId, href);
+      }
+
+      const fetchedMediaById = new Map<number, string | undefined>();
+      await Promise.all(
+        Array.from(fallbackMediaHrefs.entries()).map(async ([mediaId, href]) => {
+          const { data } = await axios.get<WpMediaResponse>(href, { signal });
+          fetchedMediaById.set(mediaId, data.guid?.rendered);
         }),
       );
+
+      const postsWithImage: WpPost[] = posts.map((post) => {
+        const mediaId = post.featured_media;
+        const imageUrl = mediaId
+          ? imageUrlById.get(mediaId) ?? fetchedMediaById.get(mediaId)
+          : undefined;
+        return { ...post, imageUrl };
+      });
 
       return {
         posts: postsWithImage,
         nextOffset: offset + posts.length,
+        totalAvailable: Number.isFinite(totalAvailable) ? totalAvailable : 0,
       };
     },
     [id, imageUrlById],
@@ -61,17 +95,31 @@ function Posts() {
   const queryEnabled = Boolean(id) && imagesReady;
 
   const { data, isLoading, fetchNextPage, hasNextPage, isFetchingNextPage } =
-    useInfiniteQuery(`posts-from-category-${id}`, fetchCategoryPostsPage, {
-      enabled: queryEnabled,
-      getNextPageParam: (lastPage) => {
-        if (!lastPage?.posts?.length || lastPage.posts.length < PAGE_SIZE) {
-          return undefined;
-        }
-        return lastPage.nextOffset;
+    useInfiniteQuery<CategoryPostsPage>(
+      `posts-from-category-${id}`,
+      fetchCategoryPostsPage,
+      {
+        enabled: queryEnabled,
+        getNextPageParam: (lastPage) => {
+          if (!lastPage?.posts?.length) {
+            return undefined;
+          }
+          if (
+            lastPage.totalAvailable > 0 &&
+            lastPage.nextOffset >= lastPage.totalAvailable
+          ) {
+            return undefined;
+          }
+          if (lastPage.posts.length < PAGE_SIZE) {
+            return undefined;
+          }
+          return lastPage.nextOffset;
+        },
       },
-    });
+    );
 
-  const pages = data && 'pages' in data ? (data as { pages: unknown[] }).pages : [];
+  const pages = data?.pages ?? [];
+  const flattenedPosts = useMemo(() => pages.flatMap((page) => page.posts), [pages]);
   const showSkeleton = !imagesReady || (isLoading && pages.length === 0);
 
   return (
@@ -82,10 +130,10 @@ function Posts() {
         <PostsPageSkeleton />
       ) : (
         <Fragment>
-          <ul className='grid grid-cols-1 gap-8 md:gap-10 lg:gap-8 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 px-4 sm:px-6 h-full'>
-            {data?.pages?.map((page: any) =>
-              page?.posts.map((post: any) => <Post key={post.id} post={post} />),
-            )}
+          <ul className='grid grid-cols-1 gap-5 sm:gap-6 md:gap-8 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 px-3 sm:px-6 h-full'>
+            {flattenedPosts.map((post) => (
+              <Post key={post.id} post={post} />
+            ))}
           </ul>
           <div className='text-center mt-8 z-10'>
             {isFetchingNextPage ? (

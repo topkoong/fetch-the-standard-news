@@ -4,7 +4,7 @@
 # Requires: bash, curl, jq. Run from repository root.
 #
 # Environment:
-#   POST_FETCH_PAGES — number of pages to fetch (100 posts each), default 10.
+#   POST_FETCH_PAGES — number of pages to fetch (100 posts each), default all.
 #                      Set to "all" to fetch every page (can be very slow / large).
 set -euo pipefail
 
@@ -17,6 +17,7 @@ postFilename="post"
 outputDir="${postsDir}/merged"
 outputFilename="posts.json"
 mobileOutputFilename="mobile-posts.json"
+metaOutputFilename="posts-meta.json"
 cachedDir="src/assets/cached"
 
 mkdir -p "${postsDir}" "${outputDir}" "${cachedDir}"
@@ -37,7 +38,7 @@ fetchPostPages() {
     exit 1
   fi
 
-  local want="${POST_FETCH_PAGES:-10}"
+  local want="${POST_FETCH_PAGES:-all}"
   local maxPage
   if [ "$want" = "all" ]; then
     maxPage="$totalPages"
@@ -66,6 +67,20 @@ fetchPostPages() {
       -H 'Content-Type: application/json' |
       jq '.' >"./${postsDir}/${postFilename}-${count}.json"
   done
+
+  jq -n \
+    --argjson totalPosts "${totalPosts}" \
+    --argjson totalPages "${totalPages}" \
+    --argjson fetchedPages "${maxPage}" \
+    --argjson perPage "${queryPerPage}" \
+    --arg fetchedAt "$(date -u +%Y-%m-%dT%H:%M:%SZ)" \
+    '{
+      totalPosts: $totalPosts,
+      totalPages: $totalPages,
+      fetchedPages: $fetchedPages,
+      perPage: $perPage,
+      fetchedAt: $fetchedAt
+    }' >"./${outputDir}/${metaOutputFilename}"
 }
 
 mergeJsonFiles() {
@@ -74,6 +89,7 @@ mergeJsonFiles() {
   echo "Copying cache files to ${cachedDir}"
   mv "./${outputDir}/${mobileOutputFilename}" "${cachedDir}/${mobileOutputFilename}"
   mv "./${outputDir}/${outputFilename}" "${cachedDir}/${outputFilename}"
+  mv "./${outputDir}/${metaOutputFilename}" "${cachedDir}/${metaOutputFilename}"
   echo "Cleaning up ${postsDir}"
   rm -f "./${postsDir}/${postFilename}"-*.json
 }
