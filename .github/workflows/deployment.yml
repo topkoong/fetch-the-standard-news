@@ -37,6 +37,19 @@ jobs:
       - name: Installing Dependencies
         run: pnpm install --frozen-lockfile
 
+      - name: Install jq for cache scripts
+        run: sudo apt-get update && sudo apt-get install -y jq
+
+      - name: Refresh cached content assets
+        env:
+          POST_FETCH_PAGES: ${{ vars.POST_FETCH_PAGES }}
+          LOCALIZE_IMAGE_ASSETS: '1'
+        run: |
+          export POST_FETCH_PAGES="${POST_FETCH_PAGES:-all}"
+          bash cachescripts/fetch-the-standard-posts.sh
+          bash cachescripts/fetch-the-standard-categories.sh
+          bash cachescripts/fetch-image-urls.sh
+
       - name: Lint
         run: pnpm lint
 
