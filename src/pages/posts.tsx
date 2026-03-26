@@ -125,6 +125,10 @@ function Posts() {
   return (
     <article className='w-full min-h-[50vh] py-8 max-w-[1600px] mx-auto'>
       <PageHeader title={category ?? 'Category'} />
+      <p className='text-white/90 text-center max-w-3xl mx-auto px-4 text-sm sm:text-base mb-3'>
+        Explore timely, high-impact stories in this category and uncover the details
+        behind each headline.
+      </p>
       <PageBreak />
       {showSkeleton ? (
         <PostsPageSkeleton />
@@ -152,10 +156,10 @@ function Posts() {
                 disabled={!hasNextPage || isFetchingNextPage}
                 aria-label='Load more articles'
               >
-                <span className='btn-secondary'>Load more</span>
+                <span className='btn-secondary'>Show more stories</span>
               </button>
             ) : (
-              <p className='btn-tertiary'>You&apos;re all caught up.</p>
+              <p className='btn-tertiary'>You&apos;ve reached the latest updates.</p>
             )}
           </div>
         </Fragment>

@@ -47,8 +47,14 @@ function Post({ post, group }: PostProps) {
             alt={titlePlain}
             loading='lazy'
             decoding='async'
+            onError={(event) => {
+              event.currentTarget.src = placeholderImage;
+            }}
           />
         </div>
+        <p className='text-neutral-600 text-sm leading-relaxed'>
+          Get the full context and verified details from The Standard newsroom.
+        </p>
         <div className='text-center mt-auto pt-2'>
           {post.link ? (
             <a
@@ -58,7 +64,7 @@ function Post({ post, group }: PostProps) {
               className='btn-primary w-full max-w-xs mx-auto no-underline inline-flex items-center justify-center'
               aria-label={`Open article: ${titlePlain}`}
             >
-              <span className='btn-secondary text-lg lg:text-xl'>Read article</span>
+              <span className='btn-secondary text-lg lg:text-xl'>Read full story</span>
             </a>
           ) : (
             <span

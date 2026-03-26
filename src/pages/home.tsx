@@ -140,6 +140,10 @@ function Home() {
   return (
     <article className='w-full min-h-[60vh] pb-10'>
       <PageHeader title='Toppy × The Standard News' />
+      <p className='text-white/90 text-center max-w-3xl mx-auto px-4 text-sm sm:text-base'>
+        Stay ahead with curated headlines, deeper context, and trustworthy reporting
+        across Thailand, world affairs, business, and culture.
+      </p>
       {showInitialShell ? (
         <HomeSkeleton />
       ) : showQuerySpinner ? (
