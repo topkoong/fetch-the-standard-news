@@ -1,3 +1,5 @@
+import desktopImagesUrl from '@assets/cached/images.json?url';
+import mobileImagesUrl from '@assets/cached/mobile-images.json?url';
 import { useEffect, useMemo, useState } from 'preact/hooks';
 
 export interface CachedImageRow {
@@ -5,23 +7,33 @@ export interface CachedImageRow {
   url: string;
 }
 
+async function fetchJson<T>(url: string, signal: AbortSignal): Promise<T> {
+  const response = await fetch(url, { signal });
+  if (!response.ok) {
+    throw new Error(`Failed to load cache asset: ${url}`);
+  }
+  return (await response.json()) as T;
+}
+
 /** Lazy-loads desktop or mobile image JSON so category pages avoid bundling both. */
 export function useCachedImageBundle(isMobile: boolean) {
   const [rows, setRows] = useState<CachedImageRow[] | null>(null);
 
   useEffect(() => {
+    const controller = new AbortController();
     let cancelled = false;
     setRows(null);
-    const load = isMobile
-      ? import('@assets/cached/mobile-images.json')
-      : import('@assets/cached/images.json');
-    void load.then((mod) => {
-      if (!cancelled) {
-        setRows(mod.default as CachedImageRow[]);
-      }
-    });
+    const url = isMobile ? mobileImagesUrl : desktopImagesUrl;
+    void fetchJson<CachedImageRow[]>(url, controller.signal)
+      .then((data) => {
+        if (!cancelled) setRows(data);
+      })
+      .catch(() => {
+        if (!cancelled && !controller.signal.aborted) setRows([]);
+      });
     return () => {
       cancelled = true;
+      controller.abort();
     };
   }, [isMobile]);
 
