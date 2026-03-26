@@ -32,7 +32,15 @@ fetchMediaJsonForPostsFile() {
     curl -s "${url}" \
       -H 'Accept: application/json' \
       -H 'Content-Type: application/json' |
-      jq '{id: .id, url: ."media_details" .sizes .medium ."source_url" }' \
+      jq '{
+        id: .id,
+        url:
+          ."media_details".sizes.medium.source_url //
+          ."media_details".sizes.medium_large.source_url //
+          ."media_details".sizes.large.source_url //
+          ."media_details".sizes.full.source_url //
+          .source_url
+      }' \
         >"./${outDir}/${baseName}-${iter}.json" || true
     ((iter += 1)) || true
   done < <(jq -r '.[] | ._links."wp:featuredmedia"[0].href // empty' "${inputPath}")
