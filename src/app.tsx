@@ -1,5 +1,3 @@
-import './app.css';
-
 import HomeSkeleton from '@components/home-skeleton';
 import PostsPageSkeleton from '@components/posts-page-skeleton';
 import Spinner from '@components/spinner';
