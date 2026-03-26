@@ -26,6 +26,11 @@ interface CategorySection {
   posts: PostWithCategoryLabels[];
 }
 
+interface StatCard {
+  label: string;
+  value: string;
+}
+
 function errorMessage(err: unknown): string {
   if (err instanceof Error) return err.message;
   if (typeof err === 'object' && err !== null && 'message' in err) {
@@ -124,6 +129,32 @@ function Home() {
     [categorySections, imageUrlById],
   );
 
+  const totalStoriesInFeed = postData?.length ?? 0;
+  const storiesRenderedNow = useMemo(
+    () =>
+      sectionsWithImages.reduce(
+        (sum, section) =>
+          sum + section.posts.slice(0, numberOfElementsToBeRendered).length,
+        0,
+      ),
+    [numberOfElementsToBeRendered, sectionsWithImages],
+  );
+
+  const successIndicators = useMemo(
+    (): StatCard[] => [
+      { label: 'Tracked categories', value: String(sectionsWithImages.length) },
+      { label: 'Stories in current sync', value: String(totalStoriesInFeed) },
+      { label: 'Cards ready on this screen', value: String(storiesRenderedNow) },
+    ],
+    [sectionsWithImages.length, storiesRenderedNow, totalStoriesInFeed],
+  );
+
+  const featureBullets = [
+    'Fast load with locally cached JSON and media.',
+    'Category-first navigation for direct discovery.',
+    'Accessible, mobile-friendly reading experience.',
+  ];
+
   const showInitialShell = !cacheReady;
   const showQuerySpinner =
     cacheReady && (postStatus === 'loading' || categoryStatus === 'loading');
@@ -133,11 +164,14 @@ function Home() {
       <PageHeader title='Toppy × The Standard News' />
       <section className='max-w-6xl mx-auto px-4 sm:px-6'>
         <h2 className='sr-only'>Your daily trusted briefing</h2>
-        <p className='text-white/90 text-center max-w-3xl mx-auto text-sm sm:text-base'>
-          Stay ahead with curated headlines, deeper context, and trustworthy reporting
-          across Thailand, world affairs, business, and culture.
+        <h2 className='text-center text-white text-2xl sm:text-3xl md:text-4xl font-extrabold tracking-tight'>
+          Signal over noise for people who build, lead, and decide.
+        </h2>
+        <p className='mt-3 text-white/90 text-center max-w-3xl mx-auto text-sm sm:text-base leading-relaxed'>
+          A sharper briefing inspired by modern tech media: fewer fluff headlines, more
+          context, and clearer implications across business, policy, and culture.
         </p>
-        <div className='mt-5 flex justify-center'>
+        <div className='mt-5 flex flex-col sm:flex-row items-center justify-center gap-3'>
           <Link
             to='/posts/categories/39'
             state={{ category: 'News' }}
@@ -145,6 +179,14 @@ function Home() {
             aria-label='Start reading today top stories'
           >
             <span className='btn-secondary'>Start with top stories</span>
+          </Link>
+          <Link
+            to='/posts/categories/11'
+            state={{ category: 'World' }}
+            className='inline-flex items-center justify-center rounded-xl border-2 border-white/60 bg-white/10 px-5 py-3 text-white font-semibold uppercase tracking-wide text-sm no-underline hover:bg-white/20 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-white focus-visible:ring-offset-2 focus-visible:ring-offset-bright-blue'
+            aria-label='Explore world coverage'
+          >
+            Explore world coverage
           </Link>
         </div>
         <ul
@@ -161,6 +203,99 @@ function Home() {
             Mobile-first reading experience
           </li>
         </ul>
+        <div className='mt-5'>
+          <h3 className='text-center text-white font-bold uppercase tracking-wide text-xs sm:text-sm'>
+            Quick navigation
+          </h3>
+          <div className='mt-2 flex flex-wrap justify-center gap-2'>
+            <Link
+              to='/posts/categories/13'
+              state={{ category: 'Business' }}
+              className='rounded-full border border-white/40 px-3 py-1 text-white text-xs sm:text-sm no-underline hover:bg-white/20'
+            >
+              Business
+            </Link>
+            <Link
+              to='/posts/categories/12'
+              state={{ category: 'Thailand' }}
+              className='rounded-full border border-white/40 px-3 py-1 text-white text-xs sm:text-sm no-underline hover:bg-white/20'
+            >
+              Thailand
+            </Link>
+            <Link
+              to='/posts/categories/27'
+              state={{ category: 'Music' }}
+              className='rounded-full border border-white/40 px-3 py-1 text-white text-xs sm:text-sm no-underline hover:bg-white/20'
+            >
+              Music
+            </Link>
+            <Link
+              to='/posts/categories/33'
+              state={{ category: 'Travel' }}
+              className='rounded-full border border-white/40 px-3 py-1 text-white text-xs sm:text-sm no-underline hover:bg-white/20'
+            >
+              Travel
+            </Link>
+          </div>
+        </div>
+        <section className='mt-6 rounded-xl border border-white/25 bg-white/10 p-4 sm:p-5'>
+          <h3 className='text-white text-lg sm:text-xl font-extrabold'>
+            Why this feed works
+          </h3>
+          <ul className='mt-3 grid grid-cols-1 md:grid-cols-3 gap-3'>
+            {featureBullets.map((feature) => (
+              <li
+                key={feature}
+                className='rounded-lg border border-white/20 bg-black/10 px-3 py-3 text-white/95 text-sm'
+              >
+                {feature}
+              </li>
+            ))}
+          </ul>
+        </section>
+        <section className='mt-5' aria-label='Success indicators'>
+          <h3 className='text-center text-white font-bold uppercase tracking-wide text-xs sm:text-sm'>
+            Success indicators
+          </h3>
+          <div className='mt-2 grid grid-cols-1 sm:grid-cols-3 gap-3'>
+            {successIndicators.map((indicator) => (
+              <div
+                key={indicator.label}
+                className='rounded-lg border border-white/25 bg-white/10 px-4 py-3 text-center'
+              >
+                <p className='text-white text-2xl font-extrabold'>{indicator.value}</p>
+                <p className='text-white/85 text-xs sm:text-sm uppercase tracking-wide'>
+                  {indicator.label}
+                </p>
+              </div>
+            ))}
+          </div>
+        </section>
+        <section className='mt-5 rounded-xl border border-white/25 bg-white/10 p-4 sm:p-5'>
+          <h3 className='text-white text-lg sm:text-xl font-extrabold'>
+            Content offer: Daily decision brief
+          </h3>
+          <p className='mt-2 text-white/90 text-sm sm:text-base'>
+            Use this feed as your first 10-minute scan: open one lead story, one market
+            story, and one culture signal before your next planning block.
+          </p>
+          <div className='mt-4 flex flex-col sm:flex-row gap-3'>
+            <Link
+              to='/posts/categories/39'
+              state={{ category: 'News' }}
+              className='btn-primary no-underline inline-flex items-center justify-center'
+            >
+              <span className='btn-secondary'>Open the daily brief</span>
+            </Link>
+            <Link
+              to='/posts/categories/13'
+              state={{ category: 'Business' }}
+              className='inline-flex items-center justify-center rounded-xl border-2 border-white/60 bg-white/10 px-5 py-3 text-white font-semibold uppercase tracking-wide text-sm no-underline hover:bg-white/20 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-white focus-visible:ring-offset-2 focus-visible:ring-offset-bright-blue'
+            >
+              Secondary CTA: Business desk
+            </Link>
+          </div>
+        </section>
       </section>
       {showInitialShell ? (
         <HomeSkeleton />
