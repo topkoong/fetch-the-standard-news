@@ -5,7 +5,7 @@ import { useCachedImageBundle } from '@hooks/use-cached-image-bundle';
 import axios from 'axios';
 import { Fragment } from 'preact';
 import { lazy } from 'preact/compat';
-import { useCallback, useMemo } from 'preact/hooks';
+import { useCallback, useEffect, useMemo, useState } from 'preact/hooks';
 import { useInfiniteQuery } from 'react-query';
 import { useLocation, useParams } from 'react-router-dom';
 import type { WpPost } from 'types/wp-api';
@@ -93,6 +93,8 @@ function Posts() {
   );
 
   const queryEnabled = Boolean(id) && imagesReady;
+  const storageKey = id ? `category-visible-count-${id}` : null;
+  const [restoreTargetCount, setRestoreTargetCount] = useState(PAGE_SIZE);
 
   const { data, isLoading, fetchNextPage, hasNextPage, isFetchingNextPage } =
     useInfiniteQuery<CategoryPostsPage>(
@@ -121,6 +123,38 @@ function Posts() {
   const pages = data?.pages ?? [];
   const flattenedPosts = useMemo(() => pages.flatMap((page) => page.posts), [pages]);
   const showSkeleton = !imagesReady || (isLoading && pages.length === 0);
+
+  useEffect(() => {
+    if (!storageKey) return;
+    if (typeof window === 'undefined') return;
+    const raw = window.sessionStorage.getItem(storageKey);
+    if (!raw) return;
+    const parsed = Number.parseInt(raw, 10);
+    if (Number.isFinite(parsed) && parsed > PAGE_SIZE) {
+      setRestoreTargetCount(parsed);
+    }
+  }, [storageKey]);
+
+  useEffect(() => {
+    if (!storageKey) return;
+    if (typeof window === 'undefined') return;
+    if (!flattenedPosts.length) return;
+    window.sessionStorage.setItem(storageKey, String(flattenedPosts.length));
+  }, [flattenedPosts.length, storageKey]);
+
+  useEffect(() => {
+    if (!queryEnabled) return;
+    if (!hasNextPage || isFetchingNextPage) return;
+    if (flattenedPosts.length >= restoreTargetCount) return;
+    void fetchNextPage();
+  }, [
+    fetchNextPage,
+    flattenedPosts.length,
+    hasNextPage,
+    isFetchingNextPage,
+    queryEnabled,
+    restoreTargetCount,
+  ]);
 
   return (
     <article className='w-full min-h-[50vh] py-8 max-w-[1600px] mx-auto'>

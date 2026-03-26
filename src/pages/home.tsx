@@ -9,6 +9,7 @@ import { useCategoryData } from '@hooks/use-category-data';
 import { lazy } from 'preact/compat';
 import { useMemo } from 'preact/hooks';
 import { useQuery } from 'react-query';
+import { Link } from 'react-router-dom';
 import type { WpPost } from 'types/wp-api';
 
 const PageBreak = lazy(() => import('@components/page-break'));
@@ -130,10 +131,37 @@ function Home() {
   return (
     <article className='w-full min-h-[60vh] pb-10'>
       <PageHeader title='Toppy × The Standard News' />
-      <p className='text-white/90 text-center max-w-3xl mx-auto px-4 text-sm sm:text-base'>
-        Stay ahead with curated headlines, deeper context, and trustworthy reporting
-        across Thailand, world affairs, business, and culture.
-      </p>
+      <section className='max-w-6xl mx-auto px-4 sm:px-6'>
+        <h2 className='sr-only'>Your daily trusted briefing</h2>
+        <p className='text-white/90 text-center max-w-3xl mx-auto text-sm sm:text-base'>
+          Stay ahead with curated headlines, deeper context, and trustworthy reporting
+          across Thailand, world affairs, business, and culture.
+        </p>
+        <div className='mt-5 flex justify-center'>
+          <Link
+            to='/posts/categories/39'
+            state={{ category: 'News' }}
+            className='btn-primary no-underline inline-flex items-center justify-center'
+            aria-label='Start reading today top stories'
+          >
+            <span className='btn-secondary'>Start with top stories</span>
+          </Link>
+        </div>
+        <ul
+          className='mt-4 flex flex-wrap justify-center gap-2 text-xs sm:text-sm text-white/95'
+          aria-label='Trust signals'
+        >
+          <li className='rounded-full border border-white/35 px-3 py-1'>
+            Source: The Standard newsroom
+          </li>
+          <li className='rounded-full border border-white/35 px-3 py-1'>
+            Updated throughout the day
+          </li>
+          <li className='rounded-full border border-white/35 px-3 py-1'>
+            Mobile-first reading experience
+          </li>
+        </ul>
+      </section>
       {showInitialShell ? (
         <HomeSkeleton />
       ) : showQuerySpinner ? (
