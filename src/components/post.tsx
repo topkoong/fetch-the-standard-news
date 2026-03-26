@@ -47,6 +47,7 @@ function Post({ post, group }: PostProps) {
             alt={titlePlain}
             loading='lazy'
             decoding='async'
+            referrerPolicy='no-referrer'
             onError={(event) => {
               event.currentTarget.src = placeholderImage;
             }}

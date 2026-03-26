@@ -77,7 +77,14 @@ localizeImagesFile() {
     local localPath="${publicMediaDir}/${localFilename}"
     local localUrl="cached-media/${localFilename}"
     if [ ! -f "${localPath}" ]; then
-      curl -sSL "${remoteUrl}" -o "${localPath}" || true
+      local headersPath="${localPath}.headers"
+      curl -sSL -D "${headersPath}" "${remoteUrl}" -o "${localPath}" || true
+      local contentType
+      contentType="$(awk -F': ' 'BEGIN{IGNORECASE=1} /^Content-Type:/ {print tolower($2); exit}' "${headersPath}" | tr -d '\r')"
+      rm -f "${headersPath}"
+      if [[ -z "${contentType}" || "${contentType}" != image/* ]]; then
+        rm -f "${localPath}"
+      fi
     fi
     local finalUrl="${remoteUrl}"
     if [ -f "${localPath}" ] && [ -s "${localPath}" ]; then
