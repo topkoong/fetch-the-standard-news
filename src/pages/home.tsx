@@ -5,6 +5,7 @@ import Spinner from '@components/spinner';
 import { REFETCH_INTERVAL } from '@constants/index';
 import useBreakpoints from '@hooks/use-breakpoints';
 import { useCachedFeedBootstrap } from '@hooks/use-cached-feed-bootstrap';
+import { useCategoryData } from '@hooks/use-category-data';
 import { lazy } from 'preact/compat';
 import { useMemo } from 'preact/hooks';
 import { useQuery } from 'react-query';
@@ -33,12 +34,11 @@ function errorMessage(err: unknown): string {
   return 'Unknown error';
 }
 
-const ASCII_NAME = /^[A-Za-z0-9]*$/;
-
 function Home() {
   const { isXs, isSm, isMd, isLg, isXl } = useBreakpoints();
   const isMobile = isXs || isSm;
   const { cacheReady, imageUrlById } = useCachedFeedBootstrap(isMobile);
+  const { nonThaiCategoryIdToName } = useCategoryData();
 
   const {
     data: postData,
@@ -48,24 +48,14 @@ function Home() {
     refetchInterval: REFETCH_INTERVAL * 3,
     staleTime: REFETCH_INTERVAL * 3,
   });
-  const {
-    data: categoriesData,
-    error: categoryError,
-    status: categoryStatus,
-  } = useQuery('allcategories', fetchCategories, {
-    refetchInterval: REFETCH_INTERVAL * 3,
-    staleTime: REFETCH_INTERVAL * 3,
-  });
-
-  const nonThaiCategoryIdToName = useMemo(() => {
-    const map: Record<string, string> = {};
-    categoriesData
-      ?.filter((section) => ASCII_NAME.test(section.name))
-      ?.forEach((section) => {
-        map[String(section.id)] = section.name;
-      });
-    return map;
-  }, [categoriesData]);
+  const { error: categoryError, status: categoryStatus } = useQuery(
+    'allcategories',
+    fetchCategories,
+    {
+      refetchInterval: REFETCH_INTERVAL * 3,
+      staleTime: REFETCH_INTERVAL * 3,
+    },
+  );
 
   const asciiCategoryNames = useMemo(
     () => Object.values(nonThaiCategoryIdToName),
