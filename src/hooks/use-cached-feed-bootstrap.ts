@@ -12,6 +12,12 @@ export interface CachedImageRow {
   url: string;
 }
 
+function resolveImageUrl(url: string): string {
+  if (/^https?:\/\//i.test(url)) return url;
+  const base = import.meta.env.BASE_URL ?? '/';
+  return `${base}${url.replace(/^\/+/, '')}`;
+}
+
 async function fetchJson<T>(url: string, signal: AbortSignal): Promise<T> {
   const response = await fetch(url, { signal });
   if (!response.ok) {
@@ -65,7 +71,7 @@ export function useCachedFeedBootstrap(isMobile: boolean) {
 
   const imageUrlById = useMemo(() => {
     if (!imageRows) return new Map<number, string>();
-    return new Map(imageRows.map((row) => [row.id, row.url]));
+    return new Map(imageRows.map((row) => [row.id, resolveImageUrl(row.url)]));
   }, [imageRows]);
 
   return { cacheReady: ready, imageUrlById };
