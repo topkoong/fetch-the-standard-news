@@ -166,15 +166,15 @@ function Home() {
           </p>
         </div>
       ) : (
-        <ul className='px-4 sm:px-6 h-full max-w-[1600px] mx-auto'>
+        <ul className='px-3 sm:px-6 h-full max-w-[1600px] mx-auto'>
           {sectionsWithImages.map(({ categoryName, posts }, idx) => (
-            <li className='w-full my-16 h-full' key={`${idx}-${categoryName}`}>
+            <li className='w-full my-12 md:my-16 h-full' key={categoryName}>
               <CategoryHeader
                 category={categoryName}
                 categoryIdToName={nonThaiCategoryIdToName}
               />
               <PageBreak />
-              <ul className='grid grid-cols-1 gap-8 md:gap-10 lg:gap-8 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 my-8'>
+              <ul className='grid grid-cols-1 gap-5 sm:gap-6 md:gap-8 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 my-6 md:my-8'>
                 {posts.slice(0, numberOfElementsToBeRendered).map((post) => (
                   <Post key={post.id} post={post} group={idx} />
                 ))}
