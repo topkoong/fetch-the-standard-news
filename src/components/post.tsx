@@ -2,6 +2,7 @@ import placeholderImage from '@assets/images/placeholder.png';
 import useIntersectionObserver from '@hooks/use-intersection-observer';
 import { memo } from 'preact/compat';
 import { useRef } from 'preact/hooks';
+import type { WpRenderedText } from 'types/wp-api';
 
 function stripHtml(html: string) {
   return html
@@ -10,15 +11,13 @@ function stripHtml(html: string) {
     .trim();
 }
 
-export interface WpPostShape {
-  id: number;
-  title?: { rendered?: string };
-  link?: string;
-  imageUrl?: string;
-}
-
 interface PostProps {
-  post: WpPostShape;
+  post: {
+    id: number;
+    title?: WpRenderedText;
+    link?: string;
+    imageUrl?: string;
+  };
   /** When set, non-first groups use a blur placeholder until the card scrolls into view. */
   group?: number;
 }

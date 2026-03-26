@@ -58,6 +58,8 @@
     @apply bg-white rounded-xl p-4 sm:p-5 md:p-6 shadow-md border border-black/10 h-full
       transition-[transform,box-shadow] duration-200 ease-out
       hover:-translate-y-1 hover:shadow-lg;
+    content-visibility: auto;
+    contain-intrinsic-size: 430px;
   }
   .btn-primary {
     @apply cursor-pointer relative border-4 border-black bg-white p-4 sm:p-5 md:p-6 shadow-sm
