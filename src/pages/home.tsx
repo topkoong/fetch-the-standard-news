@@ -6,7 +6,7 @@ import { REFETCH_INTERVAL } from '@constants/index';
 import useBreakpoints from '@hooks/use-breakpoints';
 import { useCachedFeedBootstrap } from '@hooks/use-cached-feed-bootstrap';
 import { lazy } from 'preact/compat';
-import { useMemo } from 'preact/hooks';
+import { useEffect, useMemo, useState } from 'preact/hooks';
 import { useQuery } from 'react-query';
 import type { WpPost } from 'types/wp-api';
 
@@ -121,6 +121,12 @@ function Home() {
     return 8;
   }, [isLg, isMd, isSm, isXl, isXs]);
 
+  const sectionBatchSize = useMemo(() => {
+    if (isXs || isSm) return 2;
+    if (isMd) return 3;
+    return 4;
+  }, [isMd, isSm, isXs]);
+
   const sectionsWithImages = useMemo(
     () =>
       categorySections.map((section) => ({
@@ -132,6 +138,14 @@ function Home() {
       })),
     [categorySections, imageUrlById],
   );
+
+  const [visibleSectionCount, setVisibleSectionCount] = useState(sectionBatchSize);
+  useEffect(() => {
+    setVisibleSectionCount(sectionBatchSize);
+  }, [sectionBatchSize]);
+
+  const visibleSections = sectionsWithImages.slice(0, visibleSectionCount);
+  const hasMoreSections = visibleSectionCount < sectionsWithImages.length;
 
   const showInitialShell = !cacheReady;
   const showQuerySpinner =
@@ -166,22 +180,36 @@ function Home() {
           </p>
         </div>
       ) : (
-        <ul className='px-3 sm:px-6 h-full max-w-[1600px] mx-auto'>
-          {sectionsWithImages.map(({ categoryName, posts }, idx) => (
-            <li className='w-full my-12 md:my-16 h-full' key={categoryName}>
-              <CategoryHeader
-                category={categoryName}
-                categoryIdToName={nonThaiCategoryIdToName}
-              />
-              <PageBreak />
-              <ul className='grid grid-cols-1 gap-5 sm:gap-6 md:gap-8 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 my-6 md:my-8'>
-                {posts.slice(0, numberOfElementsToBeRendered).map((post) => (
-                  <Post key={post.id} post={post} group={idx} />
-                ))}
-              </ul>
-            </li>
-          ))}
-        </ul>
+        <div className='px-3 sm:px-6 h-full max-w-[1600px] mx-auto'>
+          <ul>
+            {visibleSections.map(({ categoryName, posts }, idx) => (
+              <li className='w-full my-12 md:my-16 h-full' key={categoryName}>
+                <CategoryHeader
+                  category={categoryName}
+                  categoryIdToName={nonThaiCategoryIdToName}
+                />
+                <PageBreak />
+                <ul className='grid grid-cols-1 gap-5 sm:gap-6 md:gap-8 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 my-6 md:my-8'>
+                  {posts.slice(0, numberOfElementsToBeRendered).map((post) => (
+                    <Post key={post.id} post={post} group={idx} />
+                  ))}
+                </ul>
+              </li>
+            ))}
+          </ul>
+          {hasMoreSections ? (
+            <div className='flex justify-center pb-6'>
+              <button
+                type='button'
+                className='btn-primary'
+                onClick={() => setVisibleSectionCount((prev) => prev + sectionBatchSize)}
+                aria-label='Load more news sections'
+              >
+                <span className='btn-secondary'>Load more sections</span>
+              </button>
+            </div>
+          ) : null}
+        </div>
       )}
     </article>
   );
