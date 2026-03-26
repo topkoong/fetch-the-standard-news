@@ -113,10 +113,10 @@ function Home() {
   }, [asciiCategoryNames, postsWithCategoryLabels]);
 
   const numberOfElementsToBeRendered = useMemo(() => {
-    if (isXs) return 1;
-    if (isSm) return 1;
-    if (isMd) return 2;
-    if (isLg) return 3;
+    if (isXs) return 2;
+    if (isSm) return 2;
+    if (isMd) return 3;
+    if (isLg) return 4;
     if (isXl) return 4;
     return 8;
   }, [isLg, isMd, isSm, isXl, isXs]);
