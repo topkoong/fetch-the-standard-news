@@ -2,6 +2,7 @@ import placeholderImage from '@assets/images/placeholder.png';
 import useIntersectionObserver from '@hooks/use-intersection-observer';
 import { memo } from 'preact/compat';
 import { useEffect, useMemo, useRef, useState } from 'preact/hooks';
+import { Link } from 'react-router-dom';
 import type { WpRenderedText } from 'types/wp-api';
 
 function stripHtml(html: string) {
@@ -31,6 +32,7 @@ function Post({ post, group }: PostProps) {
   const usePlaceholder = group !== undefined && group !== 0 && !isVisible;
   const [imageSrc, setImageSrc] = useState<string | undefined>(post.imageUrl);
   const [candidateIndex, setCandidateIndex] = useState(0);
+  const [showImageFallbackNote, setShowImageFallbackNote] = useState(false);
   const baseUrl = import.meta.env.BASE_URL ?? '/';
 
   const localCandidates = useMemo(() => {
@@ -49,6 +51,7 @@ function Post({ post, group }: PostProps) {
   useEffect(() => {
     setImageSrc(post.imageUrl);
     setCandidateIndex(0);
+    setShowImageFallbackNote(false);
   }, [post.id, post.imageUrl]);
 
   const resolvedSrc = usePlaceholder ? placeholderImage : imageSrc || placeholderImage;
@@ -79,10 +82,17 @@ function Post({ post, group }: PostProps) {
                 setImageSrc(nextSrc);
                 return;
               }
+              setShowImageFallbackNote(true);
               event.currentTarget.src = placeholderImage;
             }}
           />
         </div>
+        {showImageFallbackNote ? (
+          <p className='text-xs text-neutral-500 leading-snug'>
+            Preview image unavailable from source right now. You can still open the full
+            story.
+          </p>
+        ) : null}
         <p className='text-neutral-600 text-sm leading-relaxed'>
           Get the full context and verified details from The Standard newsroom.
         </p>
@@ -98,12 +108,13 @@ function Post({ post, group }: PostProps) {
               <span className='btn-secondary text-lg lg:text-xl'>Read full story</span>
             </a>
           ) : (
-            <span
-              className='inline-block rounded border-2 border-neutral-300 bg-neutral-100 px-6 py-4 text-neutral-500 text-sm uppercase font-bold'
-              aria-disabled='true'
+            <Link
+              to='/posts/categories/39'
+              state={{ category: 'News' }}
+              className='inline-flex items-center justify-center rounded border-2 border-neutral-300 bg-neutral-100 px-6 py-4 text-neutral-700 text-sm uppercase font-bold no-underline hover:bg-neutral-200 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-neutral-500'
             >
-              Link unavailable
-            </span>
+              Discover related coverage
+            </Link>
           )}
         </div>
       </article>
