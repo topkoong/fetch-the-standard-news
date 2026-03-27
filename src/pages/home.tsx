@@ -323,6 +323,23 @@ function Home() {
               .map((e) => errorMessage(e))
               .join(' · ')}
           </p>
+          <div className='mt-4 flex flex-wrap gap-3'>
+            <button
+              type='button'
+              className='btn-primary'
+              onClick={() => window.location.reload()}
+              aria-label='Retry loading latest stories'
+            >
+              <span className='btn-secondary'>Retry loading</span>
+            </button>
+            <Link
+              to='/posts/categories/39'
+              state={{ category: 'News' }}
+              className='inline-flex items-center justify-center rounded-xl border-2 border-white/60 bg-white/10 px-5 py-3 text-white font-semibold uppercase tracking-wide text-sm no-underline hover:bg-white/20 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-white focus-visible:ring-offset-2 focus-visible:ring-offset-bright-blue'
+            >
+              Open news desk
+            </Link>
+          </div>
         </div>
       ) : (
         <ul className='px-3 sm:px-6 h-full max-w-[1600px] mx-auto'>

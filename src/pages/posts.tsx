@@ -189,6 +189,14 @@ function Posts() {
             >
               Back to homepage
             </Link>
+            <button
+              type='button'
+              className='inline-flex items-center justify-center rounded-xl border-2 border-white/60 bg-white/10 px-5 py-3 text-white font-semibold uppercase tracking-wide text-sm no-underline hover:bg-white/20 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-white focus-visible:ring-offset-2 focus-visible:ring-offset-bright-blue'
+              onClick={() => window.location.reload()}
+              aria-label='Retry this category'
+            >
+              Retry this desk
+            </button>
           </div>
         </section>
       ) : (
