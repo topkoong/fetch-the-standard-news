@@ -2,6 +2,7 @@ import storyPagesUrl from '@assets/cached/story-pages.json?url';
 import placeholderImage from '@assets/images/placeholder.png';
 import PageHeader from '@components/page-header';
 import Spinner from '@components/spinner';
+import { usePageSeo } from '@hooks/use-page-seo';
 import { useEffect, useMemo, useState } from 'preact/hooks';
 import { Link, useParams } from 'react-router-dom';
 import type { StoryPage } from 'types/wp-api';
@@ -31,6 +32,16 @@ function ReadStory() {
     () => rows?.find((row) => String(row.id) === String(id)),
     [id, rows],
   );
+
+  usePageSeo({
+    title: story ? `${story.title} | The Standard Feed` : 'Story | The Standard Feed',
+    description:
+      story?.excerpt ||
+      'Read the full story and explore related coverage on The Standard Feed.',
+    url: story
+      ? `https://topkoong.github.io/fetch-the-standard-news/read/${story.id}`
+      : 'https://topkoong.github.io/fetch-the-standard-news/read',
+  });
 
   if (!rows && !loadError) {
     return (

@@ -1,0 +1,68 @@
+export interface TopicDefinition {
+  slug: string;
+  title: string;
+  subtitle: string;
+  description: string;
+  categoryId: number;
+  categoryLabel: string;
+  benefits: string[];
+}
+
+export const TOPIC_DEFINITIONS: TopicDefinition[] = [
+  {
+    slug: 'business',
+    title: 'Business Briefing',
+    subtitle: 'Market-moving stories without the noise.',
+    description:
+      'Track strategy, leadership moves, and economic signals in one focused desk.',
+    categoryId: 13,
+    categoryLabel: 'Business',
+    benefits: [
+      'Signals that affect planning and execution.',
+      'Fast path to source-backed reporting.',
+      'Curated for daily decision workflows.',
+    ],
+  },
+  {
+    slug: 'world',
+    title: 'World Watch',
+    subtitle: 'Global context for local decisions.',
+    description:
+      'Follow geopolitics, policy shifts, and international trends with concise framing.',
+    categoryId: 11,
+    categoryLabel: 'World',
+    benefits: [
+      'Broader context behind major headlines.',
+      'Clear implications and strategic relevance.',
+      'High-signal stories organized for speed.',
+    ],
+  },
+  {
+    slug: 'thailand',
+    title: 'Thailand Desk',
+    subtitle: 'Domestic developments with practical perspective.',
+    description:
+      'Monitor policy, society, and business developments shaping Thailand every day.',
+    categoryId: 12,
+    categoryLabel: 'Thailand',
+    benefits: [
+      'Daily local updates in one stream.',
+      'Policy and society coverage side-by-side.',
+      'Quick transition to full stories and source.',
+    ],
+  },
+  {
+    slug: 'culture',
+    title: 'Culture Signals',
+    subtitle: 'Film, music, and travel trends that move audiences.',
+    description:
+      'Explore culture stories that shape consumer behavior and creative direction.',
+    categoryId: 27,
+    categoryLabel: 'Music',
+    benefits: [
+      'Fast scan of emerging cultural moments.',
+      'Useful for brand, media, and creative teams.',
+      'Connected to deeper reporting and source links.',
+    ],
+  },
+];

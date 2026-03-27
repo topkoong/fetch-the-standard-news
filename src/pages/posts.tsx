@@ -2,6 +2,7 @@ import PostsPageSkeleton from '@components/posts-page-skeleton';
 import { PAGE_SIZE, THE_STANDARD_POSTS_ENDPOINT } from '@constants/index';
 import useBreakpoints from '@hooks/use-breakpoints';
 import { useCachedImageBundle } from '@hooks/use-cached-image-bundle';
+import { usePageSeo } from '@hooks/use-page-seo';
 import axios from 'axios';
 import { Fragment } from 'preact';
 import { lazy } from 'preact/compat';
@@ -39,6 +40,18 @@ function Posts() {
   const { id } = useParams();
   const location = useLocation();
   const category = hasCategoryState(location.state) ? location.state.category : undefined;
+  usePageSeo({
+    title: category
+      ? `${category} stories | The Standard Feed`
+      : 'Category stories | The Standard Feed',
+    description: category
+      ? `Explore ${category} stories with curated context and fast load-more reading.`
+      : 'Explore category stories with curated context and fast load-more reading.',
+    url: id
+      ? `https://topkoong.github.io/fetch-the-standard-news/posts/categories/${id}`
+      : 'https://topkoong.github.io/fetch-the-standard-news/posts/categories',
+  });
+
   const { isXs, isSm } = useBreakpoints();
   const isMobile = isXs || isSm;
   const { imagesReady, imageUrlById } = useCachedImageBundle(isMobile);

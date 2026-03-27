@@ -3,9 +3,11 @@ import fetchPosts from '@apis/posts';
 import HomeSkeleton from '@components/home-skeleton';
 import Spinner from '@components/spinner';
 import { REFETCH_INTERVAL } from '@constants/index';
+import { TOPIC_DEFINITIONS } from '@constants/topics';
 import useBreakpoints from '@hooks/use-breakpoints';
 import { useCachedFeedBootstrap } from '@hooks/use-cached-feed-bootstrap';
 import { useCategoryData } from '@hooks/use-category-data';
+import { usePageSeo } from '@hooks/use-page-seo';
 import { lazy } from 'preact/compat';
 import { useMemo } from 'preact/hooks';
 import { useQuery } from 'react-query';
@@ -41,6 +43,13 @@ function errorMessage(err: unknown): string {
 }
 
 function Home() {
+  usePageSeo({
+    title: 'The Standard Feed | High-signal daily reading dashboard',
+    description:
+      'High-signal daily reading dashboard with topic desks, internal story pages, and fast category navigation.',
+    url: 'https://topkoong.github.io/fetch-the-standard-news',
+  });
+
   const { isXs, isSm, isMd, isLg, isXl } = useBreakpoints();
   const isMobile = isXs || isSm;
   const { cacheReady, imageUrlById } = useCachedFeedBootstrap(isMobile);
@@ -240,6 +249,25 @@ function Home() {
             </Link>
           </div>
         </div>
+        <section className='mt-5 surface-panel p-4 sm:p-5'>
+          <h3 className='text-white text-lg sm:text-xl font-extrabold'>
+            Topic landing pages
+          </h3>
+          <p className='mt-2 text-white/90 text-sm sm:text-base'>
+            Choose a curated topic page for focused context and guided navigation.
+          </p>
+          <div className='mt-3 flex flex-wrap gap-2'>
+            {TOPIC_DEFINITIONS.map((topic) => (
+              <Link
+                key={topic.slug}
+                to={`/topics/${topic.slug}`}
+                className='rounded-full border border-white/40 px-3 py-1 text-white text-xs sm:text-sm no-underline hover:bg-white/20'
+              >
+                {topic.title}
+              </Link>
+            ))}
+          </div>
+        </section>
         <section className='mt-6 surface-panel p-4 sm:p-5'>
           <h3 className='text-white text-lg sm:text-xl font-extrabold'>
             Why this feed works
