@@ -157,9 +157,9 @@ function Posts() {
   ]);
 
   return (
-    <article className='w-full min-h-[50vh] py-8 max-w-[1600px] mx-auto'>
+    <article className='w-full min-h-[50vh] py-8 max-w-[1600px] mx-auto space-y-3'>
       <PageHeader title={category ?? 'Category'} />
-      <p className='text-white/90 text-center max-w-3xl mx-auto px-4 text-sm sm:text-base mb-3'>
+      <p className='text-white/90 text-center max-w-3xl mx-auto px-4 text-sm sm:text-base md:text-lg'>
         Explore timely, high-impact stories in this category and uncover the details
         behind each headline.
       </p>

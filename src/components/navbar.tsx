@@ -14,7 +14,7 @@ function Navbar() {
       className='sticky top-0 z-50 flex flex-wrap items-center justify-between bg-white/96 backdrop-blur-sm py-3 lg:py-4 lg:px-8 shadow-md border-b border-neutral-200'
       aria-label='Primary'
     >
-      <div className='flex w-full justify-between px-4 sm:px-6 lg:w-auto lg:border-b-0 lg:pb-0 border-b border-neutral-200/80 pb-4'>
+      <div className='flex w-full justify-between px-4 sm:px-6 lg:w-auto lg:border-b-0 lg:pb-0 border-b border-neutral-200/80 pb-3'>
         <Link
           to='/'
           className='flex-shrink-0 font-extrabold text-xl sm:text-2xl tracking-tight uppercase text-neutral-900 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-bright-blue focus-visible:ring-offset-2 rounded-sm'

@@ -162,17 +162,17 @@ function Home() {
   return (
     <article className='w-full min-h-[60vh] pb-10'>
       <PageHeader title='Toppy × The Standard News' />
-      <section className='max-w-6xl mx-auto px-4 sm:px-6'>
+      <section className='max-w-6xl mx-auto px-4 sm:px-6 space-y-5 sm:space-y-6'>
         <h2 className='sr-only'>Your daily trusted briefing</h2>
         <div className='surface-panel p-5 sm:p-6 md:p-8'>
           <h2 className='text-center text-white text-2xl sm:text-3xl md:text-4xl font-extrabold tracking-tight'>
             Your high-signal reading dashboard for a day magazine.
           </h2>
-          <p className='mt-3 text-white/90 text-center max-w-3xl mx-auto text-sm sm:text-base leading-relaxed'>
+          <p className='mt-3 text-white/90 text-center max-w-3xl mx-auto text-sm sm:text-base md:text-lg leading-relaxed'>
             Editorially selected headlines with context-first summaries, optimized for
             fast scanning and deeper follow-up when a story matters.
           </p>
-          <div className='mt-5 flex flex-col sm:flex-row items-center justify-center gap-3'>
+          <div className='mt-6 flex flex-col sm:flex-row items-center justify-center gap-3'>
             <Link
               to='/posts/categories/39'
               state={{ category: 'News' }}
@@ -192,7 +192,7 @@ function Home() {
           </div>
         </div>
         <ul
-          className='mt-4 flex flex-wrap justify-center gap-2 text-xs sm:text-sm text-white/95'
+          className='flex flex-wrap justify-center gap-2 text-xs sm:text-sm text-white/95'
           aria-label='Trust signals'
         >
           <li className='rounded-full border border-white/35 px-3 py-1'>
@@ -205,7 +205,7 @@ function Home() {
             Mobile-first reading experience
           </li>
         </ul>
-        <div className='mt-5'>
+        <div>
           <h3 className='text-center text-white font-bold uppercase tracking-wide text-xs sm:text-sm'>
             Quick navigation
           </h3>
@@ -240,7 +240,7 @@ function Home() {
             </Link>
           </div>
         </div>
-        <section className='mt-6 surface-panel p-4 sm:p-5'>
+        <section className='surface-panel p-4 sm:p-5'>
           <h3 className='text-white text-lg sm:text-xl font-extrabold'>
             Why this feed works
           </h3>
@@ -255,7 +255,7 @@ function Home() {
             ))}
           </ul>
         </section>
-        <section className='mt-5' aria-label='Success indicators'>
+        <section aria-label='Success indicators'>
           <h3 className='text-center text-white font-bold uppercase tracking-wide text-xs sm:text-sm'>
             Success indicators
           </h3>
@@ -273,7 +273,7 @@ function Home() {
             ))}
           </div>
         </section>
-        <section className='mt-5 surface-panel p-4 sm:p-5'>
+        <section className='surface-panel p-4 sm:p-5'>
           <h3 className='text-white text-lg sm:text-xl font-extrabold'>
             Content offer: Daily decision brief
           </h3>
