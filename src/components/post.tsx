@@ -98,17 +98,24 @@ function Post({ post, group }: PostProps) {
         </p>
         <div className='text-center mt-auto pt-2'>
           {post.link ? (
-            <a
-              href={post.link}
-              target='_blank'
-              rel='noopener noreferrer'
-              className='btn-primary w-full max-w-xs mx-auto no-underline inline-flex items-center justify-center'
-              aria-label={`Open article: ${titlePlain}`}
-            >
-              <span className='btn-secondary text-lg lg:text-xl'>
-                Open source article
-              </span>
-            </a>
+            <div className='flex flex-col gap-2 items-center'>
+              <Link
+                to={`/read/${post.id}`}
+                className='btn-primary w-full max-w-xs mx-auto no-underline inline-flex items-center justify-center'
+                aria-label={`Read now: ${titlePlain}`}
+              >
+                <span className='btn-secondary text-lg lg:text-xl'>Read now</span>
+              </Link>
+              <a
+                href={post.link}
+                target='_blank'
+                rel='noopener noreferrer'
+                className='inline-flex items-center justify-center rounded-xl border-2 border-neutral-300 bg-neutral-100 px-4 py-2 text-neutral-700 text-xs uppercase font-bold no-underline hover:bg-neutral-200'
+                aria-label={`Browse original publisher: ${titlePlain}`}
+              >
+                Browse original publisher
+              </a>
+            </div>
           ) : (
             <Link
               to='/posts/categories/39'

@@ -9,6 +9,7 @@ import { Route, Routes } from 'react-router-dom';
 const Navbar = lazy(() => import('@components/navbar'));
 const Home = lazy(() => import('@pages/home'));
 const Posts = lazy(() => import('@pages/posts'));
+const ReadStory = lazy(() => import('@pages/read-story'));
 
 function App() {
   const queryClient = new QueryClient({
@@ -57,6 +58,14 @@ function App() {
                 }
               >
                 <Posts />
+              </Suspense>
+            }
+          />
+          <Route
+            path='read/:id'
+            element={
+              <Suspense fallback={<Spinner />}>
+                <ReadStory />
               </Suspense>
             }
           />
