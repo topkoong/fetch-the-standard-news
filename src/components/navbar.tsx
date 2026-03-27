@@ -59,6 +59,35 @@ function Navbar() {
           isOpen ? 'flex' : 'hidden'
         }`}
       >
+        <ul className='flex flex-col list-none gap-1 px-4 pb-3 lg:flex-row lg:gap-1 lg:pb-0 lg:px-3'>
+          <li>
+            <Link
+              to='/topics/business'
+              onClick={close}
+              className='block rounded-lg px-3 py-2.5 text-xs sm:text-sm font-bold uppercase tracking-wide text-neutral-700 transition-colors hover:bg-neutral-200 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-neutral-500 lg:inline-block lg:py-2'
+            >
+              Business Briefing
+            </Link>
+          </li>
+          <li>
+            <Link
+              to='/topics/world'
+              onClick={close}
+              className='block rounded-lg px-3 py-2.5 text-xs sm:text-sm font-bold uppercase tracking-wide text-neutral-700 transition-colors hover:bg-neutral-200 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-neutral-500 lg:inline-block lg:py-2'
+            >
+              World Watch
+            </Link>
+          </li>
+          <li>
+            <Link
+              to='/topics/thailand'
+              onClick={close}
+              className='block rounded-lg px-3 py-2.5 text-xs sm:text-sm font-bold uppercase tracking-wide text-neutral-700 transition-colors hover:bg-neutral-200 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-neutral-500 lg:inline-block lg:py-2'
+            >
+              Thailand Desk
+            </Link>
+          </li>
+        </ul>
         <ul className='flex flex-col list-none gap-1 px-4 pb-4 lg:flex-row lg:gap-1 lg:pb-0 lg:px-3 lg:ml-auto lg:max-w-[78vw] lg:overflow-x-auto'>
           {navCategories.map(({ id, label }) => (
             <li key={id}>

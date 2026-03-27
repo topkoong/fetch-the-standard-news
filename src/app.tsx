@@ -10,6 +10,7 @@ const Navbar = lazy(() => import('@components/navbar'));
 const Home = lazy(() => import('@pages/home'));
 const Posts = lazy(() => import('@pages/posts'));
 const ReadStory = lazy(() => import('@pages/read-story'));
+const TopicLanding = lazy(() => import('@pages/topic-landing'));
 
 function App() {
   const queryClient = new QueryClient({
@@ -66,6 +67,14 @@ function App() {
             element={
               <Suspense fallback={<Spinner />}>
                 <ReadStory />
+              </Suspense>
+            }
+          />
+          <Route
+            path='topics/:topic'
+            element={
+              <Suspense fallback={<Spinner />}>
+                <TopicLanding />
               </Suspense>
             }
           />
