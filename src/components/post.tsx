@@ -94,7 +94,7 @@ function Post({ post, group }: PostProps) {
           </p>
         ) : null}
         <p className='text-neutral-600 text-sm leading-relaxed'>
-          Get the full context and verified details from The Standard newsroom.
+          Context-first summary with a direct path to the source article.
         </p>
         <div className='text-center mt-auto pt-2'>
           {post.link ? (
@@ -105,7 +105,9 @@ function Post({ post, group }: PostProps) {
               className='btn-primary w-full max-w-xs mx-auto no-underline inline-flex items-center justify-center'
               aria-label={`Open article: ${titlePlain}`}
             >
-              <span className='btn-secondary text-lg lg:text-xl'>Read full story</span>
+              <span className='btn-secondary text-lg lg:text-xl'>
+                Open source article
+              </span>
             </a>
           ) : (
             <Link
