@@ -324,20 +324,48 @@ function Home() {
         </div>
       ) : (
         <ul className='px-3 sm:px-6 h-full max-w-[1600px] mx-auto'>
-          {sectionsWithImages.map(({ categoryName, posts }, idx) => (
-            <li className='w-full my-12 md:my-16 h-full' key={categoryName}>
-              <CategoryHeader
-                category={categoryName}
-                categoryIdToName={nonThaiCategoryIdToName}
-              />
-              <PageBreak />
-              <ul className='grid grid-cols-1 gap-5 sm:gap-6 md:gap-8 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 my-6 md:my-8'>
-                {posts.slice(0, numberOfElementsToBeRendered).map((post) => (
-                  <Post key={post.id} post={post} group={idx} />
-                ))}
-              </ul>
+          {sectionsWithImages.length === 0 ? (
+            <li className='my-10 rounded-xl border-2 border-white/30 bg-white/10 p-6 text-center text-white'>
+              <h3 className='text-xl font-extrabold uppercase tracking-wide'>
+                No stories available yet
+              </h3>
+              <p className='mt-2 text-white/90'>
+                We are syncing updates from the source. Try again shortly or jump to a
+                desk directly.
+              </p>
+              <div className='mt-4 flex justify-center gap-3 flex-wrap'>
+                <Link
+                  to='/posts/categories/39'
+                  state={{ category: 'News' }}
+                  className='btn-primary no-underline inline-flex items-center justify-center'
+                >
+                  <span className='btn-secondary'>Go to news desk</span>
+                </Link>
+                <Link
+                  to='/posts/categories/11'
+                  state={{ category: 'World' }}
+                  className='inline-flex items-center justify-center rounded-xl border-2 border-white/60 bg-white/10 px-5 py-3 text-white font-semibold uppercase tracking-wide text-sm no-underline hover:bg-white/20 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-white focus-visible:ring-offset-2 focus-visible:ring-offset-bright-blue'
+                >
+                  Open world desk
+                </Link>
+              </div>
             </li>
-          ))}
+          ) : (
+            sectionsWithImages.map(({ categoryName, posts }, idx) => (
+              <li className='w-full my-12 md:my-16 h-full' key={categoryName}>
+                <CategoryHeader
+                  category={categoryName}
+                  categoryIdToName={nonThaiCategoryIdToName}
+                />
+                <PageBreak />
+                <ul className='grid grid-cols-1 gap-5 sm:gap-6 md:gap-8 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 my-6 md:my-8'>
+                  {posts.slice(0, numberOfElementsToBeRendered).map((post) => (
+                    <Post key={post.id} post={post} group={idx} />
+                  ))}
+                </ul>
+              </li>
+            ))
+          )}
         </ul>
       )}
     </article>

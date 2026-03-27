@@ -7,7 +7,7 @@ import { Fragment } from 'preact';
 import { lazy } from 'preact/compat';
 import { useCallback, useEffect, useMemo, useState } from 'preact/hooks';
 import { useInfiniteQuery } from 'react-query';
-import { useLocation, useParams } from 'react-router-dom';
+import { Link, useLocation, useParams } from 'react-router-dom';
 import type { WpPost } from 'types/wp-api';
 
 interface LinkState {
@@ -166,6 +166,31 @@ function Posts() {
       <PageBreak />
       {showSkeleton ? (
         <PostsPageSkeleton />
+      ) : flattenedPosts.length === 0 ? (
+        <section className='mx-3 sm:mx-6 my-10 rounded-xl border-2 border-white/30 bg-white/10 p-6 text-center text-white'>
+          <h2 className='text-xl font-extrabold uppercase tracking-wide'>
+            No stories found for this desk
+          </h2>
+          <p className='mt-2 text-white/90'>
+            This category may be quiet at the moment. Explore another desk for fresh
+            updates.
+          </p>
+          <div className='mt-4 flex justify-center gap-3 flex-wrap'>
+            <Link
+              to='/posts/categories/39'
+              state={{ category: 'News' }}
+              className='btn-primary no-underline inline-flex items-center justify-center'
+            >
+              <span className='btn-secondary'>Go to top stories</span>
+            </Link>
+            <Link
+              to='/'
+              className='inline-flex items-center justify-center rounded-xl border-2 border-white/60 bg-white/10 px-5 py-3 text-white font-semibold uppercase tracking-wide text-sm no-underline hover:bg-white/20 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-white focus-visible:ring-offset-2 focus-visible:ring-offset-bright-blue'
+            >
+              Back to homepage
+            </Link>
+          </div>
+        </section>
       ) : (
         <Fragment>
           <ul className='grid grid-cols-1 gap-5 sm:gap-6 md:gap-8 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 px-3 sm:px-6 h-full'>
