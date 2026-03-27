@@ -164,30 +164,32 @@ function Home() {
       <PageHeader title='Toppy × The Standard News' />
       <section className='max-w-6xl mx-auto px-4 sm:px-6'>
         <h2 className='sr-only'>Your daily trusted briefing</h2>
-        <h2 className='text-center text-white text-2xl sm:text-3xl md:text-4xl font-extrabold tracking-tight'>
-          Signal over noise for people who build, lead, and decide.
-        </h2>
-        <p className='mt-3 text-white/90 text-center max-w-3xl mx-auto text-sm sm:text-base leading-relaxed'>
-          A sharper briefing inspired by modern tech media: fewer fluff headlines, more
-          context, and clearer implications across business, policy, and culture.
-        </p>
-        <div className='mt-5 flex flex-col sm:flex-row items-center justify-center gap-3'>
-          <Link
-            to='/posts/categories/39'
-            state={{ category: 'News' }}
-            className='btn-primary no-underline inline-flex items-center justify-center'
-            aria-label='Start reading today top stories'
-          >
-            <span className='btn-secondary'>Start with top stories</span>
-          </Link>
-          <Link
-            to='/posts/categories/11'
-            state={{ category: 'World' }}
-            className='inline-flex items-center justify-center rounded-xl border-2 border-white/60 bg-white/10 px-5 py-3 text-white font-semibold uppercase tracking-wide text-sm no-underline hover:bg-white/20 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-white focus-visible:ring-offset-2 focus-visible:ring-offset-bright-blue'
-            aria-label='Explore world coverage'
-          >
-            Explore world coverage
-          </Link>
+        <div className='surface-panel p-5 sm:p-6 md:p-8'>
+          <h2 className='text-center text-white text-2xl sm:text-3xl md:text-4xl font-extrabold tracking-tight'>
+            Your high-signal reading dashboard for a day magazine.
+          </h2>
+          <p className='mt-3 text-white/90 text-center max-w-3xl mx-auto text-sm sm:text-base leading-relaxed'>
+            Editorially selected headlines with context-first summaries, optimized for
+            fast scanning and deeper follow-up when a story matters.
+          </p>
+          <div className='mt-5 flex flex-col sm:flex-row items-center justify-center gap-3'>
+            <Link
+              to='/posts/categories/39'
+              state={{ category: 'News' }}
+              className='btn-primary no-underline inline-flex items-center justify-center'
+              aria-label='Start reading now'
+            >
+              <span className='btn-secondary'>Start reading now</span>
+            </Link>
+            <Link
+              to='/posts/categories/11'
+              state={{ category: 'World' }}
+              className='inline-flex items-center justify-center rounded-xl border-2 border-white/60 bg-white/10 px-5 py-3 text-white font-semibold uppercase tracking-wide text-sm no-underline hover:bg-white/20 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-white focus-visible:ring-offset-2 focus-visible:ring-offset-bright-blue'
+              aria-label='Browse world coverage from our source'
+            >
+              Browse world coverage
+            </Link>
+          </div>
         </div>
         <ul
           className='mt-4 flex flex-wrap justify-center gap-2 text-xs sm:text-sm text-white/95'
@@ -238,7 +240,7 @@ function Home() {
             </Link>
           </div>
         </div>
-        <section className='mt-6 rounded-xl border border-white/25 bg-white/10 p-4 sm:p-5'>
+        <section className='mt-6 surface-panel p-4 sm:p-5'>
           <h3 className='text-white text-lg sm:text-xl font-extrabold'>
             Why this feed works
           </h3>
@@ -271,7 +273,7 @@ function Home() {
             ))}
           </div>
         </section>
-        <section className='mt-5 rounded-xl border border-white/25 bg-white/10 p-4 sm:p-5'>
+        <section className='mt-5 surface-panel p-4 sm:p-5'>
           <h3 className='text-white text-lg sm:text-xl font-extrabold'>
             Content offer: Daily decision brief
           </h3>
@@ -292,7 +294,7 @@ function Home() {
               state={{ category: 'Business' }}
               className='inline-flex items-center justify-center rounded-xl border-2 border-white/60 bg-white/10 px-5 py-3 text-white font-semibold uppercase tracking-wide text-sm no-underline hover:bg-white/20 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-white focus-visible:ring-offset-2 focus-visible:ring-offset-bright-blue'
             >
-              Secondary CTA: Business desk
+              Browse the business desk
             </Link>
           </div>
         </section>

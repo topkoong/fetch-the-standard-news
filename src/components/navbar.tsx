@@ -11,15 +11,15 @@ function Navbar() {
 
   return (
     <nav
-      className='sticky top-0 z-50 flex flex-wrap items-center justify-between bg-white/95 backdrop-blur-sm py-3 lg:py-4 lg:px-10 shadow-md border-t-4 border-bright-blue'
+      className='sticky top-0 z-50 flex flex-wrap items-center justify-between bg-white/96 backdrop-blur-sm py-3 lg:py-4 lg:px-8 shadow-md border-b border-neutral-200'
       aria-label='Primary'
     >
-      <div className='flex w-full justify-between px-4 sm:px-6 lg:w-auto lg:border-b-0 lg:pb-0 border-b border-neutral-200 pb-4'>
+      <div className='flex w-full justify-between px-4 sm:px-6 lg:w-auto lg:border-b-0 lg:pb-0 border-b border-neutral-200/80 pb-4'>
         <Link
           to='/'
-          className='flex-shrink-0 font-semibold text-2xl sm:text-3xl tracking-tight uppercase text-neutral-900 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-bright-blue focus-visible:ring-offset-2 rounded-sm'
+          className='flex-shrink-0 font-extrabold text-xl sm:text-2xl tracking-tight uppercase text-neutral-900 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-bright-blue focus-visible:ring-offset-2 rounded-sm'
         >
-          The Standard Feed
+          High-Signal News
         </Link>
         <div className='flex items-center lg:hidden'>
           <button
@@ -59,14 +59,14 @@ function Navbar() {
           isOpen ? 'flex' : 'hidden'
         }`}
       >
-        <ul className='flex flex-col list-none gap-1 px-4 pb-4 lg:flex-row lg:gap-0 lg:pb-0 lg:px-3 lg:ml-auto lg:max-w-[78vw] lg:overflow-x-auto'>
+        <ul className='flex flex-col list-none gap-1 px-4 pb-4 lg:flex-row lg:gap-1 lg:pb-0 lg:px-3 lg:ml-auto lg:max-w-[78vw] lg:overflow-x-auto'>
           {navCategories.map(({ id, label }) => (
             <li key={id}>
               <Link
                 to={`/posts/categories/${id}`}
                 state={{ category: label }}
                 onClick={close}
-                className='block rounded-md px-3 py-2.5 text-sm font-bold uppercase tracking-wide text-bright-blue transition-colors hover:bg-bright-blue hover:text-white focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-bright-blue focus-visible:ring-inset lg:inline-block lg:py-2'
+                className='block rounded-lg px-3 py-2.5 text-xs sm:text-sm font-bold uppercase tracking-wide text-bright-blue transition-colors hover:bg-bright-blue hover:text-white focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-bright-blue focus-visible:ring-inset lg:inline-block lg:py-2'
               >
                 {label}
               </Link>
