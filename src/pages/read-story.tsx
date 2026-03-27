@@ -17,6 +17,7 @@ function ReadStory() {
   const { id } = useParams();
   const [rows, setRows] = useState<StoryPage[] | null>(null);
   const [loadError, setLoadError] = useState<string | null>(null);
+  const [reloadKey, setReloadKey] = useState(0);
 
   useEffect(() => {
     const controller = new AbortController();
@@ -26,7 +27,7 @@ function ReadStory() {
       .then((data) => setRows(data))
       .catch(() => setLoadError('Story is not available at the moment.'));
     return () => controller.abort();
-  }, []);
+  }, [reloadKey]);
 
   const story = useMemo(
     () => rows?.find((row) => String(row.id) === String(id)),
@@ -52,14 +53,22 @@ function ReadStory() {
   }
 
   if (loadError || !story) {
+    const unavailableMessage = loadError
+      ? 'We could not load this article right now. Please retry or open another desk.'
+      : 'This story was not found in the current build snapshot.';
     return (
       <article className='max-w-5xl mx-auto px-4 sm:px-6 py-10 text-white'>
         <PageHeader title='Story unavailable' />
         <div className='surface-panel p-6 text-center'>
-          <p className='text-white/90'>
-            We could not load this article right now. Please try another desk.
-          </p>
+          <p className='text-white/90'>{unavailableMessage}</p>
           <div className='mt-4 flex flex-wrap justify-center gap-3'>
+            <button
+              type='button'
+              className='btn-primary no-underline inline-flex items-center justify-center'
+              onClick={() => setReloadKey((value) => value + 1)}
+            >
+              <span className='btn-secondary'>Retry story</span>
+            </button>
             <Link
               to='/posts/categories/39'
               state={{ category: 'News' }}
@@ -106,6 +115,12 @@ function ReadStory() {
           className='mt-6 prose prose-invert max-w-none prose-p:text-white/90 prose-headings:text-white prose-a:text-cyan-200'
           dangerouslySetInnerHTML={{ __html: story.contentHtml }}
         />
+        {!story.contentHtml ? (
+          <section className='mt-6 rounded-lg border border-white/25 bg-black/10 p-4 text-white/90'>
+            Full article body is currently unavailable in this build snapshot. You can
+            continue reading related desks or open the source publisher.
+          </section>
+        ) : null}
         <div className='mt-8 flex flex-wrap gap-3'>
           <Link
             to='/'
