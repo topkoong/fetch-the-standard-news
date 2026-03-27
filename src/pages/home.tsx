@@ -154,6 +154,16 @@ function Home() {
     'Category-first navigation for direct discovery.',
     'Accessible, mobile-friendly reading experience.',
   ];
+  const editorialTrustMarks = [
+    'Publisher Source: The Standard',
+    'Category-driven editorial discovery',
+    'Cross-device readability',
+    'Context-first headline curation',
+  ];
+  const voiceOfReader = [
+    '“I can scan top stories in minutes, then dive deeper when needed.”',
+    '“Useful for daily market and culture pulse checks without noise.”',
+  ];
 
   const showInitialShell = !cacheReady;
   const showQuerySpinner =
@@ -205,6 +215,32 @@ function Home() {
             Mobile-first reading experience
           </li>
         </ul>
+        <section className='mt-5 surface-panel p-4 sm:p-5' aria-label='Social proof'>
+          <h3 className='text-white text-lg sm:text-xl font-extrabold'>Social proof</h3>
+          <p className='mt-1 text-white/85 text-sm sm:text-base'>
+            Built around a clear editorial source and optimized for repeat daily use.
+          </p>
+          <div className='mt-3 flex flex-wrap gap-2'>
+            {editorialTrustMarks.map((mark) => (
+              <span
+                key={mark}
+                className='rounded-full border border-white/35 bg-white/10 px-3 py-1 text-white text-xs sm:text-sm'
+              >
+                {mark}
+              </span>
+            ))}
+          </div>
+          <div className='mt-4 grid grid-cols-1 md:grid-cols-2 gap-3'>
+            {voiceOfReader.map((quote) => (
+              <blockquote
+                key={quote}
+                className='rounded-lg border border-white/25 bg-black/10 px-4 py-3 text-white/95 text-sm sm:text-base leading-relaxed'
+              >
+                {quote}
+              </blockquote>
+            ))}
+          </div>
+        </section>
         <div className='mt-5'>
           <h3 className='text-center text-white font-bold uppercase tracking-wide text-xs sm:text-sm'>
             Quick navigation
