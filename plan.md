@@ -121,12 +121,14 @@ Increase discoverability and page depth by adding meaningful internal content pa
 
 - Expand top-level and contextual routes (e.g., about, methodology, coverage pages).
 - Add topic landing routes (e.g., `/topics/business`, `/topics/world`, `/topics/thailand`, `/topics/culture`) with unique copy and internal CTA paths.
+- Add a topic-hub index route (`/topics`) to centralize SEO crawl depth and internal routing.
 - Add internal linking between:
   - homepage modules
   - category pages
   - story pages
 - Strengthen metadata consistency (title/description/open graph patterns) with per-page runtime mapping.
 - Ensure CTA language is editorial-grade and conversion-oriented across all templates.
+- Add related-story modules on read pages to improve session depth and contextual discovery.
 
 ### Acceptance Criteria
 

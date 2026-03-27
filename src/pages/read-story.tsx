@@ -32,6 +32,23 @@ function ReadStory() {
     () => rows?.find((row) => String(row.id) === String(id)),
     [id, rows],
   );
+  const relatedStories = useMemo(() => {
+    if (!rows || !story) return [];
+    const storyCats = new Set(story.categoryNames);
+    return rows
+      .filter((row) => row.id !== story.id)
+      .map((row) => ({
+        row,
+        score: row.categoryNames.reduce(
+          (acc, category) => acc + (storyCats.has(category) ? 1 : 0),
+          0,
+        ),
+      }))
+      .filter((item) => item.score > 0)
+      .sort((a, b) => b.score - a.score)
+      .slice(0, 3)
+      .map((item) => item.row);
+  }, [rows, story]);
 
   usePageSeo({
     title: story ? `${story.title} | The Standard Feed` : 'Story | The Standard Feed',
@@ -106,6 +123,30 @@ function ReadStory() {
           className='mt-6 prose prose-invert max-w-none prose-p:text-white/90 prose-headings:text-white prose-a:text-cyan-200'
           dangerouslySetInnerHTML={{ __html: story.contentHtml }}
         />
+        {relatedStories.length > 0 ? (
+          <section className='mt-8'>
+            <h2 className='text-xl font-extrabold'>Related stories</h2>
+            <ul className='mt-3 grid grid-cols-1 md:grid-cols-3 gap-3'>
+              {relatedStories.map((related) => (
+                <li
+                  key={related.id}
+                  className='rounded-lg border border-white/25 bg-black/10 p-4'
+                >
+                  <h3 className='font-bold text-sm leading-snug'>{related.title}</h3>
+                  <p className='mt-2 text-white/80 text-xs line-clamp-3'>
+                    {related.excerpt}
+                  </p>
+                  <Link
+                    to={`/read/${related.id}`}
+                    className='mt-3 inline-flex items-center justify-center rounded-xl border-2 border-white/60 bg-white/10 px-3 py-2 text-white font-semibold uppercase tracking-wide text-xs no-underline hover:bg-white/20'
+                  >
+                    Read related
+                  </Link>
+                </li>
+              ))}
+            </ul>
+          </section>
+        ) : null}
         <div className='mt-8 flex flex-wrap gap-3'>
           <Link
             to='/'
