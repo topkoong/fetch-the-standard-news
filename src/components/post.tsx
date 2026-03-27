@@ -1,7 +1,7 @@
 import placeholderImage from '@assets/images/placeholder.png';
 import useIntersectionObserver from '@hooks/use-intersection-observer';
 import { memo } from 'preact/compat';
-import { useRef } from 'preact/hooks';
+import { useEffect, useMemo, useRef, useState } from 'preact/hooks';
 import type { WpRenderedText } from 'types/wp-api';
 
 function stripHtml(html: string) {
@@ -17,6 +17,7 @@ interface PostProps {
     title?: WpRenderedText;
     link?: string;
     imageUrl?: string;
+    featured_media?: number;
   };
   /** When set, non-first groups use a blur placeholder until the card scrolls into view. */
   group?: number;
@@ -28,6 +29,29 @@ function Post({ post, group }: PostProps) {
   const isVisible = !!entry?.isIntersecting;
   const titlePlain = stripHtml(post?.title?.rendered ?? '') || 'Article';
   const usePlaceholder = group !== undefined && group !== 0 && !isVisible;
+  const [imageSrc, setImageSrc] = useState<string | undefined>(post.imageUrl);
+  const [candidateIndex, setCandidateIndex] = useState(0);
+  const baseUrl = import.meta.env.BASE_URL ?? '/';
+
+  const localCandidates = useMemo(() => {
+    const mediaId = post.featured_media;
+    if (!mediaId) return [];
+    const prefix = `${baseUrl}cached-media/${mediaId}`;
+    return [
+      `${prefix}.jpg`,
+      `${prefix}.jpeg`,
+      `${prefix}.png`,
+      `${prefix}.webp`,
+      `${prefix}.avif`,
+    ];
+  }, [baseUrl, post.featured_media]);
+
+  useEffect(() => {
+    setImageSrc(post.imageUrl);
+    setCandidateIndex(0);
+  }, [post.id, post.imageUrl]);
+
+  const resolvedSrc = usePlaceholder ? placeholderImage : imageSrc || placeholderImage;
 
   return (
     <li className='card-article'>
@@ -43,12 +67,18 @@ function Post({ post, group }: PostProps) {
                 ? 'grayscale blur-md scale-105'
                 : 'grayscale-0 blur-0 scale-100'
             }`}
-            src={usePlaceholder ? placeholderImage : post?.imageUrl || placeholderImage}
+            src={resolvedSrc}
             alt={titlePlain}
             loading='lazy'
             decoding='async'
             referrerPolicy='no-referrer'
             onError={(event) => {
+              if (candidateIndex < localCandidates.length) {
+                const nextSrc = localCandidates[candidateIndex];
+                setCandidateIndex((idx) => idx + 1);
+                setImageSrc(nextSrc);
+                return;
+              }
               event.currentTarget.src = placeholderImage;
             }}
           />
