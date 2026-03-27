@@ -49,6 +49,7 @@ jobs:
           bash cachescripts/fetch-the-standard-posts.sh
           bash cachescripts/fetch-the-standard-categories.sh
           bash cachescripts/fetch-image-urls.sh
+          bash cachescripts/build-story-pages-index.sh
 
       - name: Lint
         run: pnpm lint
