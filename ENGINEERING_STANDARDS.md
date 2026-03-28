@@ -662,9 +662,9 @@ Cursor must ensure these flags are enabled in `tsconfig.json`:
     "noFallthroughCasesInSwitch": true,
     "forceConsistentCasingInFileNames": true,
     "paths": {
-      "@/*": ["./src/*"] // Enables @/ absolute imports
-    }
-  }
+      "@/*": ["./src/*"], // Enables @/ absolute imports
+    },
+  },
 }
 ```
 
@@ -716,7 +716,7 @@ type(scope): imperative short description (max 72 chars)
       {
         "selector": "interface",
         "format": ["PascalCase"],
-        "custom": { "regex": "^[A-Z]", "match": true }
+        "custom": { "regex": "^[A-Z]", "match": true },
       },
       { "selector": "typeAlias", "format": ["PascalCase"] },
       { "selector": "enum", "format": ["UPPER_CASE"] },
@@ -724,14 +724,14 @@ type(scope): imperative short description (max 72 chars)
         "selector": "variable",
         "types": ["boolean"],
         "format": ["camelCase"],
-        "prefix": ["is", "has", "can", "should"]
+        "prefix": ["is", "has", "can", "should"],
       },
-      { "selector": "function", "format": ["camelCase", "PascalCase"] }
+      { "selector": "function", "format": ["camelCase", "PascalCase"] },
     ],
     "no-magic-numbers": ["error", { "ignore": [0, 1, -1], "ignoreArrayIndexes": true }],
     "prefer-const": "error",
-    "no-var": "error"
-  }
+    "no-var": "error",
+  },
 }
 ```
 
