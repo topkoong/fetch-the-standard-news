@@ -3,7 +3,7 @@ import useIntersectionObserver from '@hooks/use-intersection-observer';
 import { memo } from 'preact/compat';
 import { useEffect, useMemo, useRef, useState } from 'preact/hooks';
 import { Link } from 'react-router-dom';
-import type { WpRenderedText } from 'types/wp-api';
+import type { WpRenderedContent, WpRenderedText } from 'types/wp-api';
 
 function stripHtml(html: string) {
   return html
@@ -16,6 +16,7 @@ interface PostProps {
   post: {
     id: number;
     title?: WpRenderedText;
+    excerpt?: WpRenderedContent;
     link?: string;
     imageUrl?: string;
     featured_media?: number;
@@ -29,6 +30,7 @@ function Post({ post, group }: PostProps) {
   const entry = useIntersectionObserver(ref, {});
   const isVisible = !!entry?.isIntersecting;
   const titlePlain = stripHtml(post?.title?.rendered ?? '') || 'Article';
+  const excerptPlain = stripHtml(post?.excerpt?.rendered ?? '').trim();
   const usePlaceholder = group !== undefined && group !== 0 && !isVisible;
   const [imageSrc, setImageSrc] = useState<string | undefined>(post.imageUrl);
   const [candidateIndex, setCandidateIndex] = useState(0);
@@ -93,8 +95,9 @@ function Post({ post, group }: PostProps) {
             story.
           </p>
         ) : null}
-        <p className='text-neutral-600 text-sm leading-relaxed'>
-          Context-first summary with a direct path to the source article.
+        <p className='text-neutral-600 text-sm leading-relaxed line-clamp-3'>
+          {excerptPlain ||
+            'Read now for our layout; use the publisher link when you need the source site.'}
         </p>
         <div className='text-center mt-auto pt-2'>
           {post.link ? (
