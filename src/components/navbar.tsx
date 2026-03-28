@@ -1,36 +1,56 @@
+import {
+  MENU_BUTTON_VISIBLE_LABEL,
+  NAVBAR_DESK_LINK_CLASS,
+  NAVBAR_LINK_CLASS,
+  NAVBAR_MOBILE_MENU_PANEL_CLASS,
+  NAVBAR_MORE_LINKS,
+  NAVBAR_MORE_MENU_LABEL,
+  NAVBAR_PRIMARY_LINKS,
+  NAVBAR_TOP_BAR_CLASS,
+  NAVBAR_WRAPPER_CLASS,
+  ROUTE_PATH_HOME,
+  ROUTE_PATH_POSTS_CATEGORY_PREFIX,
+  SITE_BRAND_NAV_LABEL,
+} from '@constants/index';
 import { useCategoryData } from '@hooks/use-category-data';
 import { useCallback, useId, useState } from 'preact/hooks';
 import { Link } from 'react-router-dom';
 
 function Navbar() {
-  const [isOpen, setIsOpen] = useState(false);
-  const menuId = useId();
-  const close = useCallback(() => setIsOpen(false), []);
-  const toggle = useCallback(() => setIsOpen((o) => !o), []);
+  const [isMenuOpen, setIsMenuOpen] = useState(false);
+  const menuPanelId = useId();
   const { navCategories } = useCategoryData();
 
+  const handleCloseMenu = useCallback(() => {
+    setIsMenuOpen(false);
+  }, []);
+
+  const handleToggleMenu = useCallback(() => {
+    setIsMenuOpen((wasOpen) => !wasOpen);
+  }, []);
+
   return (
-    <nav
-      className='sticky top-0 z-50 flex flex-wrap items-center justify-between bg-white/96 backdrop-blur-sm py-3 lg:py-4 lg:px-8 shadow-md border-b border-neutral-200'
-      aria-label='Primary'
-    >
-      <div className='flex w-full justify-between px-4 sm:px-6 lg:w-auto lg:border-b-0 lg:pb-0 border-b border-neutral-200/80 pb-4'>
+    <nav className={NAVBAR_WRAPPER_CLASS} aria-label='Primary'>
+      <div className={NAVBAR_TOP_BAR_CLASS}>
         <Link
-          to='/'
+          to={ROUTE_PATH_HOME}
           className='flex-shrink-0 font-extrabold text-xl sm:text-2xl tracking-tight uppercase text-neutral-900 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-bright-blue focus-visible:ring-offset-2 rounded-sm'
         >
-          High-Signal News
+          {SITE_BRAND_NAV_LABEL}
         </Link>
-        <div className='flex items-center lg:hidden'>
+
+        <div className='flex items-center gap-2 lg:hidden'>
           <button
             type='button'
-            className='flex items-center rounded-md border-2 border-bright-blue px-3 py-2 text-bright-blue transition-colors hover:bg-bright-blue hover:text-white focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-bright-blue focus-visible:ring-offset-2'
-            aria-expanded={isOpen}
-            aria-controls={menuId}
-            onClick={toggle}
+            className='flex items-center gap-2 rounded-md border-2 border-bright-blue px-3 py-2 text-bright-blue transition-colors hover:bg-bright-blue hover:text-white focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-bright-blue focus-visible:ring-offset-2'
+            aria-expanded={isMenuOpen}
+            aria-controls={menuPanelId}
+            onClick={handleToggleMenu}
           >
-            <span className='sr-only'>{isOpen ? 'Close menu' : 'Open menu'}</span>
-            {!isOpen ? (
+            <span className='text-sm font-bold uppercase tracking-wide'>
+              {MENU_BUTTON_VISIBLE_LABEL}
+            </span>
+            {!isMenuOpen ? (
               <svg
                 className='h-5 w-5 fill-current'
                 viewBox='0 0 20 20'
@@ -52,86 +72,87 @@ function Navbar() {
             )}
           </button>
         </div>
+
+        <div className='hidden lg:flex lg:flex-1 lg:flex-wrap lg:items-center lg:justify-between lg:gap-2 lg:px-3'>
+          <ul className='flex list-none flex-row flex-wrap items-center gap-1'>
+            {NAVBAR_PRIMARY_LINKS.map((item) => (
+              <li key={item.href}>
+                <Link to={item.href} className={NAVBAR_LINK_CLASS}>
+                  {item.label}
+                </Link>
+              </li>
+            ))}
+            <li className='relative'>
+              <details className='group'>
+                <summary
+                  className={`${NAVBAR_LINK_CLASS} cursor-pointer list-none [&::-webkit-details-marker]:hidden`}
+                >
+                  {NAVBAR_MORE_MENU_LABEL}
+                </summary>
+                <ul className='absolute left-0 z-50 mt-1 min-w-[12rem] list-none rounded-lg border border-neutral-200 bg-white py-1 shadow-lg'>
+                  {NAVBAR_MORE_LINKS.map((item) => (
+                    <li key={item.href}>
+                      <Link to={item.href} className={NAVBAR_LINK_CLASS}>
+                        {item.label}
+                      </Link>
+                    </li>
+                  ))}
+                </ul>
+              </details>
+            </li>
+          </ul>
+          <ul className='flex max-w-[78vw] list-none flex-row flex-wrap items-center gap-1 overflow-x-auto'>
+            {navCategories.map(({ id, label }) => (
+              <li key={id}>
+                <Link
+                  to={`${ROUTE_PATH_POSTS_CATEGORY_PREFIX}${id}`}
+                  state={{ category: label }}
+                  className={NAVBAR_DESK_LINK_CLASS}
+                >
+                  {label}
+                </Link>
+              </li>
+            ))}
+          </ul>
+        </div>
       </div>
+
       <div
-        id={menuId}
-        className={`w-full flex-grow lg:flex lg:w-auto lg:items-center ${
-          isOpen ? 'flex' : 'hidden'
-        }`}
+        id={menuPanelId}
+        className={`${isMenuOpen ? '' : 'hidden '}${NAVBAR_MOBILE_MENU_PANEL_CLASS}`}
       >
-        <ul className='flex flex-col list-none gap-1 px-4 pb-3 lg:flex-row lg:gap-1 lg:pb-0 lg:px-3'>
-          <li>
-            <Link
-              to='/about'
-              onClick={close}
-              className='block rounded-lg px-3 py-2.5 text-xs sm:text-sm font-bold uppercase tracking-wide text-neutral-700 transition-colors hover:bg-neutral-200 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-neutral-500 lg:inline-block lg:py-2'
-            >
-              About
-            </Link>
-          </li>
-          <li>
-            <Link
-              to='/methodology'
-              onClick={close}
-              className='block rounded-lg px-3 py-2.5 text-xs sm:text-sm font-bold uppercase tracking-wide text-neutral-700 transition-colors hover:bg-neutral-200 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-neutral-500 lg:inline-block lg:py-2'
-            >
-              Methodology
-            </Link>
-          </li>
-          <li>
-            <Link
-              to='/coverage'
-              onClick={close}
-              className='block rounded-lg px-3 py-2.5 text-xs sm:text-sm font-bold uppercase tracking-wide text-neutral-700 transition-colors hover:bg-neutral-200 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-neutral-500 lg:inline-block lg:py-2'
-            >
-              Coverage
-            </Link>
-          </li>
-          <li>
-            <Link
-              to='/topics'
-              onClick={close}
-              className='block rounded-lg px-3 py-2.5 text-xs sm:text-sm font-bold uppercase tracking-wide text-neutral-700 transition-colors hover:bg-neutral-200 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-neutral-500 lg:inline-block lg:py-2'
-            >
-              Topic hubs
-            </Link>
-          </li>
-          <li>
-            <Link
-              to='/topics/business'
-              onClick={close}
-              className='block rounded-lg px-3 py-2.5 text-xs sm:text-sm font-bold uppercase tracking-wide text-neutral-700 transition-colors hover:bg-neutral-200 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-neutral-500 lg:inline-block lg:py-2'
-            >
-              Business Briefing
-            </Link>
-          </li>
-          <li>
-            <Link
-              to='/topics/world'
-              onClick={close}
-              className='block rounded-lg px-3 py-2.5 text-xs sm:text-sm font-bold uppercase tracking-wide text-neutral-700 transition-colors hover:bg-neutral-200 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-neutral-500 lg:inline-block lg:py-2'
-            >
-              World Watch
-            </Link>
-          </li>
-          <li>
-            <Link
-              to='/topics/thailand'
-              onClick={close}
-              className='block rounded-lg px-3 py-2.5 text-xs sm:text-sm font-bold uppercase tracking-wide text-neutral-700 transition-colors hover:bg-neutral-200 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-neutral-500 lg:inline-block lg:py-2'
-            >
-              Thailand Desk
-            </Link>
-          </li>
+        <ul className='flex list-none flex-col gap-1 px-4 pb-3 pt-2'>
+          {NAVBAR_PRIMARY_LINKS.map((item) => (
+            <li key={item.href}>
+              <Link
+                to={item.href}
+                onClick={handleCloseMenu}
+                className={NAVBAR_LINK_CLASS}
+              >
+                {item.label}
+              </Link>
+            </li>
+          ))}
+          {NAVBAR_MORE_LINKS.map((item) => (
+            <li key={item.href}>
+              <Link
+                to={item.href}
+                onClick={handleCloseMenu}
+                className={NAVBAR_LINK_CLASS}
+              >
+                {item.label}
+              </Link>
+            </li>
+          ))}
         </ul>
-        <ul className='flex flex-col list-none gap-1 px-4 pb-4 lg:flex-row lg:gap-1 lg:pb-0 lg:px-3 lg:ml-auto lg:max-w-[78vw] lg:overflow-x-auto'>
+        <ul className='flex list-none flex-col gap-1 border-t border-neutral-200 px-4 pb-4 pt-2'>
           {navCategories.map(({ id, label }) => (
             <li key={id}>
               <Link
-                to={`/posts/categories/${id}`}
+                to={`${ROUTE_PATH_POSTS_CATEGORY_PREFIX}${id}`}
                 state={{ category: label }}
-                onClick={close}
-                className='block rounded-lg px-3 py-2.5 text-xs sm:text-sm font-bold uppercase tracking-wide text-bright-blue transition-colors hover:bg-bright-blue hover:text-white focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-bright-blue focus-visible:ring-inset lg:inline-block lg:py-2'
+                onClick={handleCloseMenu}
+                className={NAVBAR_DESK_LINK_CLASS}
               >
                 {label}
               </Link>
