@@ -28,3 +28,5 @@ dist-ssr
 
 cachescripts/images-json/desktop/input-posts.json
 cachescripts/images-json/mobile/mobile-input-posts.json
+
+public/data/articles.json
