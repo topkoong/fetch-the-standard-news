@@ -1,7 +1,7 @@
 import HomeSkeleton from '@components/home-skeleton';
 import PostsPageSkeleton from '@components/posts-page-skeleton';
 import Spinner from '@components/spinner';
-import { REFETCH_INTERVAL } from '@constants/index';
+import { MAIN_CONTENT_TOP_OFFSET_CLASS, REFETCH_INTERVAL } from '@constants/index';
 import { lazy, Suspense } from 'preact/compat';
 import { QueryClient, QueryClientProvider } from 'react-query';
 import { Route, Routes } from 'react-router-dom';
@@ -36,7 +36,7 @@ function App() {
       <Suspense fallback={<Spinner />}>
         <Navbar />
       </Suspense>
-      <main id='main-content'>
+      <main id='main-content' className={MAIN_CONTENT_TOP_OFFSET_CLASS}>
         <Routes>
           <Route
             path='/'
