@@ -11,6 +11,9 @@ const Home = lazy(() => import('@pages/home'));
 const Posts = lazy(() => import('@pages/posts'));
 const ReadStory = lazy(() => import('@pages/read-story'));
 const TopicLanding = lazy(() => import('@pages/topic-landing'));
+const About = lazy(() => import('@pages/about'));
+const Methodology = lazy(() => import('@pages/methodology'));
+const Coverage = lazy(() => import('@pages/coverage'));
 
 function App() {
   const queryClient = new QueryClient({
@@ -75,6 +78,30 @@ function App() {
             element={
               <Suspense fallback={<Spinner />}>
                 <TopicLanding />
+              </Suspense>
+            }
+          />
+          <Route
+            path='about'
+            element={
+              <Suspense fallback={<Spinner />}>
+                <About />
+              </Suspense>
+            }
+          />
+          <Route
+            path='methodology'
+            element={
+              <Suspense fallback={<Spinner />}>
+                <Methodology />
+              </Suspense>
+            }
+          />
+          <Route
+            path='coverage'
+            element={
+              <Suspense fallback={<Spinner />}>
+                <Coverage />
               </Suspense>
             }
           />

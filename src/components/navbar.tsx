@@ -62,6 +62,33 @@ function Navbar() {
         <ul className='flex flex-col list-none gap-1 px-4 pb-3 lg:flex-row lg:gap-1 lg:pb-0 lg:px-3'>
           <li>
             <Link
+              to='/about'
+              onClick={close}
+              className='block rounded-lg px-3 py-2.5 text-xs sm:text-sm font-bold uppercase tracking-wide text-neutral-700 transition-colors hover:bg-neutral-200 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-neutral-500 lg:inline-block lg:py-2'
+            >
+              About
+            </Link>
+          </li>
+          <li>
+            <Link
+              to='/methodology'
+              onClick={close}
+              className='block rounded-lg px-3 py-2.5 text-xs sm:text-sm font-bold uppercase tracking-wide text-neutral-700 transition-colors hover:bg-neutral-200 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-neutral-500 lg:inline-block lg:py-2'
+            >
+              Methodology
+            </Link>
+          </li>
+          <li>
+            <Link
+              to='/coverage'
+              onClick={close}
+              className='block rounded-lg px-3 py-2.5 text-xs sm:text-sm font-bold uppercase tracking-wide text-neutral-700 transition-colors hover:bg-neutral-200 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-neutral-500 lg:inline-block lg:py-2'
+            >
+              Coverage
+            </Link>
+          </li>
+          <li>
+            <Link
               to='/topics/business'
               onClick={close}
               className='block rounded-lg px-3 py-2.5 text-xs sm:text-sm font-bold uppercase tracking-wide text-neutral-700 transition-colors hover:bg-neutral-200 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-neutral-500 lg:inline-block lg:py-2'
