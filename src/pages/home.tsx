@@ -59,18 +59,19 @@ function Home() {
     data: postData,
     error: postError,
     status: postStatus,
+    refetch: refetchPosts,
   } = useQuery('allposts', fetchPosts, {
     refetchInterval: REFETCH_INTERVAL * 3,
     staleTime: REFETCH_INTERVAL * 3,
   });
-  const { error: categoryError, status: categoryStatus } = useQuery(
-    'allcategories',
-    fetchCategories,
-    {
-      refetchInterval: REFETCH_INTERVAL * 3,
-      staleTime: REFETCH_INTERVAL * 3,
-    },
-  );
+  const {
+    error: categoryError,
+    status: categoryStatus,
+    refetch: refetchCategories,
+  } = useQuery('allcategories', fetchCategories, {
+    refetchInterval: REFETCH_INTERVAL * 3,
+    staleTime: REFETCH_INTERVAL * 3,
+  });
 
   const asciiCategoryNames = useMemo(
     () => Object.values(nonThaiCategoryIdToName),
@@ -351,6 +352,18 @@ function Home() {
               .map((e) => errorMessage(e))
               .join(' · ')}
           </p>
+          <div className='mt-4'>
+            <button
+              type='button'
+              className='btn-primary'
+              onClick={() => {
+                void refetchPosts();
+                void refetchCategories();
+              }}
+            >
+              <span className='btn-secondary'>Retry sync</span>
+            </button>
+          </div>
         </div>
       ) : (
         <ul className='px-3 sm:px-6 h-full max-w-[1600px] mx-auto'>

@@ -109,29 +109,36 @@ function Posts() {
   const storageKey = id ? `category-visible-count-${id}` : null;
   const [restoreTargetCount, setRestoreTargetCount] = useState(PAGE_SIZE);
 
-  const { data, isLoading, fetchNextPage, hasNextPage, isFetchingNextPage } =
-    useInfiniteQuery<CategoryPostsPage>(
-      `posts-from-category-${id}`,
-      fetchCategoryPostsPage,
-      {
-        enabled: queryEnabled,
-        getNextPageParam: (lastPage) => {
-          if (!lastPage?.posts?.length) {
-            return undefined;
-          }
-          if (
-            lastPage.totalAvailable > 0 &&
-            lastPage.nextOffset >= lastPage.totalAvailable
-          ) {
-            return undefined;
-          }
-          if (lastPage.posts.length < PAGE_SIZE) {
-            return undefined;
-          }
-          return lastPage.nextOffset;
-        },
+  const {
+    data,
+    isLoading,
+    error,
+    refetch,
+    fetchNextPage,
+    hasNextPage,
+    isFetchingNextPage,
+  } = useInfiniteQuery<CategoryPostsPage>(
+    `posts-from-category-${id}`,
+    fetchCategoryPostsPage,
+    {
+      enabled: queryEnabled,
+      getNextPageParam: (lastPage) => {
+        if (!lastPage?.posts?.length) {
+          return undefined;
+        }
+        if (
+          lastPage.totalAvailable > 0 &&
+          lastPage.nextOffset >= lastPage.totalAvailable
+        ) {
+          return undefined;
+        }
+        if (lastPage.posts.length < PAGE_SIZE) {
+          return undefined;
+        }
+        return lastPage.nextOffset;
       },
-    );
+    },
+  );
 
   const pages = data?.pages ?? [];
   const flattenedPosts = useMemo(() => pages.flatMap((page) => page.posts), [pages]);
@@ -179,6 +186,30 @@ function Posts() {
       <PageBreak />
       {showSkeleton ? (
         <PostsPageSkeleton />
+      ) : error ? (
+        <section
+          className='mx-3 sm:mx-6 my-10 rounded-xl border-2 border-white/30 bg-white/10 p-6 text-center text-white'
+          role='alert'
+        >
+          <h2 className='text-xl font-extrabold uppercase tracking-wide'>
+            Unable to load this desk right now
+          </h2>
+          <p className='mt-2 text-white/90'>
+            The source may be temporarily unavailable. Retry or open another desk.
+          </p>
+          <div className='mt-4 flex justify-center gap-3 flex-wrap'>
+            <button type='button' className='btn-primary' onClick={() => void refetch()}>
+              <span className='btn-secondary'>Retry desk</span>
+            </button>
+            <Link
+              to='/posts/categories/39'
+              state={{ category: 'News' }}
+              className='inline-flex items-center justify-center rounded-xl border-2 border-white/60 bg-white/10 px-5 py-3 text-white font-semibold uppercase tracking-wide text-sm no-underline hover:bg-white/20 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-white focus-visible:ring-offset-2 focus-visible:ring-offset-bright-blue'
+            >
+              Go to top stories
+            </Link>
+          </div>
+        </section>
       ) : flattenedPosts.length === 0 ? (
         <section className='mx-3 sm:mx-6 my-10 rounded-xl border-2 border-white/30 bg-white/10 p-6 text-center text-white'>
           <h2 className='text-xl font-extrabold uppercase tracking-wide'>
