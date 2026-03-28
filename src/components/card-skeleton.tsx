@@ -1,11 +1,19 @@
+import { NEWS_CARD_ARTICLE_CLASS } from '@constants/index';
+
 /** Placeholder block for news card layout (pulse). */
 function CardSkeleton() {
   return (
-    <li className='card-article pointer-events-none select-none' aria-hidden='true'>
-      <div className='flex flex-col gap-4 h-full animate-pulse'>
-        <div className='h-16 rounded-md bg-white/25' />
-        <div className='relative w-full aspect-[16/10] rounded-md bg-white/20' />
-        <div className='h-14 rounded-md bg-white/25 mx-auto w-3/4 max-w-[14rem]' />
+    <li
+      className={`${NEWS_CARD_ARTICLE_CLASS} pointer-events-none h-full list-none select-none overflow-hidden`}
+      aria-hidden='true'
+    >
+      <div className='flex h-full min-h-0 animate-pulse flex-col'>
+        <div className='relative aspect-[16/10] w-full bg-neutral-200' />
+        <div className='flex flex-1 flex-col gap-3 p-4 sm:p-5 md:p-6'>
+          <div className='h-14 rounded-md bg-neutral-200' />
+          <div className='h-12 rounded-md bg-neutral-200' />
+          <div className='mx-auto mt-auto h-10 w-full max-w-xs rounded-lg bg-neutral-200' />
+        </div>
       </div>
     </li>
   );

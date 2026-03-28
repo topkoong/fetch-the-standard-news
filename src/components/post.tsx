@@ -1,5 +1,14 @@
 import placeholderImage from '@assets/images/placeholder.png';
+import {
+  NEWS_CARD_ARTICLE_CLASS,
+  NEWS_CARD_READ_NOW_BUTTON_CLASS,
+  NEWS_CARD_READ_NOW_LABEL,
+  NEWS_CARD_SECONDARY_FOOTER_LINK_CLASS,
+  ROUTE_PATH_NEWS_DESK_FALLBACK,
+  ROUTE_STATE_NEWS_DESK_CATEGORY,
+} from '@constants/index';
 import useIntersectionObserver from '@hooks/use-intersection-observer';
+import { Fragment } from 'preact';
 import { memo } from 'preact/compat';
 import { useEffect, useMemo, useRef, useState } from 'preact/hooks';
 import { Link } from 'react-router-dom';
@@ -59,18 +68,15 @@ function Post({ post, group }: PostProps) {
   const resolvedSrc = usePlaceholder ? placeholderImage : imageSrc || placeholderImage;
 
   return (
-    <li className='card-article'>
-      <article className='flex flex-col gap-4 h-full'>
-        <header>
-          <h2 className='post-title'>{titlePlain}</h2>
-        </header>
-        <div className='relative w-full aspect-[16/10] overflow-hidden rounded-md bg-neutral-100 border border-black/5'>
+    <li className='h-full list-none'>
+      <article className={`${NEWS_CARD_ARTICLE_CLASS} min-h-0`}>
+        <div className='relative aspect-[16/10] w-full min-h-0 overflow-hidden bg-neutral-100'>
           <img
             ref={ref}
             className={`h-full w-full object-cover transition-all duration-500 ease-out ${
               usePlaceholder
-                ? 'grayscale blur-md scale-105'
-                : 'grayscale-0 blur-0 scale-100'
+                ? 'scale-105 blur-md grayscale'
+                : 'scale-100 blur-0 grayscale-0'
             }`}
             src={resolvedSrc}
             alt={titlePlain}
@@ -89,45 +95,52 @@ function Post({ post, group }: PostProps) {
             }}
           />
         </div>
-        {showImageFallbackNote ? (
-          <p className='text-xs text-neutral-500 leading-snug'>
-            Preview image unavailable from source right now. You can still open the full
-            story.
+        <div className='flex min-h-0 flex-1 flex-col gap-2 p-4 sm:p-5 md:p-6'>
+          <header>
+            <h2 className='line-clamp-3 text-lg font-bold leading-snug text-gray-900 sm:text-xl'>
+              {titlePlain}
+            </h2>
+          </header>
+          {showImageFallbackNote ? (
+            <p className='text-xs leading-snug text-neutral-500'>
+              Preview image unavailable from source right now. You can still open the full
+              story.
+            </p>
+          ) : null}
+          <p className='line-clamp-3 text-sm leading-relaxed text-neutral-600'>
+            {excerptPlain ||
+              'Read now for our layout; use the publisher link when you need the source site.'}
           </p>
-        ) : null}
-        <p className='text-neutral-600 text-sm leading-relaxed line-clamp-3'>
-          {excerptPlain ||
-            'Read now for our layout; use the publisher link when you need the source site.'}
-        </p>
-        <div className='text-center mt-auto pt-2'>
-          {post.link ? (
-            <div className='flex flex-col gap-2 items-center'>
+          <div className='mt-auto flex flex-col items-center gap-2 pt-2 text-center'>
+            {post.link ? (
+              <>
+                <Link
+                  to={`/read/${post.id}`}
+                  className={`${NEWS_CARD_READ_NOW_BUTTON_CLASS} mx-auto w-full max-w-xs`}
+                  aria-label={`Read now: ${titlePlain}`}
+                >
+                  {NEWS_CARD_READ_NOW_LABEL}
+                </Link>
+                <a
+                  href={post.link}
+                  target='_blank'
+                  rel='noopener noreferrer'
+                  className={NEWS_CARD_SECONDARY_FOOTER_LINK_CLASS}
+                  aria-label={`Browse original publisher: ${titlePlain}`}
+                >
+                  Browse original publisher
+                </a>
+              </>
+            ) : (
               <Link
-                to={`/read/${post.id}`}
-                className='btn-primary w-full max-w-xs mx-auto no-underline inline-flex items-center justify-center'
-                aria-label={`Read now: ${titlePlain}`}
+                to={ROUTE_PATH_NEWS_DESK_FALLBACK}
+                state={{ category: ROUTE_STATE_NEWS_DESK_CATEGORY }}
+                className={NEWS_CARD_SECONDARY_FOOTER_LINK_CLASS}
               >
-                <span className='btn-secondary text-lg lg:text-xl'>Read now</span>
+                Discover related coverage
               </Link>
-              <a
-                href={post.link}
-                target='_blank'
-                rel='noopener noreferrer'
-                className='inline-flex items-center justify-center rounded-xl border-2 border-neutral-300 bg-neutral-100 px-4 py-2 text-neutral-700 text-xs uppercase font-bold no-underline hover:bg-neutral-200'
-                aria-label={`Browse original publisher: ${titlePlain}`}
-              >
-                Browse original publisher
-              </a>
-            </div>
-          ) : (
-            <Link
-              to='/posts/categories/39'
-              state={{ category: 'News' }}
-              className='inline-flex items-center justify-center rounded border-2 border-neutral-300 bg-neutral-100 px-6 py-4 text-neutral-700 text-sm uppercase font-bold no-underline hover:bg-neutral-200 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-neutral-500'
-            >
-              Discover related coverage
-            </Link>
-          )}
+            )}
+          </div>
         </div>
       </article>
     </li>
