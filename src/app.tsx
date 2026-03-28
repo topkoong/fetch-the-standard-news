@@ -35,7 +35,7 @@ function App() {
       <Suspense fallback={<Spinner />}>
         <Navbar />
       </Suspense>
-      <main id='main-content'>
+      <main id='main-content' className='pt-16'>
         <Routes>
           <Route
             path='/'

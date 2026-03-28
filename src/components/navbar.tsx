@@ -11,7 +11,7 @@ function Navbar() {
 
   return (
     <nav
-      className='sticky top-0 z-50 flex flex-wrap items-center justify-between bg-white/96 backdrop-blur-sm py-3 lg:py-4 lg:px-8 shadow-md border-b border-neutral-200'
+      className='fixed top-0 left-0 right-0 z-50 flex flex-wrap items-center justify-between bg-white border-b border-gray-100 shadow-sm py-3 lg:py-4 lg:px-8'
       aria-label='Primary'
     >
       <div className='flex w-full justify-between px-4 sm:px-6 lg:w-auto lg:border-b-0 lg:pb-0 border-b border-neutral-200/80 pb-4'>
@@ -55,7 +55,7 @@ function Navbar() {
       </div>
       <div
         id={menuId}
-        className={`w-full flex-grow lg:flex lg:w-auto lg:items-center ${
+        className={`z-50 w-full flex-grow lg:flex lg:w-auto lg:items-center ${
           isOpen ? 'flex' : 'hidden'
         }`}
       >
