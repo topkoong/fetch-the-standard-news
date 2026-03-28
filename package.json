@@ -23,6 +23,8 @@
   "scripts": {
     "prepare": "husky",
     "dev": "vite",
+    "fetch": "node scripts/fetch-content.mjs",
+    "prebuild": "node scripts/fetch-content.mjs",
     "build": "tsc && vite build",
     "preview": "vite preview",
     "lint:fix": "eslint ./src --ext .jsx,.js,.ts,.tsx --fix --ignore-pattern \"**/*.d.ts\"",
