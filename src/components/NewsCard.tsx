@@ -21,7 +21,12 @@ import {
   ROUTE_PATH_READ_PREFIX,
   ROUTE_STATE_NEWS_DESK_CATEGORY,
 } from '@constants/index';
-import { handleNewsImageLoadError, placeholderNewsPublicPath } from '@utils/formatters';
+import {
+  handleNewsImageLoadError,
+  isStandardPublisherImageUrl,
+  placeholderNewsPublicPath,
+  publisherImageReferrerProps,
+} from '@utils/formatters';
 import { useEffect, useMemo, useState } from 'preact/hooks';
 import { Link } from 'react-router-dom';
 
@@ -52,6 +57,8 @@ export function NewsCard({
 
   const localCandidates = useMemo(() => {
     if (!featuredMediaId) return [];
+    /* With LOCALIZE_IMAGE_ASSETS=0, desks only use CDN URLs — skip missing public/cached-media/* retries. */
+    if (isStandardPublisherImageUrl(imageUrl)) return [];
     const prefix = `${baseUrl}cached-media/${featuredMediaId}`;
     return [
       `${prefix}.jpg`,
@@ -60,7 +67,7 @@ export function NewsCard({
       `${prefix}.webp`,
       `${prefix}.avif`,
     ];
-  }, [baseUrl, featuredMediaId]);
+  }, [baseUrl, featuredMediaId, imageUrl]);
 
   useEffect(() => {
     setImageSrc(imageUrl);
@@ -108,6 +115,7 @@ export function NewsCard({
               decoding='async'
               className={NEWS_CARD_IMAGE_CLASS}
               onError={handleImageError}
+              {...publisherImageReferrerProps}
             />
           </div>
           <div className={bodyPaddingClass}>
