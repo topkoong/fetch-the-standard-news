@@ -56,6 +56,12 @@ function ReadStory() {
       .map((item) => item.row);
   }, [story]);
 
+  /*
+   * Story pages use `og:type: article` when `story` exists. `image` uses `resolveImageUrl`
+   * so bundled base URL / CDN rules match the `<img>` on the page; `absoluteUrlForOpenGraph`
+   * then ensures OG crawlers get an absolute URL. When the route id is missing from the
+   * snapshot, we still set head tags for a generic “story” URL — crawlers see website-type metadata.
+   */
   usePageSeo({
     title: story ? `${story.title} | The Standard Feed` : 'Story | The Standard Feed',
     description:

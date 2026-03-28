@@ -201,6 +201,11 @@ function Home() {
     };
   }, [cacheReady, imageUrlById, nonThaiCategoryIdToName, postData]);
 
+  /*
+   * Head metadata must run after `heroFeaturedArticle` is derived so `og:image` can use the
+   * same resolved hero image URL as `HeroSection`. If this hook sat above the memo, social
+   * previews would lag one render or show only the default placeholder.
+   */
   usePageSeo({
     title: 'The Standard Feed | High-signal daily reading dashboard',
     description:

@@ -57,6 +57,7 @@ function Posts() {
   const { id } = useParams();
   const location = useLocation();
   const category = hasCategoryState(location.state) ? location.state.category : undefined;
+  /* One canonical/og:url per desk; `id` comes from the route so deep links share correctly. */
   const postsCanonical = id
     ? `${PUBLIC_SITE_URL}/posts/categories/${id}`
     : `${PUBLIC_SITE_URL}/posts/categories`;
