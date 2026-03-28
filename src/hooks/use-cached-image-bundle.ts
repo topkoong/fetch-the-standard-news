@@ -1,16 +1,11 @@
 import desktopImagesUrl from '@assets/cached/images.json?url';
 import mobileImagesUrl from '@assets/cached/mobile-images.json?url';
+import { resolveImageUrl } from '@utils/formatters';
 import { useEffect, useMemo, useState } from 'preact/hooks';
 
 export interface CachedImageRow {
   id: number;
   url: string;
-}
-
-function resolveImageUrl(url: string): string {
-  if (/^https?:\/\//i.test(url)) return url;
-  const base = import.meta.env.BASE_URL ?? '/';
-  return `${base}${url.replace(/^\/+/, '')}`;
 }
 
 async function fetchJson<T>(url: string, signal: AbortSignal): Promise<T> {

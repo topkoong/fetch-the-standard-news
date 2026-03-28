@@ -8,6 +8,7 @@ import {
   ROUTE_STATE_NEWS_DESK_CATEGORY,
 } from '@constants/index';
 import useIntersectionObserver from '@hooks/use-intersection-observer';
+import { placeholderNewsPublicPath } from '@utils/formatters';
 import { Fragment } from 'preact';
 import { memo } from 'preact/compat';
 import { useEffect, useMemo, useRef, useState } from 'preact/hooks';
@@ -82,7 +83,6 @@ function Post({ post, group }: PostProps) {
             alt={titlePlain}
             loading='lazy'
             decoding='async'
-            referrerPolicy='no-referrer'
             onError={(event) => {
               if (candidateIndex < localCandidates.length) {
                 const nextSrc = localCandidates[candidateIndex];
@@ -91,7 +91,7 @@ function Post({ post, group }: PostProps) {
                 return;
               }
               setShowImageFallbackNote(true);
-              event.currentTarget.src = placeholderImage;
+              event.currentTarget.src = placeholderNewsPublicPath();
             }}
           />
         </div>

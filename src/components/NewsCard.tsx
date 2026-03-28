@@ -1,4 +1,3 @@
-import placeholderImage from '@assets/images/placeholder.png';
 import {
   NEWS_CARD_ARTICLE_CLASS,
   NEWS_CARD_BODY_PADDING_FEATURE_CLASS,
@@ -22,6 +21,7 @@ import {
   ROUTE_PATH_READ_PREFIX,
   ROUTE_STATE_NEWS_DESK_CATEGORY,
 } from '@constants/index';
+import { handleNewsImageLoadError, placeholderNewsPublicPath } from '@utils/formatters';
 import { useEffect, useMemo, useState } from 'preact/hooks';
 import { Link } from 'react-router-dom';
 
@@ -81,14 +81,15 @@ export function NewsCard({
     ? NEWS_CARD_TITLE_FEATURE_CLASS
     : NEWS_CARD_TITLE_STANDARD_CLASS;
 
-  const handleImageError = (): void => {
+  const handleImageError = (event: { currentTarget: HTMLImageElement }): void => {
     if (candidateIndex < localCandidates.length) {
       const nextSrc = localCandidates[candidateIndex];
       setCandidateIndex((idx) => idx + 1);
       setImageSrc(nextSrc);
       return;
     }
-    setImageSrc(placeholderImage);
+    handleNewsImageLoadError(event);
+    setImageSrc(placeholderNewsPublicPath());
   };
 
   return (
@@ -101,11 +102,10 @@ export function NewsCard({
         >
           <div className={imageWrapperClass}>
             <img
-              src={imageSrc || placeholderImage}
+              src={imageSrc || placeholderNewsPublicPath()}
               alt={title}
               loading='lazy'
               decoding='async'
-              referrerPolicy='no-referrer'
               className={NEWS_CARD_IMAGE_CLASS}
               onError={handleImageError}
             />
