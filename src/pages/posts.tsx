@@ -3,6 +3,7 @@ import { PAGE_SIZE, THE_STANDARD_POSTS_ENDPOINT } from '@constants/index';
 import useBreakpoints from '@hooks/use-breakpoints';
 import { useCachedImageBundle } from '@hooks/use-cached-image-bundle';
 import { usePageSeo } from '@hooks/use-page-seo';
+import { resolveImageUrl } from '@utils/formatters';
 import axios from 'axios';
 import { Fragment } from 'preact';
 import { lazy } from 'preact/compat';
@@ -90,10 +91,11 @@ function Posts() {
 
       const postsWithImage: WpPost[] = posts.map((post) => {
         const mediaId = post.featured_media;
-        const imageUrl = mediaId
-          ? imageUrlById.get(mediaId) ?? fetchedMediaById.get(mediaId)
-          : undefined;
-        return { ...post, imageUrl };
+        const raw =
+          mediaId !== undefined && mediaId !== null && mediaId !== 0
+            ? imageUrlById.get(mediaId) ?? fetchedMediaById.get(mediaId) ?? ''
+            : '';
+        return { ...post, imageUrl: resolveImageUrl(raw) };
       });
 
       return {

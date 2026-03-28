@@ -1,8 +1,8 @@
 import storyPagesUrl from '@assets/cached/story-pages.json?url';
-import placeholderImage from '@assets/images/placeholder.png';
 import PageHeader from '@components/page-header';
 import Spinner from '@components/spinner';
 import { usePageSeo } from '@hooks/use-page-seo';
+import { handleNewsImageLoadError, resolveImageUrl } from '@utils/formatters';
 import { useEffect, useMemo, useState } from 'preact/hooks';
 import { Link, useParams } from 'react-router-dom';
 import type { StoryPage } from 'types/wp-api';
@@ -123,11 +123,9 @@ function ReadStory() {
         </div>
         <img
           className='mt-5 w-full rounded-xl border border-white/20 bg-white/5 object-cover max-h-[28rem]'
-          src={story.imageUrl || placeholderImage}
+          src={resolveImageUrl(story.imageUrl ?? '')}
           alt={story.title}
-          onError={(e) => {
-            e.currentTarget.src = placeholderImage;
-          }}
+          onError={handleNewsImageLoadError}
         />
         <div
           className='mt-6 prose prose-invert max-w-none prose-p:text-white/90 prose-headings:text-white prose-a:text-cyan-200'

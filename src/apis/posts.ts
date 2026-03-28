@@ -1,5 +1,6 @@
 import { THE_STANDARD_POSTS_ENDPOINT } from '@constants/index';
 import { loadArticles } from '@hooks/use-news';
+import { resolveImageUrl } from '@utils/formatters';
 import axios from 'axios';
 import type { WpPost } from 'types/wp-api';
 
@@ -38,7 +39,7 @@ function mapArticleToWpPost(raw: unknown, index: number): WpPost {
     id,
     title: { rendered: title || 'Article' },
     link,
-    imageUrl: image || undefined,
+    imageUrl: image ? resolveImageUrl(image) : undefined,
     featured_media: 0,
     categories: [39],
     date,
@@ -59,6 +60,19 @@ const fetchPosts = async (): Promise<WpPost[]> => {
   const { data } = await axios.get<WpPost[]>(
     `${THE_STANDARD_POSTS_ENDPOINT}?per_page=100&orderby=date&order=desc`,
   );
+  if (import.meta.env.DEV) {
+    for (let i = 0; i < Math.min(3, data.length); i++) {
+      const p = data[i];
+      const mediaHref = p._links?.['wp:featuredmedia']?.[0]?.href;
+      console.info(
+        `[fetchPosts] article[${i}] id=${p.id} imageUrl=${
+          p.imageUrl ?? '(none)'
+        } featured_media=${p.featured_media ?? '(none)'} mediaHref=${
+          mediaHref ?? '(none)'
+        }`,
+      );
+    }
+  }
   return data;
 };
 

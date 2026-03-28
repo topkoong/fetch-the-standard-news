@@ -1,6 +1,5 @@
 import fetchCategories from '@apis/categories';
 import fetchPosts from '@apis/posts';
-import placeholderImage from '@assets/images/placeholder.png';
 import { HeroSection } from '@components/HeroSection';
 import HomeSkeleton from '@components/home-skeleton';
 import Spinner from '@components/spinner';
@@ -16,6 +15,7 @@ import useBreakpoints from '@hooks/use-breakpoints';
 import { useCachedFeedBootstrap } from '@hooks/use-cached-feed-bootstrap';
 import { useCategoryData } from '@hooks/use-category-data';
 import { usePageSeo } from '@hooks/use-page-seo';
+import { resolveImageUrl } from '@utils/formatters';
 import { lazy } from 'preact/compat';
 import { useMemo } from 'preact/hooks';
 import { useQuery } from 'react-query';
@@ -149,7 +149,7 @@ function Home() {
         ...section,
         posts: section.posts.map((post) => ({
           ...post,
-          imageUrl: imageUrlById.get(post.featured_media ?? 0),
+          imageUrl: resolveImageUrl(imageUrlById.get(post.featured_media ?? 0) ?? ''),
         })),
       })),
     [categorySections, imageUrlById],
@@ -188,12 +188,13 @@ function Home() {
     const post = postData[0];
     const titlePlain = stripRenderedMarkup(post.title?.rendered ?? '');
     const link = post.link ?? THE_STANDARD_HOSTNAME;
-    const resolvedImage =
+    const rawHeroImage =
       post.imageUrl ??
       (post.featured_media !== undefined && post.featured_media !== null
         ? imageUrlById.get(post.featured_media)
         : undefined) ??
-      placeholderImage;
+      '';
+    const resolvedImage = resolveImageUrl(rawHeroImage);
     const firstCategoryId = post.categories?.[0];
     const categoryLabel =
       firstCategoryId !== undefined
@@ -495,7 +496,7 @@ function Home() {
                       <NewsCard
                         key={post.id}
                         title={titlePlain}
-                        imageUrl={post.imageUrl ?? placeholderImage}
+                        imageUrl={post.imageUrl ?? resolveImageUrl('')}
                         categoryLabel={primaryCategory}
                         postId={post.id}
                         excerpt={excerptPlain || undefined}

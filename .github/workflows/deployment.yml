@@ -45,8 +45,16 @@ jobs:
           POST_FETCH_PAGES: ${{ vars.POST_FETCH_PAGES }}
           LOCALIZE_IMAGE_ASSETS: '1'
         run: |
-          export POST_FETCH_PAGES="${POST_FETCH_PAGES:-all}"
-          bash cachescripts/fetch-the-standard-posts.sh
+          # Do not default to fetching all WP post pages here: ~100+ pages/min × 1700+
+          # pages can exceed the job timeout and one HTML/rate-limit response breaks jq.
+          # Use committed src/assets/cached/posts.json unless the repo Actions variable
+          # POST_FETCH_PAGES is set (e.g. 5 for a quick refresh, or a larger cap).
+          if [ -n "${POST_FETCH_PAGES:-}" ]; then
+            echo "Refreshing posts from API (POST_FETCH_PAGES=${POST_FETCH_PAGES})"
+            bash cachescripts/fetch-the-standard-posts.sh
+          else
+            echo "Skipping fetch-the-standard-posts.sh — using committed posts.json (set POST_FETCH_PAGES to enable)."
+          fi
           bash cachescripts/fetch-the-standard-categories.sh
           bash cachescripts/fetch-image-urls.sh
           bash cachescripts/build-story-pages-index.sh
