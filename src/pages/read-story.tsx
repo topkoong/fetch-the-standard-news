@@ -14,7 +14,11 @@
 import rawStoryPages from '@assets/cached/story-pages.json';
 import PageHeader from '@components/page-header';
 import { usePageSeo } from '@hooks/use-page-seo';
-import { handleNewsImageLoadError, resolveImageUrl } from '@utils/formatters';
+import {
+  handleNewsImageLoadError,
+  publisherImageReferrerProps,
+  resolveImageUrl,
+} from '@utils/formatters';
 import { useMemo } from 'preact/hooks';
 import { Link, useParams } from 'react-router-dom';
 import type { StoryPage } from 'types/wp-api';
@@ -110,6 +114,7 @@ function ReadStory() {
           src={resolveImageUrl(story.imageUrl ?? '')}
           alt={story.title}
           onError={handleNewsImageLoadError}
+          {...publisherImageReferrerProps}
         />
         <div
           className='mt-6 prose prose-invert max-w-none prose-p:text-white/90 prose-headings:text-white prose-a:text-cyan-200'

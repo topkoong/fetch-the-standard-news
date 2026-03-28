@@ -8,7 +8,11 @@ import {
   ROUTE_STATE_NEWS_DESK_CATEGORY,
 } from '@constants/index';
 import useIntersectionObserver from '@hooks/use-intersection-observer';
-import { placeholderNewsPublicPath } from '@utils/formatters';
+import {
+  isStandardPublisherImageUrl,
+  placeholderNewsPublicPath,
+  publisherImageReferrerProps,
+} from '@utils/formatters';
 import { Fragment } from 'preact';
 import { memo } from 'preact/compat';
 import { useEffect, useMemo, useRef, useState } from 'preact/hooks';
@@ -50,6 +54,8 @@ function Post({ post, group }: PostProps) {
   const localCandidates = useMemo(() => {
     const mediaId = post.featured_media;
     if (!mediaId) return [];
+    const primary = post.imageUrl ?? '';
+    if (isStandardPublisherImageUrl(primary)) return [];
     const prefix = `${baseUrl}cached-media/${mediaId}`;
     return [
       `${prefix}.jpg`,
@@ -58,7 +64,7 @@ function Post({ post, group }: PostProps) {
       `${prefix}.webp`,
       `${prefix}.avif`,
     ];
-  }, [baseUrl, post.featured_media]);
+  }, [baseUrl, post.featured_media, post.imageUrl]);
 
   useEffect(() => {
     setImageSrc(post.imageUrl);
@@ -83,6 +89,7 @@ function Post({ post, group }: PostProps) {
             alt={titlePlain}
             loading='lazy'
             decoding='async'
+            {...publisherImageReferrerProps}
             onError={(event) => {
               if (candidateIndex < localCandidates.length) {
                 const nextSrc = localCandidates[candidateIndex];

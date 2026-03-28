@@ -8,7 +8,25 @@ export interface TopicDefinition {
   benefits: string[];
 }
 
+/**
+ * Curated topic hubs + matching WP category desks. Order matches plan.md PR 10
+ * (Politics → Business → Tech → World → Thailand → Culture) for homepage chips.
+ */
 export const TOPIC_DEFINITIONS: TopicDefinition[] = [
+  {
+    slug: 'politics',
+    title: 'Politics Briefing',
+    subtitle: 'Power, policy, and elections without the scroll fatigue.',
+    description:
+      'Follow legislative moves, coalition dynamics, and civic issues with concise framing for busy readers.',
+    categoryId: 15,
+    categoryLabel: 'Politics',
+    benefits: [
+      'Timelines that connect statements to outcomes.',
+      'Desk view filtered to political coverage only.',
+      'Jump from hub summary to full posts in one click.',
+    ],
+  },
   {
     slug: 'business',
     title: 'Business Briefing',
@@ -21,6 +39,20 @@ export const TOPIC_DEFINITIONS: TopicDefinition[] = [
       'Signals that affect planning and execution.',
       'Fast path to source-backed reporting.',
       'Curated for daily decision workflows.',
+    ],
+  },
+  {
+    slug: 'tech',
+    title: 'Tech Watch',
+    subtitle: 'Innovation, digital policy, and product moves in one stream.',
+    description:
+      'Stay current on technology trends, regulation, and the stories shaping Thailand’s digital economy.',
+    categoryId: 17,
+    categoryLabel: 'Tech',
+    benefits: [
+      'High-signal tech headlines without gadget spam.',
+      'Clear path from hub to the live Tech desk.',
+      'Useful for operators tracking platform and AI shifts.',
     ],
   },
   {
@@ -53,16 +85,16 @@ export const TOPIC_DEFINITIONS: TopicDefinition[] = [
   },
   {
     slug: 'culture',
-    title: 'Culture Signals',
-    subtitle: 'Film, music, and travel trends that move audiences.',
+    title: 'Culture Desk',
+    subtitle: 'Arts, lifestyle, and creative industries in focus.',
     description:
-      'Explore culture stories that shape consumer behavior and creative direction.',
-    categoryId: 27,
-    categoryLabel: 'Music',
+      'Explore culture coverage across film, music, design, and travel from The Standard’s desks.',
+    categoryId: 3,
+    categoryLabel: 'Culture',
     benefits: [
-      'Fast scan of emerging cultural moments.',
-      'Useful for brand, media, and creative teams.',
-      'Connected to deeper reporting and source links.',
+      'One hub before you open the Culture category stream.',
+      'Cross-desks context for creative and brand teams.',
+      'Links straight into the live Culture feed when you need depth.',
     ],
   },
 ];

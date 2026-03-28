@@ -1,5 +1,7 @@
 import fetchCategories from '@apis/categories';
 import fetchPosts from '@apis/posts';
+import { CategoryChips } from '@components/CategoryChips';
+import { EditorialBenefitsSection } from '@components/EditorialBenefitsSection';
 import { HeroSection } from '@components/HeroSection';
 import HomeSkeleton from '@components/home-skeleton';
 import Spinner from '@components/spinner';
@@ -175,12 +177,6 @@ function Home() {
     [sectionsWithImages.length, storiesRenderedNow, totalStoriesInFeed],
   );
 
-  const featureBullets = [
-    'Fast load with locally cached JSON and media.',
-    'Category-first navigation for direct discovery.',
-    'Accessible, mobile-friendly reading experience.',
-  ];
-
   const heroFeaturedArticle = useMemo((): HeroFeaturedArticle | null => {
     if (!cacheReady || !postData?.[0]) {
       return null;
@@ -217,6 +213,7 @@ function Home() {
   return (
     <article className='w-full min-h-[60vh] pb-10'>
       {heroFeaturedArticle ? <HeroSection featuredArticle={heroFeaturedArticle} /> : null}
+      <CategoryChips />
       <PageHeader
         title='Toppy × The Standard News'
         isPrimaryHeading={heroFeaturedArticle === null}
@@ -264,41 +261,7 @@ function Home() {
             Mobile-first reading experience
           </li>
         </ul>
-        <div className='mt-5'>
-          <h3 className='text-center text-white font-bold uppercase tracking-wide text-xs sm:text-sm'>
-            Quick navigation
-          </h3>
-          <div className='mt-2 flex flex-wrap justify-center gap-2'>
-            <Link
-              to='/posts/categories/13'
-              state={{ category: 'Business' }}
-              className='rounded-full border border-white/40 px-3 py-1 text-white text-xs sm:text-sm no-underline hover:bg-white/20'
-            >
-              Business
-            </Link>
-            <Link
-              to='/posts/categories/12'
-              state={{ category: 'Thailand' }}
-              className='rounded-full border border-white/40 px-3 py-1 text-white text-xs sm:text-sm no-underline hover:bg-white/20'
-            >
-              Thailand
-            </Link>
-            <Link
-              to='/posts/categories/27'
-              state={{ category: 'Music' }}
-              className='rounded-full border border-white/40 px-3 py-1 text-white text-xs sm:text-sm no-underline hover:bg-white/20'
-            >
-              Music
-            </Link>
-            <Link
-              to='/posts/categories/33'
-              state={{ category: 'Travel' }}
-              className='rounded-full border border-white/40 px-3 py-1 text-white text-xs sm:text-sm no-underline hover:bg-white/20'
-            >
-              Travel
-            </Link>
-          </div>
-        </div>
+        <EditorialBenefitsSection />
         <section className='mt-5 surface-panel p-4 sm:p-5'>
           <h3 className='text-white text-lg sm:text-xl font-extrabold'>
             Editorial pages
@@ -351,21 +314,6 @@ function Home() {
               </Link>
             ))}
           </div>
-        </section>
-        <section className='mt-6 surface-panel p-4 sm:p-5'>
-          <h3 className='text-white text-lg sm:text-xl font-extrabold'>
-            Why this feed works
-          </h3>
-          <ul className='mt-3 grid grid-cols-1 md:grid-cols-3 gap-3'>
-            {featureBullets.map((feature) => (
-              <li
-                key={feature}
-                className='rounded-lg border border-white/20 bg-black/10 px-3 py-3 text-white/95 text-sm'
-              >
-                {feature}
-              </li>
-            ))}
-          </ul>
         </section>
         <section className='mt-5' aria-label='Success indicators'>
           <h3 className='text-center text-white font-bold uppercase tracking-wide text-xs sm:text-sm'>

@@ -18,7 +18,11 @@ import {
   HERO_VALUE_SUBHEADLINE,
   THE_STANDARD_HOSTNAME,
 } from '@constants/index';
-import { handleNewsImageLoadError, resolveImageUrl } from '@utils/formatters';
+import {
+  handleNewsImageLoadError,
+  publisherImageReferrerProps,
+  resolveImageUrl,
+} from '@utils/formatters';
 import { Link } from 'react-router-dom';
 import type { HeroSectionProps } from 'types/hero.types';
 
@@ -30,6 +34,7 @@ export function HeroSection({ featuredArticle }: HeroSectionProps) {
         alt={featuredArticle.title}
         className={HERO_BACKGROUND_IMAGE_CLASS}
         onError={handleNewsImageLoadError}
+        {...publisherImageReferrerProps}
       />
       <div className={HERO_GRADIENT_OVERLAY_CLASS} aria-hidden='true' />
       <div className={HERO_CONTENT_WRAPPER_CLASS}>

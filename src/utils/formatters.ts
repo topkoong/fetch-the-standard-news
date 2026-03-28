@@ -2,6 +2,20 @@ const STANDARD_ORIGIN = 'https://thestandard.co';
 
 const PLACEHOLDER_FILE = 'placeholder-news.jpg';
 
+const STANDARD_IMAGE_ORIGIN_RE = /^https?:\/\/thestandard\.co/i;
+
+/** Use on `<img>` loading thestandard.co assets from GitHub Pages so CDN hotlink rules do not block by Referer. */
+export function isStandardPublisherImageUrl(url: string): boolean {
+  return STANDARD_IMAGE_ORIGIN_RE.test(typeof url === 'string' ? url.trim() : '');
+}
+
+/**
+ * Props for `<img>` that load The Standard CDN while the app is hosted on another origin.
+ */
+export const publisherImageReferrerProps = {
+  referrerPolicy: 'no-referrer' as const,
+};
+
 /** Public placeholder path (honours Vite `base`, e.g. GitHub Pages). */
 export function placeholderNewsPublicPath(): string {
   const base = import.meta.env.BASE_URL ?? '/';
