@@ -51,17 +51,24 @@ fetchMediaJsonForPostsFile() {
   local outDir="$2"
   local baseName="$3"
   local iter=1
+  # One jq expression, no line breaks; bracket keys for sizes. Assign in shell so // is never split by continuations.
+  local media_jq='{id: .id, url: (.media_details.sizes["medium"].source_url // .media_details.sizes["medium_large"].source_url // .media_details.sizes["large"].source_url // .media_details.sizes["full"].source_url // .source_url // "")}'
+  local jqerr
   while IFS= read -r url; do
     [[ -z "${url}" || "${url}" == "null" ]] && continue
     echo "${url}"
-    # jq // must stay on one line: multi-line single-quoted strings break parsing in some shells/CI.
-    curl -s "${url}" \
+    local out="./${outDir}/${baseName}-${iter}.json"
+    jqerr=$(mktemp)
+    if ! curl -s "${url}" \
       -H 'Accept: application/json' \
       -H 'Content-Type: application/json' |
-      jq '{id: .id, url: (."media_details".sizes.medium.source_url // ."media_details".sizes.medium_large.source_url // ."media_details".sizes.large.source_url // ."media_details".sizes.full.source_url // .source_url // "")}' \
-        >"./${outDir}/${baseName}-${iter}.json" || true
+      jq "${media_jq}" >"${out}" 2>"${jqerr}"; then
+      echo "warning: jq/curl failed for ${url}: $(tr '\n' ' ' <"${jqerr}")" >&2
+      jq -n '{id: null, url: ""}' >"${out}"
+    fi
+    rm -f "${jqerr}"
     ((iter += 1)) || true
-  done < <(jq -r '.[] | ._links."wp:featuredmedia"[0].href // empty' "${inputPath}")
+  done < <(jq -r '.[] | ._links["wp:featuredmedia"][0].href // empty' "${inputPath}")
 }
 
 # Infer file extension from URL path (strip query string); default jpg if unknown.
