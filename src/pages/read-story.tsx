@@ -1,44 +1,43 @@
-import storyPagesUrl from '@assets/cached/story-pages.json?url';
+/**
+ * Full article view for a single story, driven entirely by `story-pages.json`.
+ *
+ * That index is built in CI (after posts + categories + image URLs) by
+ * `cachescripts/build-story-pages-index.sh`. Importing it statically means:
+ * - No runtime `fetch()` to the publisher domain for story metadata (CORS-safe).
+ * - Whatever was in the JSON at `vite build` time is what users see until the
+ *   next deploy.
+ *
+ * Hero image: `story.imageUrl` is often an absolute CDN URL. Using it in
+ * `<img src="...">` is not a CORS request (unlike `fetch`), so remote URLs work
+ * without downloading binaries into the repo when `LOCALIZE_IMAGE_ASSETS=0`.
+ */
+import rawStoryPages from '@assets/cached/story-pages.json';
 import PageHeader from '@components/page-header';
-import Spinner from '@components/spinner';
 import { usePageSeo } from '@hooks/use-page-seo';
 import { handleNewsImageLoadError, resolveImageUrl } from '@utils/formatters';
-import { useEffect, useMemo, useState } from 'preact/hooks';
+import { useMemo } from 'preact/hooks';
 import { Link, useParams } from 'react-router-dom';
 import type { StoryPage } from 'types/wp-api';
 
-async function fetchStoryPages(signal: AbortSignal): Promise<StoryPage[]> {
-  const response = await fetch(storyPagesUrl, { signal });
-  if (!response.ok) throw new Error('Unable to load story index');
-  return (await response.json()) as StoryPage[];
-}
+/** Parsed once at module load; large file but avoids async loading and empty states. */
+const STORY_PAGES = rawStoryPages as StoryPage[];
 
 function ReadStory() {
   const { id } = useParams();
-  const [rows, setRows] = useState<StoryPage[] | null>(null);
-  const [loadError, setLoadError] = useState<string | null>(null);
-  const [reloadKey, setReloadKey] = useState(0);
-
-  useEffect(() => {
-    const controller = new AbortController();
-    setRows(null);
-    setLoadError(null);
-    void fetchStoryPages(controller.signal)
-      .then((data) => setRows(data))
-      .catch(() => setLoadError('Story is not available at the moment.'));
-    return () => controller.abort();
-  }, [reloadKey]);
 
   const story = useMemo(
-    () => rows?.find((row) => String(row.id) === String(id)),
-    [id, rows],
+    () => STORY_PAGES.find((row) => String(row.id) === String(id)),
+    [id],
   );
 
+  /**
+   * Lightweight “related” rail: overlap on human-readable category names, not WP ids.
+   * Higher score = more shared labels; we show the top three after sorting.
+   */
   const relatedStories = useMemo(() => {
-    if (!rows || !story) return [];
+    if (!story) return [];
     const storyCats = new Set(story.categoryNames);
-    return rows
-      .filter((row) => row.id !== story.id)
+    return STORY_PAGES.filter((row) => row.id !== story.id)
       .map((row) => ({
         row,
         score: row.categoryNames.reduce(
@@ -50,7 +49,7 @@ function ReadStory() {
       .sort((a, b) => b.score - a.score)
       .slice(0, 3)
       .map((item) => item.row);
-  }, [rows, story]);
+  }, [story]);
 
   usePageSeo({
     title: story ? `${story.title} | The Standard Feed` : 'Story | The Standard Feed',
@@ -62,31 +61,16 @@ function ReadStory() {
       : 'https://topkoong.github.io/fetch-the-standard-news/read',
   });
 
-  if (!rows && !loadError) {
-    return (
-      <section className='min-h-[50vh] spinner-container py-24' aria-busy='true'>
-        <Spinner />
-      </section>
-    );
-  }
-
-  if (loadError || !story) {
-    const unavailableMessage = loadError
-      ? 'We could not load this article right now. Please retry or open another desk.'
-      : 'This story was not found in the current build snapshot.';
+  /* Route id does not match any row in the current bundle (stale link or typo). */
+  if (!story) {
     return (
       <article className='max-w-5xl mx-auto px-4 sm:px-6 py-10 text-white'>
         <PageHeader title='Story unavailable' />
         <div className='surface-panel p-6 text-center'>
-          <p className='text-white/90'>{unavailableMessage}</p>
+          <p className='text-white/90'>
+            This story was not found in the current build snapshot.
+          </p>
           <div className='mt-4 flex flex-wrap justify-center gap-3'>
-            <button
-              type='button'
-              className='btn-primary no-underline inline-flex items-center justify-center'
-              onClick={() => setReloadKey((value) => value + 1)}
-            >
-              <span className='btn-secondary'>Retry story</span>
-            </button>
             <Link
               to='/posts/categories/39'
               state={{ category: 'News' }}

@@ -1,3 +1,12 @@
+/**
+ * Loads the WP media-id → image URL table used by category grids (`Posts` page).
+ *
+ * We use `import ... ?url` so Vite emits a separate chunk; `fetch()` then loads it
+ * from the **deployed origin** (GitHub Pages), not from thestandard.co. That keeps
+ * bundle size down (desktop vs mobile variants) while staying CORS-safe.
+ *
+ * Until `fetch` completes, `imagesReady` is false so callers can show a skeleton.
+ */
 import desktopImagesUrl from '@assets/cached/images.json?url';
 import mobileImagesUrl from '@assets/cached/mobile-images.json?url';
 import { resolveImageUrl } from '@utils/formatters';
@@ -16,7 +25,6 @@ async function fetchJson<T>(url: string, signal: AbortSignal): Promise<T> {
   return (await response.json()) as T;
 }
 
-/** Lazy-loads desktop or mobile image JSON so category pages avoid bundling both. */
 export function useCachedImageBundle(isMobile: boolean) {
   const [rows, setRows] = useState<CachedImageRow[] | null>(null);
 
