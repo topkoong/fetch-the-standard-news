@@ -4,4 +4,5 @@ export const THE_STANDARD_CATEGORIES_ENDPOINT = `${THE_STANDARD_HOSTNAME}/wp-jso
 export const PAGE_SIZE = 8;
 export const REFETCH_INTERVAL = 1000 * 60 * 5;
 
+export * from './hero.constants';
 export * from './navbar-layout.constants';

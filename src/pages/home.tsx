@@ -1,8 +1,15 @@
 import fetchCategories from '@apis/categories';
 import fetchPosts from '@apis/posts';
+import placeholderImage from '@assets/images/placeholder.png';
+import { HeroSection } from '@components/HeroSection';
 import HomeSkeleton from '@components/home-skeleton';
 import Spinner from '@components/spinner';
-import { REFETCH_INTERVAL } from '@constants/index';
+import {
+  HERO_FALLBACK_ARTICLE_TITLE,
+  HERO_FALLBACK_CATEGORY_LABEL,
+  REFETCH_INTERVAL,
+  THE_STANDARD_HOSTNAME,
+} from '@constants/index';
 import { TOPIC_DEFINITIONS } from '@constants/topics';
 import useBreakpoints from '@hooks/use-breakpoints';
 import { useCachedFeedBootstrap } from '@hooks/use-cached-feed-bootstrap';
@@ -12,6 +19,7 @@ import { lazy } from 'preact/compat';
 import { useMemo } from 'preact/hooks';
 import { useQuery } from 'react-query';
 import { Link } from 'react-router-dom';
+import type { HeroFeaturedArticle } from 'types/hero.types';
 import type { WpPost } from 'types/wp-api';
 
 const PageBreak = lazy(() => import('@components/page-break'));
@@ -31,6 +39,13 @@ interface CategorySection {
 interface StatCard {
   label: string;
   value: string;
+}
+
+function stripRenderedMarkup(raw: string): string {
+  return raw
+    .replace(/<[^>]*>/g, '')
+    .replace(/&nbsp;/g, ' ')
+    .trim();
 }
 
 function errorMessage(err: unknown): string {
@@ -165,13 +180,43 @@ function Home() {
     'Accessible, mobile-friendly reading experience.',
   ];
 
+  const heroFeaturedArticle = useMemo((): HeroFeaturedArticle | null => {
+    if (!cacheReady || !postData?.[0]) {
+      return null;
+    }
+    const post = postData[0];
+    const titlePlain = stripRenderedMarkup(post.title?.rendered ?? '');
+    const link = post.link ?? THE_STANDARD_HOSTNAME;
+    const resolvedImage =
+      post.imageUrl ??
+      (post.featured_media !== undefined && post.featured_media !== null
+        ? imageUrlById.get(post.featured_media)
+        : undefined) ??
+      placeholderImage;
+    const firstCategoryId = post.categories?.[0];
+    const categoryLabel =
+      firstCategoryId !== undefined
+        ? nonThaiCategoryIdToName[String(firstCategoryId)] ?? HERO_FALLBACK_CATEGORY_LABEL
+        : HERO_FALLBACK_CATEGORY_LABEL;
+    return {
+      title: titlePlain || HERO_FALLBACK_ARTICLE_TITLE,
+      link,
+      image: resolvedImage,
+      category: categoryLabel,
+    };
+  }, [cacheReady, imageUrlById, nonThaiCategoryIdToName, postData]);
+
   const showInitialShell = !cacheReady;
   const showQuerySpinner =
     cacheReady && (postStatus === 'loading' || categoryStatus === 'loading');
 
   return (
     <article className='w-full min-h-[60vh] pb-10'>
-      <PageHeader title='Toppy × The Standard News' />
+      {heroFeaturedArticle ? <HeroSection featuredArticle={heroFeaturedArticle} /> : null}
+      <PageHeader
+        title='Toppy × The Standard News'
+        isPrimaryHeading={heroFeaturedArticle === null}
+      />
       <section className='max-w-6xl mx-auto px-4 sm:px-6'>
         <h2 className='sr-only'>Your daily trusted briefing</h2>
         <div className='surface-panel p-5 sm:p-6 md:p-8'>
