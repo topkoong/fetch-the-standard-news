@@ -4,7 +4,6 @@ import {
   NEWS_CARD_BODY_PADDING_FEATURE_CLASS,
   NEWS_CARD_BODY_PADDING_STANDARD_CLASS,
   NEWS_CARD_CATEGORY_CLASS,
-  NEWS_CARD_DISCOVER_LINK_CLASS,
   NEWS_CARD_DISCOVER_LINK_LABEL,
   NEWS_CARD_EXCERPT_CLASS,
   NEWS_CARD_EXTERNAL_REL,
@@ -13,8 +12,10 @@ import {
   NEWS_CARD_IMAGE_CLASS,
   NEWS_CARD_IMAGE_WRAPPER_FEATURE_CLASS,
   NEWS_CARD_IMAGE_WRAPPER_STANDARD_CLASS,
-  NEWS_CARD_PUBLISHER_ANCHOR_CLASS,
   NEWS_CARD_PUBLISHER_LINK_LABEL,
+  NEWS_CARD_READ_NOW_BUTTON_CLASS,
+  NEWS_CARD_READ_NOW_LABEL,
+  NEWS_CARD_SECONDARY_FOOTER_LINK_CLASS,
   NEWS_CARD_TITLE_FEATURE_CLASS,
   NEWS_CARD_TITLE_STANDARD_CLASS,
   ROUTE_PATH_NEWS_DESK_FALLBACK,
@@ -112,6 +113,9 @@ export function NewsCard({
           <div className={bodyPaddingClass}>
             <span className={NEWS_CARD_CATEGORY_CLASS}>{categoryLabel}</span>
             <h2 className={titleClass}>{title}</h2>
+            <span className={`mt-3 ${NEWS_CARD_READ_NOW_BUTTON_CLASS}`}>
+              {NEWS_CARD_READ_NOW_LABEL}
+            </span>
           </div>
         </Link>
         {excerpt ? <p className={NEWS_CARD_EXCERPT_CLASS}>{excerpt}</p> : null}
@@ -121,7 +125,7 @@ export function NewsCard({
               href={externalUrl}
               target='_blank'
               rel={NEWS_CARD_EXTERNAL_REL}
-              className={NEWS_CARD_PUBLISHER_ANCHOR_CLASS}
+              className={NEWS_CARD_SECONDARY_FOOTER_LINK_CLASS}
               aria-label={`${NEWS_CARD_PUBLISHER_LINK_LABEL}: ${title}`}
             >
               {NEWS_CARD_PUBLISHER_LINK_LABEL}
@@ -130,7 +134,7 @@ export function NewsCard({
             <Link
               to={ROUTE_PATH_NEWS_DESK_FALLBACK}
               state={{ category: ROUTE_STATE_NEWS_DESK_CATEGORY }}
-              className={NEWS_CARD_DISCOVER_LINK_CLASS}
+              className={NEWS_CARD_SECONDARY_FOOTER_LINK_CLASS}
             >
               {NEWS_CARD_DISCOVER_LINK_LABEL}
             </Link>
