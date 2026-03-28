@@ -19,6 +19,8 @@
 #                      (each page is up to `queryPerPage` posts, default 100).
 #                      Default when unset: **all** pages reported by `X-WP-TotalPages`.
 #                      Use e.g. `POST_FETCH_PAGES=3` for a fast partial refresh.
+#   GitHub deploy workflow: leave repository variable POST_FETCH_PAGES **unset** so the
+#   job uses committed posts.json; set it only when you intentionally refresh from the API.
 #
 # Flow:
 #   1. HEAD-like request via curl -sSI on page 1 to read X-WP-Total / X-WP-TotalPages.
@@ -85,12 +87,32 @@ fetchPostPages() {
 
   echo "Fetching pages 1..${maxPage} (set POST_FETCH_PAGES or POST_FETCH_PAGES=all to change)"
   local count
+  local tmp http_code
   for ((count = 1; count <= maxPage; count++)); do
     echo "Fetching page: $count"
-    curl -s "${postsBaseUrl}?page=${count}&${querySuffix}" \
-      -H 'Accept: application/json' \
-      -H 'Content-Type: application/json' |
-      jq '.' >"./${postsDir}/${postFilename}-${count}.json"
+    tmp="$(mktemp)"
+    http_code="$(
+      curl -sS -w '%{http_code}' -o "$tmp" \
+        "${postsBaseUrl}?page=${count}&${querySuffix}" \
+        -H 'Accept: application/json' \
+        -H 'Content-Type: application/json'
+    )"
+    if [ "$http_code" != "200" ]; then
+      echo "error: page ${count} HTTP ${http_code} body (first 240 bytes):" >&2
+      head -c 240 "$tmp" | cat -v >&2 || true
+      echo >&2
+      rm -f "$tmp"
+      exit 1
+    fi
+    if ! jq -e . "$tmp" >/dev/null 2>&1; then
+      echo "error: page ${count} is not valid JSON (first 240 bytes):" >&2
+      head -c 240 "$tmp" | cat -v >&2 || true
+      echo >&2
+      rm -f "$tmp"
+      exit 1
+    fi
+    jq '.' "$tmp" >"./${postsDir}/${postFilename}-${count}.json"
+    rm -f "$tmp"
   done
 
   # Record what we actually pulled (for CI logs and debugging stale caches).
