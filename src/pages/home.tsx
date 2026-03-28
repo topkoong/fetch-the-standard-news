@@ -252,6 +252,34 @@ function Home() {
         </div>
         <section className='mt-5 surface-panel p-4 sm:p-5'>
           <h3 className='text-white text-lg sm:text-xl font-extrabold'>
+            Editorial pages
+          </h3>
+          <p className='mt-2 text-white/90 text-sm sm:text-base'>
+            Understand the product, how syncing works, and which desks map to each hub.
+          </p>
+          <div className='mt-3 flex flex-wrap gap-2'>
+            <Link
+              to='/about'
+              className='rounded-full border border-white/40 px-3 py-1 text-white text-xs sm:text-sm no-underline hover:bg-white/20'
+            >
+              About this feed
+            </Link>
+            <Link
+              to='/methodology'
+              className='rounded-full border border-white/40 px-3 py-1 text-white text-xs sm:text-sm no-underline hover:bg-white/20'
+            >
+              Methodology
+            </Link>
+            <Link
+              to='/coverage'
+              className='rounded-full border border-white/40 px-3 py-1 text-white text-xs sm:text-sm no-underline hover:bg-white/20'
+            >
+              Coverage map
+            </Link>
+          </div>
+        </section>
+        <section className='mt-5 surface-panel p-4 sm:p-5'>
+          <h3 className='text-white text-lg sm:text-xl font-extrabold'>
             Topic landing pages
           </h3>
           <p className='mt-2 text-white/90 text-sm sm:text-base'>
