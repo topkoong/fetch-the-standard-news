@@ -1,10 +1,29 @@
 #!/usr/bin/env bash
 #
-# Build images.json / mobile-images.json from cached posts (featured media → medium URL).
-# Run after fetch-the-standard-posts.sh. Requires: bash, curl, jq. Run from repo root.
+# fetch-image-urls.sh
+# ====================
+# Builds **id → image URL** maps for featured media referenced by cached posts.
+# Must run **after** fetch-the-standard-posts.sh (reads src/assets/cached/posts.json
+# and mobile-posts.json).
+#
+# Two parallel pipelines:
+#   - **Desktop**: full posts.json → many per-media JSON files → merged images.json
+#   - **Mobile**: mobile-posts.json (subset) → merged mobile-images.json
+#
+# For each post, the script reads `_links["wp:featuredmedia"][0].href` and curls that
+# **media** endpoint (not the binary file yet). From the JSON it prefers, in order:
+#   medium → medium_large → large → full → source_url
+#
+# Localization (default ON):
+#   When LOCALIZE_IMAGE_ASSETS=1, each URL is downloaded to public/cached-media/<id>.<ext>.
+#   The response **Content-Type** must start with `image/`; otherwise the file is removed
+#   and the remote URL is kept in JSON so broken HTML/error pages are not shipped as images.
+#
 # Environment:
-#   LOCALIZE_IMAGE_ASSETS=1 (default) downloads images to public/cached-media and stores local URLs.
-#   Set LOCALIZE_IMAGE_ASSETS=0 to keep remote CDN URLs in JSON.
+#   LOCALIZE_IMAGE_ASSETS — 1 (default) or 0. See readme “Cache scripts” section.
+#
+# Prerequisites: bash, curl, jq, awk. Run from repository root.
+#
 set -euo pipefail
 
 shopt -s nullglob
@@ -26,6 +45,7 @@ localizeImageAssets="${LOCALIZE_IMAGE_ASSETS:-1}"
 
 mkdir -p "${imagesDir}" "${mobileImagesDir}" "${outputDir}" "${mobileOutputDir}" "${cachedDir}" "${publicMediaDir}"
 
+# For each featured-media REST URL in the posts file, fetch JSON and extract {id, url}.
 fetchMediaJsonForPostsFile() {
   local inputPath="$1"
   local outDir="$2"
@@ -51,6 +71,7 @@ fetchMediaJsonForPostsFile() {
   done < <(jq -r '.[] | ._links."wp:featuredmedia"[0].href // empty' "${inputPath}")
 }
 
+# Infer file extension from URL path (strip query string); default jpg if unknown.
 getFileExt() {
   local url="$1"
   local clean="${url%%\?*}"
@@ -62,6 +83,8 @@ getFileExt() {
   fi
 }
 
+# Rewrite images.json in place: replace remote URLs with cached-media/ paths when a
+# valid image file exists on disk after download.
 localizeImagesFile() {
   local inputJson="$1"
   local outputJson="$2"
@@ -75,6 +98,7 @@ localizeImagesFile() {
     ext=$(getFileExt "${remoteUrl}")
     local localFilename="${id}.${ext}"
     local localPath="${publicMediaDir}/${localFilename}"
+    # Path relative to site root as stored in JSON (Vite public/ is served at /).
     local localUrl="cached-media/${localFilename}"
     if [ ! -f "${localPath}" ]; then
       local headersPath="${localPath}.headers"

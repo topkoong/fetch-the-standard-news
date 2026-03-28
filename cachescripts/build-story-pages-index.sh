@@ -1,7 +1,27 @@
 #!/usr/bin/env bash
 #
-# Build a structured story index for internal reading pages.
-# Requires: bash, jq. Run from repository root after fetching posts/categories/images.
+# build-story-pages-index.sh
+# ===========================
+# Compiles **story-pages.json**: a denormalized list of objects for the internal
+# reader route (/read/:id). Each entry is self-contained so the UI does not need
+# live WordPress calls for title, body, categories, hero image, or canonical link.
+#
+# Inputs (must already exist under src/assets/cached/):
+#   - posts.json      — from fetch-the-standard-posts.sh
+#   - categories.json — from fetch-the-standard-categories.sh
+#   - images.json     — from fetch-image-urls.sh (featured_media id → url)
+#
+# Output:
+#   - src/assets/cached/story-pages.json — JSON array consumed by read-story.tsx
+#
+# The heavy lifting is one **jq** program that:
+#   1. Builds a map categoryId → category name from categories.json.
+#   2. Builds a map mediaId → image URL from images.json.
+#   3. Maps each post to { id, title, excerpt, contentHtml, date, categoryNames,
+#      imageUrl, sourceUrl } with HTML stripped from title/excerpt for safe plain text.
+#
+# Prerequisites: bash, jq. Run from repository root **after** the three fetch scripts.
+#
 set -euo pipefail
 
 cachedDir="src/assets/cached"
@@ -21,6 +41,7 @@ jq -n \
   --slurpfile categories "${categoriesJson}" \
   --slurpfile images "${imagesJson}" \
   '
+  # Remove simple HTML tags and normalize whitespace for excerpt/title display.
   def stripHtml:
     gsub("<[^>]*>"; " ")
     | gsub("&nbsp;"; " ")
@@ -28,10 +49,12 @@ jq -n \
     | sub("^\\s+"; "")
     | sub("\\s+$"; "");
 
+  # { "12": "Business", ... } from categories array
   def categoryNameMap:
     ($categories[0] // [])
     | reduce .[] as $c ({}; . + { (($c.id|tostring)): ($c.name // "") });
 
+  # { "456": "https://...", ... } from images array (id matches post.featured_media)
   def imageMap:
     ($images[0] // [])
     | reduce .[] as $img ({}; . + { (($img.id|tostring)): ($img.url // "") });
@@ -43,6 +66,7 @@ jq -n \
       id: .id,
       title: ((.title.rendered // "Untitled") | stripHtml),
       excerpt: ((.excerpt.rendered // "") | stripHtml),
+      # Prefer full content; fall back to excerpt HTML if content missing.
       contentHtml: (.content.rendered // .excerpt.rendered // ""),
       date: .date,
       categoryNames: (
