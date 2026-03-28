@@ -7,3 +7,4 @@ export const REFETCH_INTERVAL = 1000 * 60 * 5;
 export * from './hero.constants';
 export * from './navbar-layout.constants';
 export * from './news-card.constants';
+export * from './seo.constants';

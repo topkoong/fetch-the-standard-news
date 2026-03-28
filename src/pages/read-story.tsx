@@ -13,7 +13,8 @@
  */
 import rawStoryPages from '@assets/cached/story-pages.json';
 import PageHeader from '@components/page-header';
-import { usePageSeo } from '@hooks/use-page-seo';
+import { PUBLIC_SITE_URL } from '@constants/index';
+import { absoluteUrlForOpenGraph, usePageSeo } from '@hooks/use-page-seo';
 import {
   handleNewsImageLoadError,
   publisherImageReferrerProps,
@@ -60,9 +61,14 @@ function ReadStory() {
     description:
       story?.excerpt ||
       'Read the full story and explore related coverage on The Standard Feed.',
-    url: story
-      ? `https://topkoong.github.io/fetch-the-standard-news/read/${story.id}`
-      : 'https://topkoong.github.io/fetch-the-standard-news/read',
+    url: story ? `${PUBLIC_SITE_URL}/read/${story.id}` : `${PUBLIC_SITE_URL}/read`,
+    canonicalUrl: story
+      ? `${PUBLIC_SITE_URL}/read/${story.id}`
+      : `${PUBLIC_SITE_URL}/read`,
+    image: story?.imageUrl
+      ? absoluteUrlForOpenGraph(resolveImageUrl(story.imageUrl))
+      : undefined,
+    ogType: story ? 'article' : 'website',
   });
 
   /* Route id does not match any row in the current bundle (stale link or typo). */

@@ -2,6 +2,7 @@ import fetchCategories from '@apis/categories';
 import fetchPosts from '@apis/posts';
 import { CategoryChips } from '@components/CategoryChips';
 import { EditorialBenefitsSection } from '@components/EditorialBenefitsSection';
+import { EmptyStatePanel } from '@components/empty-state-panel';
 import { HeroSection } from '@components/HeroSection';
 import HomeSkeleton from '@components/home-skeleton';
 import Spinner from '@components/spinner';
@@ -9,6 +10,7 @@ import {
   HERO_FALLBACK_ARTICLE_TITLE,
   HERO_FALLBACK_CATEGORY_LABEL,
   NEWS_CARD_FALLBACK_CATEGORY_LABEL,
+  PUBLIC_SITE_URL,
   REFETCH_INTERVAL,
   THE_STANDARD_HOSTNAME,
 } from '@constants/index';
@@ -61,13 +63,6 @@ function errorMessage(err: unknown): string {
 }
 
 function Home() {
-  usePageSeo({
-    title: 'The Standard Feed | High-signal daily reading dashboard',
-    description:
-      'High-signal daily reading dashboard with topic desks, internal story pages, and fast category navigation.',
-    url: 'https://topkoong.github.io/fetch-the-standard-news',
-  });
-
   const { isXs, isSm, isMd, isLg, isXl } = useBreakpoints();
   const isMobile = isXs || isSm;
   const { cacheReady, imageUrlById } = useCachedFeedBootstrap(isMobile);
@@ -205,6 +200,16 @@ function Home() {
       category: categoryLabel,
     };
   }, [cacheReady, imageUrlById, nonThaiCategoryIdToName, postData]);
+
+  usePageSeo({
+    title: 'The Standard Feed | High-signal daily reading dashboard',
+    description:
+      'High-signal daily reading dashboard with topic desks, internal story pages, and fast category navigation.',
+    url: PUBLIC_SITE_URL,
+    canonicalUrl: PUBLIC_SITE_URL,
+    image: heroFeaturedArticle?.image,
+    ogType: 'website',
+  });
 
   const showInitialShell = !cacheReady;
   const showQuerySpinner =
@@ -370,44 +375,35 @@ function Home() {
           <Spinner />
         </div>
       ) : postError || categoryError ? (
-        <div
-          className='mx-6 my-8 rounded-xl border-2 border-white/30 bg-white/10 px-6 py-5 text-white shadow-md'
+        <EmptyStatePanel
+          title='Something went wrong'
+          description={[postError, categoryError]
+            .filter(Boolean)
+            .map((e) => errorMessage(e))
+            .join(' · ')}
           role='alert'
+          variant='emphasis'
         >
-          <p className='font-semibold uppercase tracking-wide text-sm opacity-90'>
-            Something went wrong
-          </p>
-          <p className='mt-2 text-lg'>
-            {[postError, categoryError]
-              .filter(Boolean)
-              .map((e) => errorMessage(e))
-              .join(' · ')}
-          </p>
-          <div className='mt-4'>
-            <button
-              type='button'
-              className='btn-primary'
-              onClick={() => {
-                void refetchPosts();
-                void refetchCategories();
-              }}
-            >
-              <span className='btn-secondary'>Retry sync</span>
-            </button>
-          </div>
-        </div>
+          <button
+            type='button'
+            className='btn-primary'
+            onClick={() => {
+              void refetchPosts();
+              void refetchCategories();
+            }}
+          >
+            <span className='btn-secondary'>Retry sync</span>
+          </button>
+        </EmptyStatePanel>
       ) : (
         <ul className='px-3 sm:px-6 h-full max-w-[1600px] mx-auto'>
           {sectionsWithImages.length === 0 ? (
-            <li className='my-10 rounded-xl border-2 border-white/30 bg-white/10 p-6 text-center text-white'>
-              <h3 className='text-xl font-extrabold uppercase tracking-wide'>
-                No stories available yet
-              </h3>
-              <p className='mt-2 text-white/90'>
-                We are syncing updates from the source. Try again shortly or jump to a
-                desk directly.
-              </p>
-              <div className='mt-4 flex justify-center gap-3 flex-wrap'>
+            <li className='block w-full list-none'>
+              <EmptyStatePanel
+                title='No stories available yet'
+                description='We are syncing updates from the source. Try again shortly or jump to a desk directly.'
+                headingLevel='h3'
+              >
                 <Link
                   to='/posts/categories/39'
                   state={{ category: 'News' }}
@@ -422,7 +418,7 @@ function Home() {
                 >
                   Open world desk
                 </Link>
-              </div>
+              </EmptyStatePanel>
             </li>
           ) : (
             sectionsWithImages.map(({ categoryName, posts }, idx) => (

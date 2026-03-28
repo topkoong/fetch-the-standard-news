@@ -1,15 +1,17 @@
 import PageHeader from '@components/page-header';
+import { PUBLIC_SITE_URL } from '@constants/index';
 import { usePageSeo } from '@hooks/use-page-seo';
 import { Link } from 'react-router-dom';
 
-const SITE_ORIGIN = 'https://topkoong.github.io/fetch-the-standard-news';
-
 function Methodology() {
+  const canonical = `${PUBLIC_SITE_URL}/methodology`;
   usePageSeo({
     title: 'Methodology | The Standard Feed',
     description:
       'How The Standard Feed pulls WordPress content, caches assets in CI, and serves internal story pages with predictable deploy snapshots.',
-    url: `${SITE_ORIGIN}/methodology`,
+    url: canonical,
+    canonicalUrl: canonical,
+    ogType: 'website',
   });
 
   return (
