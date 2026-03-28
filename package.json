@@ -23,8 +23,6 @@
   "scripts": {
     "prepare": "husky",
     "dev": "vite",
-    "fetch": "node scripts/fetch-content.mjs",
-    "prebuild": "node scripts/fetch-content.mjs",
     "build": "tsc && vite build",
     "preview": "vite preview",
     "lint:fix": "eslint ./src --ext .jsx,.js,.ts,.tsx --fix --ignore-pattern \"**/*.d.ts\"",
@@ -50,7 +48,6 @@
     "@tailwindcss/vite": "4.2.2",
     "@typescript-eslint/eslint-plugin": "8.57.2",
     "@typescript-eslint/parser": "8.57.2",
-    "axios": "1.13.6",
     "eslint": "10.1.0",
     "eslint-config-preact": "2.0.0",
     "eslint-config-prettier": "10.1.8",

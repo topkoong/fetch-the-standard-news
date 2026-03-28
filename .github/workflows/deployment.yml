@@ -7,6 +7,9 @@ on:
 
   workflow_dispatch:
 
+permissions:
+  contents: write
+
 jobs:
   deployment:
     runs-on: ubuntu-latest
@@ -40,24 +43,26 @@ jobs:
       - name: Install jq for cache scripts
         run: sudo apt-get update && sudo apt-get install -y jq
 
-      - name: Refresh cached content assets
+      - name: Fetch posts
         env:
           POST_FETCH_PAGES: ${{ vars.POST_FETCH_PAGES }}
-          LOCALIZE_IMAGE_ASSETS: '1'
         run: |
-          # Do not default to fetching all WP post pages here: ~100+ pages/min × 1700+
-          # pages can exceed the job timeout and one HTML/rate-limit response breaks jq.
-          # Use committed src/assets/cached/posts.json unless the repo Actions variable
-          # POST_FETCH_PAGES is set (e.g. 5 for a quick refresh, or a larger cap).
-          if [ -n "${POST_FETCH_PAGES:-}" ]; then
-            echo "Refreshing posts from API (POST_FETCH_PAGES=${POST_FETCH_PAGES})"
-            bash cachescripts/fetch-the-standard-posts.sh
+          if [ -z "${POST_FETCH_PAGES:-}" ] && [ -f "src/assets/cached/posts.json" ]; then
+            echo "Skipping fetch-the-standard-posts.sh — using committed posts.json"
           else
-            echo "Skipping fetch-the-standard-posts.sh — using committed posts.json (set POST_FETCH_PAGES to enable)."
+            bash cachescripts/fetch-the-standard-posts.sh
           fi
-          bash cachescripts/fetch-the-standard-categories.sh
-          bash cachescripts/fetch-image-urls.sh
-          bash cachescripts/build-story-pages-index.sh
+
+      - name: Fetch categories
+        run: bash cachescripts/fetch-the-standard-categories.sh
+
+      - name: Fetch image URLs
+        env:
+          LOCALIZE_IMAGE_ASSETS: '0'
+        run: bash cachescripts/fetch-image-urls.sh
+
+      - name: Build story pages index
+        run: bash cachescripts/build-story-pages-index.sh
 
       - name: Lint
         run: pnpm lint
@@ -71,5 +76,5 @@ jobs:
       - name: Deploy to GitHub Pages
         uses: peaceiris/actions-gh-pages@v3
         with:
-          deploy_key: ${{ secrets.ACTIONS_DEPLOY_KEY }}
+          github_token: ${{ secrets.GITHUB_TOKEN }}
           publish_dir: ./dist

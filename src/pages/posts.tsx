@@ -1,10 +1,10 @@
+import allPostsJson from '@assets/cached/posts.json';
 import PostsPageSkeleton from '@components/posts-page-skeleton';
-import { PAGE_SIZE, THE_STANDARD_POSTS_ENDPOINT } from '@constants/index';
+import { PAGE_SIZE } from '@constants/index';
 import useBreakpoints from '@hooks/use-breakpoints';
 import { useCachedImageBundle } from '@hooks/use-cached-image-bundle';
 import { usePageSeo } from '@hooks/use-page-seo';
 import { resolveImageUrl } from '@utils/formatters';
-import axios from 'axios';
 import { Fragment } from 'preact';
 import { lazy } from 'preact/compat';
 import { useCallback, useEffect, useMemo, useState } from 'preact/hooks';
@@ -22,15 +22,11 @@ interface CategoryPostsPage {
   totalAvailable: number;
 }
 
-interface WpMediaResponse {
-  guid?: {
-    rendered?: string;
-  };
-}
-
 function hasCategoryState(state: unknown): state is LinkState {
   return Boolean(state) && typeof state === 'object';
 }
+
+const ALL_POSTS = allPostsJson as WpPost[];
 
 const PageBreak = lazy(() => import('@components/page-break'));
 const PageHeader = lazy(() => import('@components/page-header'));
@@ -57,57 +53,47 @@ function Posts() {
   const isMobile = isXs || isSm;
   const { imagesReady, imageUrlById } = useCachedImageBundle(isMobile);
 
+  const categoryIdNum = useMemo(() => {
+    if (!id) return NaN;
+    return Number.parseInt(id, 10);
+  }, [id]);
+
+  const postsForCategory = useMemo(() => {
+    if (!Number.isFinite(categoryIdNum)) return [];
+    return ALL_POSTS.filter((p) => p.categories?.includes(categoryIdNum)).sort((a, b) => {
+      const da = a.date ? Date.parse(a.date) : 0;
+      const db = b.date ? Date.parse(b.date) : 0;
+      return db - da;
+    });
+  }, [categoryIdNum]);
+
   const fetchCategoryPostsPage = useCallback(
     async ({
       pageParam,
-      signal,
     }: {
       pageParam?: number;
       signal?: AbortSignal;
     }): Promise<CategoryPostsPage> => {
       const offset = pageParam ?? 0;
-      const url = `${THE_STANDARD_POSTS_ENDPOINT}?categories=${id}&per_page=${PAGE_SIZE}&offset=${offset}&orderby=date&order=desc`;
-      const response = await axios.get<WpPost[]>(url, { signal });
-      const posts = response.data;
-      const totalHeader = response.headers['x-wp-total'];
-      const totalAvailable =
-        typeof totalHeader === 'string' ? Number.parseInt(totalHeader, 10) : 0;
-
-      const fallbackMediaHrefs = new Map<number, string>();
-      for (const post of posts) {
-        const mediaId = post.featured_media;
-        if (!mediaId || imageUrlById.has(mediaId)) continue;
-        const href = post._links?.['wp:featuredmedia']?.[0]?.href;
-        if (href) fallbackMediaHrefs.set(mediaId, href);
-      }
-
-      const fetchedMediaById = new Map<number, string | undefined>();
-      await Promise.all(
-        Array.from(fallbackMediaHrefs.entries()).map(async ([mediaId, href]) => {
-          const { data } = await axios.get<WpMediaResponse>(href, { signal });
-          fetchedMediaById.set(mediaId, data.guid?.rendered);
-        }),
-      );
-
-      const postsWithImage: WpPost[] = posts.map((post) => {
+      const slice = postsForCategory.slice(offset, offset + PAGE_SIZE);
+      const postsWithImage: WpPost[] = slice.map((post) => {
         const mediaId = post.featured_media;
         const raw =
           mediaId !== undefined && mediaId !== null && mediaId !== 0
-            ? imageUrlById.get(mediaId) ?? fetchedMediaById.get(mediaId) ?? ''
+            ? (imageUrlById.get(mediaId) ?? '')
             : '';
         return { ...post, imageUrl: resolveImageUrl(raw) };
       });
-
       return {
         posts: postsWithImage,
-        nextOffset: offset + posts.length,
-        totalAvailable: Number.isFinite(totalAvailable) ? totalAvailable : 0,
+        nextOffset: offset + slice.length,
+        totalAvailable: postsForCategory.length,
       };
     },
-    [id, imageUrlById],
+    [postsForCategory, imageUrlById],
   );
 
-  const queryEnabled = Boolean(id) && imagesReady;
+  const queryEnabled = Boolean(id) && imagesReady && Number.isFinite(categoryIdNum);
   const storageKey = id ? `category-visible-count-${id}` : null;
   const [restoreTargetCount, setRestoreTargetCount] = useState(PAGE_SIZE);
 
