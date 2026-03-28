@@ -1,0 +1,1 @@
+import{t as e}from"./jsxRuntime.module-CKKWO3Nq.js";function t({title:t,isPrimaryHeading:n=!0}){return e(n?`h1`:`h2`,{className:`page-title`,children:t})}export{t as default};
