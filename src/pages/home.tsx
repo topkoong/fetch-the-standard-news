@@ -7,6 +7,7 @@ import Spinner from '@components/spinner';
 import {
   HERO_FALLBACK_ARTICLE_TITLE,
   HERO_FALLBACK_CATEGORY_LABEL,
+  NEWS_CARD_FALLBACK_CATEGORY_LABEL,
   REFETCH_INTERVAL,
   THE_STANDARD_HOSTNAME,
 } from '@constants/index';
@@ -24,7 +25,7 @@ import type { WpPost } from 'types/wp-api';
 
 const PageBreak = lazy(() => import('@components/page-break'));
 const PageHeader = lazy(() => import('@components/page-header'));
-const Post = lazy(() => import('@components/post'));
+const NewsCard = lazy(() => import('@components/NewsCard'));
 const CategoryHeader = lazy(() => import('@components/category-header'));
 
 interface PostWithCategoryLabels extends Omit<WpPost, 'categories'> {
@@ -480,10 +481,30 @@ function Home() {
                   categoryIdToName={nonThaiCategoryIdToName}
                 />
                 <PageBreak />
-                <ul className='grid grid-cols-1 gap-5 sm:gap-6 md:gap-8 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 my-6 md:my-8'>
-                  {posts.slice(0, numberOfElementsToBeRendered).map((post) => (
-                    <Post key={post.id} post={post} group={idx} />
-                  ))}
+                <ul className='my-6 grid grid-cols-1 gap-4 md:my-8 md:grid-cols-3 md:gap-6'>
+                  {posts.slice(0, numberOfElementsToBeRendered).map((post, postIndex) => {
+                    const titlePlain =
+                      stripRenderedMarkup(post.title?.rendered ?? '') ||
+                      HERO_FALLBACK_ARTICLE_TITLE;
+                    const excerptPlain = stripRenderedMarkup(
+                      post.excerpt?.rendered ?? '',
+                    ).trim();
+                    const primaryCategory =
+                      post.categories[0] ?? NEWS_CARD_FALLBACK_CATEGORY_LABEL;
+                    return (
+                      <NewsCard
+                        key={post.id}
+                        title={titlePlain}
+                        imageUrl={post.imageUrl ?? placeholderImage}
+                        categoryLabel={primaryCategory}
+                        postId={post.id}
+                        excerpt={excerptPlain || undefined}
+                        externalUrl={post.link}
+                        featuredMediaId={post.featured_media}
+                        isFeature={postIndex === 0}
+                      />
+                    );
+                  })}
                 </ul>
               </li>
             ))
