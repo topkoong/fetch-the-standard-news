@@ -286,6 +286,12 @@ function Home() {
             Choose a curated topic page for focused context and guided navigation.
           </p>
           <div className='mt-3 flex flex-wrap gap-2'>
+            <Link
+              to='/topics'
+              className='rounded-full border border-white/60 bg-white/10 px-3 py-1 text-white text-xs sm:text-sm font-semibold no-underline hover:bg-white/20'
+            >
+              All topic hubs
+            </Link>
             {TOPIC_DEFINITIONS.map((topic) => (
               <Link
                 key={topic.slug}

@@ -89,6 +89,15 @@ function Navbar() {
           </li>
           <li>
             <Link
+              to='/topics'
+              onClick={close}
+              className='block rounded-lg px-3 py-2.5 text-xs sm:text-sm font-bold uppercase tracking-wide text-neutral-700 transition-colors hover:bg-neutral-200 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-neutral-500 lg:inline-block lg:py-2'
+            >
+              Topic hubs
+            </Link>
+          </li>
+          <li>
+            <Link
               to='/topics/business'
               onClick={close}
               className='block rounded-lg px-3 py-2.5 text-xs sm:text-sm font-bold uppercase tracking-wide text-neutral-700 transition-colors hover:bg-neutral-200 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-neutral-500 lg:inline-block lg:py-2'

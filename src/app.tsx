@@ -11,6 +11,7 @@ const Home = lazy(() => import('@pages/home'));
 const Posts = lazy(() => import('@pages/posts'));
 const ReadStory = lazy(() => import('@pages/read-story'));
 const TopicLanding = lazy(() => import('@pages/topic-landing'));
+const TopicsHub = lazy(() => import('@pages/topics-hub'));
 const About = lazy(() => import('@pages/about'));
 const Methodology = lazy(() => import('@pages/methodology'));
 const Coverage = lazy(() => import('@pages/coverage'));
@@ -70,6 +71,14 @@ function App() {
             element={
               <Suspense fallback={<Spinner />}>
                 <ReadStory />
+              </Suspense>
+            }
+          />
+          <Route
+            path='topics'
+            element={
+              <Suspense fallback={<Spinner />}>
+                <TopicsHub />
               </Suspense>
             }
           />
