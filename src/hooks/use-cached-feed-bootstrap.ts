@@ -1,3 +1,11 @@
+/**
+ * Home / global feed bootstrap: loads large JSON via same-origin URLs instead of
+ * static `import`, so the main bundle stays smaller. Fetched assets are still
+ * deployed with the site (hashed filenames), not loaded from thestandard.co.
+ *
+ * Writes into React Query (`allposts`, `allcategories`) and exposes `imageUrlById`
+ * for components that resolve featured media without hitting the WP API.
+ */
 import categoriesUrl from '@assets/cached/categories.json?url';
 import desktopImagesUrl from '@assets/cached/images.json?url';
 import mobileImagesUrl from '@assets/cached/mobile-images.json?url';
@@ -21,10 +29,7 @@ async function fetchJson<T>(url: string, signal: AbortSignal): Promise<T> {
   return (await response.json()) as T;
 }
 
-/**
- * Code-splits large cached JSON into async chunks, then hydrates React Query + image map.
- * Re-runs when `isMobile` changes so the correct posts/images bundle is used.
- */
+/** Re-runs when `isMobile` flips so mobile vs desktop post/image JSON variants apply. */
 export function useCachedFeedBootstrap(isMobile: boolean) {
   const queryClient = useQueryClient();
   const [ready, setReady] = useState(false);

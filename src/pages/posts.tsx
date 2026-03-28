@@ -1,3 +1,18 @@
+/**
+ * Category (“desk”) listing: paginated grid of posts for one WordPress category id.
+ *
+ * Data flow (all offline-friendly after build):
+ * 1. `posts.json` — full post list; we filter by `post.categories` containing the
+ *    numeric id from the URL (`/posts/categories/:id`).
+ * 2. `images.json` / `mobile-images.json` — maps `featured_media` id → image URL.
+ *    Loaded via `useCachedImageBundle` (same-origin `fetch` of a hashed chunk), not
+ *    the WP media API in the browser.
+ * 3. `useInfiniteQuery` slices the filtered array client-side for “load more” UX;
+ *    there is no second network round-trip per page.
+ *
+ * Session storage: remembers how many items the user had expanded so we can
+ * auto-fetch pages on return navigation (see effects below).
+ */
 import allPostsJson from '@assets/cached/posts.json';
 import PostsPageSkeleton from '@components/posts-page-skeleton';
 import { PAGE_SIZE } from '@constants/index';
@@ -12,13 +27,17 @@ import { useInfiniteQuery } from 'react-query';
 import { Link, useLocation, useParams } from 'react-router-dom';
 import type { WpPost } from 'types/wp-api';
 
+/** Optional label passed from `<Link state={{ category: 'News' }} />` for headings/SEO. */
 interface LinkState {
   category?: string;
 }
 
+/** One “page” of infinite query: slice metadata for react-query pagination. */
 interface CategoryPostsPage {
   posts: WpPost[];
+  /** Index immediately after the last item in `posts` within the full filtered list. */
   nextOffset: number;
+  /** Total posts in this category (before paging). */
   totalAvailable: number;
 }
 
@@ -51,6 +70,7 @@ function Posts() {
 
   const { isXs, isSm } = useBreakpoints();
   const isMobile = isXs || isSm;
+  /* Wait for the correct desktop/mobile image map before enabling the query. */
   const { imagesReady, imageUrlById } = useCachedImageBundle(isMobile);
 
   const categoryIdNum = useMemo(() => {
@@ -58,6 +78,7 @@ function Posts() {
     return Number.parseInt(id, 10);
   }, [id]);
 
+  /* Newest first, same mental model as the old `orderby=date&order=desc` API call. */
   const postsForCategory = useMemo(() => {
     if (!Number.isFinite(categoryIdNum)) return [];
     return ALL_POSTS.filter((p) => p.categories?.includes(categoryIdNum)).sort((a, b) => {
@@ -78,6 +99,7 @@ function Posts() {
       const slice = postsForCategory.slice(offset, offset + PAGE_SIZE);
       const postsWithImage: WpPost[] = slice.map((post) => {
         const mediaId = post.featured_media;
+        /* `images.json` rows are keyed by WP media id from the bash pipeline. */
         const raw =
           mediaId !== undefined && mediaId !== null && mediaId !== 0
             ? (imageUrlById.get(mediaId) ?? '')
@@ -120,6 +142,7 @@ function Posts() {
         ) {
           return undefined;
         }
+        /* Short final page means there is nothing left to request. */
         if (lastPage.posts.length < PAGE_SIZE) {
           return undefined;
         }
@@ -132,6 +155,7 @@ function Posts() {
   const flattenedPosts = useMemo(() => pages.flatMap((page) => page.posts), [pages]);
   const showSkeleton = !imagesReady || (isLoading && pages.length === 0);
 
+  /* On mount: if user previously loaded N items, remember N for auto-pagination below. */
   useEffect(() => {
     if (!storageKey) return;
     if (typeof window === 'undefined') return;
@@ -143,6 +167,7 @@ function Posts() {
     }
   }, [storageKey]);
 
+  /* Persist visible count whenever the list grows (manual “Show more” or restore). */
   useEffect(() => {
     if (!storageKey) return;
     if (typeof window === 'undefined') return;
@@ -150,6 +175,7 @@ function Posts() {
     window.sessionStorage.setItem(storageKey, String(flattenedPosts.length));
   }, [flattenedPosts.length, storageKey]);
 
+  /* Silently pull extra pages until we reach the saved count (e.g. back button). */
   useEffect(() => {
     if (!queryEnabled) return;
     if (!hasNextPage || isFetchingNextPage) return;
@@ -175,6 +201,7 @@ function Posts() {
       {showSkeleton ? (
         <PostsPageSkeleton />
       ) : error ? (
+        /* Rare: image JSON failed to load or query threw; data itself is local. */
         <section
           className='mx-3 sm:mx-6 my-10 rounded-xl border-2 border-white/30 bg-white/10 p-6 text-center text-white'
           role='alert'
@@ -199,6 +226,7 @@ function Posts() {
           </div>
         </section>
       ) : flattenedPosts.length === 0 ? (
+        /* Valid route but no posts in bundle tagged with this category id. */
         <section className='mx-3 sm:mx-6 my-10 rounded-xl border-2 border-white/30 bg-white/10 p-6 text-center text-white'>
           <h2 className='text-xl font-extrabold uppercase tracking-wide'>
             No stories found for this desk

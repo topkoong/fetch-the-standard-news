@@ -1,3 +1,16 @@
+/**
+ * Full article view for a single story, driven entirely by `story-pages.json`.
+ *
+ * That index is built in CI (after posts + categories + image URLs) by
+ * `cachescripts/build-story-pages-index.sh`. Importing it statically means:
+ * - No runtime `fetch()` to the publisher domain for story metadata (CORS-safe).
+ * - Whatever was in the JSON at `vite build` time is what users see until the
+ *   next deploy.
+ *
+ * Hero image: `story.imageUrl` is often an absolute CDN URL. Using it in
+ * `<img src="...">` is not a CORS request (unlike `fetch`), so remote URLs work
+ * without downloading binaries into the repo when `LOCALIZE_IMAGE_ASSETS=0`.
+ */
 import rawStoryPages from '@assets/cached/story-pages.json';
 import PageHeader from '@components/page-header';
 import { usePageSeo } from '@hooks/use-page-seo';
@@ -6,6 +19,7 @@ import { useMemo } from 'preact/hooks';
 import { Link, useParams } from 'react-router-dom';
 import type { StoryPage } from 'types/wp-api';
 
+/** Parsed once at module load; large file but avoids async loading and empty states. */
 const STORY_PAGES = rawStoryPages as StoryPage[];
 
 function ReadStory() {
@@ -16,6 +30,10 @@ function ReadStory() {
     [id],
   );
 
+  /**
+   * Lightweight “related” rail: overlap on human-readable category names, not WP ids.
+   * Higher score = more shared labels; we show the top three after sorting.
+   */
   const relatedStories = useMemo(() => {
     if (!story) return [];
     const storyCats = new Set(story.categoryNames);
@@ -43,6 +61,7 @@ function ReadStory() {
       : 'https://topkoong.github.io/fetch-the-standard-news/read',
   });
 
+  /* Route id does not match any row in the current bundle (stale link or typo). */
   if (!story) {
     return (
       <article className='max-w-5xl mx-auto px-4 sm:px-6 py-10 text-white'>
