@@ -48,13 +48,13 @@ Deliverable: add a deploy workflow step that runs `build-story-pages-index.sh` *
 Branch: `feat/topic-landing-pages`
 Commit: `feat(topics): add /topics/:categorySlug landing pages with unique copy and CTAs`
 
-**PR 16**
+**PR 16** ✅ (branch: `feat/plan-phase4-5-seo-empty-states`)
 Branch: `feat/page-meta`
 Commit: `feat(seo): add per-page title, description, and open graph metadata`
 
 ### Phase 5 PRs — Resilience
 
-**PR 17**
+**PR 17** ✅ (same branch as PR 16)
 Branch: `feat/empty-states`
 Commit: `feat(ux): add empty state modules for home and category views with recovery CTAs`
 

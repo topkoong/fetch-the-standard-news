@@ -14,8 +14,9 @@
  * auto-fetch pages on return navigation (see effects below).
  */
 import allPostsJson from '@assets/cached/posts.json';
+import { EmptyStatePanel } from '@components/empty-state-panel';
 import PostsPageSkeleton from '@components/posts-page-skeleton';
-import { PAGE_SIZE } from '@constants/index';
+import { PAGE_SIZE, PUBLIC_SITE_URL } from '@constants/index';
 import useBreakpoints from '@hooks/use-breakpoints';
 import { useCachedImageBundle } from '@hooks/use-cached-image-bundle';
 import { usePageSeo } from '@hooks/use-page-seo';
@@ -56,6 +57,10 @@ function Posts() {
   const { id } = useParams();
   const location = useLocation();
   const category = hasCategoryState(location.state) ? location.state.category : undefined;
+  /* One canonical/og:url per desk; `id` comes from the route so deep links share correctly. */
+  const postsCanonical = id
+    ? `${PUBLIC_SITE_URL}/posts/categories/${id}`
+    : `${PUBLIC_SITE_URL}/posts/categories`;
   usePageSeo({
     title: category
       ? `${category} stories | The Standard Feed`
@@ -63,9 +68,9 @@ function Posts() {
     description: category
       ? `Explore ${category} stories with curated context and fast load-more reading.`
       : 'Explore category stories with curated context and fast load-more reading.',
-    url: id
-      ? `https://topkoong.github.io/fetch-the-standard-news/posts/categories/${id}`
-      : 'https://topkoong.github.io/fetch-the-standard-news/posts/categories',
+    url: postsCanonical,
+    canonicalUrl: postsCanonical,
+    ogType: 'website',
   });
 
   const { isXs, isSm } = useBreakpoints();
@@ -201,56 +206,41 @@ function Posts() {
       {showSkeleton ? (
         <PostsPageSkeleton />
       ) : error ? (
-        /* Rare: image JSON failed to load or query threw; data itself is local. */
-        <section
-          className='mx-3 sm:mx-6 my-10 rounded-xl border-2 border-white/30 bg-white/10 p-6 text-center text-white'
+        <EmptyStatePanel
+          title='Unable to load this desk right now'
+          description='The source may be temporarily unavailable. Retry or open another desk.'
           role='alert'
         >
-          <h2 className='text-xl font-extrabold uppercase tracking-wide'>
-            Unable to load this desk right now
-          </h2>
-          <p className='mt-2 text-white/90'>
-            The source may be temporarily unavailable. Retry or open another desk.
-          </p>
-          <div className='mt-4 flex justify-center gap-3 flex-wrap'>
-            <button type='button' className='btn-primary' onClick={() => void refetch()}>
-              <span className='btn-secondary'>Retry desk</span>
-            </button>
-            <Link
-              to='/posts/categories/39'
-              state={{ category: 'News' }}
-              className='inline-flex items-center justify-center rounded-xl border-2 border-white/60 bg-white/10 px-5 py-3 text-white font-semibold uppercase tracking-wide text-sm no-underline hover:bg-white/20 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-white focus-visible:ring-offset-2 focus-visible:ring-offset-bright-blue'
-            >
-              Go to top stories
-            </Link>
-          </div>
-        </section>
+          <button type='button' className='btn-primary' onClick={() => void refetch()}>
+            <span className='btn-secondary'>Retry desk</span>
+          </button>
+          <Link
+            to='/posts/categories/39'
+            state={{ category: 'News' }}
+            className='inline-flex items-center justify-center rounded-xl border-2 border-white/60 bg-white/10 px-5 py-3 text-white font-semibold uppercase tracking-wide text-sm no-underline hover:bg-white/20 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-white focus-visible:ring-offset-2 focus-visible:ring-offset-bright-blue'
+          >
+            Go to top stories
+          </Link>
+        </EmptyStatePanel>
       ) : flattenedPosts.length === 0 ? (
-        /* Valid route but no posts in bundle tagged with this category id. */
-        <section className='mx-3 sm:mx-6 my-10 rounded-xl border-2 border-white/30 bg-white/10 p-6 text-center text-white'>
-          <h2 className='text-xl font-extrabold uppercase tracking-wide'>
-            No stories found for this desk
-          </h2>
-          <p className='mt-2 text-white/90'>
-            This category may be quiet at the moment. Explore another desk for fresh
-            updates.
-          </p>
-          <div className='mt-4 flex justify-center gap-3 flex-wrap'>
-            <Link
-              to='/posts/categories/39'
-              state={{ category: 'News' }}
-              className='btn-primary no-underline inline-flex items-center justify-center'
-            >
-              <span className='btn-secondary'>Go to top stories</span>
-            </Link>
-            <Link
-              to='/'
-              className='inline-flex items-center justify-center rounded-xl border-2 border-white/60 bg-white/10 px-5 py-3 text-white font-semibold uppercase tracking-wide text-sm no-underline hover:bg-white/20 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-white focus-visible:ring-offset-2 focus-visible:ring-offset-bright-blue'
-            >
-              Back to homepage
-            </Link>
-          </div>
-        </section>
+        <EmptyStatePanel
+          title='No stories found for this desk'
+          description='This category may be quiet at the moment. Explore another desk for fresh updates.'
+        >
+          <Link
+            to='/posts/categories/39'
+            state={{ category: 'News' }}
+            className='btn-primary no-underline inline-flex items-center justify-center'
+          >
+            <span className='btn-secondary'>Go to top stories</span>
+          </Link>
+          <Link
+            to='/'
+            className='inline-flex items-center justify-center rounded-xl border-2 border-white/60 bg-white/10 px-5 py-3 text-white font-semibold uppercase tracking-wide text-sm no-underline hover:bg-white/20 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-white focus-visible:ring-offset-2 focus-visible:ring-offset-bright-blue'
+          >
+            Back to homepage
+          </Link>
+        </EmptyStatePanel>
       ) : (
         <Fragment>
           <ul className='grid grid-cols-1 gap-5 sm:gap-6 md:gap-8 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 px-3 sm:px-6 h-full'>

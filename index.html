@@ -20,6 +20,19 @@
       property="og:url"
       content="https://topkoong.github.io/fetch-the-standard-news"
     />
+    <!--
+      Default social image for crawlers that do not execute JS. The SPA overwrites og:image /
+      twitter:image per route via src/hooks/use-page-seo.ts. Keep this URL aligned with
+      DEFAULT_OG_IMAGE_URL in src/constants/seo.constants.ts (same host, base path, file).
+    -->
+    <meta
+      property="og:image"
+      content="https://topkoong.github.io/fetch-the-standard-news/placeholder-news.jpg"
+    />
+    <meta
+      name="twitter:image"
+      content="https://topkoong.github.io/fetch-the-standard-news/placeholder-news.jpg"
+    />
     <meta name="twitter:card" content="summary" />
     <meta name="twitter:title" content="The Standard Feed - Trusted news, faster" />
     <meta

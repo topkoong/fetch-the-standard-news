@@ -1,3 +1,4 @@
+import { PUBLIC_SITE_URL } from '@constants/index';
 import { TOPIC_DEFINITIONS } from '@constants/topics';
 import { usePageSeo } from '@hooks/use-page-seo';
 import { Link, useParams } from 'react-router-dom';
@@ -6,15 +7,18 @@ function TopicLanding() {
   const { topic } = useParams();
   const definition = TOPIC_DEFINITIONS.find((item) => item.slug === topic);
 
+  const canonical = definition
+    ? `${PUBLIC_SITE_URL}/topics/${definition.slug}`
+    : `${PUBLIC_SITE_URL}/topics`;
   usePageSeo({
     title: definition
       ? `${definition.title} | The Standard Feed`
       : 'Topic | The Standard Feed',
     description:
       definition?.description ?? 'Explore curated topic coverage from The Standard Feed.',
-    url: definition
-      ? `https://topkoong.github.io/fetch-the-standard-news/topics/${definition.slug}`
-      : 'https://topkoong.github.io/fetch-the-standard-news/topics',
+    url: canonical,
+    canonicalUrl: canonical,
+    ogType: 'website',
   });
 
   if (!definition) {

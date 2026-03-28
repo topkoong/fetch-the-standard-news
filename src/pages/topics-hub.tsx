@@ -1,14 +1,18 @@
 import PageHeader from '@components/page-header';
+import { PUBLIC_SITE_URL } from '@constants/index';
 import { TOPIC_DEFINITIONS } from '@constants/topics';
 import { usePageSeo } from '@hooks/use-page-seo';
 import { Link } from 'react-router-dom';
 
 function TopicsHub() {
+  const canonical = `${PUBLIC_SITE_URL}/topics`;
   usePageSeo({
     title: 'Topic hubs | The Standard Feed',
     description:
       'Browse curated topic hubs for business, world, Thailand, and culture with clear paths to desks and internal stories.',
-    url: 'https://topkoong.github.io/fetch-the-standard-news/topics',
+    url: canonical,
+    canonicalUrl: canonical,
+    ogType: 'website',
   });
 
   return (

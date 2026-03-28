@@ -1,15 +1,17 @@
 import PageHeader from '@components/page-header';
+import { PUBLIC_SITE_URL } from '@constants/index';
 import { usePageSeo } from '@hooks/use-page-seo';
 import { Link } from 'react-router-dom';
 
-const SITE_ORIGIN = 'https://topkoong.github.io/fetch-the-standard-news';
-
 function About() {
+  const canonical = `${PUBLIC_SITE_URL}/about`;
   usePageSeo({
     title: 'About this feed | The Standard Feed',
     description:
       'Learn what The Standard Feed is, how it is built for fast reading, and how to navigate desks and internal story pages.',
-    url: `${SITE_ORIGIN}/about`,
+    url: canonical,
+    canonicalUrl: canonical,
+    ogType: 'website',
   });
 
   return (

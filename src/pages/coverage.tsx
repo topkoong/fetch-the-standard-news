@@ -1,16 +1,18 @@
 import PageHeader from '@components/page-header';
+import { PUBLIC_SITE_URL } from '@constants/index';
 import { TOPIC_DEFINITIONS } from '@constants/topics';
 import { usePageSeo } from '@hooks/use-page-seo';
 import { Link } from 'react-router-dom';
 
-const SITE_ORIGIN = 'https://topkoong.github.io/fetch-the-standard-news';
-
 function Coverage() {
+  const canonical = `${PUBLIC_SITE_URL}/coverage`;
   usePageSeo({
     title: 'Coverage map | The Standard Feed',
     description:
       'Navigate topic hubs and category desks for business, world, Thailand, culture, and daily news from The Standard Feed.',
-    url: `${SITE_ORIGIN}/coverage`,
+    url: canonical,
+    canonicalUrl: canonical,
+    ogType: 'website',
   });
 
   return (
