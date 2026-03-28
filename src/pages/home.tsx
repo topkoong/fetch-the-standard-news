@@ -201,6 +201,7 @@ function Home() {
         ? nonThaiCategoryIdToName[String(firstCategoryId)] ?? HERO_FALLBACK_CATEGORY_LABEL
         : HERO_FALLBACK_CATEGORY_LABEL;
     return {
+      id: post.id,
       title: titlePlain || HERO_FALLBACK_ARTICLE_TITLE,
       link,
       image: resolvedImage,

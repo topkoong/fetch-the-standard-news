@@ -19,6 +19,7 @@ import {
   THE_STANDARD_HOSTNAME,
 } from '@constants/index';
 import { handleNewsImageLoadError, resolveImageUrl } from '@utils/formatters';
+import { Link } from 'react-router-dom';
 import type { HeroSectionProps } from 'types/hero.types';
 
 export function HeroSection({ featuredArticle }: HeroSectionProps) {
@@ -40,14 +41,12 @@ export function HeroSection({ featuredArticle }: HeroSectionProps) {
         </h1>
         <p className={HERO_SUBHEADLINE_CLASS}>{HERO_VALUE_SUBHEADLINE}</p>
         <div className={HERO_CTA_ROW_CLASS}>
-          <a
-            href={featuredArticle.link}
-            target='_blank'
-            rel={HERO_PRIMARY_CTA_EXTERNAL_REL}
-            className={HERO_PRIMARY_CTA_CLASS}
+          <Link
+            to={`/read/${featuredArticle.id}`}
+            className={`${HERO_PRIMARY_CTA_CLASS} no-underline`}
           >
             {HERO_PRIMARY_CTA_LABEL}
-          </a>
+          </Link>
           <a
             href={THE_STANDARD_HOSTNAME}
             target='_blank'
