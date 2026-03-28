@@ -75,19 +75,24 @@ Create a `HeroSection` component at `src/components/HeroSection.tsx`:
 
 ```tsx
 // src/components/HeroSection.tsx
-// Use the FIRST article fetched from thestandard.co/homepage as the hero image.
-// The article object shape from the API will have: title, link, image, category.
+// Use the FIRST article from the feed as the hero image.
+// featuredArticle must include id for the internal reader route (plan.md Phase 2 / PR 13).
 
-interface HeroProps {
-  featuredArticle: {
-    title: string;
-    link: string;
-    image: string;
-    category: string;
-  };
+import { Link } from 'react-router-dom';
+
+export interface HeroFeaturedArticle {
+  readonly id: number;
+  readonly title: string;
+  readonly link: string;
+  readonly image: string;
+  readonly category: string;
 }
 
-export function HeroSection({ featuredArticle }: HeroProps) {
+export interface HeroSectionProps {
+  readonly featuredArticle: HeroFeaturedArticle;
+}
+
+export function HeroSection({ featuredArticle }: HeroSectionProps) {
   return (
     <section className='relative min-h-[85vh] flex items-end overflow-hidden bg-gray-950'>
       {/* Full-bleed background image */}
@@ -123,20 +128,18 @@ export function HeroSection({ featuredArticle }: HeroProps) {
           อัปเดตทุกชั่วโมง
         </p>
 
-        {/* Primary CTA — links to the featured article */}
+        {/* Primary CTA — internal reader (same tab); secondary stays external */}
         <div className='flex flex-col sm:flex-row gap-4'>
-          <a
-            href={featuredArticle.link}
-            target='_blank'
-            rel='noopener noreferrer'
-            className='inline-flex items-center justify-center gap-2
+          <Link
+            to={`/read/${featuredArticle.id}`}
+            className='inline-flex items-center justify-center gap-2 no-underline
                        px-8 py-4 text-base font-bold text-white
                        bg-red-600 hover:bg-red-500 active:bg-red-700
                        rounded-lg shadow-lg shadow-red-900/40
                        transition-all duration-200 hover:-translate-y-0.5'
           >
             อ่านข่าวเด่นวันนี้ →
-          </a>
+          </Link>
           <a
             href='https://thestandard.co'
             target='_blank'
@@ -155,16 +158,15 @@ export function HeroSection({ featuredArticle }: HeroProps) {
 }
 ```
 
-**Wire it up in `App.tsx`:**
+**Wire it up** (e.g. on `Home`): pass `id` with title, link, image, and category so the primary CTA can resolve `/read/:id`.
 
 ```tsx
-// Pass the first article from your fetched data as featuredArticle
-<HeroSection featuredArticle={articles[0]} />
+<HeroSection featuredArticle={heroFeaturedArticle} />
 ```
 
 ### PR Description
 
-> Introduces a full-bleed hero section above the fold. Uses the top fetched article's image as the hero background. Adds a bilingual value-proposition headline, sub-headline, and two CTAs (primary red button → featured article, secondary ghost button → The Standard homepage). Both buttons open in a new tab.
+> Introduces a full-bleed hero section above the fold. Uses the top article’s image as the hero background. Adds a value-proposition headline, sub-headline, and two CTAs: **primary red button → internal `/read/:id`** (same tab), **secondary ghost button → thestandard.co** (new tab). Aligns with plan.md Phase 2 / PR 13 for on-site reading first.
 
 ---
 
@@ -184,19 +186,19 @@ Redesign the `NewsCard` component (or create one at `src/components/NewsCard.tsx
 ```tsx
 // src/components/NewsCard.tsx
 interface NewsCardProps {
-  title: string;
-  link: string;
-  image: string;
-  category: string;
-  isFeature?: boolean; // true = large card (1st in a row), false = standard
+  readonly title: string;
+  readonly link: string;
+  readonly imageUrl: string;
+  readonly categoryName: string;
+  readonly isFeatureCard?: boolean; // true = large card (1st in a row), false = standard
 }
 
 export function NewsCard({
   title,
   link,
-  image,
-  category,
-  isFeature = false,
+  imageUrl,
+  categoryName,
+  isFeatureCard = false,
 }: NewsCardProps) {
   return (
     <a
@@ -205,31 +207,33 @@ export function NewsCard({
       rel='noopener noreferrer'
       className={`group block bg-white rounded-xl overflow-hidden shadow-sm
                   hover:shadow-xl transition-all duration-300 hover:-translate-y-1
-                  ${isFeature ? 'md:col-span-2 md:row-span-2' : ''}`}
+                  ${isFeatureCard ? 'md:col-span-2 md:row-span-2' : ''}`}
     >
       {/* Image — aspect-ratio locks prevent layout shift */}
       <div
-        className={`overflow-hidden ${isFeature ? 'aspect-[16/9]' : 'aspect-[16/10]'}`}
+        className={`overflow-hidden ${
+          isFeatureCard ? 'aspect-[16/9]' : 'aspect-[16/10]'
+        }`}
       >
         <img
-          src={image}
+          src={imageUrl}
           alt={title}
           loading='lazy'
           className='w-full h-full object-cover group-hover:scale-105 transition-transform duration-500'
         />
       </div>
 
-      <div className={`p-4 ${isFeature ? 'md:p-6' : ''}`}>
+      <div className={`p-4 ${isFeatureCard ? 'md:p-6' : ''}`}>
         {/* Category badge */}
         <span className='text-xs font-semibold uppercase tracking-wider text-red-600'>
-          {category}
+          {categoryName}
         </span>
 
         {/* Title */}
         <h2
           className={`mt-2 font-bold text-gray-900 leading-snug
                         group-hover:text-red-600 transition-colors
-                        ${isFeature ? 'text-xl md:text-2xl' : 'text-base'}`}
+                        ${isFeatureCard ? 'text-xl md:text-2xl' : 'text-base'}`}
         >
           {title}
         </h2>
@@ -245,7 +249,7 @@ export function NewsCard({
 // Use a CSS grid with the first card spanning 2 columns on desktop
 <div className='grid grid-cols-1 md:grid-cols-3 gap-6'>
   {articles.map((article, i) => (
-    <NewsCard key={article.link} {...article} isFeature={i === 0} />
+    <NewsCard key={article.link} {...article} isFeatureCard={i === 0} />
   ))}
 </div>
 ```
@@ -253,6 +257,8 @@ export function NewsCard({
 ### PR Description
 
 > Replaces small thumbnail layout with a proper card grid. First card is a feature card (spans 2 columns on desktop). Images use `aspect-ratio` to prevent layout shift. Cards have hover lift + image zoom micro-interactions. Category is displayed as a red uppercase label above the title for clear scan hierarchy.
+
+**Note:** The card `href` will be updated in **PR 13** (`feat/card-internal-cta`) to point to `/read/:id`. Implement PR 3 as written — PR 13 overrides the primary navigation target only.
 
 ---
 
@@ -374,23 +380,29 @@ Create `src/components/TrustBar.tsx`:
 
 ```tsx
 // src/components/TrustBar.tsx
-const stats = [
+// Prefer a shared domain type (e.g. src/types/trust-bar.types.ts) when you add it.
+interface TrustStatItem {
+  readonly value: string;
+  readonly label: string;
+}
+
+const TRUST_STAT_ITEMS = [
   { value: '10M+', label: 'ผู้อ่านต่อเดือน' },
   { value: '2017', label: 'ก่อตั้งเมื่อปี' },
   { value: '24/7', label: 'อัปเดตข่าว' },
   { value: '#1', label: 'สำนักข่าวออนไลน์ไทย' },
-];
+] as const satisfies readonly TrustStatItem[];
 
 export function TrustBar() {
   return (
     <div className='bg-white border-y border-gray-100 py-6 my-12'>
       <div className='grid grid-cols-2 md:grid-cols-4 gap-6 text-center'>
-        {stats.map((s) => (
-          <div key={s.label}>
+        {TRUST_STAT_ITEMS.map((statItem: TrustStatItem) => (
+          <div key={statItem.label}>
             <div className='text-2xl md:text-3xl font-extrabold text-gray-900'>
-              {s.value}
+              {statItem.value}
             </div>
-            <div className='text-sm text-gray-500 mt-1'>{s.label}</div>
+            <div className='text-sm text-gray-500 mt-1'>{statItem.label}</div>
           </div>
         ))}
       </div>
@@ -421,10 +433,20 @@ While articles are loading, users see a blank page. If the fetch fails, there is
 1. **Skeleton card** — create `src/components/SkeletonCard.tsx`:
 
    ```tsx
-   export function SkeletonCard() {
+   type CardVariant = 'standard' | 'feature';
+
+   interface SkeletonCardProps {
+     readonly variant?: CardVariant;
+   }
+
+   export function SkeletonCard({ variant = 'standard' }: SkeletonCardProps) {
      return (
        <div className='bg-white rounded-xl overflow-hidden animate-pulse'>
-         <div className='aspect-[16/10] bg-gray-200' />
+         <div
+           className={`bg-gray-200 ${
+             variant === 'feature' ? 'aspect-[16/9]' : 'aspect-[16/10]'
+           }`}
+         />
          <div className='p-4 space-y-3'>
            <div className='h-3 bg-gray-200 rounded w-1/4' />
            <div className='h-4 bg-gray-200 rounded w-full' />

@@ -74,8 +74,8 @@ jq -n \
         | map(($catMap[(tostring)] // empty))
         | map(select(length > 0))
       ),
-      imageUrl: ($imgMap[(.featured_media|tostring)] // empty),
-      sourceUrl: (.link // empty)
+      imageUrl: ($imgMap[(.featured_media|tostring)] // ""),
+      sourceUrl: (.link // "")
     })
   ' >"${outputJson}"
 

@@ -38,7 +38,9 @@ Commit: `feat(cards): wire primary card CTA to internal reader, secondary to ext
 
 **PR 14**
 Branch: `ci/story-pages-index`
-Commit: `ci(content): add build-story-pages-index.sh and deploy workflow step`
+Commit: `ci(content): wire build-story-pages-index.sh into GitHub Actions deploy workflow`
+
+Deliverable: add a deploy workflow step that runs `build-story-pages-index.sh` **after** `fetch-the-standard-posts.sh`, `fetch-the-standard-categories.sh`, and `fetch-image-urls.sh` complete. The script already lives in `cachescripts/` — do not rewrite it; only add the workflow step.
 
 ### Phase 4 PRs — SEO & Topic Pages
 
