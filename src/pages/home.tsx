@@ -198,7 +198,8 @@ function Home() {
     const firstCategoryId = post.categories?.[0];
     const categoryLabel =
       firstCategoryId !== undefined
-        ? nonThaiCategoryIdToName[String(firstCategoryId)] ?? HERO_FALLBACK_CATEGORY_LABEL
+        ? (nonThaiCategoryIdToName[String(firstCategoryId)] ??
+          HERO_FALLBACK_CATEGORY_LABEL)
         : HERO_FALLBACK_CATEGORY_LABEL;
     return {
       id: post.id,
