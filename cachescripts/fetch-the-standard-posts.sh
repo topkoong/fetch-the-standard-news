@@ -1,11 +1,33 @@
 #!/usr/bin/env bash
 #
-# Download posts from The Standard WP API into src/assets/cached.
-# Requires: bash, curl, jq. Run from repository root.
+# fetch-the-standard-posts.sh
+# ============================
+# Downloads WordPress REST **posts** from The Standard (`wp/v2/posts`) and merges
+# paginated responses into JSON files consumed by the Vite app and downstream scripts.
+#
+# Prerequisites (run from repository root):
+#   - bash 4+, curl, jq
+#
+# Outputs (final paths):
+#   - src/assets/cached/posts.json       — full merged list (all fetched pages).
+#   - src/assets/cached/mobile-posts.json — posts from **page 1 only** (lighter bundle).
+#   - src/assets/cached/posts-meta.json   — audit: totals from WP headers + how many
+#                                           pages were actually fetched.
 #
 # Environment:
-#   POST_FETCH_PAGES — number of pages to fetch (100 posts each), default all.
-#                      Set to "all" to fetch every page (can be very slow / large).
+#   POST_FETCH_PAGES — Optional. Non-negative integer = max number of API pages to pull
+#                      (each page is up to `queryPerPage` posts, default 100).
+#                      Default when unset: **all** pages reported by `X-WP-TotalPages`.
+#                      Use e.g. `POST_FETCH_PAGES=3` for a fast partial refresh.
+#
+# Flow:
+#   1. HEAD-like request via curl -sSI on page 1 to read X-WP-Total / X-WP-TotalPages.
+#   2. Loop pages 1..maxPage, save each response as pretty-printed JSON under
+#      cachescripts/posts-json/post-<n>.json
+#   3. jq -s 'flatten' merges all page files into one array for posts.json;
+#      mobile-posts.json uses only post-1.json (single-page slice for mobile bundle).
+#   4. Move merged files into src/assets/cached/ and delete per-page temp files.
+#
 set -euo pipefail
 
 workdir="cachescripts"
@@ -22,8 +44,10 @@ cachedDir="src/assets/cached"
 
 mkdir -p "${postsDir}" "${outputDir}" "${cachedDir}"
 
+# --- Fetch every requested page from the REST API ---------------------------------
 fetchPostPages() {
   echo "Fetching The Standard posts"
+  # WordPress sends total count and page count in response headers (not JSON body).
   headers=$(curl -sSI "${postsBaseUrl}?page=1&${querySuffix}")
   rawTotalPosts=$(echo "$headers" | grep -Fi X-WP-Total: || true)
   rawTotalPages=$(echo "$headers" | grep -Fi X-WP-TotalPages: || true)
@@ -38,6 +62,7 @@ fetchPostPages() {
     exit 1
   fi
 
+  # Cap how many pages we download: either user limit or full site.
   local want="${POST_FETCH_PAGES:-all}"
   local maxPage
   if [ "$want" = "all" ]; then
@@ -68,6 +93,7 @@ fetchPostPages() {
       jq '.' >"./${postsDir}/${postFilename}-${count}.json"
   done
 
+  # Record what we actually pulled (for CI logs and debugging stale caches).
   jq -n \
     --argjson totalPosts "${totalPosts}" \
     --argjson totalPages "${totalPages}" \
@@ -83,8 +109,11 @@ fetchPostPages() {
     }' >"./${outputDir}/${metaOutputFilename}"
 }
 
+# --- Merge page files into app-facing bundles -------------------------------------
 mergeJsonFiles() {
+  # jq -s slurps all inputs as array of arrays; flatten produces one big post array.
   jq -s 'flatten' "./${postsDir}/${postFilename}"*.json >"./${outputDir}/${outputFilename}"
+  # Mobile bundle: intentionally only the first page to limit asset size.
   jq -s 'flatten' "./${postsDir}/${postFilename}-1.json" >"./${outputDir}/${mobileOutputFilename}"
   echo "Copying cache files to ${cachedDir}"
   mv "./${outputDir}/${mobileOutputFilename}" "${cachedDir}/${mobileOutputFilename}"

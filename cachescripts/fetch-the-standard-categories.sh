@@ -1,7 +1,22 @@
 #!/usr/bin/env bash
 #
-# Download categories from The Standard WP API into src/assets/cached/categories.json
-# Requires: bash, curl, jq. Run from repository root.
+# fetch-the-standard-categories.sh
+# =================================
+# Downloads all **categories** from The Standard WordPress API (`wp/v2/categories`)
+# and writes a single merged JSON array to src/assets/cached/categories.json.
+#
+# Used by:
+#   - The app (category labels, navigation, grouping).
+#   - build-story-pages-index.sh (maps numeric category ids on posts to human names).
+#
+# Prerequisites: bash, curl, jq. Run from repository root.
+#
+# Pagination note:
+#   WordPress returns fixed `per_page=100` for full pages. The **last** page often
+#   contains fewer than 100 items; this script uses a custom `per_page` on the final
+#   request equal to `remainingPosts` so the API returns exactly the leftover rows
+#   without an empty tail page.
+#
 set -euo pipefail
 
 workdir="cachescripts"
@@ -20,6 +35,7 @@ fetchAllCategoryPages() {
   headers=$(curl -sSI "${categoriesBaseUrl}?page=1&${querySuffix}")
   rawTotalPosts=$(echo "$headers" | grep -Fi X-WP-Total: || true)
   rawTotalPages=$(echo "$headers" | grep -Fi X-WP-TotalPages: || true)
+  # Header names say "Total" but value is the number of **categories**, not posts.
   totalPosts=${rawTotalPosts//[!0-9]/}
   totalPages=${rawTotalPages//[!0-9]/}
   echo "totalPages: ${totalPages:-?}"
@@ -33,6 +49,7 @@ fetchAllCategoryPages() {
   local count
   for ((count = 1; count <= totalPages; count++)); do
     if [ "$count" -eq "$totalPages" ]; then
+      # Last page: request only the remaining items so we do not ask for 100 when fewer exist.
       local queriedPages=$((count - 1))
       local totalQueriedPosts=$((100 * queriedPages))
       local remainingPosts=$((totalPosts - totalQueriedPosts))
