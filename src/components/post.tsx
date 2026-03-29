@@ -81,7 +81,14 @@ function Post({ post, group }: PostProps) {
     setShowImageFallbackNote(false);
   }, [post.id, post.imageUrl]);
 
-  const resolvedSrc = usePlaceholder ? placeholderImage : remoteSrc;
+  const hasDeckImageAttempts =
+    Boolean((post.imageUrl ?? '').trim()) || localCandidates.length > 0;
+
+  const resolvedSrc = usePlaceholder
+    ? placeholderImage
+    : hasDeckImageAttempts
+      ? remoteSrc
+      : placeholderImage;
 
   return (
     <li className='h-full list-none'>
@@ -100,7 +107,7 @@ function Post({ post, group }: PostProps) {
             decoding='async'
             {...publisherImageReferrerProps}
             onError={(event) => {
-              if (usePlaceholder) return;
+              if (usePlaceholder || !hasDeckImageAttempts) return;
               onRemoteImageError(event);
             }}
           />
