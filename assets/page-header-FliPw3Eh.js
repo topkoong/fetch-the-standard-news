@@ -1,0 +1,1 @@
+import{t as e}from"./jsxRuntime.module-CKKWO3Nq.js";function t({title:t,isPrimaryHeading:n=!0,tone:r=`dark`}){return e(n?`h1`:`h2`,{className:r===`light`?`page-title-light`:`page-title`,children:t})}export{t as default};
