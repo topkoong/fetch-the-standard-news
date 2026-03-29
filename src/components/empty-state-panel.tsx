@@ -56,8 +56,8 @@ export function EmptyStatePanel({
 }: EmptyStatePanelProps) {
   const rootClass =
     variant === 'emphasis'
-      ? 'mx-6 my-8 rounded-xl border-2 border-white/30 bg-white/10 px-6 py-5 text-center text-white shadow-md'
-      : 'mx-3 sm:mx-6 my-10 rounded-xl border-2 border-white/30 bg-white/10 p-6 text-center text-white';
+      ? 'mx-6 my-8 rounded-xl border-2 border-red-200 bg-red-50 px-6 py-5 text-center text-gray-900 shadow-md'
+      : 'mx-3 sm:mx-6 my-10 rounded-xl border border-gray-200 bg-white p-6 text-center text-gray-900 shadow-sm';
   /* Dynamic heading tag keeps one component while satisfying document outline rules. */
   const HeadingTag = headingLevel;
   return (
@@ -65,7 +65,7 @@ export function EmptyStatePanel({
       <HeadingTag className='text-xl font-extrabold uppercase tracking-wide'>
         {title}
       </HeadingTag>
-      <p className='mt-2 text-white/90'>{description}</p>
+      <p className='mt-2 text-gray-600'>{description}</p>
       {children ? (
         <div className='mt-4 flex justify-center gap-3 flex-wrap'>{children}</div>
       ) : null}

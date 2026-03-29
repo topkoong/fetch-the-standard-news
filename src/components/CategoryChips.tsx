@@ -11,7 +11,7 @@ export function CategoryChips() {
       className='w-full max-w-6xl mx-auto px-4 sm:px-6 pt-4 pb-2'
       aria-label='Browse topics'
     >
-      <p className='text-white/80 text-xs font-semibold uppercase tracking-wide mb-2'>
+      <p className='text-gray-500 text-xs font-semibold uppercase tracking-wide mb-2'>
         Topics
       </p>
       <div className='-mx-4 px-4 overflow-x-auto overflow-y-hidden pb-1'>
@@ -20,7 +20,7 @@ export function CategoryChips() {
             <li key={topic.slug} className='snap-start shrink-0'>
               <Link
                 to={`/topics/${topic.slug}`}
-                className='inline-flex items-center justify-center rounded-full border-2 border-white/50 bg-white/10 px-4 py-2 text-white text-sm font-semibold no-underline whitespace-nowrap hover:bg-white/20 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-white focus-visible:ring-offset-2 focus-visible:ring-offset-bright-blue'
+                className='inline-flex items-center justify-center rounded-full border-2 border-gray-300 bg-white px-4 py-2 text-gray-900 text-sm font-semibold no-underline whitespace-nowrap shadow-sm hover:bg-gray-50 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-gray-400 focus-visible:ring-offset-2 focus-visible:ring-offset-gray-50'
               >
                 {topic.categoryLabel}
               </Link>
