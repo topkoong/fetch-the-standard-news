@@ -21,14 +21,14 @@ import {
   ROUTE_PATH_READ_PREFIX,
   ROUTE_STATE_NEWS_DESK_CATEGORY,
 } from '@constants/index';
+import { useFeaturedImageSrc } from '@hooks/use-featured-image-src';
 import {
   decodeHtmlEntities,
-  handleNewsImageLoadError,
   isStandardPublisherImageUrl,
   placeholderNewsPublicPath,
   publisherImageReferrerProps,
 } from '@utils/formatters';
-import { useEffect, useMemo, useState } from 'preact/hooks';
+import { useMemo } from 'preact/hooks';
 import { Link } from 'react-router-dom';
 
 export interface NewsCardProps {
@@ -52,8 +52,6 @@ export function NewsCard({
   featuredMediaId,
   isFeature,
 }: NewsCardProps) {
-  const [imageSrc, setImageSrc] = useState(imageUrl);
-  const [candidateIndex, setCandidateIndex] = useState(0);
   const baseUrl = import.meta.env.BASE_URL ?? '/';
 
   const localCandidates = useMemo(() => {
@@ -70,10 +68,11 @@ export function NewsCard({
     ];
   }, [baseUrl, featuredMediaId, imageUrl]);
 
-  useEffect(() => {
-    setImageSrc(imageUrl);
-    setCandidateIndex(0);
-  }, [imageUrl, postId]);
+  const { src: imageSrc, onError: handleImageError } = useFeaturedImageSrc(
+    imageUrl,
+    localCandidates,
+    postId,
+  );
 
   const readPath = `${ROUTE_PATH_READ_PREFIX}${postId}`;
 
@@ -88,17 +87,6 @@ export function NewsCard({
   const titleClass = isFeature
     ? NEWS_CARD_TITLE_FEATURE_CLASS
     : NEWS_CARD_TITLE_STANDARD_CLASS;
-
-  const handleImageError = (event: { currentTarget: HTMLImageElement }): void => {
-    if (candidateIndex < localCandidates.length) {
-      const nextSrc = localCandidates[candidateIndex];
-      setCandidateIndex((idx) => idx + 1);
-      setImageSrc(nextSrc);
-      return;
-    }
-    handleNewsImageLoadError(event);
-    setImageSrc(placeholderNewsPublicPath());
-  };
 
   return (
     <li className={isFeature ? NEWS_CARD_FEATURE_LI_CLASS : ''}>

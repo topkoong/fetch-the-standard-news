@@ -7,16 +7,16 @@ import {
   ROUTE_PATH_NEWS_DESK_FALLBACK,
   ROUTE_STATE_NEWS_DESK_CATEGORY,
 } from '@constants/index';
+import { useFeaturedImageSrc } from '@hooks/use-featured-image-src';
 import useIntersectionObserver from '@hooks/use-intersection-observer';
 import {
   decodeHtmlEntities,
   isStandardPublisherImageUrl,
-  placeholderNewsPublicPath,
   publisherImageReferrerProps,
 } from '@utils/formatters';
 import { Fragment } from 'preact';
 import { memo } from 'preact/compat';
-import { useEffect, useMemo, useRef, useState } from 'preact/hooks';
+import { useCallback, useEffect, useMemo, useRef, useState } from 'preact/hooks';
 import { Link } from 'react-router-dom';
 import type { WpRenderedContent, WpRenderedText } from 'types/wp-api';
 
@@ -50,8 +50,6 @@ function Post({ post, group }: PostProps) {
     stripHtml(post?.excerpt?.rendered ?? ''),
   ).trim();
   const usePlaceholder = group !== undefined && group !== 0 && !isVisible;
-  const [imageSrc, setImageSrc] = useState<string | undefined>(post.imageUrl);
-  const [candidateIndex, setCandidateIndex] = useState(0);
   const [showImageFallbackNote, setShowImageFallbackNote] = useState(false);
   const baseUrl = import.meta.env.BASE_URL ?? '/';
 
@@ -70,13 +68,20 @@ function Post({ post, group }: PostProps) {
     ];
   }, [baseUrl, post.featured_media, post.imageUrl]);
 
+  const onDeckPlaceholder = useCallback(() => setShowImageFallbackNote(true), []);
+
+  const { src: remoteSrc, onError: onRemoteImageError } = useFeaturedImageSrc(
+    post.imageUrl ?? '',
+    localCandidates,
+    post.id,
+    onDeckPlaceholder,
+  );
+
   useEffect(() => {
-    setImageSrc(post.imageUrl);
-    setCandidateIndex(0);
     setShowImageFallbackNote(false);
   }, [post.id, post.imageUrl]);
 
-  const resolvedSrc = usePlaceholder ? placeholderImage : imageSrc || placeholderImage;
+  const resolvedSrc = usePlaceholder ? placeholderImage : remoteSrc;
 
   return (
     <li className='h-full list-none'>
@@ -95,14 +100,8 @@ function Post({ post, group }: PostProps) {
             decoding='async'
             {...publisherImageReferrerProps}
             onError={(event) => {
-              if (candidateIndex < localCandidates.length) {
-                const nextSrc = localCandidates[candidateIndex];
-                setCandidateIndex((idx) => idx + 1);
-                setImageSrc(nextSrc);
-                return;
-              }
-              setShowImageFallbackNote(true);
-              event.currentTarget.src = placeholderNewsPublicPath();
+              if (usePlaceholder) return;
+              onRemoteImageError(event);
             }}
           />
         </div>

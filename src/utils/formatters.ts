@@ -70,3 +70,30 @@ export function handleNewsImageLoadError(event: {
 }): void {
   event.currentTarget.src = placeholderNewsPublicPath();
 }
+
+/**
+ * Ordered `src` attempts for featured images (plan.md PR 18).
+ * WordPress often exposes `-WxH` derivatives; loading the undimensioned file name can succeed
+ * when the cropped asset 404s or is blocked. Appends optional `cached-media/*` candidates.
+ */
+export function buildFeaturedImageFallbackChain(
+  resolvedPrimary: string,
+  localCandidates: readonly string[] = [],
+): string[] {
+  const raw = typeof resolvedPrimary === 'string' ? resolvedPrimary.trim() : '';
+  const chain: string[] = [];
+  if (raw) {
+    chain.push(raw);
+    if (isStandardPublisherImageUrl(raw)) {
+      const stripped = raw.replace(/-\d+x\d+(?=\.[a-z0-9]+(?:$|\?))/i, '');
+      if (stripped !== raw && stripped.length > 0 && !chain.includes(stripped)) {
+        chain.push(stripped);
+      }
+    }
+  }
+  for (const c of localCandidates) {
+    const t = typeof c === 'string' ? c.trim() : '';
+    if (t && !chain.includes(t)) chain.push(t);
+  }
+  return chain;
+}

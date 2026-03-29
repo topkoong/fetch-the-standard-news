@@ -18,24 +18,28 @@ import {
   HERO_VALUE_SUBHEADLINE,
   THE_STANDARD_HOSTNAME,
 } from '@constants/index';
-import {
-  handleNewsImageLoadError,
-  publisherImageReferrerProps,
-  resolveImageUrl,
-} from '@utils/formatters';
+import { useFeaturedImageSrc } from '@hooks/use-featured-image-src';
+import { publisherImageReferrerProps, resolveImageUrl } from '@utils/formatters';
 import { Link } from 'react-router-dom';
 import type { HeroSectionProps } from 'types/hero.types';
 
 export function HeroSection({ featuredArticle }: HeroSectionProps) {
+  const resolvedHero = resolveImageUrl(featuredArticle.image);
+  const { src: heroImageSrc, onError: onHeroImageError } = useFeaturedImageSrc(
+    resolvedHero,
+    [],
+    featuredArticle.id,
+  );
+
   return (
     <section className={HERO_SECTION_ROOT_CLASS} aria-label='Featured coverage'>
       <img
-        src={resolveImageUrl(featuredArticle.image)}
+        src={heroImageSrc}
         alt={featuredArticle.title}
         loading='eager'
         fetchPriority='high'
         className={HERO_BACKGROUND_IMAGE_CLASS}
-        onError={handleNewsImageLoadError}
+        onError={onHeroImageError}
         {...publisherImageReferrerProps}
       />
       <div className={HERO_GRADIENT_OVERLAY_CLASS} aria-hidden='true' />
