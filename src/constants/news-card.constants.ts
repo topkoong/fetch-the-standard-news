@@ -22,7 +22,7 @@ export const NEWS_CARD_READ_NOW_BUTTON_CLASS =
 export const NEWS_CARD_FEATURE_LI_CLASS = 'md:col-span-2 md:row-span-2' as const;
 
 export const NEWS_CARD_ARTICLE_CLASS =
-  'group flex h-full flex-col overflow-hidden rounded-xl bg-white shadow-sm transition-all duration-300 hover:-translate-y-1 hover:shadow-md' as const;
+  'group flex h-full flex-col overflow-hidden rounded-xl bg-white shadow-sm transition-all duration-300 hover:-translate-y-1 hover:shadow-xl' as const;
 
 export const NEWS_CARD_IMAGE_WRAPPER_FEATURE_CLASS =
   'aspect-[16/9] overflow-hidden bg-neutral-100' as const;

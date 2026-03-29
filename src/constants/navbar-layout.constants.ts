@@ -4,11 +4,12 @@
  */
 export const MAIN_CONTENT_TOP_OFFSET_CLASS = 'pt-16' as const;
 
+/** Single fixed row (64px); category desks live in homepage chips, not a second nav row. */
 export const NAVBAR_WRAPPER_CLASS =
-  'fixed top-0 left-0 right-0 z-50 border-b border-neutral-200 bg-white/95 shadow-sm backdrop-blur-sm' as const;
+  'fixed top-0 left-0 right-0 z-50 h-16 border-b border-gray-100 bg-white/95 shadow-sm backdrop-blur-sm' as const;
 
 export const NAVBAR_TOP_BAR_CLASS =
-  'flex min-h-16 w-full flex-shrink-0 items-center justify-between gap-4 px-4 py-3 sm:px-6 lg:px-8' as const;
+  'flex h-full w-full flex-shrink-0 items-center justify-between gap-4 px-4 sm:px-6 lg:px-8' as const;
 
 /** Full-width sheet below the 4rem header on small screens only */
 export const NAVBAR_MOBILE_MENU_PANEL_CLASS =

@@ -9,6 +9,7 @@ import {
 } from '@constants/index';
 import useIntersectionObserver from '@hooks/use-intersection-observer';
 import {
+  decodeHtmlEntities,
   isStandardPublisherImageUrl,
   placeholderNewsPublicPath,
   publisherImageReferrerProps,
@@ -43,8 +44,11 @@ function Post({ post, group }: PostProps) {
   const ref = useRef<HTMLImageElement | null>(null);
   const entry = useIntersectionObserver(ref, {});
   const isVisible = !!entry?.isIntersecting;
-  const titlePlain = stripHtml(post?.title?.rendered ?? '') || 'Article';
-  const excerptPlain = stripHtml(post?.excerpt?.rendered ?? '').trim();
+  const titlePlain =
+    decodeHtmlEntities(stripHtml(post?.title?.rendered ?? '')) || 'Article';
+  const excerptPlain = decodeHtmlEntities(
+    stripHtml(post?.excerpt?.rendered ?? ''),
+  ).trim();
   const usePlaceholder = group !== undefined && group !== 0 && !isVisible;
   const [imageSrc, setImageSrc] = useState<string | undefined>(post.imageUrl);
   const [candidateIndex, setCandidateIndex] = useState(0);

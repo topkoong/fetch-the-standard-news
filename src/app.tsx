@@ -36,7 +36,10 @@ function App() {
       <Suspense fallback={<Spinner />}>
         <Navbar />
       </Suspense>
-      <main id='main-content' className={MAIN_CONTENT_TOP_OFFSET_CLASS}>
+      <main
+        id='main-content'
+        className={`min-h-screen bg-gray-50 ${MAIN_CONTENT_TOP_OFFSET_CLASS}`}
+      >
         <Routes>
           <Route
             path='/'

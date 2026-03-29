@@ -16,6 +16,7 @@ import PageHeader from '@components/page-header';
 import { PUBLIC_SITE_URL } from '@constants/index';
 import { absoluteUrlForOpenGraph, usePageSeo } from '@hooks/use-page-seo';
 import {
+  decodeHtmlEntities,
   handleNewsImageLoadError,
   publisherImageReferrerProps,
   resolveImageUrl,
@@ -64,9 +65,9 @@ function ReadStory() {
    */
   usePageSeo({
     title: story ? `${story.title} | The Standard Feed` : 'Story | The Standard Feed',
-    description:
-      story?.excerpt ||
-      'Read the full story and explore related coverage on The Standard Feed.',
+    description: story?.excerpt
+      ? decodeHtmlEntities(story.excerpt)
+      : 'Read the full story and explore related coverage on The Standard Feed.',
     url: story ? `${PUBLIC_SITE_URL}/read/${story.id}` : `${PUBLIC_SITE_URL}/read`,
     canonicalUrl: story
       ? `${PUBLIC_SITE_URL}/read/${story.id}`
@@ -110,7 +111,9 @@ function ReadStory() {
     <article className='max-w-5xl mx-auto px-4 sm:px-6 py-8 text-white'>
       <PageHeader title={story.title} />
       <section className='surface-panel p-5 sm:p-6 md:p-8'>
-        <p className='text-white/80 text-sm sm:text-base'>{story.excerpt}</p>
+        <p className='text-white/80 text-sm sm:text-base'>
+          {decodeHtmlEntities(story.excerpt)}
+        </p>
         <div className='mt-3 flex flex-wrap gap-2'>
           {story.categoryNames.map((name) => (
             <span
@@ -149,7 +152,7 @@ function ReadStory() {
                 >
                   <h3 className='font-bold text-sm leading-snug'>{related.title}</h3>
                   <p className='mt-2 text-white/80 text-xs line-clamp-3'>
-                    {related.excerpt}
+                    {decodeHtmlEntities(related.excerpt)}
                   </p>
                   <Link
                     to={`/read/${related.id}`}

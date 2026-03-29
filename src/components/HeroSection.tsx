@@ -32,6 +32,8 @@ export function HeroSection({ featuredArticle }: HeroSectionProps) {
       <img
         src={resolveImageUrl(featuredArticle.image)}
         alt={featuredArticle.title}
+        loading='eager'
+        fetchPriority='high'
         className={HERO_BACKGROUND_IMAGE_CLASS}
         onError={handleNewsImageLoadError}
         {...publisherImageReferrerProps}
