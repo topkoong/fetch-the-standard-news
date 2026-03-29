@@ -1,3 +1,14 @@
+/**
+ * Decodes HTML entities in a plain-text string.
+ * Uses DOMParser — safe, no innerHTML, no XSS risk. Browser-only (SPA).
+ */
+export function decodeHtmlEntities(text: string): string {
+  if (typeof document === 'undefined') return text;
+  const parser = new DOMParser();
+  const doc = parser.parseFromString(text, 'text/html');
+  return doc.documentElement.textContent ?? text;
+}
+
 const STANDARD_ORIGIN = 'https://thestandard.co';
 
 const PLACEHOLDER_FILE = 'placeholder-news.jpg';

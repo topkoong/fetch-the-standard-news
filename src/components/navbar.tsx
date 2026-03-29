@@ -73,7 +73,7 @@ function Navbar() {
           </button>
         </div>
 
-        <div className='hidden lg:flex lg:flex-1 lg:flex-wrap lg:items-center lg:justify-between lg:gap-2 lg:px-3'>
+        <div className='hidden lg:flex lg:flex-1 lg:items-center lg:justify-end lg:gap-2 lg:px-3'>
           <ul className='flex list-none flex-row flex-wrap items-center gap-1'>
             {NAVBAR_PRIMARY_LINKS.map((item) => (
               <li key={item.href}>
@@ -100,19 +100,6 @@ function Navbar() {
                 </ul>
               </details>
             </li>
-          </ul>
-          <ul className='flex max-w-[78vw] list-none flex-row flex-wrap items-center gap-1 overflow-x-auto'>
-            {navCategories.map(({ id, label }) => (
-              <li key={id}>
-                <Link
-                  to={`${ROUTE_PATH_POSTS_CATEGORY_PREFIX}${id}`}
-                  state={{ category: label }}
-                  className={NAVBAR_DESK_LINK_CLASS}
-                >
-                  {label}
-                </Link>
-              </li>
-            ))}
           </ul>
         </div>
       </div>

@@ -38,23 +38,18 @@ jobs:
       - name: Verify pnpm
         run: pnpm -v
 
-      - name: Installing Dependencies
-        run: pnpm install --frozen-lockfile
-
       - name: Install jq for cache scripts
         run: sudo apt-get update && sudo apt-get install -y jq
 
       # Order matters: story-pages index needs posts + categories + image URL map.
-      # Without running image URLs before build-story-pages-index, the index can be empty.
+      # Install app dependencies only after cache JSON is built (scripts need bash + jq only).
 
       - name: Fetch posts
         env:
           POST_FETCH_PAGES: ${{ vars.POST_FETCH_PAGES }}
         run: |
-          # Skip heavy WP pagination when unset and committed snapshot exists (default for CI speed).
-          # Set repo Actions variable POST_FETCH_PAGES to refresh (e.g. small number for smoke tests).
           if [ -z "${POST_FETCH_PAGES:-}" ] && [ -f "src/assets/cached/posts.json" ]; then
-            echo "Skipping fetch-the-standard-posts.sh — using committed posts.json"
+            echo "Skipping — using committed posts.json"
           else
             bash cachescripts/fetch-the-standard-posts.sh
           fi
@@ -63,14 +58,15 @@ jobs:
         run: bash cachescripts/fetch-the-standard-categories.sh
 
       - name: Fetch image URLs
-        env:
-          # Keep CDN URLs in JSON only — do not download binaries into the repo (faster CI).
-          # Browser <img src="https://..."> is not subject to CORS like fetch() is.
-          LOCALIZE_IMAGE_ASSETS: '0'
         run: bash cachescripts/fetch-image-urls.sh
+        env:
+          LOCALIZE_IMAGE_ASSETS: "0"
 
       - name: Build story pages index
         run: bash cachescripts/build-story-pages-index.sh
+
+      - name: Install dependencies
+        run: pnpm install --frozen-lockfile
 
       - name: Lint
         run: pnpm lint
@@ -81,7 +77,6 @@ jobs:
       - name: Add .nojekyll file
         run: touch ./dist/.nojekyll
 
-      # GITHUB_TOKEN + contents:write replaces a deploy SSH key for same-repo Pages.
       - name: Deploy to GitHub Pages
         uses: peaceiris/actions-gh-pages@v3
         with:

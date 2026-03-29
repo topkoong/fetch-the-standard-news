@@ -19,6 +19,7 @@ import useBreakpoints from '@hooks/use-breakpoints';
 import { useCachedFeedBootstrap } from '@hooks/use-cached-feed-bootstrap';
 import { useCategoryData } from '@hooks/use-category-data';
 import { usePageSeo } from '@hooks/use-page-seo';
+import { decodeHtmlEntities } from '@utils/formatters';
 import { resolveImageUrl } from '@utils/formatters';
 import { lazy } from 'preact/compat';
 import { useMemo } from 'preact/hooks';
@@ -47,10 +48,12 @@ interface StatCard {
 }
 
 function stripRenderedMarkup(raw: string): string {
-  return raw
-    .replace(/<[^>]*>/g, '')
-    .replace(/&nbsp;/g, ' ')
-    .trim();
+  return decodeHtmlEntities(
+    raw
+      .replace(/<[^>]*>/g, '')
+      .replace(/&nbsp;/g, ' ')
+      .trim(),
+  );
 }
 
 function errorMessage(err: unknown): string {

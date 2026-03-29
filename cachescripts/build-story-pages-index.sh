@@ -41,10 +41,19 @@ jq -n \
   --slurpfile categories "${categoriesJson}" \
   --slurpfile images "${imagesJson}" \
   '
-  # Remove simple HTML tags and normalize whitespace for excerpt/title display.
+  # Remove simple HTML tags, decode common entities, normalize whitespace for excerpt/title.
   def stripHtml:
     gsub("<[^>]*>"; " ")
     | gsub("&nbsp;"; " ")
+    | gsub("&hellip;"; "…")
+    | gsub("&amp;"; "&")
+    | gsub("&lt;"; "<")
+    | gsub("&gt;"; ">")
+    | gsub("&quot;"; "\"")
+    | gsub("&#8220;"; "\u201C")
+    | gsub("&#8221;"; "\u201D")
+    | gsub("&#8216;"; "\u2018")
+    | gsub("&#8217;"; "\u2019")
     | gsub("\\s+"; " ")
     | sub("^\\s+"; "")
     | sub("\\s+$"; "");
@@ -73,6 +82,7 @@ jq -n \
         (.categories // [])
         | map(($catMap[(tostring)] // empty))
         | map(select(length > 0))
+        | unique
       ),
       imageUrl: ($imgMap[(.featured_media|tostring)] // ""),
       sourceUrl: (.link // "")

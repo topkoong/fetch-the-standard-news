@@ -22,6 +22,7 @@ import {
   ROUTE_STATE_NEWS_DESK_CATEGORY,
 } from '@constants/index';
 import {
+  decodeHtmlEntities,
   handleNewsImageLoadError,
   isStandardPublisherImageUrl,
   placeholderNewsPublicPath,
@@ -126,7 +127,9 @@ export function NewsCard({
             </span>
           </div>
         </Link>
-        {excerpt ? <p className={NEWS_CARD_EXCERPT_CLASS}>{excerpt}</p> : null}
+        {excerpt ? (
+          <p className={NEWS_CARD_EXCERPT_CLASS}>{decodeHtmlEntities(excerpt)}</p>
+        ) : null}
         <div className={NEWS_CARD_FOOTER_CLASS}>
           {externalUrl ? (
             <a
