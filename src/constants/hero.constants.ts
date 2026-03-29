@@ -1,6 +1,7 @@
 /** Tailwind bundles for the homepage hero (IMPROVEMENTS.md PR 2). */
+/** Dark slab behind hero marketing + photo; keeps white/light headline text readable. */
 export const HERO_SECTION_ROOT_CLASS =
-  'relative flex min-h-[85vh] items-end overflow-hidden bg-gray-950' as const;
+  'relative min-h-[85vh] flex items-end overflow-hidden bg-gray-950' as const;
 
 export const HERO_BACKGROUND_IMAGE_CLASS =
   'absolute inset-0 h-full w-full object-cover opacity-50' as const;

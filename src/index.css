@@ -46,8 +46,13 @@
     @apply text-center font-extrabold leading-tight text-2xl sm:text-3xl md:text-5xl py-5 sm:py-6 md:py-10 text-white uppercase tracking-tight px-3;
     text-wrap: balance;
   }
+  /** For `PageHeader` on `bg-gray-50` main — dark text. */
+  .page-title-light {
+    @apply text-center font-extrabold leading-tight text-2xl sm:text-3xl md:text-5xl py-5 sm:py-6 md:py-10 text-gray-900 uppercase tracking-tight px-3;
+    text-wrap: balance;
+  }
   .category-title {
-    @apply font-semibold text-xl sm:text-2xl md:text-4xl text-white uppercase tracking-tight;
+    @apply font-semibold text-xl sm:text-2xl md:text-4xl text-gray-900 uppercase tracking-tight;
   }
   .post-title {
     @apply font-bold text-lg sm:text-xl text-bright-blue;
@@ -84,5 +89,9 @@
   }
   .surface-panel {
     @apply rounded-2xl border border-white/30 bg-white/10 backdrop-blur-sm;
+  }
+  /** Cards on light main (`bg-gray-50`) — hero stays on dark `surface-panel` elsewhere. */
+  .surface-panel-light {
+    @apply rounded-2xl border border-gray-200 bg-white shadow-sm;
   }
 }

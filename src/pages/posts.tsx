@@ -197,8 +197,8 @@ function Posts() {
 
   return (
     <article className='w-full min-h-[50vh] py-8 max-w-[1600px] mx-auto'>
-      <PageHeader title={category ?? 'Category'} />
-      <p className='text-white/90 text-center max-w-3xl mx-auto px-4 text-sm sm:text-base mb-3'>
+      <PageHeader title={category ?? 'Category'} tone='light' />
+      <p className='text-gray-600 text-center max-w-3xl mx-auto px-4 text-sm sm:text-base mb-3'>
         Explore timely, high-impact stories in this category and uncover the details
         behind each headline.
       </p>
@@ -217,7 +217,7 @@ function Posts() {
           <Link
             to='/posts/categories/39'
             state={{ category: 'News' }}
-            className='inline-flex items-center justify-center rounded-xl border-2 border-white/60 bg-white/10 px-5 py-3 text-white font-semibold uppercase tracking-wide text-sm no-underline hover:bg-white/20 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-white focus-visible:ring-offset-2 focus-visible:ring-offset-bright-blue'
+            className='inline-flex items-center justify-center rounded-xl border-2 border-gray-300 bg-white px-5 py-3 text-gray-900 font-semibold uppercase tracking-wide text-sm no-underline shadow-sm hover:bg-gray-50 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-gray-400 focus-visible:ring-offset-2 focus-visible:ring-offset-gray-50'
           >
             Go to top stories
           </Link>
@@ -236,7 +236,7 @@ function Posts() {
           </Link>
           <Link
             to='/'
-            className='inline-flex items-center justify-center rounded-xl border-2 border-white/60 bg-white/10 px-5 py-3 text-white font-semibold uppercase tracking-wide text-sm no-underline hover:bg-white/20 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-white focus-visible:ring-offset-2 focus-visible:ring-offset-bright-blue'
+            className='inline-flex items-center justify-center rounded-xl border-2 border-gray-300 bg-white px-5 py-3 text-gray-900 font-semibold uppercase tracking-wide text-sm no-underline shadow-sm hover:bg-gray-50 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-gray-400 focus-visible:ring-offset-2 focus-visible:ring-offset-gray-50'
           >
             Back to homepage
           </Link>
@@ -268,7 +268,9 @@ function Posts() {
                 <span className='btn-secondary'>Show more stories</span>
               </button>
             ) : (
-              <p className='btn-tertiary'>You&apos;ve reached the latest updates.</p>
+              <p className='text-center font-extrabold leading-tight text-lg md:text-xl py-6 text-gray-900 uppercase tracking-tight'>
+                You&apos;ve reached the latest updates.
+              </p>
             )}
           </div>
         </Fragment>

@@ -25,7 +25,7 @@ const BENEFITS: readonly {
 ];
 
 function BenefitIcon({ variant }: { variant: 'bolt' | 'layers' | 'device' }) {
-  const common = 'w-10 h-10 text-red-400';
+  const common = 'w-10 h-10 text-red-600';
   if (variant === 'bolt') {
     return (
       <svg className={common} viewBox='0 0 24 24' fill='none' aria-hidden>
@@ -70,12 +70,12 @@ function BenefitIcon({ variant }: { variant: 'bolt' | 'layers' | 'device' }) {
 export function EditorialBenefitsSection() {
   return (
     <section
-      className='mt-6 surface-panel p-5 sm:p-6 md:p-8'
+      className='mt-6 surface-panel-light p-5 sm:p-6 md:p-8'
       aria-labelledby='editorial-benefits-heading'
     >
       <h2
         id='editorial-benefits-heading'
-        className='text-white text-lg sm:text-xl font-extrabold text-center'
+        className='text-gray-900 text-lg sm:text-xl font-extrabold text-center'
       >
         ทำไมถึงอ่านที่นี่
       </h2>
@@ -83,13 +83,13 @@ export function EditorialBenefitsSection() {
         {BENEFITS.map((item) => (
           <li
             key={item.heading}
-            className='flex flex-col items-center text-center rounded-xl border border-white/20 bg-black/15 px-4 py-5'
+            className='flex flex-col items-center text-center rounded-xl border border-gray-200 bg-white px-4 py-5 shadow-sm'
           >
             <BenefitIcon variant={item.icon} />
-            <h3 className='mt-3 text-white font-extrabold text-base sm:text-lg'>
+            <h3 className='mt-3 text-gray-900 font-extrabold text-base sm:text-lg'>
               {item.heading}
             </h3>
-            <p className='mt-2 text-white/85 text-sm sm:text-base leading-relaxed'>
+            <p className='mt-2 text-gray-600 text-sm sm:text-base leading-relaxed'>
               {item.body}
             </p>
           </li>

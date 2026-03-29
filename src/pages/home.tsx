@@ -230,14 +230,15 @@ function Home() {
       <PageHeader
         title='Toppy × The Standard News'
         isPrimaryHeading={heroFeaturedArticle === null}
+        tone='light'
       />
       <section className='max-w-6xl mx-auto px-4 sm:px-6'>
         <h2 className='sr-only'>Your daily trusted briefing</h2>
-        <div className='surface-panel p-5 sm:p-6 md:p-8'>
-          <h2 className='text-center text-white text-2xl sm:text-3xl md:text-4xl font-extrabold tracking-tight'>
+        <div className='surface-panel-light p-5 sm:p-6 md:p-8'>
+          <h2 className='text-center text-gray-900 text-2xl sm:text-3xl md:text-4xl font-extrabold tracking-tight'>
             Your high-signal reading dashboard for a day magazine.
           </h2>
-          <p className='mt-3 text-white/90 text-center max-w-3xl mx-auto text-sm sm:text-base leading-relaxed'>
+          <p className='mt-3 text-gray-600 text-center max-w-3xl mx-auto text-sm sm:text-base leading-relaxed'>
             Editorially selected headlines with context-first summaries, optimized for
             fast scanning and deeper follow-up when a story matters.
           </p>
@@ -253,7 +254,7 @@ function Home() {
             <Link
               to='/posts/categories/11'
               state={{ category: 'World' }}
-              className='inline-flex items-center justify-center rounded-xl border-2 border-white/60 bg-white/10 px-5 py-3 text-white font-semibold uppercase tracking-wide text-sm no-underline hover:bg-white/20 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-white focus-visible:ring-offset-2 focus-visible:ring-offset-bright-blue'
+              className='inline-flex items-center justify-center rounded-xl border-2 border-gray-300 bg-white px-5 py-3 text-gray-900 font-semibold uppercase tracking-wide text-sm no-underline shadow-sm hover:bg-gray-50 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-gray-400 focus-visible:ring-offset-2 focus-visible:ring-offset-gray-50'
               aria-label='Browse world coverage from our source'
             >
               Explore world coverage
@@ -261,59 +262,59 @@ function Home() {
           </div>
         </div>
         <ul
-          className='mt-4 flex flex-wrap justify-center gap-2 text-xs sm:text-sm text-white/95'
+          className='mt-4 flex flex-wrap justify-center gap-2 text-xs sm:text-sm text-gray-600'
           aria-label='Trust signals'
         >
-          <li className='rounded-full border border-white/35 px-3 py-1'>
+          <li className='rounded-full border border-gray-200 bg-white px-3 py-1 shadow-sm'>
             Source: The Standard newsroom
           </li>
-          <li className='rounded-full border border-white/35 px-3 py-1'>
+          <li className='rounded-full border border-gray-200 bg-white px-3 py-1 shadow-sm'>
             Updated throughout the day
           </li>
-          <li className='rounded-full border border-white/35 px-3 py-1'>
+          <li className='rounded-full border border-gray-200 bg-white px-3 py-1 shadow-sm'>
             Mobile-first reading experience
           </li>
         </ul>
         <EditorialBenefitsSection />
-        <section className='mt-5 surface-panel p-4 sm:p-5'>
-          <h3 className='text-white text-lg sm:text-xl font-extrabold'>
+        <section className='mt-5 surface-panel-light p-4 sm:p-5'>
+          <h3 className='text-gray-900 text-lg sm:text-xl font-extrabold'>
             Editorial pages
           </h3>
-          <p className='mt-2 text-white/90 text-sm sm:text-base'>
+          <p className='mt-2 text-gray-600 text-sm sm:text-base'>
             Understand the product, how syncing works, and which desks map to each hub.
           </p>
           <div className='mt-3 flex flex-wrap gap-2'>
             <Link
               to='/about'
-              className='rounded-full border border-white/40 px-3 py-1 text-white text-xs sm:text-sm no-underline hover:bg-white/20'
+              className='rounded-full border border-gray-200 bg-white px-3 py-1 text-gray-900 text-xs sm:text-sm shadow-sm no-underline hover:bg-gray-50'
             >
               About this feed
             </Link>
             <Link
               to='/methodology'
-              className='rounded-full border border-white/40 px-3 py-1 text-white text-xs sm:text-sm no-underline hover:bg-white/20'
+              className='rounded-full border border-gray-200 bg-white px-3 py-1 text-gray-900 text-xs sm:text-sm shadow-sm no-underline hover:bg-gray-50'
             >
               Methodology
             </Link>
             <Link
               to='/coverage'
-              className='rounded-full border border-white/40 px-3 py-1 text-white text-xs sm:text-sm no-underline hover:bg-white/20'
+              className='rounded-full border border-gray-200 bg-white px-3 py-1 text-gray-900 text-xs sm:text-sm shadow-sm no-underline hover:bg-gray-50'
             >
               Coverage map
             </Link>
           </div>
         </section>
-        <section className='mt-5 surface-panel p-4 sm:p-5'>
-          <h3 className='text-white text-lg sm:text-xl font-extrabold'>
+        <section className='mt-5 surface-panel-light p-4 sm:p-5'>
+          <h3 className='text-gray-900 text-lg sm:text-xl font-extrabold'>
             Topic landing pages
           </h3>
-          <p className='mt-2 text-white/90 text-sm sm:text-base'>
+          <p className='mt-2 text-gray-600 text-sm sm:text-base'>
             Choose a curated topic page for focused context and guided navigation.
           </p>
           <div className='mt-3 flex flex-wrap gap-2'>
             <Link
               to='/topics'
-              className='rounded-full border border-white/60 bg-white/10 px-3 py-1 text-white text-xs sm:text-sm font-semibold no-underline hover:bg-white/20'
+              className='rounded-full border border-gray-300 bg-white px-3 py-1 text-gray-900 text-xs sm:text-sm font-semibold shadow-sm no-underline hover:bg-gray-50'
             >
               All topic hubs
             </Link>
@@ -321,7 +322,7 @@ function Home() {
               <Link
                 key={topic.slug}
                 to={`/topics/${topic.slug}`}
-                className='rounded-full border border-white/40 px-3 py-1 text-white text-xs sm:text-sm no-underline hover:bg-white/20'
+                className='rounded-full border border-gray-200 bg-white px-3 py-1 text-gray-900 text-xs sm:text-sm shadow-sm no-underline hover:bg-gray-50'
               >
                 {topic.title}
               </Link>
@@ -329,28 +330,28 @@ function Home() {
           </div>
         </section>
         <section className='mt-5' aria-label='Success indicators'>
-          <h3 className='text-center text-white font-bold uppercase tracking-wide text-xs sm:text-sm'>
+          <h3 className='text-center text-gray-900 font-bold uppercase tracking-wide text-xs sm:text-sm'>
             Success indicators
           </h3>
           <div className='mt-2 grid grid-cols-1 sm:grid-cols-3 gap-3'>
             {successIndicators.map((indicator) => (
               <div
                 key={indicator.label}
-                className='rounded-lg border border-white/25 bg-white/10 px-4 py-3 text-center'
+                className='rounded-lg border border-gray-200 bg-white px-4 py-3 text-center shadow-sm'
               >
-                <p className='text-white text-2xl font-extrabold'>{indicator.value}</p>
-                <p className='text-white/85 text-xs sm:text-sm uppercase tracking-wide'>
+                <p className='text-gray-900 text-2xl font-extrabold'>{indicator.value}</p>
+                <p className='text-gray-500 text-xs sm:text-sm uppercase tracking-wide'>
                   {indicator.label}
                 </p>
               </div>
             ))}
           </div>
         </section>
-        <section className='mt-5 surface-panel p-4 sm:p-5'>
-          <h3 className='text-white text-lg sm:text-xl font-extrabold'>
+        <section className='mt-5 surface-panel-light p-4 sm:p-5'>
+          <h3 className='text-gray-900 text-lg sm:text-xl font-extrabold'>
             Content offer: Daily decision brief
           </h3>
-          <p className='mt-2 text-white/90 text-sm sm:text-base'>
+          <p className='mt-2 text-gray-600 text-sm sm:text-base'>
             Use this feed as your first 10-minute scan: open one lead story, one market
             story, and one culture signal before your next planning block.
           </p>
@@ -365,7 +366,7 @@ function Home() {
             <Link
               to='/posts/categories/13'
               state={{ category: 'Business' }}
-              className='inline-flex items-center justify-center rounded-xl border-2 border-white/60 bg-white/10 px-5 py-3 text-white font-semibold uppercase tracking-wide text-sm no-underline hover:bg-white/20 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-white focus-visible:ring-offset-2 focus-visible:ring-offset-bright-blue'
+              className='inline-flex items-center justify-center rounded-xl border-2 border-gray-300 bg-white px-5 py-3 text-gray-900 font-semibold uppercase tracking-wide text-sm no-underline shadow-sm hover:bg-gray-50 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-gray-400 focus-visible:ring-offset-2 focus-visible:ring-offset-gray-50'
             >
               Browse the business desk
             </Link>
@@ -422,7 +423,7 @@ function Home() {
                 <Link
                   to='/posts/categories/11'
                   state={{ category: 'World' }}
-                  className='inline-flex items-center justify-center rounded-xl border-2 border-white/60 bg-white/10 px-5 py-3 text-white font-semibold uppercase tracking-wide text-sm no-underline hover:bg-white/20 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-white focus-visible:ring-offset-2 focus-visible:ring-offset-bright-blue'
+                  className='inline-flex items-center justify-center rounded-xl border-2 border-gray-300 bg-white px-5 py-3 text-gray-900 font-semibold uppercase tracking-wide text-sm no-underline shadow-sm hover:bg-gray-50 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-gray-400 focus-visible:ring-offset-2 focus-visible:ring-offset-gray-50'
                 >
                   Open world desk
                 </Link>

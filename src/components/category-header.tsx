@@ -13,17 +13,17 @@ function CategoryHeader({ category, categoryIdToName }: CategoryHeaderProps) {
   return (
     <div className='flex justify-between'>
       <div className='category-title'>{category}</div>
-      <div className='font-semibold text-base md:text-lg text-white uppercase'>
+      <div className='font-semibold text-base md:text-lg text-gray-900 uppercase'>
         {categoryId ? (
           <Link
             to={`/posts/categories/${categoryId}`}
             state={{ category }}
-            className='inline-flex items-center gap-1 underline underline-offset-4 decoration-2 transition-opacity hover:opacity-90 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-white focus-visible:ring-offset-2 focus-visible:ring-offset-bright-blue rounded-sm px-1 -mx-1'
+            className='inline-flex items-center gap-1 text-red-700 underline underline-offset-4 decoration-2 transition-opacity hover:opacity-90 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-red-500 focus-visible:ring-offset-2 focus-visible:ring-offset-gray-50 rounded-sm px-1 -mx-1'
           >
             View all
           </Link>
         ) : (
-          <span className='opacity-60 cursor-not-allowed' aria-disabled='true'>
+          <span className='text-gray-500 cursor-not-allowed' aria-disabled='true'>
             View all
           </span>
         )}
