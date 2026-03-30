@@ -14,29 +14,29 @@ All hero, navbar, cards, CTA, trust bar, spacing, skeleton, a11y, and perf work.
 
 Two Phase 1 deliverables not yet in IMPROVEMENTS.md — add as PR 10 and PR 11:
 
-**PR 10**
+**PR 10** ✅ merged to `main`
 Branch: `feat/category-chips`
 Commit: `feat(nav): add quick-link category chips below hero for direct topic navigation`
 Deliverable: A horizontal scrollable row of pill buttons (Politics, Business, Tech, World, Thailand, Culture) each linking to `/topics/:categorySlug`.
 
-**PR 11**
+**PR 11** ✅ merged to `main`
 Branch: `feat/benefits-section`
 Commit: `feat(sections): add editorial benefits block communicating site value proposition`
 Deliverable: A 3-column grid section between the trust bar and news feed. Each column has an icon, a short bold heading, and one sentence. Example columns: "ข่าวเร็ว", "วิเคราะห์ลึก", "อ่านได้ทุกที่".
 
 ### Phase 2 PRs — Internal Reader Route
 
-**PR 12**
+**PR 12** ✅ merged to `main`
 Branch: `feat/story-reader-route`
 Commit: `feat(story-reader): add internal /read/:id route with StoryReadPage layout`
 
-**PR 13**
+**PR 13** ✅ merged to `main`
 Branch: `feat/card-internal-cta`
 Commit: `feat(cards): wire primary card CTA to internal reader, secondary to external source`
 
 ### Phase 3 PRs — CI/CD Build Script
 
-**PR 14**
+**PR 14** ✅ merged to `main`
 Branch: `ci/story-pages-index`
 Commit: `ci(content): wire build-story-pages-index.sh into GitHub Actions deploy workflow`
 
@@ -44,7 +44,7 @@ Deliverable: add a deploy workflow step that runs `build-story-pages-index.sh` *
 
 ### Phase 4 PRs — SEO & Topic Pages
 
-**PR 15**
+**PR 15** ✅ merged to `main`
 Branch: `feat/topic-landing-pages`
 Commit: `feat(topics): add /topics/:categorySlug landing pages with unique copy and CTAs`
 
@@ -58,6 +58,10 @@ Commit: `feat(seo): add per-page title, description, and open graph metadata`
 Branch: `feat/empty-states`
 Commit: `feat(ux): add empty state modules for home and category views with recovery CTAs`
 
-**PR 18**
+**PR 18** ✅ merged to `main` (#257)
 Branch: `feat/image-fallbacks`
 Commit: `feat(ux): add image fallback and retry behavior for missing media`
+
+### Beyond Phase 5
+
+There is no PR 19 in this roadmap. Use `IMPROVEMENTS.md` for any new incremental UX work, or open a follow-up doc for Phase 6 if you extend scope.
