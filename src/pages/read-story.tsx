@@ -14,10 +14,10 @@
 import rawStoryPages from '@assets/cached/story-pages.json';
 import PageHeader from '@components/page-header';
 import { PUBLIC_SITE_URL } from '@constants/index';
+import { useFeaturedImageSrc } from '@hooks/use-featured-image-src';
 import { absoluteUrlForOpenGraph, usePageSeo } from '@hooks/use-page-seo';
 import {
   decodeHtmlEntities,
-  handleNewsImageLoadError,
   publisherImageReferrerProps,
   resolveImageUrl,
 } from '@utils/formatters';
@@ -56,6 +56,16 @@ function ReadStory() {
       .slice(0, 3)
       .map((item) => item.row);
   }, [story]);
+
+  const resolvedLeadImage = useMemo(
+    () => (story ? resolveImageUrl(story.imageUrl ?? '') : ''),
+    [story],
+  );
+  const { src: leadImageSrc, onError: onLeadImageError } = useFeaturedImageSrc(
+    resolvedLeadImage,
+    [],
+    story?.id ?? `read-${id ?? 'unknown'}`,
+  );
 
   /*
    * Story pages use `og:type: article` when `story` exists. `image` uses `resolveImageUrl`
@@ -125,10 +135,12 @@ function ReadStory() {
           ))}
         </div>
         <img
-          className='mt-5 w-full rounded-xl border border-white/20 bg-white/5 object-cover max-h-[28rem]'
-          src={resolveImageUrl(story.imageUrl ?? '')}
+          className='mt-5 w-full min-h-[12rem] rounded-xl border border-white/20 bg-neutral-800 object-cover max-h-[28rem]'
+          src={leadImageSrc}
           alt={story.title}
-          onError={handleNewsImageLoadError}
+          loading='eager'
+          decoding='async'
+          onError={onLeadImageError}
           {...publisherImageReferrerProps}
         />
         <div
